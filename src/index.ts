@@ -10,7 +10,7 @@ import path from "node:path";
 
 import { analyzeHolding, suggestIdeas } from "./claude";
 import { computeHitRate, evaluatePending } from "./evaluate";
-import { fetchPrice, toYahooSymbol } from "./prices";
+import { fetchRawPrice, indexSymbolFor, toYahooSymbol } from "./prices";
 import { mdSafe, packChunks, sendTelegram } from "./telegram";
 import type {
   Analysis,
@@ -100,15 +100,17 @@ function recentCallsFor(
 // ---- price cache (shared by evaluation + today's analysis) ------------------
 
 const priceCache = new Map<string, number | null>();
+async function getRaw(ticker: string): Promise<number | null> {
+  if (priceCache.has(ticker)) return priceCache.get(ticker) ?? null;
+  const p = await fetchRawPrice(ticker);
+  priceCache.set(ticker, p);
+  return p;
+}
 async function getPrice(
   symbol: string,
   exchange: Exchange,
 ): Promise<number | null> {
-  const key = toYahooSymbol(symbol, exchange);
-  if (priceCache.has(key)) return priceCache.get(key) ?? null;
-  const p = await fetchPrice(symbol, exchange);
-  priceCache.set(key, p);
-  return p;
+  return getRaw(toYahooSymbol(symbol, exchange));
 }
 
 // ---- message building -------------------------------------------------------
@@ -131,7 +133,7 @@ function header(history: History): string {
     `Short-term calls are close to a coin flip — the record below is here to show that honestly.`,
     ``,
     rateLine,
-    `(~50% is what a coin flip gives. Add = right if the price rose; Trim/Avoid = right if it fell. Hold/Watch are not scored.)`,
+    `(Scored vs the index — "right" means the pick beat just holding the NIFTY/SENSEX over ~1 day; Add = beat it, Trim/Avoid = lagged it, Hold/Watch not scored. ~50% is a coin flip.)`,
   ].join("\n");
 }
 
@@ -198,7 +200,7 @@ async function main(): Promise<void> {
 
   // 1. Evaluate how the PREVIOUS run's calls turned out.
   try {
-    const resolved = await evaluatePending(history, getPrice, today);
+    const resolved = await evaluatePending(history, getRaw, today);
     console.log(`[main] evaluated ${resolved} prior call(s).`);
   } catch (err) {
     console.error(
@@ -212,6 +214,10 @@ async function main(): Promise<void> {
   const newCalls: CallRecord[] = [];
   for (const holding of portfolio) {
     const price = await getPrice(holding.symbol, holding.exchange);
+    // Capture the benchmark level now so this call can later be scored as
+    // outperformance vs the index, not just raw direction.
+    const indexSymbol = indexSymbolFor(holding.exchange);
+    const indexAtCall = await getRaw(indexSymbol);
     const recent = recentCallsFor(history, holding.symbol, holding.exchange, 5);
     const analysis = await analyzeHolding(holding, price, recent);
     views.push({ holding, price, analysis });
@@ -223,6 +229,8 @@ async function main(): Promise<void> {
       stance: analysis.stance,
       confidence: analysis.confidence,
       priceAtCall: price,
+      indexSymbol,
+      indexAtCall,
       reasoning: analysis.reasoning,
       keyNews: analysis.keyNews,
       outcome: "pending",

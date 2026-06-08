@@ -14,20 +14,26 @@ const yahooFinance = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
 
 const SUFFIX: Record<Exchange, string> = { NS: ".NS", BO: ".BO" };
 
+// Benchmark index per exchange: NIFTY 50 for NSE, SENSEX for BSE. A call is
+// only "right" if the pick beat simply holding this index (see evaluate.ts).
+const INDEX: Record<Exchange, string> = { NS: "^NSEI", BO: "^BSESN" };
+
 /** Build the Yahoo ticker, e.g. ("RELIANCE", "NS") -> "RELIANCE.NS". */
 export function toYahooSymbol(symbol: string, exchange: Exchange): string {
   return `${symbol.trim().toUpperCase()}${SUFFIX[exchange]}`;
 }
 
+/** The benchmark index ticker for an exchange (e.g. "NS" -> "^NSEI"). */
+export function indexSymbolFor(exchange: Exchange): string {
+  return INDEX[exchange];
+}
+
 /**
- * Fetch the latest price for one holding. Returns null on any failure so the
- * caller can carry on with the rest of the portfolio.
+ * Fetch the latest price for any raw Yahoo ticker (a stock like "RELIANCE.NS"
+ * or an index like "^NSEI"). Returns null on any failure so the caller can
+ * carry on.
  */
-export async function fetchPrice(
-  symbol: string,
-  exchange: Exchange,
-): Promise<number | null> {
-  const ticker = toYahooSymbol(symbol, exchange);
+export async function fetchRawPrice(ticker: string): Promise<number | null> {
   try {
     const quote = await yahooFinance.quote(ticker);
     const price = quote?.regularMarketPrice;
@@ -41,4 +47,12 @@ export async function fetchPrice(
     );
     return null;
   }
+}
+
+/** Convenience wrapper: fetch the price for one holding. */
+export async function fetchPrice(
+  symbol: string,
+  exchange: Exchange,
+): Promise<number | null> {
+  return fetchRawPrice(toYahooSymbol(symbol, exchange));
 }

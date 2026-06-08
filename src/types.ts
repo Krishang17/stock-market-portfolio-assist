@@ -53,8 +53,19 @@ export interface CallRecord {
   priceAtCall: number | null;
   reasoning: string;
   keyNews: string[];
-  outcome: Outcome; // "pending" until a later run evaluates it
+
+  // Benchmark captured WHEN THE CALL WAS MADE, so the outcome can be scored as
+  // outperformance vs the index rather than raw direction.
+  indexSymbol?: string; // e.g. "^NSEI" (NIFTY 50) or "^BSESN" (SENSEX)
+  indexAtCall?: number | null;
+
+  // Evaluation (filled in on a later run):
+  outcome: Outcome; // "pending" until evaluated
   evaluatedPrice?: number | null;
+  evaluatedIndexPrice?: number | null;
+  stockReturnPct?: number; // stock % change over the eval window
+  benchmarkReturnPct?: number; // index % change (undefined if not benchmarked)
+  benchmarked?: boolean; // was the outcome scored vs the index (vs raw fallback)?
   evaluatedDate?: string;
 }
 

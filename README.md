@@ -35,17 +35,26 @@ This project is deliberately built to be honest about what it is and is not.
 
 ### How the track record is scored (and its simplifications)
 
+Calls are scored as **outperformance vs a benchmark index**, not raw direction.
+This matters a lot: in a rising market almost everything rises, so "the price
+went up" mostly measures market drift, not skill. We only credit a call if the
+pick actually **beat simply holding the index**. The relevant index level is
+stored *when the call is made* (NIFTY 50 `^NSEI` for NSE, SENSEX `^BSESN` for
+BSE) so the comparison covers the same window.
+
 - At the start of each run, the most recent unresolved calls are evaluated by
-  comparing the **price stored when the call was made** to the **current price**.
-- This is a **rough ~1-trading-day horizon**: it simply uses "the price at the
-  next run". It does not align to exact market sessions, ignores intraday moves,
-  dividends, and splits, and a missed/delayed run lengthens the horizon. It is a
-  blunt, honest proxy — not a backtest.
-- **Only directional calls are scored:**
-  - `Add` is **right** if the price **rose**.
-  - `Trim` / `Avoid` are **right** if the price **fell**.
+  comparing the stock's return since the call to the index's return over the
+  same window.
+  - `Add` is **right** if the stock **outperformed** the index.
+  - `Trim` / `Avoid` are **right** if the stock **underperformed** the index.
   - `Hold` / `Watch` are **not scored** (excluded from the hit rate).
-  - An exactly-flat price is treated as **unscored**.
+  - Matching the index exactly is **unscored**.
+- This is a **rough ~1-trading-day horizon**: it uses "the level at the next
+  run". It does not align to exact market sessions, ignores intraday moves and
+  dividends, and a missed/delayed run lengthens the horizon. It is a blunt,
+  honest proxy — not a backtest.
+- If a benchmark level is unavailable, the call falls back to raw-direction
+  scoring and is flagged as not benchmarked.
 - The running hit rate shown is `right / (right + wrong)` over all scored calls.
 
 ---

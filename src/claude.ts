@@ -143,23 +143,31 @@ export function fallbackAnalysis(): Analysis {
   };
 }
 
+function fmtPct(n: number): string {
+  return `${n >= 0 ? "+" : ""}${n.toFixed(1)}%`;
+}
+
 function formatRecentCalls(recent: CallRecord[]): string {
   if (!recent.length) return "Your prior calls on this stock: none on record yet.";
   const lines = recent.map((c) => {
     const at = c.priceAtCall != null ? `₹${c.priceAtCall}` : "n/a";
     let res: string = c.outcome;
-    if (
-      (c.outcome === "right" || c.outcome === "wrong") &&
-      c.evaluatedPrice != null
-    ) {
-      res += ` (price next session ₹${c.evaluatedPrice})`;
+    if (c.outcome === "right" || c.outcome === "wrong") {
+      if (
+        typeof c.stockReturnPct === "number" &&
+        typeof c.benchmarkReturnPct === "number"
+      ) {
+        res += ` (stock ${fmtPct(c.stockReturnPct)} vs index ${fmtPct(c.benchmarkReturnPct)})`;
+      } else if (typeof c.stockReturnPct === "number") {
+        res += ` (stock ${fmtPct(c.stockReturnPct)}, no benchmark)`;
+      }
     }
     return `- ${c.date}: ${c.stance} @ ${at} -> ${res}`;
   });
   return (
-    "Your prior calls on this stock (most recent first). This is shown ONLY as " +
-    "honest context so you can acknowledge your own record — it does NOT mean " +
-    "you have learned, improved, or been retrained:\n" +
+    "Your prior calls on this stock (most recent first), scored as outperformance " +
+    "vs the index. This is shown ONLY as honest context so you can see your own " +
+    "record — it does NOT mean you have learned, improved, or been retrained:\n" +
     lines.join("\n")
   );
 }
@@ -171,6 +179,7 @@ const ANALYSIS_SYSTEM = `You are a careful equity analyst writing a brief, hones
 Honesty rules (do not soften these):
 - This is information, not financial advice.
 - Short-term direction (about one trading day) is close to a coin flip. Never imply reliability. No hype, no price targets, no guarantees.
+- Your track record is scored as OUTPERFORMANCE vs the index (NIFTY/SENSEX): an "Add" only counts as right if the stock beats simply holding the index over ~1 day, and "Trim"/"Avoid" only if it lags. Beating the market short-term is hard — stay humble.
 - Use the web_search tool to find the most recent, relevant news for THIS specific company before forming a view.
 
 You may be shown your own recent past calls and how they turned out. That history is context only — it does not mean you have been retrained or that you improve over time.
