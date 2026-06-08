@@ -1,0 +1,58 @@
+name: Morning Briefing
+
+on:
+  schedule:
+    # 03:00 UTC = 08:30 IST — before NSE/BSE open (09:15 IST).
+    # NOTE: GitHub's cron is best-effort and can be delayed (sometimes by many
+    # minutes) under load — it is not a guaranteed-on-time scheduler.
+    # NOTE: scheduled workflows are automatically PAUSED after ~60 days of no
+    # repository activity; push a commit or re-enable the workflow to resume.
+    - cron: "0 3 * * *"
+  # Manual trigger so you can run it on demand to test.
+  workflow_dispatch: {}
+
+# Needed so the job can commit the updated data/history.json back to the repo.
+permissions:
+  contents: write
+
+# Avoid overlapping runs racing on the history commit.
+concurrency:
+  group: morning-briefing
+  cancel-in-progress: false
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run morning briefing
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # Optional repo variable; falls back to the in-code default.
+          MODEL: ${{ vars.MODEL || 'claude-sonnet-4-6' }}
+        run: npm run briefing
+
+      - name: Commit updated history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/history.json
+          if git diff --staged --quiet; then
+            echo "No history changes to commit."
+          else
+            git commit -m "chore: update briefing history [skip ci]"
+            git push
+          fi

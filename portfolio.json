@@ -1,0 +1,23 @@
+[
+  {
+    "symbol": "RELIANCE",
+    "name": "Reliance Industries",
+    "exchange": "NS",
+    "qty": 10,
+    "buyPrice": 1200.0
+  },
+  {
+    "symbol": "TCS",
+    "name": "Tata Consultancy Services",
+    "exchange": "NS",
+    "qty": 5,
+    "buyPrice": 2100.0
+  },
+  {
+    "symbol": "HDFCBANK",
+    "name": "HDFC Bank",
+    "exchange": "NS",
+    "qty": 15,
+    "buyPrice": 700.0
+  }
+]
