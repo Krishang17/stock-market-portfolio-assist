@@ -1,3 +1,46 @@
 {
-  "calls": []
+  "calls": [
+    {
+      "date": "2026-06-09",
+      "symbol": "RELIANCE",
+      "exchange": "NS",
+      "name": "Reliance Industries",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1264.2,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23195.55,
+      "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-09",
+      "symbol": "TCS",
+      "exchange": "NS",
+      "name": "Tata Consultancy Services",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 2147.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23195.55,
+      "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-09",
+      "symbol": "HDFCBANK",
+      "exchange": "NS",
+      "name": "HDFC Bank",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 735,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23195.55,
+      "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "outcome": "pending"
+    }
+  ]
 }
