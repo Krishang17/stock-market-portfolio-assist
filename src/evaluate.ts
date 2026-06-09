@@ -14,7 +14,15 @@
 // thing that matters — did picking this stock beat just holding the market.
 
 import { toYahooSymbol } from "./prices";
-import type { CallRecord, History, Outcome, Stance } from "./types";
+import type {
+  Calibration,
+  CallRecord,
+  Confidence,
+  ConfidenceBucket,
+  History,
+  Outcome,
+  Stance,
+} from "./types";
 
 /**
  * Score a single directional call by OUTPERFORMANCE vs the benchmark.
@@ -119,6 +127,60 @@ export function computeHitRate(history: History): {
   }
   const total = right + wrong;
   return { right, wrong, rate: total > 0 ? right / total : null };
+}
+
+/**
+ * Assumed probability that a directional call is right, per stated confidence.
+ *
+ * The model returns a categorical Low/Medium/High — to compute a Brier score we
+ * need a number. These are a DOCUMENTED ASSUMPTION (not the model's own
+ * probability): "Low" still implies a lean past a coin flip, "High" implies a
+ * strong one. The Brier score below then measures how well those implied
+ * probabilities matched reality. The per-bucket hit rates are assumption-free
+ * and are the primary signal.
+ */
+export const CONFIDENCE_PROB: Record<Confidence, number> = {
+  Low: 0.55,
+  Medium: 0.65,
+  High: 0.75,
+};
+
+/**
+ * Compute confidence calibration over all scored directional calls.
+ *
+ * This is the honest "learn from mistakes" loop: the result is fed back into the
+ * prompt (see claude.ts) so the model confronts whether its own confidence has
+ * meant anything. It does NOT retrain the model — it's a measured statistic the
+ * model is shown as context.
+ */
+export function computeCalibration(history: History): Calibration {
+  const order: Confidence[] = ["High", "Medium", "Low"];
+  const acc: Record<Confidence, { right: number; wrong: number }> = {
+    High: { right: 0, wrong: 0 },
+    Medium: { right: 0, wrong: 0 },
+    Low: { right: 0, wrong: 0 },
+  };
+  let brierSum = 0;
+  let scored = 0;
+
+  for (const c of history.calls) {
+    if (c.outcome !== "right" && c.outcome !== "wrong") continue; // scored only
+    scored++;
+    const bucket = acc[c.confidence];
+    if (c.outcome === "right") bucket.right++;
+    else bucket.wrong++;
+    const outcome = c.outcome === "right" ? 1 : 0;
+    const forecast = CONFIDENCE_PROB[c.confidence];
+    brierSum += (forecast - outcome) ** 2;
+  }
+
+  const buckets: ConfidenceBucket[] = order.map((confidence) => {
+    const { right, wrong } = acc[confidence];
+    const count = right + wrong;
+    return { confidence, count, right, wrong, rate: count > 0 ? right / count : null };
+  });
+
+  return { buckets, scored, brier: scored > 0 ? brierSum / scored : null };
 }
 
 /** Re-export for callers that want the record type handy. */

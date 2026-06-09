@@ -73,3 +73,23 @@ export interface CallRecord {
 export interface History {
   calls: CallRecord[];
 }
+
+/** Empirical performance of all scored directional calls in one confidence bucket. */
+export interface ConfidenceBucket {
+  confidence: Confidence;
+  count: number; // scored directional calls in this bucket
+  right: number;
+  wrong: number;
+  rate: number | null; // right / count
+}
+
+/**
+ * Calibration = does the model's stated confidence actually mean anything?
+ * If "High" calls don't beat "Low" calls, the confidence signal is noise — and
+ * this surfaces that honestly.
+ */
+export interface Calibration {
+  buckets: ConfidenceBucket[]; // ordered High, Medium, Low
+  scored: number; // total scored directional calls
+  brier: number | null; // mean squared error vs the assumed confidence->prob map
+}

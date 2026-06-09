@@ -13,6 +13,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 import type {
   Analysis,
+  Calibration,
   CallRecord,
   Confidence,
   Holding,
@@ -174,6 +175,37 @@ function formatRecentCalls(recent: CallRecord[]): string {
 
 // ---- per-holding analysis ---------------------------------------------------
 
+/**
+ * Format the confidence-calibration stats for the prompt. This is the feedback
+ * loop: the model is shown whether its OWN past confidence has meant anything,
+ * so it can pick today's confidence honestly. (Still just context — no retrain.)
+ */
+function formatCalibration(cal: Calibration): string {
+  if (!cal || cal.scored === 0) {
+    return "Calibration: no scored directional calls yet — keep your confidence modest.";
+  }
+  const parts = cal.buckets
+    .filter((b) => b.count > 0)
+    .map(
+      (b) =>
+        `${b.confidence} confidence: beat the index ${Math.round((b.rate ?? 0) * 100)}% of the time (${b.count} call${b.count === 1 ? "" : "s"})`,
+    );
+  const small = cal.scored < 20 ? " (small sample so far — treat as a weak signal)" : "";
+  const brier =
+    cal.brier != null
+      ? ` Overall Brier score ${cal.brier.toFixed(2)} (0.25 is what you'd get always saying "50/50"; lower is better).`
+      : "";
+  return (
+    "Calibration of YOUR OWN past directional calls, scored vs the index" +
+    small +
+    ":\n" +
+    parts.join("\n") +
+    "." +
+    brier +
+    "\nIf higher confidence has NOT led to better outcomes, do not inflate your confidence here — say Low or Medium."
+  );
+}
+
 const ANALYSIS_SYSTEM = `You are a careful equity analyst writing a brief, honest morning note on ONE existing holding in an Indian retail investor's portfolio (NSE/BSE).
 
 Honesty rules (do not soften these):
@@ -191,6 +223,7 @@ export async function analyzeHolding(
   holding: Holding,
   price: number | null,
   recent: CallRecord[],
+  calibration: Calibration,
 ): Promise<Analysis> {
   const exch = holding.exchange === "NS" ? "NSE" : "BSE";
   const priceLine =
@@ -201,6 +234,8 @@ export async function analyzeHolding(
 ${priceLine}
 
 ${formatRecentCalls(recent)}
+
+${formatCalibration(calibration)}
 
 Search for current news on this company, then return your JSON read now.`;
 

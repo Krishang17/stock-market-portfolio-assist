@@ -9,11 +9,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { analyzeHolding, suggestIdeas } from "./claude";
-import { computeHitRate, evaluatePending } from "./evaluate";
+import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate";
 import { fetchRawPrice, indexSymbolFor, toYahooSymbol } from "./prices";
 import { mdSafe, packChunks, sendTelegram } from "./telegram";
 import type {
   Analysis,
+  Calibration,
   CallRecord,
   Exchange,
   History,
@@ -121,20 +122,34 @@ interface StockView {
   analysis: Analysis;
 }
 
-function header(history: History): string {
+function header(history: History, cal: Calibration): string {
   const { right, wrong, rate } = computeHitRate(history);
   const rateLine =
     rate == null
       ? "Track record: no scored directional calls yet."
       : `Track record: ${right}/${right + wrong} correct (${Math.round(rate * 100)}%) on scored directional calls.`;
-  return [
+  const lines = [
     `*Morning Briefing — ${todayISO()}*`,
     `_This is information, not financial advice._`,
     `Short-term calls are close to a coin flip — the record below is here to show that honestly.`,
     ``,
     rateLine,
-    `(Scored vs the index — "right" means the pick beat just holding the NIFTY/SENSEX over ~1 day; Add = beat it, Trim/Avoid = lagged it, Hold/Watch not scored. ~50% is a coin flip.)`,
-  ].join("\n");
+  ];
+  // Confidence calibration: does "High" actually beat "Low"? If not, the
+  // confidence signal is noise — and this line shows it.
+  if (cal.scored > 0) {
+    const parts = cal.buckets
+      .filter((b) => b.count > 0)
+      .map((b) => `${b.confidence} ${Math.round((b.rate ?? 0) * 100)}% (${b.count})`);
+    const brier = cal.brier != null ? ` · Brier ${cal.brier.toFixed(2)}` : "";
+    lines.push(
+      `Confidence check (does confidence mean anything?): ${parts.join(" · ")}${brier}.`,
+    );
+  }
+  lines.push(
+    `(Scored vs the index — "right" means the pick beat just holding the NIFTY/SENSEX over ~1 day; Add = beat it, Trim/Avoid = lagged it, Hold/Watch not scored. ~50% is a coin flip; Brier 0.25 = always guessing 50/50.)`,
+  );
+  return lines.join("\n");
 }
 
 function stockSection(v: StockView): string {
@@ -209,6 +224,10 @@ async function main(): Promise<void> {
     );
   }
 
+  // Calibration over the (now freshly-evaluated) record; fed into each prompt
+  // and shown in the briefing.
+  const calibration = computeCalibration(history);
+
   // 2. Fetch prices + ask Claude for an honest read on each holding.
   const views: StockView[] = [];
   const newCalls: CallRecord[] = [];
@@ -219,7 +238,7 @@ async function main(): Promise<void> {
     const indexSymbol = indexSymbolFor(holding.exchange);
     const indexAtCall = await getRaw(indexSymbol);
     const recent = recentCallsFor(history, holding.symbol, holding.exchange, 5);
-    const analysis = await analyzeHolding(holding, price, recent);
+    const analysis = await analyzeHolding(holding, price, recent, calibration);
     views.push({ holding, price, analysis });
     newCalls.push({
       date: today,
@@ -253,7 +272,7 @@ async function main(): Promise<void> {
 
   // 4. Build and send the Telegram briefing.
   const sections = [
-    header(history),
+    header(history, calibration),
     ...views.map(stockSection),
     ideasSection(ideas),
   ];

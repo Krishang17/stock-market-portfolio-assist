@@ -57,6 +57,27 @@ BSE) so the comparison covers the same window.
   scoring and is flagged as not benchmarked.
 - The running hit rate shown is `right / (right + wrong)` over all scored calls.
 
+### Confidence calibration (does confidence mean anything?)
+
+Each run also computes **calibration** — whether the model's stated confidence
+actually tracks reality — and feeds it back into the prompt and the message:
+
+- **Per-confidence hit rate:** the share of `High` / `Medium` / `Low` calls that
+  beat the index. If `High` calls don't beat `Low` calls, the confidence signal
+  is noise, and the bot is told so (and told not to inflate confidence).
+- **Brier score:** a single calibration number. Because the model returns a
+  categorical Low/Medium/High, we map those to assumed probabilities — **Low =
+  0.55, Medium = 0.65, High = 0.75** (a documented assumption, not the model's
+  own number, defined in [`src/evaluate.ts`](./src/evaluate.ts)). The Brier score
+  is the mean squared error of those probabilities against actual outcomes;
+  **0.25 is what you'd score by always saying "50/50", and lower is better.**
+- This is the honest version of "learning from mistakes": a measured statistic
+  the model is shown as context so it can pick today's confidence more soberly.
+  It is **still not retraining** — the weights never change.
+- **It needs data.** With only a handful of scored calls the numbers are mostly
+  noise; the bot flags a small sample as a weak signal. Expect it to mean
+  something only after a few weeks of runs.
+
 ---
 
 ## How it works
