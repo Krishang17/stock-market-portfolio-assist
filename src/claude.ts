@@ -1,13 +1,15 @@
-// Claude client: per-holding analysis + research ideas.
+// Claude client: per-holding analysis + research ideas, WITH source links.
 //
 // We call the Anthropic Messages API (https://api.anthropic.com/v1/messages)
-// through the official SDK with the server-side `web_search` tool enabled, so
-// the model pulls current news itself — there is no separate news API.
+// through the official SDK with the server-side `web_search` tool enabled, so the
+// model pulls current news itself (no separate news API) AND we capture the
+// source URLs it consulted — so every read on the dashboard can link to where
+// the facts came from.
 //
-// On "learning from mistakes": the only thing that happens is that recent past
-// calls and their outcomes are formatted into the prompt as plain text context
-// (see formatRecentCalls). The model can therefore SEE its own record, but it is
-// NOT retrained or fine-tuned and does NOT improve between runs.
+// On "learning from mistakes": recent past calls + outcomes are formatted into
+// the prompt as plain text context (see formatRecentCalls / formatCalibration).
+// The model can SEE its own record, but it is NOT retrained or fine-tuned and
+// does NOT improve between runs.
 
 import Anthropic from "@anthropic-ai/sdk";
 
@@ -18,6 +20,7 @@ import type {
   Confidence,
   Holding,
   Idea,
+  Source,
   Stance,
 } from "./types";
 
@@ -50,19 +53,55 @@ function extractText(content: Anthropic.ContentBlock[]): string {
 }
 
 /**
- * Run one Messages request with web search enabled and return the final text.
- * Server-side tool loops can stop with reason "pause_turn"; when that happens we
- * re-send the assistant turn so the server resumes where it left off.
+ * Collect the source links Claude consulted via web search, so the dashboard can
+ * show "here's where this came from". We read web_search_tool_result blocks (and
+ * any inline text citations). Nested server-tool block shapes vary across SDK
+ * versions, so we read them defensively.
+ */
+function extractSources(content: Anthropic.ContentBlock[]): Source[] {
+  const out: Source[] = [];
+  const seen = new Set<string>();
+  const add = (url: unknown, title: unknown) => {
+    if (typeof url !== "string" || !url || seen.has(url)) return;
+    seen.add(url);
+    out.push({ url, title: typeof title === "string" && title ? title : url });
+  };
+  for (const block of content as unknown as Array<Record<string, unknown>>) {
+    if (block?.type === "web_search_tool_result" && Array.isArray(block.content)) {
+      for (const r of block.content as Array<Record<string, unknown>>) {
+        if (r?.type === "web_search_result") add(r.url, r.title);
+      }
+    }
+    if (block?.type === "text" && Array.isArray(block.citations)) {
+      for (const c of block.citations as Array<Record<string, unknown>>) {
+        add(c?.url, c?.title);
+      }
+    }
+  }
+  return out.slice(0, 6);
+}
+
+interface WebSearchResult {
+  text: string;
+  sources: Source[];
+}
+
+/**
+ * Run one Messages request with web search enabled; return the final text plus
+ * the sources consulted. Server-side tool loops can stop with "pause_turn"; when
+ * that happens we re-send the assistant turn so the server resumes.
  */
 async function askWithWebSearch(
   system: string,
   userText: string,
   maxTokens: number,
-): Promise<string> {
+): Promise<WebSearchResult> {
   const messages: Anthropic.MessageParam[] = [
     { role: "user", content: userText },
   ];
   let finalText = "";
+  const sources: Source[] = [];
+  const seen = new Set<string>();
   for (let i = 0; i < 4; i++) {
     const resp = await getClient().messages.create({
       model: model(),
@@ -73,6 +112,12 @@ async function askWithWebSearch(
     });
     const text = extractText(resp.content);
     if (text) finalText = text;
+    for (const s of extractSources(resp.content)) {
+      if (!seen.has(s.url)) {
+        seen.add(s.url);
+        sources.push(s);
+      }
+    }
     if (resp.stop_reason === "pause_turn") {
       messages.push({
         role: "assistant",
@@ -82,7 +127,7 @@ async function askWithWebSearch(
     }
     break;
   }
-  return finalText;
+  return { text: finalText, sources: sources.slice(0, 6) };
 }
 
 // ---- robust JSON extraction -------------------------------------------------
@@ -120,8 +165,7 @@ function normalizeAnalysis(parsed: unknown): Analysis | null {
   const confidence = CONFIDENCES.includes(p.confidence as Confidence)
     ? (p.confidence as Confidence)
     : "Low";
-  const reasoning =
-    typeof p.reasoning === "string" ? p.reasoning.trim() : "";
+  const reasoning = typeof p.reasoning === "string" ? p.reasoning.trim() : "";
   const keyNews = Array.isArray(p.keyNews)
     ? p.keyNews.filter((x): x is string => typeof x === "string").slice(0, 3)
     : [];
@@ -139,8 +183,10 @@ export function fallbackAnalysis(): Analysis {
     stance: "Watch",
     confidence: "Low",
     reasoning:
-      "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
+      "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
     keyNews: [],
+    sources: [],
+    unavailable: true,
   };
 }
 
@@ -173,8 +219,6 @@ function formatRecentCalls(recent: CallRecord[]): string {
   );
 }
 
-// ---- per-holding analysis ---------------------------------------------------
-
 /**
  * Format the confidence-calibration stats for the prompt. This is the feedback
  * loop: the model is shown whether its OWN past confidence has meant anything,
@@ -206,13 +250,15 @@ function formatCalibration(cal: Calibration): string {
   );
 }
 
+// ---- per-holding analysis ---------------------------------------------------
+
 const ANALYSIS_SYSTEM = `You are a careful equity analyst writing a brief, honest morning note on ONE existing holding in an Indian retail investor's portfolio (NSE/BSE).
 
 Honesty rules (do not soften these):
 - This is information, not financial advice.
 - Short-term direction (about one trading day) is close to a coin flip. Never imply reliability. No hype, no price targets, no guarantees.
 - Your track record is scored as OUTPERFORMANCE vs the index (NIFTY/SENSEX): an "Add" only counts as right if the stock beats simply holding the index over ~1 day, and "Trim"/"Avoid" only if it lags. Beating the market short-term is hard — stay humble.
-- Use the web_search tool to find the most recent, relevant news for THIS specific company before forming a view.
+- Base every claim on what you find via the web_search tool. Search for the most recent, relevant news for THIS specific company before forming a view. Do not state facts you did not find.
 
 You may be shown your own recent past calls and how they turned out. That history is context only — it does not mean you have been retrained or that you improve over time.
 
@@ -239,9 +285,9 @@ ${formatCalibration(calibration)}
 
 Search for current news on this company, then return your JSON read now.`;
 
-  let raw = "";
+  let result: WebSearchResult;
   try {
-    raw = await askWithWebSearch(ANALYSIS_SYSTEM, user, 1500);
+    result = await askWithWebSearch(ANALYSIS_SYSTEM, user, 1500);
   } catch (err) {
     console.error(
       `[claude] analyzeHolding failed for ${holding.symbol}:`,
@@ -250,10 +296,13 @@ Search for current news on this company, then return your JSON read now.`;
     return fallbackAnalysis();
   }
 
-  const json = extractJsonObject(raw);
+  const json = extractJsonObject(result.text);
   if (!json) return fallbackAnalysis();
   try {
-    return normalizeAnalysis(JSON.parse(json)) ?? fallbackAnalysis();
+    const parsed = normalizeAnalysis(JSON.parse(json));
+    if (!parsed) return fallbackAnalysis();
+    parsed.sources = result.sources;
+    return parsed;
   } catch {
     return fallbackAnalysis();
   }
@@ -266,34 +315,39 @@ const IDEAS_SYSTEM = `You suggest Indian-market stock ideas as STARTING POINTS F
 Honesty rules:
 - This is information, not financial advice.
 - You cannot predict short-term moves; present these only as things to look into.
-- Use the web_search tool for current context.
+- Base every claim on what you find via the web_search tool.
 
 Output ONLY a single minified JSON array, no code fences and no other text:
 [{"symbol":"TICKER","name":"Company","why":"one short line","risk":"one short line"}]
 Return 2 or 3 ideas.`;
 
-export async function suggestIdeas(held: string[]): Promise<Idea[]> {
+export interface IdeasResult {
+  ideas: Idea[];
+  sources: Source[];
+}
+
+export async function suggestIdeas(held: string[]): Promise<IdeasResult> {
   const user = `I already hold: ${held.join(", ") || "(nothing yet)"}.
 Suggest 2-3 liquid Indian-listed stocks I do NOT already hold, each with a one-line reason to look into it and a one-line key risk. Return the JSON array now.`;
 
-  let raw = "";
+  let result: WebSearchResult;
   try {
-    raw = await askWithWebSearch(IDEAS_SYSTEM, user, 2000);
+    result = await askWithWebSearch(IDEAS_SYSTEM, user, 2000);
   } catch (err) {
     console.error(
       "[claude] suggestIdeas failed:",
       err instanceof Error ? err.message : err,
     );
-    return [];
+    return { ideas: [], sources: [] };
   }
 
-  const json = extractJsonArray(raw);
-  if (!json) return [];
+  const json = extractJsonArray(result.text);
+  if (!json) return { ideas: [], sources: result.sources };
   try {
     const arr = JSON.parse(json);
-    if (!Array.isArray(arr)) return [];
+    if (!Array.isArray(arr)) return { ideas: [], sources: result.sources };
     const heldSet = new Set(held.map((h) => h.toUpperCase()));
-    return arr
+    const ideas = arr
       .filter(
         (x: unknown): x is Record<string, unknown> =>
           !!x &&
@@ -310,7 +364,8 @@ Suggest 2-3 liquid Indian-listed stocks I do NOT already hold, each with a one-l
         why: String(x.why),
         risk: String(x.risk),
       }));
+    return { ideas, sources: result.sources };
   } catch {
-    return [];
+    return { ideas: [], sources: result.sources };
   }
 }

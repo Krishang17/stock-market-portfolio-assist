@@ -26,12 +26,20 @@ export interface Holding {
   buyPrice: number;
 }
 
+/** A source link Claude consulted via web search (for "backed by facts"). */
+export interface Source {
+  title: string;
+  url: string;
+}
+
 /** The minified-JSON shape we ask Claude to return per holding. */
 export interface Analysis {
   stance: Stance;
   confidence: Confidence;
   reasoning: string;
   keyNews: string[];
+  sources?: Source[]; // links Claude consulted for this read
+  unavailable?: boolean; // true when this was a fallback (model/credit/parse error)
 }
 
 /** A "research starting point" suggestion (explicitly NOT a call). */
@@ -53,6 +61,7 @@ export interface CallRecord {
   priceAtCall: number | null;
   reasoning: string;
   keyNews: string[];
+  sources?: Source[]; // source links consulted for this call
 
   // Benchmark captured WHEN THE CALL WAS MADE, so the outcome can be scored as
   // outperformance vs the index rather than raw direction.

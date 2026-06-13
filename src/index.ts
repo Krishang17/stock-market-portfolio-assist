@@ -1,6 +1,7 @@
 // Orchestrator: reads the portfolio, evaluates the previous run's calls, asks
-// Claude for an honest read on each holding, sends the briefing to Telegram, and
-// persists the updated track record so it survives to the next run.
+// Claude for an honest read on each holding (with source links), writes a
+// snapshot for the GitHub Pages dashboard, and persists the track record so it
+// survives to the next run.
 //
 // Every external step is wrapped so one stock's failure never crashes the run.
 
@@ -11,20 +12,20 @@ import path from "node:path";
 import { analyzeHolding, suggestIdeas } from "./claude";
 import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate";
 import { fetchRawPrice, indexSymbolFor, toYahooSymbol } from "./prices";
-import { mdSafe, packChunks, sendTelegram } from "./telegram";
 import type {
   Analysis,
-  Calibration,
   CallRecord,
   Exchange,
   History,
   Holding,
-  Idea,
+  Stance,
 } from "./types";
 
 const ROOT = process.cwd();
 const PORTFOLIO_PATH = path.join(ROOT, "portfolio.json");
 const HISTORY_PATH = path.join(ROOT, "data", "history.json");
+// The dashboard (docs/) is served by GitHub Pages and reads this snapshot.
+const SNAPSHOT_PATH = path.join(ROOT, "docs", "briefing.json");
 
 function todayISO(): string {
   return new Date().toISOString().slice(0, 10);
@@ -34,14 +35,20 @@ function exchangeLabel(e: Exchange): string {
   return e === "NS" ? "NSE" : "BSE";
 }
 
-function inr(n: number): string {
-  return (
-    "₹" +
-    n.toLocaleString("en-IN", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })
-  );
+/** Plain-English action shown on the dashboard alongside the raw stance. */
+function actionLabel(stance: Stance): string {
+  switch (stance) {
+    case "Add":
+      return "Buy more";
+    case "Trim":
+      return "Trim";
+    case "Avoid":
+      return "Sell / avoid";
+    case "Hold":
+      return "Hold";
+    case "Watch":
+      return "Watch";
+  }
 }
 
 // ---- loading / saving -------------------------------------------------------
@@ -86,6 +93,11 @@ function saveHistory(history: History): void {
   fs.writeFileSync(HISTORY_PATH, JSON.stringify(history, null, 2) + "\n");
 }
 
+function saveSnapshot(snapshot: unknown): void {
+  fs.mkdirSync(path.dirname(SNAPSHOT_PATH), { recursive: true });
+  fs.writeFileSync(SNAPSHOT_PATH, JSON.stringify(snapshot, null, 2) + "\n");
+}
+
 function recentCallsFor(
   history: History,
   symbol: string,
@@ -114,84 +126,13 @@ async function getPrice(
   return getRaw(toYahooSymbol(symbol, exchange));
 }
 
-// ---- message building -------------------------------------------------------
+// ---- main -------------------------------------------------------------------
 
 interface StockView {
   holding: Holding;
   price: number | null;
   analysis: Analysis;
 }
-
-function header(history: History, cal: Calibration): string {
-  const { right, wrong, rate } = computeHitRate(history);
-  const rateLine =
-    rate == null
-      ? "Track record: no scored directional calls yet."
-      : `Track record: ${right}/${right + wrong} correct (${Math.round(rate * 100)}%) on scored directional calls.`;
-  const lines = [
-    `*Morning Briefing — ${todayISO()}*`,
-    `_This is information, not financial advice._`,
-    `Short-term calls are close to a coin flip — the record below is here to show that honestly.`,
-    ``,
-    rateLine,
-  ];
-  // Confidence calibration: does "High" actually beat "Low"? If not, the
-  // confidence signal is noise — and this line shows it.
-  if (cal.scored > 0) {
-    const parts = cal.buckets
-      .filter((b) => b.count > 0)
-      .map((b) => `${b.confidence} ${Math.round((b.rate ?? 0) * 100)}% (${b.count})`);
-    const brier = cal.brier != null ? ` · Brier ${cal.brier.toFixed(2)}` : "";
-    lines.push(
-      `Confidence check (does confidence mean anything?): ${parts.join(" · ")}${brier}.`,
-    );
-  }
-  lines.push(
-    `(Scored vs the index — "right" means the pick beat just holding the NIFTY/SENSEX over ~1 day; Add = beat it, Trim/Avoid = lagged it, Hold/Watch not scored. ~50% is a coin flip; Brier 0.25 = always guessing 50/50.)`,
-  );
-  return lines.join("\n");
-}
-
-function stockSection(v: StockView): string {
-  const { holding, price, analysis } = v;
-  const lines: string[] = [];
-  lines.push(
-    `*${mdSafe(holding.symbol)}* (${exchangeLabel(holding.exchange)}) — ${mdSafe(holding.name)}`,
-  );
-  lines.push(`${analysis.stance} · ${analysis.confidence} confidence`);
-  if (price != null) {
-    const diffPct = ((price - holding.buyPrice) / holding.buyPrice) * 100;
-    const totalAbs = (price - holding.buyPrice) * holding.qty;
-    const sign = diffPct >= 0 ? "+" : "";
-    const absSign = totalAbs >= 0 ? "+" : "";
-    lines.push(
-      `Price ${inr(price)} · P/L ${sign}${diffPct.toFixed(1)}% (${absSign}${inr(totalAbs)} on ${holding.qty}) vs buy ${inr(holding.buyPrice)}`,
-    );
-  } else {
-    lines.push(`Price unavailable this run.`);
-  }
-  if (analysis.reasoning) lines.push(mdSafe(analysis.reasoning));
-  if (analysis.keyNews.length) {
-    lines.push("News:");
-    for (const h of analysis.keyNews) lines.push(`• ${mdSafe(h)}`);
-  }
-  return lines.join("\n");
-}
-
-function ideasSection(ideas: Idea[]): string {
-  if (!ideas.length) {
-    return `*Ideas to research* — starting points, not calls\n(none generated this run)`;
-  }
-  const lines = [`*Ideas to research* — starting points, not calls`];
-  for (const idea of ideas) {
-    const name = idea.name ? ` (${mdSafe(idea.name)})` : "";
-    lines.push(`*${mdSafe(idea.symbol)}*${name} — ${mdSafe(idea.why)}`);
-    lines.push(`   Risk: ${mdSafe(idea.risk)}`);
-  }
-  return lines.join("\n");
-}
-
-// ---- main -------------------------------------------------------------------
 
 async function main(): Promise<void> {
   const today = todayISO();
@@ -225,10 +166,10 @@ async function main(): Promise<void> {
   }
 
   // Calibration over the (now freshly-evaluated) record; fed into each prompt
-  // and shown in the briefing.
+  // and shown on the dashboard.
   const calibration = computeCalibration(history);
 
-  // 2. Fetch prices + ask Claude for an honest read on each holding.
+  // 2. Fetch prices + ask Claude for an honest, sourced read on each holding.
   const views: StockView[] = [];
   const newCalls: CallRecord[] = [];
   for (const holding of portfolio) {
@@ -252,6 +193,7 @@ async function main(): Promise<void> {
       indexAtCall,
       reasoning: analysis.reasoning,
       keyNews: analysis.keyNews,
+      sources: analysis.sources ?? [],
       outcome: "pending",
     });
     console.log(
@@ -260,9 +202,12 @@ async function main(): Promise<void> {
   }
 
   // 3. A few research ideas the user does NOT already hold.
-  let ideas: Idea[] = [];
+  let ideas = [] as Awaited<ReturnType<typeof suggestIdeas>>["ideas"];
+  let ideaSources = [] as Awaited<ReturnType<typeof suggestIdeas>>["sources"];
   try {
-    ideas = await suggestIdeas(portfolio.map((p) => p.symbol));
+    const res = await suggestIdeas(portfolio.map((p) => p.symbol));
+    ideas = res.ideas;
+    ideaSources = res.sources;
   } catch (err) {
     console.error(
       "[main] ideas step failed:",
@@ -270,13 +215,54 @@ async function main(): Promise<void> {
     );
   }
 
-  // 4. Build and send the Telegram briefing.
-  const sections = [
-    header(history, calibration),
-    ...views.map(stockSection),
-    ideasSection(ideas),
-  ];
-  await sendTelegram(packChunks(sections));
+  // 4. Write the dashboard snapshot.
+  const { right, wrong, rate } = computeHitRate(history);
+  const snapshot = {
+    generatedAt: new Date().toISOString(),
+    date: today,
+    model: process.env.MODEL?.trim() || "claude-sonnet-4-6",
+    disclaimer:
+      "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
+    degraded: views.some((v) => v.analysis.unavailable === true),
+    track: { right, wrong, rate },
+    calibration,
+    holdings: views.map((v) => {
+      const { holding, price, analysis } = v;
+      const plPct =
+        price != null ? ((price - holding.buyPrice) / holding.buyPrice) * 100 : null;
+      const plAbs = price != null ? (price - holding.buyPrice) * holding.qty : null;
+      return {
+        symbol: holding.symbol,
+        name: holding.name,
+        exchange: exchangeLabel(holding.exchange),
+        qty: holding.qty,
+        buyPrice: holding.buyPrice,
+        price,
+        plPct,
+        plAbs,
+        stance: analysis.stance,
+        confidence: analysis.confidence,
+        action: actionLabel(analysis.stance),
+        reasoning: analysis.reasoning,
+        keyNews: analysis.keyNews,
+        sources: analysis.sources ?? [],
+        unavailable: analysis.unavailable === true,
+      };
+    }),
+    ideas: { items: ideas, sources: ideaSources },
+  };
+
+  try {
+    saveSnapshot(snapshot);
+    console.log(
+      `[main] wrote docs/briefing.json (${snapshot.holdings.length} holdings, ${ideas.length} ideas, degraded=${snapshot.degraded}).`,
+    );
+  } catch (err) {
+    console.error(
+      "[main] failed to write snapshot:",
+      err instanceof Error ? err.message : err,
+    );
+  }
 
   // 5. Persist today's calls so the record survives to the next run.
   history.calls.push(...newCalls);

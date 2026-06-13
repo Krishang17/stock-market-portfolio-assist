@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio Briefing</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main id="app">
+      <header class="site-header">
+        <h1>Portfolio Briefing</h1>
+        <p class="disclaimer">
+          ⚠️ Information, not financial advice. Short-term calls are close to a
+          coin flip — the track record below is here to show that honestly.
+        </p>
+        <p id="meta" class="meta">Loading…</p>
+      </header>
+
+      <div id="banner" class="banner hidden"></div>
+
+      <section id="track" class="card track"></section>
+
+      <h2 class="section-title">Your holdings</h2>
+      <section id="holdings" class="grid"></section>
+
+      <h2 class="section-title">Ideas to research <span class="muted">— starting points, not calls</span></h2>
+      <section id="ideas" class="grid"></section>
+
+      <footer class="site-footer">
+        <p>
+          Prices via Yahoo Finance (unofficial). Analysis by Claude with live web
+          search; the links under each card are the sources it consulted. Calls
+          are scored as outperformance vs the NIFTY/SENSEX; Hold/Watch are not
+          scored. This page shows the latest scheduled run — it is not live.
+        </p>
+      </footer>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

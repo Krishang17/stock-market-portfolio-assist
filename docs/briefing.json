@@ -1,0 +1,96 @@
+{
+  "generatedAt": "2026-06-13T22:04:54.289Z",
+  "date": "2026-06-13",
+  "model": "claude-sonnet-4-6",
+  "disclaimer": "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
+  "degraded": true,
+  "track": {
+    "right": 0,
+    "wrong": 0,
+    "rate": null
+  },
+  "calibration": {
+    "buckets": [
+      {
+        "confidence": "High",
+        "count": 0,
+        "right": 0,
+        "wrong": 0,
+        "rate": null
+      },
+      {
+        "confidence": "Medium",
+        "count": 0,
+        "right": 0,
+        "wrong": 0,
+        "rate": null
+      },
+      {
+        "confidence": "Low",
+        "count": 0,
+        "right": 0,
+        "wrong": 0,
+        "rate": null
+      }
+    ],
+    "scored": 0,
+    "brier": null
+  },
+  "holdings": [
+    {
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries",
+      "exchange": "NSE",
+      "qty": 10,
+      "buyPrice": 1200,
+      "price": 1293,
+      "plPct": 7.75,
+      "plAbs": 930,
+      "stance": "Watch",
+      "confidence": "Low",
+      "action": "Watch",
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "unavailable": true
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "exchange": "NSE",
+      "qty": 5,
+      "buyPrice": 2100,
+      "price": 2161.4,
+      "plPct": 2.923809523809528,
+      "plAbs": 307.00000000000045,
+      "stance": "Watch",
+      "confidence": "Low",
+      "action": "Watch",
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "unavailable": true
+    },
+    {
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank",
+      "exchange": "NSE",
+      "qty": 15,
+      "buyPrice": 700,
+      "price": 772.45,
+      "plPct": 10.350000000000007,
+      "plAbs": 1086.7500000000007,
+      "stance": "Watch",
+      "confidence": "Low",
+      "action": "Watch",
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "unavailable": true
+    }
+  ],
+  "ideas": {
+    "items": [],
+    "sources": []
+  }
+}
