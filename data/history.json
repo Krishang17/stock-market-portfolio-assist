@@ -252,7 +252,13 @@
       "indexAtCall": 23622.9,
       "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1293,
+      "evaluatedIndexPrice": 23622.9,
+      "stockReturnPct": 0,
+      "benchmarkReturnPct": 0,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-14"
     },
     {
       "date": "2026-06-13",
@@ -266,7 +272,13 @@
       "indexAtCall": 23622.9,
       "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 2161.4,
+      "evaluatedIndexPrice": 23622.9,
+      "stockReturnPct": 0,
+      "benchmarkReturnPct": 0,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-14"
     },
     {
       "date": "2026-06-13",
@@ -280,7 +292,13 @@
       "indexAtCall": 23622.9,
       "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 772.45,
+      "evaluatedIndexPrice": 23622.9,
+      "stockReturnPct": 0,
+      "benchmarkReturnPct": 0,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-14"
     },
     {
       "date": "2026-06-13",
@@ -294,7 +312,13 @@
       "indexAtCall": 23622.9,
       "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1293,
+      "evaluatedIndexPrice": 23622.9,
+      "stockReturnPct": 0,
+      "benchmarkReturnPct": 0,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-14"
     },
     {
       "date": "2026-06-13",
@@ -308,7 +332,13 @@
       "indexAtCall": 23622.9,
       "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 2161.4,
+      "evaluatedIndexPrice": 23622.9,
+      "stockReturnPct": 0,
+      "benchmarkReturnPct": 0,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-14"
     },
     {
       "date": "2026-06-13",
@@ -322,6 +352,57 @@
       "indexAtCall": 23622.9,
       "reasoning": "Automated analysis was unavailable this run (model or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
+      "outcome": "unscored",
+      "evaluatedPrice": 772.45,
+      "evaluatedIndexPrice": 23622.9,
+      "stockReturnPct": 0,
+      "benchmarkReturnPct": 0,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-14"
+    },
+    {
+      "date": "2026-06-14",
+      "symbol": "RELIANCE",
+      "exchange": "NS",
+      "name": "Reliance Industries",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1293,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23622.9,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-14",
+      "symbol": "TCS",
+      "exchange": "NS",
+      "name": "Tata Consultancy Services",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 2161.4,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23622.9,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-14",
+      "symbol": "HDFCBANK",
+      "exchange": "NS",
+      "name": "HDFC Bank",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 772.45,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23622.9,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
       "outcome": "pending"
     }
   ]
