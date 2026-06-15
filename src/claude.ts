@@ -25,7 +25,7 @@ import type {
 } from "./types";
 
 // Default Claude model; overridable via the MODEL env var / repo variable.
-const DEFAULT_MODEL = "claude-opus-4-8";
+const DEFAULT_MODEL = "claude-sonnet-4-6";
 
 // Lazy singleton so importing this module never throws when ANTHROPIC_API_KEY
 // is absent (e.g. during local type-checking).
@@ -52,9 +52,12 @@ function noteFailure(err: unknown): void {
 }
 
 // web_search runs server-side; dynamic filtering is built into this version.
+// max_uses caps searches per call — web-search results are token-heavy, so this
+// is the main lever on cost (and latency) per holding.
 const WEB_SEARCH_TOOL = {
   type: "web_search_20260209",
   name: "web_search",
+  max_uses: 3,
 } as const;
 
 function extractText(content: Anthropic.ContentBlock[]): string {

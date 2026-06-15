@@ -53,6 +53,26 @@ function round2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
+/** Run an async fn over items with bounded concurrency, preserving order. */
+async function mapLimit<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let next = 0;
+  async function worker(): Promise<void> {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i], i);
+    }
+  }
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, () => worker()),
+  );
+  return results;
+}
+
 /** Plain-English action shown on the dashboard alongside the raw stance. */
 function actionLabel(stance: Stance): string {
   switch (stance) {
@@ -200,19 +220,43 @@ async function main(): Promise<void> {
   // Calibration over the (now freshly-evaluated) record.
   const calibration = computeCalibration(history);
 
-  // 2. Fetch quotes + ask Claude for an honest, sourced read on each holding.
+  // 2. Fetch quotes (parallel), then analyse each holding concurrently (bounded)
+  //    and kick off the ideas call in parallel too. Doing these sequentially was
+  //    slow (each web-search call can take ~a minute), so this cuts the whole run
+  //    from many minutes to a couple.
+  const quotes = await Promise.all(
+    portfolio.map((h) => getQuote(toYahooSymbol(h.symbol, h.exchange))),
+  );
+  // Benchmark index level(s) — fetched once (cached) for scoring today's calls.
+  for (const h of portfolio) await getRaw(indexSymbolFor(h.exchange));
+
+  const ideasPromise = suggestIdeas(portfolio.map((p) => p.symbol)).catch(
+    (err) => {
+      console.error(
+        "[main] ideas step failed:",
+        err instanceof Error ? err.message : err,
+      );
+      return { ideas: [], sources: [] };
+    },
+  );
+
+  const analyses = await mapLimit(portfolio, 5, (holding, i) =>
+    analyzeHolding(
+      holding,
+      quotes[i].price,
+      recentCallsFor(history, holding.symbol, holding.exchange, 5),
+      calibration,
+    ),
+  );
+
   const views: StockView[] = [];
   const newCalls: CallRecord[] = [];
-  for (const holding of portfolio) {
-    const q = await getQuote(toYahooSymbol(holding.symbol, holding.exchange));
-    const price = q.price;
-    // Capture the benchmark level now so this call can later be scored as
-    // outperformance vs the index, not just raw direction.
+  portfolio.forEach((holding, i) => {
+    const q = quotes[i];
+    const analysis = analyses[i];
     const indexSymbol = indexSymbolFor(holding.exchange);
-    const indexAtCall = await getRaw(indexSymbol);
-    const recent = recentCallsFor(history, holding.symbol, holding.exchange, 5);
-    const analysis = await analyzeHolding(holding, price, recent, calibration);
-    views.push({ holding, price, dayChangePct: q.changePercent, analysis });
+    const indexAtCall = quoteCache.get(indexSymbol)?.price ?? null;
+    views.push({ holding, price: q.price, dayChangePct: q.changePercent, analysis });
     newCalls.push({
       date: today,
       symbol: holding.symbol,
@@ -220,7 +264,7 @@ async function main(): Promise<void> {
       name: holding.name,
       stance: analysis.stance,
       confidence: analysis.confidence,
-      priceAtCall: price,
+      priceAtCall: q.price,
       indexSymbol,
       indexAtCall,
       reasoning: analysis.reasoning,
@@ -231,7 +275,7 @@ async function main(): Promise<void> {
     console.log(
       `[main] ${holding.symbol}: ${analysis.stance} (${analysis.confidence})`,
     );
-  }
+  });
 
   // 3. Market indices (SENSEX / NIFTY 50 / BANK NIFTY).
   const indices = [];
@@ -277,19 +321,8 @@ async function main(): Promise<void> {
     }
   }
 
-  // 6. Research ideas the user does NOT already hold.
-  let ideas = [] as Awaited<ReturnType<typeof suggestIdeas>>["ideas"];
-  let ideaSources = [] as Awaited<ReturnType<typeof suggestIdeas>>["sources"];
-  try {
-    const res = await suggestIdeas(portfolio.map((p) => p.symbol));
-    ideas = res.ideas;
-    ideaSources = res.sources;
-  } catch (err) {
-    console.error(
-      "[main] ideas step failed:",
-      err instanceof Error ? err.message : err,
-    );
-  }
+  // 6. Research ideas (kicked off in parallel above).
+  const { ideas, sources: ideaSources } = await ideasPromise;
 
   // 7. Write the dashboard snapshot.
   const { right, wrong, rate } = computeHitRate(history);
@@ -298,7 +331,7 @@ async function main(): Promise<void> {
   const snapshot = {
     generatedAt: new Date().toISOString(),
     date: today,
-    model: process.env.MODEL?.trim() || "claude-opus-4-8",
+    model: process.env.MODEL?.trim() || "claude-sonnet-4-6",
     disclaimer:
       "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
     degraded,

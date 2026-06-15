@@ -69,7 +69,7 @@ the dashboard. It needs a few weeks of calls before it means much.
 3. In the repo: **Settings → Secrets and variables → Actions → New repository
    secret** → name it exactly `ANTHROPIC_API_KEY`.
 4. (Optional) Add a repository **variable** `MODEL` to override the model
-   (default `claude-opus-4-8`).
+   (default `claude-sonnet-4-6`).
 
 ### 2. Turn on GitHub Pages
 
