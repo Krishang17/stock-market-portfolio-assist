@@ -1,23 +1,13 @@
 [
-  {
-    "symbol": "RELIANCE",
-    "name": "Reliance Industries",
-    "exchange": "NS",
-    "qty": 10,
-    "buyPrice": 1200.0
-  },
-  {
-    "symbol": "TCS",
-    "name": "Tata Consultancy Services",
-    "exchange": "NS",
-    "qty": 5,
-    "buyPrice": 2100.0
-  },
-  {
-    "symbol": "HDFCBANK",
-    "name": "HDFC Bank",
-    "exchange": "NS",
-    "qty": 15,
-    "buyPrice": 700.0
-  }
+  { "symbol": "LT", "name": "Larsen & Toubro", "exchange": "NS", "qty": 50, "buyPrice": 3556.92 },
+  { "symbol": "SCILAL", "name": "SCI Land & Assets", "exchange": "NS", "qty": 500, "buyPrice": 45.42 },
+  { "symbol": "JIOFIN", "name": "Jio Financial Services", "exchange": "NS", "qty": 50, "buyPrice": 107.89 },
+  { "symbol": "RELIANCE", "name": "Reliance Industries", "exchange": "NS", "qty": 150, "buyPrice": 1226.71 },
+  { "symbol": "PARAS", "name": "Paras Defence & Space Technologies", "exchange": "NS", "qty": 10, "buyPrice": 910.85 },
+  { "symbol": "BEL", "name": "Bharat Electronics", "exchange": "NS", "qty": 80, "buyPrice": 257.17 },
+  { "symbol": "HINDZINC", "name": "Hindustan Zinc", "exchange": "NS", "qty": 16, "buyPrice": 628.24 },
+  { "symbol": "POWERGRID", "name": "Power Grid Corporation of India", "exchange": "NS", "qty": 25, "buyPrice": 282.63 },
+  { "symbol": "JWL", "name": "Jupiter Wagons", "exchange": "NS", "qty": 25, "buyPrice": 275.06 },
+  { "symbol": "CPPLUS", "name": "Aditya Infotech (CP PLUS)", "exchange": "NS", "qty": 4, "buyPrice": 3601.26 },
+  { "symbol": "VEDL", "name": "Vedanta", "exchange": "NS", "qty": 80, "buyPrice": 415.65 }
 ]

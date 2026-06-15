@@ -1,7 +1,7 @@
 // Price lookups via yahoo-finance2.
 //
 // Yahoo Finance is an UNOFFICIAL data source. Every lookup is wrapped in
-// try/catch so a single bad symbol (or a transient outage) returns null
+// try/catch so a single bad symbol (or a transient outage) returns nulls
 // instead of killing the whole run.
 
 import YahooFinance from "yahoo-finance2";
@@ -18,6 +18,18 @@ const SUFFIX: Record<Exchange, string> = { NS: ".NS", BO: ".BO" };
 // only "right" if the pick beat simply holding this index (see evaluate.ts).
 const INDEX: Record<Exchange, string> = { NS: "^NSEI", BO: "^BSESN" };
 
+/** Indices shown in the dashboard's market strip. */
+export const MARKET_INDICES: { label: string; symbol: string }[] = [
+  { label: "SENSEX", symbol: "^BSESN" },
+  { label: "NIFTY 50", symbol: "^NSEI" },
+  { label: "BANK NIFTY", symbol: "^NSEBANK" },
+];
+
+export interface Quote {
+  price: number | null;
+  changePercent: number | null; // regular-session % change (day move)
+}
+
 /** Build the Yahoo ticker, e.g. ("RELIANCE", "NS") -> "RELIANCE.NS". */
 export function toYahooSymbol(symbol: string, exchange: Exchange): string {
   return `${symbol.trim().toUpperCase()}${SUFFIX[exchange]}`;
@@ -29,24 +41,36 @@ export function indexSymbolFor(exchange: Exchange): string {
 }
 
 /**
- * Fetch the latest price for any raw Yahoo ticker (a stock like "RELIANCE.NS"
- * or an index like "^NSEI"). Returns null on any failure so the caller can
+ * Fetch price + day-change for any raw Yahoo ticker (a stock like "RELIANCE.NS"
+ * or an index like "^NSEI"). Returns nulls on any failure so the caller can
  * carry on.
  */
-export async function fetchRawPrice(ticker: string): Promise<number | null> {
+export async function fetchQuote(ticker: string): Promise<Quote> {
   try {
-    const quote = await yahooFinance.quote(ticker);
-    const price = quote?.regularMarketPrice;
-    if (typeof price === "number" && Number.isFinite(price)) return price;
-    console.warn(`[prices] No usable price returned for ${ticker}`);
-    return null;
+    const q = await yahooFinance.quote(ticker);
+    const price =
+      typeof q?.regularMarketPrice === "number" && Number.isFinite(q.regularMarketPrice)
+        ? q.regularMarketPrice
+        : null;
+    const changePercent =
+      typeof q?.regularMarketChangePercent === "number" &&
+      Number.isFinite(q.regularMarketChangePercent)
+        ? q.regularMarketChangePercent
+        : null;
+    if (price == null) console.warn(`[prices] No usable price returned for ${ticker}`);
+    return { price, changePercent };
   } catch (err) {
     console.error(
       `[prices] Lookup failed for ${ticker}:`,
       err instanceof Error ? err.message : err,
     );
-    return null;
+    return { price: null, changePercent: null };
   }
+}
+
+/** Just the price for any raw Yahoo ticker. */
+export async function fetchRawPrice(ticker: string): Promise<number | null> {
+  return (await fetchQuote(ticker)).price;
 }
 
 /** Convenience wrapper: fetch the price for one holding. */

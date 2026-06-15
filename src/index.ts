@@ -1,7 +1,7 @@
 // Orchestrator: reads the portfolio, evaluates the previous run's calls, asks
-// Claude for an honest read on each holding (with source links), writes a
-// snapshot for the GitHub Pages dashboard, and persists the track record so it
-// survives to the next run.
+// Claude for an honest read on each holding (with source links), computes totals
+// + index levels, writes a snapshot for the GitHub Pages dashboard, and persists
+// the track record + a portfolio-value time series so they survive across runs.
 //
 // Every external step is wrapped so one stock's failure never crashes the run.
 
@@ -11,7 +11,13 @@ import path from "node:path";
 
 import { analyzeHolding, suggestIdeas } from "./claude";
 import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate";
-import { fetchRawPrice, indexSymbolFor, toYahooSymbol } from "./prices";
+import {
+  MARKET_INDICES,
+  fetchQuote,
+  indexSymbolFor,
+  toYahooSymbol,
+  type Quote,
+} from "./prices";
 import type {
   Analysis,
   CallRecord,
@@ -24,8 +30,16 @@ import type {
 const ROOT = process.cwd();
 const PORTFOLIO_PATH = path.join(ROOT, "portfolio.json");
 const HISTORY_PATH = path.join(ROOT, "data", "history.json");
+const VALUE_HISTORY_PATH = path.join(ROOT, "data", "value-history.json");
 // The dashboard (docs/) is served by GitHub Pages and reads this snapshot.
 const SNAPSHOT_PATH = path.join(ROOT, "docs", "briefing.json");
+
+interface ValuePoint {
+  date: string;
+  value: number;
+  invested: number;
+  pnlAbs: number;
+}
 
 function todayISO(): string {
   return new Date().toISOString().slice(0, 10);
@@ -33,6 +47,10 @@ function todayISO(): string {
 
 function exchangeLabel(e: Exchange): string {
   return e === "NS" ? "NSE" : "BSE";
+}
+
+function round2(n: number): number {
+  return Math.round(n * 100) / 100;
 }
 
 /** Plain-English action shown on the dashboard alongside the raw stance. */
@@ -93,6 +111,20 @@ function saveHistory(history: History): void {
   fs.writeFileSync(HISTORY_PATH, JSON.stringify(history, null, 2) + "\n");
 }
 
+function loadValueHistory(): ValuePoint[] {
+  try {
+    const arr = JSON.parse(fs.readFileSync(VALUE_HISTORY_PATH, "utf8"));
+    return Array.isArray(arr) ? (arr as ValuePoint[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveValueHistory(series: ValuePoint[]): void {
+  fs.mkdirSync(path.dirname(VALUE_HISTORY_PATH), { recursive: true });
+  fs.writeFileSync(VALUE_HISTORY_PATH, JSON.stringify(series, null, 2) + "\n");
+}
+
 function saveSnapshot(snapshot: unknown): void {
   fs.mkdirSync(path.dirname(SNAPSHOT_PATH), { recursive: true });
   fs.writeFileSync(SNAPSHOT_PATH, JSON.stringify(snapshot, null, 2) + "\n");
@@ -110,20 +142,19 @@ function recentCallsFor(
     .slice(0, n);
 }
 
-// ---- price cache (shared by evaluation + today's analysis) ------------------
+// ---- quote cache (shared by evaluation, totals, and analysis) ---------------
 
-const priceCache = new Map<string, number | null>();
-async function getRaw(ticker: string): Promise<number | null> {
-  if (priceCache.has(ticker)) return priceCache.get(ticker) ?? null;
-  const p = await fetchRawPrice(ticker);
-  priceCache.set(ticker, p);
-  return p;
+const quoteCache = new Map<string, Quote>();
+async function getQuote(ticker: string): Promise<Quote> {
+  const cached = quoteCache.get(ticker);
+  if (cached) return cached;
+  const q = await fetchQuote(ticker);
+  quoteCache.set(ticker, q);
+  return q;
 }
-async function getPrice(
-  symbol: string,
-  exchange: Exchange,
-): Promise<number | null> {
-  return getRaw(toYahooSymbol(symbol, exchange));
+// evaluate.ts only needs the price.
+async function getRaw(ticker: string): Promise<number | null> {
+  return (await getQuote(ticker)).price;
 }
 
 // ---- main -------------------------------------------------------------------
@@ -131,6 +162,7 @@ async function getPrice(
 interface StockView {
   holding: Holding;
   price: number | null;
+  dayChangePct: number | null;
   analysis: Analysis;
 }
 
@@ -165,22 +197,22 @@ async function main(): Promise<void> {
     );
   }
 
-  // Calibration over the (now freshly-evaluated) record; fed into each prompt
-  // and shown on the dashboard.
+  // Calibration over the (now freshly-evaluated) record.
   const calibration = computeCalibration(history);
 
-  // 2. Fetch prices + ask Claude for an honest, sourced read on each holding.
+  // 2. Fetch quotes + ask Claude for an honest, sourced read on each holding.
   const views: StockView[] = [];
   const newCalls: CallRecord[] = [];
   for (const holding of portfolio) {
-    const price = await getPrice(holding.symbol, holding.exchange);
+    const q = await getQuote(toYahooSymbol(holding.symbol, holding.exchange));
+    const price = q.price;
     // Capture the benchmark level now so this call can later be scored as
     // outperformance vs the index, not just raw direction.
     const indexSymbol = indexSymbolFor(holding.exchange);
     const indexAtCall = await getRaw(indexSymbol);
     const recent = recentCallsFor(history, holding.symbol, holding.exchange, 5);
     const analysis = await analyzeHolding(holding, price, recent, calibration);
-    views.push({ holding, price, analysis });
+    views.push({ holding, price, dayChangePct: q.changePercent, analysis });
     newCalls.push({
       date: today,
       symbol: holding.symbol,
@@ -201,7 +233,51 @@ async function main(): Promise<void> {
     );
   }
 
-  // 3. A few research ideas the user does NOT already hold.
+  // 3. Market indices (SENSEX / NIFTY 50 / BANK NIFTY).
+  const indices = [];
+  for (const { label, symbol } of MARKET_INDICES) {
+    const q = await getQuote(symbol);
+    indices.push({ label, symbol, price: q.price, changePercent: q.changePercent });
+  }
+
+  // 4. Portfolio totals (over holdings that have a price, so P/L is consistent).
+  const priced = views.filter((v) => v.price != null);
+  const invested = priced.reduce((s, v) => s + v.holding.qty * v.holding.buyPrice, 0);
+  const value = priced.reduce((s, v) => s + v.holding.qty * (v.price as number), 0);
+  const pnlAbs = value - invested;
+  const totals = {
+    invested: round2(invested),
+    value: round2(value),
+    pnlAbs: round2(pnlAbs),
+    pnlPct: invested > 0 ? round2((pnlAbs / invested) * 100) : null,
+    holdings: views.length,
+    priced: priced.length,
+    unpriced: views.length - priced.length,
+  };
+
+  // 5. Append today's value to the time series (only when we have real prices).
+  const series = loadValueHistory();
+  if (priced.length > 0) {
+    const point: ValuePoint = {
+      date: today,
+      value: totals.value,
+      invested: totals.invested,
+      pnlAbs: totals.pnlAbs,
+    };
+    const i = series.findIndex((p) => p.date === today);
+    if (i === -1) series.push(point);
+    else series[i] = point;
+    try {
+      saveValueHistory(series);
+    } catch (err) {
+      console.error(
+        "[main] failed to write value history:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  // 6. Research ideas the user does NOT already hold.
   let ideas = [] as Awaited<ReturnType<typeof suggestIdeas>>["ideas"];
   let ideaSources = [] as Awaited<ReturnType<typeof suggestIdeas>>["sources"];
   try {
@@ -215,7 +291,7 @@ async function main(): Promise<void> {
     );
   }
 
-  // 4. Write the dashboard snapshot.
+  // 7. Write the dashboard snapshot.
   const { right, wrong, rate } = computeHitRate(history);
   const snapshot = {
     generatedAt: new Date().toISOString(),
@@ -224,10 +300,13 @@ async function main(): Promise<void> {
     disclaimer:
       "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
     degraded: views.some((v) => v.analysis.unavailable === true),
+    totals,
+    indices,
+    valueSeries: series.slice(-90),
     track: { right, wrong, rate },
     calibration,
     holdings: views.map((v) => {
-      const { holding, price, analysis } = v;
+      const { holding, price, dayChangePct, analysis } = v;
       const plPct =
         price != null ? ((price - holding.buyPrice) / holding.buyPrice) * 100 : null;
       const plAbs = price != null ? (price - holding.buyPrice) * holding.qty : null;
@@ -238,6 +317,9 @@ async function main(): Promise<void> {
         qty: holding.qty,
         buyPrice: holding.buyPrice,
         price,
+        dayChangePct,
+        value: price != null ? round2(price * holding.qty) : null,
+        invested: round2(holding.buyPrice * holding.qty),
         plPct,
         plAbs,
         stance: analysis.stance,
@@ -255,7 +337,7 @@ async function main(): Promise<void> {
   try {
     saveSnapshot(snapshot);
     console.log(
-      `[main] wrote docs/briefing.json (${snapshot.holdings.length} holdings, ${ideas.length} ideas, degraded=${snapshot.degraded}).`,
+      `[main] wrote docs/briefing.json (${snapshot.holdings.length} holdings, value ₹${totals.value}, P/L ₹${totals.pnlAbs}, degraded=${snapshot.degraded}).`,
     );
   } catch (err) {
     console.error(
@@ -264,7 +346,7 @@ async function main(): Promise<void> {
     );
   }
 
-  // 5. Persist today's calls so the record survives to the next run.
+  // 8. Persist today's calls so the record survives to the next run.
   history.calls.push(...newCalls);
   try {
     saveHistory(history);

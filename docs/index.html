@@ -19,6 +19,19 @@
 
       <div id="banner" class="banner hidden"></div>
 
+      <!-- Total value + P/L -->
+      <section id="summary" class="summary"></section>
+
+      <!-- SENSEX / NIFTY 50 / BANK NIFTY -->
+      <section id="indices" class="indices"></section>
+
+      <!-- Allocation, per-stock P/L, value over time -->
+      <section class="charts">
+        <div class="chart-card"><h3>Allocation by value</h3><canvas id="allocChart"></canvas></div>
+        <div class="chart-card"><h3>Profit / loss by stock</h3><canvas id="plChart"></canvas></div>
+        <div class="chart-card"><h3>Portfolio value over time</h3><canvas id="valueChart"></canvas></div>
+      </section>
+
       <section id="track" class="card track"></section>
 
       <h2 class="section-title">Your holdings</h2>
@@ -36,6 +49,8 @@
         </p>
       </footer>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
