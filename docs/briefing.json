@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-15T09:30:54.189Z",
+  "generatedAt": "2026-06-15T17:45:07.620Z",
   "date": "2026-06-15",
   "model": "claude-sonnet-4-6",
   "disclaimer": "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
-  "degraded": true,
+  "degraded": false,
   "track": {
     "right": 0,
     "wrong": 0,
@@ -43,16 +43,45 @@
       "exchange": "NSE",
       "qty": 10,
       "buyPrice": 1200,
-      "price": 1307.3,
-      "plPct": 8.941666666666663,
-      "plAbs": 1072.9999999999995,
+      "price": 1307,
+      "plPct": 8.916666666666668,
+      "plAbs": 1070,
       "stance": "Watch",
       "confidence": "Low",
       "action": "Watch",
-      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
-      "keyNews": [],
-      "sources": [],
-      "unavailable": true
+      "reasoning": "RELIANCE hit a fresh 52-week low of ₹1,253.65 on June 11 and has lost ~17% YTD amid oil-margin pressure and institutional caution; it has since bounced ~4% to ₹1,307 but the trend remains fragile. A major near-term catalyst is the June 19 AGM where Jio IPO timeline and DRHP filing details are expected — outcome is binary and unpredictable, keeping short-term direction close to a coin flip. No scored directional edge exists in the prior call record, so conviction stays low.",
+      "keyNews": [
+        "Jio Platforms DRHP expected to be filed with SEBI in second half of June 2026 — AGM on June 19 is the key watch event",
+        "RIL touched 52-week low of ₹1,253.65 on June 11; stock down ~17% YTD amid oil-price pressure and institutional caution",
+        "Block trade of ₹52.73 cr on NSE at ₹1,313.50/share flagged recently — high liquidity but sentiment still cautious"
+      ],
+      "sources": [
+        {
+          "url": "https://www.businesstoday.in/markets/ipo-corner/story/nse-reliance-jio-may-file-drhps-soon-can-these-giant-ipos-revive-indias-primary-market-536888-2026-06-15",
+          "title": "NSE, Reliance Jio may file DRHPs soon: Can these giant IPOs revive India's primary market? - BusinessToday"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/reliance-industries-ltd-share-price",
+          "title": "Reliance Share Price Today, Live Chart, News, Target Price"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/RELIANCE.NS/",
+          "title": "Reliance Industries Limited (RELIANCE.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://scanx.trade/stock-news/reliance-industries-ltd",
+          "title": "Reliance Industries Share News - Latest Updates, Live News & More | ScanX"
+        },
+        {
+          "url": "https://www.screener.in/company/RELIANCE/consolidated/",
+          "title": "Reliance Industries Ltd share price | About Reliance Industries | Key Insights - Screener"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quote/equity/RELIANCE/Reliance-Industries-Limited",
+          "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
+        }
+      ],
+      "unavailable": false
     },
     {
       "symbol": "TCS",
@@ -60,16 +89,45 @@
       "exchange": "NSE",
       "qty": 5,
       "buyPrice": 2100,
-      "price": 2161.5,
-      "plPct": 2.928571428571429,
-      "plAbs": 307.5,
+      "price": 2162,
+      "plPct": 2.9523809523809526,
+      "plAbs": 310,
       "stance": "Watch",
       "confidence": "Low",
       "action": "Watch",
-      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
-      "keyNews": [],
-      "sources": [],
-      "unavailable": true
+      "reasoning": "TCS has fallen ~34% YTD and recently touched a 52-week low of ₹2,110, reflecting sector-wide pressure from aggressive AI model launches (Anthropic Claude) threatening traditional IT services revenue. Near-term positives exist — a multimillion-euro Canada Life AI deal, a new GVIC business unit, and an Anthropic partnership — but these have not reversed the structural valuation de-rating; the stock is barely above its 52-week low with no clear catalyst for a one-day outperformance over the index. Short-term direction is close to a coin flip, and no scored directional calls have been made yet, so confidence stays low.",
+      "keyNews": [
+        "TCS stock down ~34% in 2026, hit 52-week low of ₹2,110 on June 11 amid Anthropic AI threat to IT sector",
+        "TCS wins multimillion-euro AI deal with Canada Life; launches Global Value & Innovation Centres (GVIC) business unit",
+        "TCS participated in CLSA India GenAI Access Day analyst meet on June 12; workplace harassment probe in Pune adds reputational overhang"
+      ],
+      "sources": [
+        {
+          "url": "https://www.latestly.com/business/tata-consultancy-services-opening-bell-updates-ai-partnerships-in-focus-7469865.html/amp",
+          "title": "TCS Share Price Today, June 12, 2026: Stock Gains 0.5% on Anthropic AI Partnership, Analyst Meet in Focus | LatestLY"
+        },
+        {
+          "url": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-launches-dedicated-business-unit-to-help-enterprises-build-ai-native-global-capability-centres",
+          "title": "TCS Launches Dedicated Business Unit to Help Enterprises Build AI-Native Global Capability Centres"
+        },
+        {
+          "url": "https://www.tcs.com/home-page",
+          "title": "Tata Consultancy Services: Building Perpetually Adaptive Enterprises"
+        },
+        {
+          "url": "https://www.hrkatha.com/news/pune-tcs-engineers-suicide-sparks-workplace-harassment-probe/",
+          "title": "Pune TCS engineer’s suicide sparks workplace harassment probe"
+        },
+        {
+          "url": "https://www.tcs.com/who-we-are/newsroom/news-alert",
+          "title": "TCS News Alert: Latest Updates on TCS Events and Announcements"
+        },
+        {
+          "url": "https://www.tipranks.com/stocks/in:tcs/earnings",
+          "title": "www.tipranks.com"
+        }
+      ],
+      "unavailable": false
     },
     {
       "symbol": "HDFCBANK",
@@ -77,20 +135,93 @@
       "exchange": "NSE",
       "qty": 15,
       "buyPrice": 700,
-      "price": 777.7,
-      "plPct": 11.100000000000007,
-      "plAbs": 1165.5000000000007,
+      "price": 777.35,
+      "plPct": 11.050000000000002,
+      "plAbs": 1160.2500000000005,
       "stance": "Watch",
       "confidence": "Low",
       "action": "Watch",
-      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
-      "keyNews": [],
-      "sources": [],
-      "unavailable": true
+      "reasoning": "HDFC Bank closed at ₹777.35 on June 15, buoyed by a broad market rally after a US-Iran peace deal crashed crude oil prices, easing inflation fears. A key near-term event is the ex-dividend date of June 19 (₹13/share final dividend), which typically causes a price drop roughly equal to the dividend on that date. Short-term direction vs the index remains a near-coin flip — no scored calls exist to justify higher confidence.",
+      "keyNews": [
+        "HDFC Bank gained on June 15 as Nifty surged ~1,200 pts on US-Iran deal / crude oil crash",
+        "₹13 final dividend for FY26 declared; ex-date June 19, 2026 — price likely adjusts down on that day",
+        "Analyst consensus 12-month fair value ~₹1,042–₹1,076, well above current ₹777 but short-term is noisy"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/hdfc-bank-HDBK",
+          "title": "HDFCBANK Share Price Live: HDFC Bank NSE Today"
+        },
+        {
+          "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/hdfc-bank-ltd-stock-ine040a01034-shares-under-pressure-as-investors/69500991",
+          "title": "HDFC Bank Ltd stock (INE040A01034): Shares under pressure as investors digest weak one-year performa"
+        },
+        {
+          "url": "https://www.angelone.in/news/stocks/hdfc-bank-announces-rs-13-final-dividend-for-fy26-record-date-set-for-june-19-2026",
+          "title": "HDFC Bank Announces ₹13 Final Dividend For FY26; Record Date Set for June 19, 2026"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/HDFCBANK.NS/",
+          "title": "HDFC Bank Limited (HDFCBANK.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/banks/nse-hdfcbank/hdfc-bank-shares",
+          "title": "HDFC Bank (NSEI:HDFCBANK) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://www.google.com/finance/beta/quote/HDFCBANK:NSE",
+          "title": "HDFC Bank Ltd (HDFCBANK) Stock Price & News - Google Finance"
+        }
+      ],
+      "unavailable": false
     }
   ],
   "ideas": {
-    "items": [],
-    "sources": []
+    "items": [
+      {
+        "symbol": "ICICIBANK",
+        "name": "ICICI Bank",
+        "why": "Consistent loan-book growth, strong retail franchise, and healthy capital ratios make it a bellwether private-sector bank worth researching as a complement to HDFCBANK",
+        "risk": "Net-interest-margin compression in a falling-rate cycle and any uptick in unsecured-lending stress could weigh on earnings"
+      },
+      {
+        "symbol": "INFY",
+        "name": "Infosys",
+        "why": "Large-cap IT with a broad global client base and improving deal pipeline; offers diversification away from domestic-consumption names already in your portfolio",
+        "risk": "Third consecutive year of industry-wide IT-spend slowdown and dearth of mega-deals may keep near-term revenue growth muted"
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "name": "Bharti Airtel",
+        "why": "Post-tariff-hike ARPU expansion and a potential Airtel Africa monetisation event (possible IPO) give it a credible multi-year earnings-upgrade story",
+        "risk": "High capital intensity and residual debt load mean free cash flow remains sensitive to competitive pricing pressure from Jio"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://ts2.tech/en/icici-bank-stock-outlook-on-december-5-2025-share-price-today-rbi-moves-q2-results-and-analyst-targets/",
+        "title": "ICICI Bank Stock Outlook on December 5, 2025: Share Price Today, RBI Moves, Q2 Results and Analyst Targets"
+      },
+      {
+        "url": "https://in.tradingview.com/symbols/NSE-ICICIBANK/",
+        "title": "ICICIBANK Stock Price and Chart — NSE:ICICIBANK — TradingView — India"
+      },
+      {
+        "url": "https://in.tradingview.com/symbols/NSE-ICICIBANK/ideas/",
+        "title": "ICICI Bank Limited Trade Ideas — NSE:ICICIBANK — TradingView — India"
+      },
+      {
+        "url": "https://stockanalysis.com/quote/nse/ICICIBANK/",
+        "title": "ICICI Bank (NSE:ICICIBANK) Stock Price & Overview"
+      },
+      {
+        "url": "https://simplywall.st/stocks/in/banks/nse-icicibank/icici-bank-shares",
+        "title": "ICICI Bank (NSEI:ICICIBANK) - Stock Analysis - Simply Wall St"
+      },
+      {
+        "url": "https://www.stocks-buy.com/nse-icicibank",
+        "title": "NSE : ICICIBANK Share Price Target 2025 2026 2027 2030 | Prediction"
+      }
+    ]
   }
 }
