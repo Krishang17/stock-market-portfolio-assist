@@ -9,6 +9,7 @@
   },
   "scripts": {
     "briefing": "tsx src/index.ts",
+    "portfolio": "tsx src/manage-portfolio.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

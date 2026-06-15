@@ -8,8 +8,36 @@ on:
     # NOTE: scheduled workflows are automatically PAUSED after ~60 days of no
     # repository activity; push a commit or re-enable the workflow to resume.
     - cron: "0 3 * * *"
-  # Manual trigger so you can run it on demand to test.
-  workflow_dispatch: {}
+  # Manual trigger. Leave "action" as "none" to just refresh the dashboard, or
+  # set it to add/remove a holding via the form fields below.
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Portfolio change ('none' = just refresh the dashboard)"
+        type: choice
+        options: [none, add, remove]
+        default: none
+      symbol:
+        description: "Ticker, e.g. INFY (required for add/remove)"
+        type: string
+        default: ""
+      name:
+        description: "Company name (optional, for add)"
+        type: string
+        default: ""
+      exchange:
+        description: "Exchange"
+        type: choice
+        options: [NS, BO]
+        default: NS
+      qty:
+        description: "Quantity / shares (for add)"
+        type: string
+        default: "0"
+      buyPrice:
+        description: "Average buy price in rupees (for add)"
+        type: string
+        default: "0"
 
 # Needed so the job can commit the updated history + dashboard snapshot back.
 permissions:
@@ -37,6 +65,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Optional: apply an add/remove from the "Run workflow" form before analysis.
+      - name: Update portfolio (from form)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.action != 'none' }}
+        env:
+          ACTION: ${{ inputs.action }}
+          SYMBOL: ${{ inputs.symbol }}
+          NAME: ${{ inputs.name }}
+          EXCHANGE: ${{ inputs.exchange }}
+          QTY: ${{ inputs.qty }}
+          BUYPRICE: ${{ inputs.buyPrice }}
+        run: npm run portfolio
+
       - name: Run morning briefing
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -48,7 +88,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/history.json docs/briefing.json
+          git add portfolio.json data/history.json docs/briefing.json
           if git diff --staged --quiet; then
             echo "No data changes to commit."
           else

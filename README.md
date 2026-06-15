@@ -94,6 +94,14 @@ Edit [`portfolio.json`](./portfolio.json) directly on GitHub — an array of:
 - `qty`, `buyPrice` — your position (for the P/L line). Use your **split-adjusted**
   cost, since Yahoo prices are split-adjusted.
 
+**Or add/remove without touching JSON (form):** go to **Actions → Morning
+Briefing → Run workflow**, set **action** to `add` (or `remove`), fill in the
+ticker / exchange / quantity / buy price, and Run. It updates `portfolio.json`
+and refreshes the dashboard in one go. (A true in-page form on the dashboard
+isn't possible safely — it's a static public page with no server, so a write
+token there would be exposed to everyone; the authenticated Actions form is the
+safe equivalent.)
+
 ---
 
 ## Running and testing
