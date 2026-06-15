@@ -19,26 +19,28 @@
 
       <div id="banner" class="banner hidden"></div>
 
-      <!-- Total value + P/L -->
-      <section id="summary" class="summary"></section>
+      <!-- Per-stock detail view (shown when the URL is #/SYMBOL) -->
+      <section id="detail" class="detail hidden"></section>
 
-      <!-- SENSEX / NIFTY 50 / BANK NIFTY -->
-      <section id="indices" class="indices"></section>
+      <!-- Overview -->
+      <div id="overview">
+        <section id="summary" class="summary"></section>
+        <section id="indices" class="indices"></section>
 
-      <!-- Allocation, per-stock P/L, value over time -->
-      <section class="charts">
-        <div class="chart-card"><h3>Allocation by value</h3><canvas id="allocChart"></canvas></div>
-        <div class="chart-card"><h3>Profit / loss by stock</h3><canvas id="plChart"></canvas></div>
-        <div class="chart-card"><h3>Portfolio value over time</h3><canvas id="valueChart"></canvas></div>
-      </section>
+        <section class="charts">
+          <div class="chart-card"><h3>Allocation by value</h3><canvas id="allocChart"></canvas></div>
+          <div class="chart-card"><h3>Profit / loss by stock</h3><canvas id="plChart"></canvas></div>
+          <div class="chart-card"><h3>Portfolio value over time</h3><canvas id="valueChart"></canvas></div>
+        </section>
 
-      <section id="track" class="card track"></section>
+        <section id="track" class="card track"></section>
 
-      <h2 class="section-title">Your holdings</h2>
-      <section id="holdings" class="grid"></section>
+        <h2 class="section-title">Your holdings <span class="muted">— click a stock for its prediction + charts</span></h2>
+        <section id="holdings" class="grid"></section>
 
-      <h2 class="section-title">Ideas to research <span class="muted">— starting points, not calls</span></h2>
-      <section id="ideas" class="grid"></section>
+        <h2 class="section-title">Ideas to research <span class="muted">— starting points, not calls</span></h2>
+        <section id="ideas" class="grid"></section>
+      </div>
 
       <footer class="site-footer">
         <p>

@@ -326,3 +326,103 @@ body {
   border-top: 1px solid var(--border);
   padding-top: 14px;
 }
+
+.hidden {
+  display: none;
+}
+
+/* clickable holding cards */
+.stock.clickable {
+  cursor: pointer;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.stock.clickable:hover {
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+
+/* ---- per-stock detail view ---- */
+.detail {
+  margin-top: 16px;
+}
+.back {
+  display: inline-block;
+  color: var(--blue);
+  text-decoration: none;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.back:hover {
+  text-decoration: underline;
+}
+.detail .d-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.detail .d-title {
+  margin: 0;
+  font-size: 22px;
+}
+.detail .d-name {
+  color: var(--muted);
+  font-size: 13px;
+}
+.detail .d-pos {
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+}
+.detail .pred {
+  margin-top: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.detail .pred h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.detail .pred .reasoning {
+  font-size: 15px;
+  margin: 6px 0;
+}
+.detail .calls {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.detail .calls th,
+.detail .calls td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.detail .calls th {
+  color: var(--muted);
+  font-weight: 600;
+}
+.tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+.tag.right {
+  background: rgba(63, 185, 80, 0.16);
+  color: var(--green);
+}
+.tag.wrong {
+  background: rgba(248, 81, 73, 0.16);
+  color: var(--red);
+}
+.tag.unscored,
+.tag.pending {
+  background: rgba(154, 163, 175, 0.16);
+  color: var(--muted);
+}

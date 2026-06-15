@@ -2,12 +2,13 @@ name: Morning Briefing
 
 on:
   schedule:
-    # 03:00 UTC = 08:30 IST — before NSE/BSE open (09:15 IST).
+    # 03:00 UTC = 08:30 IST — before NSE/BSE open (09:15 IST). Mon–Fri only:
+    # markets are closed on weekends, so weekend runs would just waste credits.
     # NOTE: GitHub's cron is best-effort and can be delayed (sometimes by many
     # minutes) under load — it is not a guaranteed-on-time scheduler.
     # NOTE: scheduled workflows are automatically PAUSED after ~60 days of no
     # repository activity; push a commit or re-enable the workflow to resume.
-    - cron: "0 3 * * *"
+    - cron: "0 3 * * 1-5"
   # Manual trigger. Leave "action" as "none" to just refresh the dashboard, or
   # set it to add/remove a holding via the form fields below.
   workflow_dispatch:

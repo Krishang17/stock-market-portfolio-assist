@@ -80,3 +80,41 @@ export async function fetchPrice(
 ): Promise<number | null> {
   return fetchRawPrice(toYahooSymbol(symbol, exchange));
 }
+
+export interface PricePoint {
+  t: string; // YYYY-MM-DD
+  c: number; // close
+}
+
+/** Daily close history for a ticker (default ~6 months), for the detail chart. */
+export async function fetchHistory(
+  ticker: string,
+  days = 180,
+): Promise<PricePoint[]> {
+  try {
+    const period1 = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+    const res = await yahooFinance.chart(ticker, { period1, interval: "1d" });
+    const quotes =
+      (res as { quotes?: Array<{ date?: unknown; close?: unknown }> })?.quotes ?? [];
+    const out: PricePoint[] = [];
+    for (const q of quotes) {
+      const close = q?.close;
+      if (typeof close !== "number" || !Number.isFinite(close)) continue;
+      const d =
+        q?.date instanceof Date
+          ? q.date
+          : q?.date
+            ? new Date(q.date as string)
+            : null;
+      if (!d || Number.isNaN(d.getTime())) continue;
+      out.push({ t: d.toISOString().slice(0, 10), c: Math.round(close * 100) / 100 });
+    }
+    return out;
+  } catch (err) {
+    console.error(
+      `[prices] History lookup failed for ${ticker}:`,
+      err instanceof Error ? err.message : err,
+    );
+    return [];
+  }
+}

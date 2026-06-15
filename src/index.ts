@@ -13,6 +13,7 @@ import { analyzeHolding, getLastFailureReason, suggestIdeas } from "./claude";
 import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate";
 import {
   MARKET_INDICES,
+  fetchHistory,
   fetchQuote,
   indexSymbolFor,
   toYahooSymbol,
@@ -227,6 +228,10 @@ async function main(): Promise<void> {
   const quotes = await Promise.all(
     portfolio.map((h) => getQuote(toYahooSymbol(h.symbol, h.exchange))),
   );
+  // Daily price history per holding (free Yahoo calls) for the detail charts.
+  const histories = await Promise.all(
+    portfolio.map((h) => fetchHistory(toYahooSymbol(h.symbol, h.exchange))),
+  );
   // Benchmark index level(s) — fetched once (cached) for scoring today's calls.
   for (const h of portfolio) await getRaw(indexSymbolFor(h.exchange));
 
@@ -341,7 +346,7 @@ async function main(): Promise<void> {
     valueSeries: series.slice(-90),
     track: { right, wrong, rate },
     calibration,
-    holdings: views.map((v) => {
+    holdings: views.map((v, i) => {
       const { holding, price, dayChangePct, analysis } = v;
       const plPct =
         price != null ? ((price - holding.buyPrice) / holding.buyPrice) * 100 : null;
@@ -365,6 +370,17 @@ async function main(): Promise<void> {
         keyNews: analysis.keyNews,
         sources: analysis.sources ?? [],
         unavailable: analysis.unavailable === true,
+        priceHistory: histories[i],
+        recentCalls: recentCallsFor(history, holding.symbol, holding.exchange, 8).map(
+          (c) => ({
+            date: c.date,
+            stance: c.stance,
+            confidence: c.confidence,
+            outcome: c.outcome,
+            stockReturnPct: c.stockReturnPct ?? null,
+            benchmarkReturnPct: c.benchmarkReturnPct ?? null,
+          }),
+        ),
       };
     }),
     ideas: { items: ideas, sources: ideaSources },

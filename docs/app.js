@@ -1,5 +1,6 @@
 // Renders docs/briefing.json into the dashboard. Vanilla JS + Chart.js (CDN).
-// Dynamic text goes through textContent / typed DOM nodes (never innerHTML).
+// Overview at "#"; per-stock detail at "#/SYMBOL". Dynamic text goes through
+// textContent / typed DOM nodes (never innerHTML).
 
 const inr = (n) =>
   new Intl.NumberFormat("en-IN", {
@@ -38,223 +39,17 @@ const PALETTE = [
   "#ff7b72", "#7ee787", "#ffa657", "#a5d6ff", "#f0883e", "#d2a8ff",
 ];
 
-// ---- summary + indices ------------------------------------------------------
+let DATA = null;
+let detailChart = null;
 
-function stat(label, valueNode, subNode) {
-  return el("div", { class: "stat" }, [
-    el("div", { class: "label", text: label }),
-    valueNode,
-    subNode || null,
-  ]);
+/** Create a chart, destroying any previous one bound to the same canvas. */
+function chartOn(canvasId, config) {
+  if (typeof Chart === "undefined") return null;
+  const c = document.getElementById(canvasId);
+  if (!c) return null;
+  Chart.getChart(c)?.destroy();
+  return new Chart(c, config);
 }
-
-function renderSummary(data) {
-  const root = document.getElementById("summary");
-  root.innerHTML = "";
-  const t = data.totals;
-  if (!t) return;
-
-  root.appendChild(
-    stat("Total value", el("div", { class: "val", text: inr(t.value) })),
-  );
-  root.appendChild(
-    stat("Invested", el("div", { class: "val", text: inr(t.invested) })),
-  );
-  const plVal = el("div", { class: `val ${cls(t.pnlAbs)}` }, [
-    (t.pnlAbs >= 0 ? "+" : "") + inr(t.pnlAbs),
-  ]);
-  const plSub =
-    t.pnlPct != null
-      ? el("div", { class: `sub ${cls(t.pnlPct)}`, text: pct(t.pnlPct) })
-      : null;
-  root.appendChild(stat("Total P/L (unrealised)", plVal, plSub));
-
-  const sub =
-    t.unpriced > 0
-      ? el("div", { class: "sub muted", text: `${t.unpriced} without a price` })
-      : null;
-  root.appendChild(
-    stat("Holdings", el("div", { class: "val", text: String(t.holdings) }), sub),
-  );
-}
-
-function renderIndices(data) {
-  const root = document.getElementById("indices");
-  root.innerHTML = "";
-  (data.indices || []).forEach((ix) => {
-    const chip = el("span", { class: "index-chip" }, [
-      el("span", { class: "nm", text: ix.label }),
-    ]);
-    if (ix.price != null) {
-      chip.appendChild(
-        document.createTextNode(
-          ix.price.toLocaleString("en-IN", { maximumFractionDigits: 2 }),
-        ),
-      );
-      if (ix.changePercent != null) {
-        chip.appendChild(document.createTextNode("  "));
-        chip.appendChild(
-          el("span", { class: cls(ix.changePercent), text: pct(ix.changePercent) }),
-        );
-      }
-    } else {
-      chip.appendChild(document.createTextNode("—"));
-    }
-    root.appendChild(chip);
-  });
-}
-
-// ---- charts -----------------------------------------------------------------
-
-function renderCharts(data) {
-  if (typeof Chart === "undefined") return; // CDN blocked — skip silently
-  Chart.defaults.color = "#9aa3af";
-  Chart.defaults.borderColor = "#2a2f3a";
-  Chart.defaults.font.family = "inherit";
-
-  const holdings = data.holdings || [];
-  const priced = holdings.filter((h) => h.price != null && h.value != null);
-
-  // Allocation donut (by market value)
-  const alloc = priced.filter((h) => h.value > 0);
-  if (alloc.length) {
-    new Chart(document.getElementById("allocChart"), {
-      type: "doughnut",
-      data: {
-        labels: alloc.map((h) => h.symbol),
-        datasets: [
-          {
-            data: alloc.map((h) => h.value),
-            backgroundColor: alloc.map((_, i) => PALETTE[i % PALETTE.length]),
-            borderWidth: 0,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: "right", labels: { boxWidth: 12, font: { size: 11 } } },
-          tooltip: { callbacks: { label: (c) => `${c.label}: ${inr0(c.parsed)}` } },
-        },
-      },
-    });
-  }
-
-  // P/L by stock (bar)
-  const plH = holdings.filter((h) => h.plAbs != null);
-  if (plH.length) {
-    new Chart(document.getElementById("plChart"), {
-      type: "bar",
-      data: {
-        labels: plH.map((h) => h.symbol),
-        datasets: [
-          {
-            data: plH.map((h) => h.plAbs),
-            backgroundColor: plH.map((h) => (h.plAbs >= 0 ? "#3fb950" : "#f85149")),
-            borderWidth: 0,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (c) => inr0(c.parsed.y) } },
-        },
-        scales: { x: { ticks: { font: { size: 10 } } } },
-      },
-    });
-  }
-
-  // Portfolio value over time (line)
-  const series = data.valueSeries || [];
-  if (series.length) {
-    new Chart(document.getElementById("valueChart"), {
-      type: "line",
-      data: {
-        labels: series.map((p) => p.date),
-        datasets: [
-          {
-            label: "Value",
-            data: series.map((p) => p.value),
-            borderColor: "#58a6ff",
-            backgroundColor: "rgba(88,166,255,0.12)",
-            fill: true,
-            tension: 0.25,
-            pointRadius: series.length > 30 ? 0 : 3,
-          },
-          {
-            label: "Invested",
-            data: series.map((p) => p.invested),
-            borderColor: "#9aa3af",
-            borderDash: [5, 4],
-            fill: false,
-            tension: 0,
-            pointRadius: 0,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { labels: { boxWidth: 12, font: { size: 11 } } },
-          tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${inr0(c.parsed.y)}` } },
-        },
-        scales: { y: { ticks: { callback: (v) => inr0(v) } } },
-      },
-    });
-  } else {
-    const c = document.getElementById("valueChart");
-    if (c && c.parentElement) {
-      c.parentElement.appendChild(
-        el("p", { class: "muted", text: "Builds up as the daily job runs." }),
-      );
-    }
-  }
-}
-
-// ---- track record -----------------------------------------------------------
-
-function renderTrack(data) {
-  const root = document.getElementById("track");
-  root.innerHTML = "";
-  const t = data.track || {};
-  const cal = data.calibration || {};
-
-  const row = el("div", { class: "row" });
-  if (t.rate == null) {
-    row.appendChild(el("span", { class: "big", text: "No scored calls yet" }));
-    row.appendChild(
-      el("span", { class: "muted", text: "directional calls get scored vs the index after a day" }),
-    );
-  } else {
-    row.appendChild(el("span", { class: "big", text: `${Math.round(t.rate * 100)}% hit rate` }));
-    row.appendChild(
-      el("span", { class: "muted", text: `${t.right}/${t.right + t.wrong} beat the index` }),
-    );
-  }
-  if (cal.scored > 0 && Array.isArray(cal.buckets)) {
-    const parts = cal.buckets
-      .filter((b) => b.count > 0)
-      .map((b) => `${b.confidence} ${Math.round((b.rate ?? 0) * 100)}% (${b.count})`)
-      .join(" · ");
-    const brier = cal.brier != null ? ` · Brier ${cal.brier.toFixed(2)}` : "";
-    row.appendChild(el("span", { class: "muted", text: `Confidence: ${parts}${brier}` }));
-  }
-  root.appendChild(row);
-  root.appendChild(
-    el("p", {
-      class: "note",
-      text:
-        '"Right" = the pick beat just holding the NIFTY/SENSEX over ~1 day. Hold/Watch not scored. ~50% is a coin flip; Brier 0.25 = always guessing 50/50.',
-    }),
-  );
-}
-
-// ---- holdings + ideas -------------------------------------------------------
 
 function sourcesRow(sources) {
   if (!sources || !sources.length) return null;
@@ -274,57 +69,194 @@ function sourcesRow(sources) {
   return row;
 }
 
-function holdingCard(h) {
-  const card = el("div", { class: "stock" });
+// ---- summary + indices ------------------------------------------------------
 
-  const pill = el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance });
+function stat(label, valueNode, subNode) {
+  return el("div", { class: "stat" }, [
+    el("div", { class: "label", text: label }),
+    valueNode,
+    subNode || null,
+  ]);
+}
+
+function renderSummary(data) {
+  const root = document.getElementById("summary");
+  root.innerHTML = "";
+  const t = data.totals;
+  if (!t) return;
+  root.appendChild(stat("Total value", el("div", { class: "val", text: inr(t.value) })));
+  root.appendChild(stat("Invested", el("div", { class: "val", text: inr(t.invested) })));
+  const plVal = el("div", { class: `val ${cls(t.pnlAbs)}` }, [
+    (t.pnlAbs >= 0 ? "+" : "") + inr(t.pnlAbs),
+  ]);
+  const plSub =
+    t.pnlPct != null ? el("div", { class: `sub ${cls(t.pnlPct)}`, text: pct(t.pnlPct) }) : null;
+  root.appendChild(stat("Total P/L (unrealised)", plVal, plSub));
+  const sub =
+    t.unpriced > 0 ? el("div", { class: "sub muted", text: `${t.unpriced} without a price` }) : null;
+  root.appendChild(stat("Holdings", el("div", { class: "val", text: String(t.holdings) }), sub));
+}
+
+function renderIndices(data) {
+  const root = document.getElementById("indices");
+  root.innerHTML = "";
+  (data.indices || []).forEach((ix) => {
+    const chip = el("span", { class: "index-chip" }, [el("span", { class: "nm", text: ix.label })]);
+    if (ix.price != null) {
+      chip.appendChild(
+        document.createTextNode(ix.price.toLocaleString("en-IN", { maximumFractionDigits: 2 })),
+      );
+      if (ix.changePercent != null) {
+        chip.appendChild(document.createTextNode("  "));
+        chip.appendChild(el("span", { class: cls(ix.changePercent), text: pct(ix.changePercent) }));
+      }
+    } else {
+      chip.appendChild(document.createTextNode("—"));
+    }
+    root.appendChild(chip);
+  });
+}
+
+// ---- overview charts --------------------------------------------------------
+
+function renderCharts(data) {
+  if (typeof Chart === "undefined") return;
+  Chart.defaults.color = "#9aa3af";
+  Chart.defaults.borderColor = "#2a2f3a";
+  Chart.defaults.font.family = "inherit";
+
+  const holdings = data.holdings || [];
+  const priced = holdings.filter((h) => h.price != null && h.value != null);
+
+  const alloc = priced.filter((h) => h.value > 0);
+  if (alloc.length) {
+    chartOn("allocChart", {
+      type: "doughnut",
+      data: {
+        labels: alloc.map((h) => h.symbol),
+        datasets: [{ data: alloc.map((h) => h.value), backgroundColor: alloc.map((_, i) => PALETTE[i % PALETTE.length]), borderWidth: 0 }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "right", labels: { boxWidth: 12, font: { size: 11 } } },
+          tooltip: { callbacks: { label: (c) => `${c.label}: ${inr0(c.parsed)}` } },
+        },
+      },
+    });
+  }
+
+  const plH = holdings.filter((h) => h.plAbs != null);
+  if (plH.length) {
+    chartOn("plChart", {
+      type: "bar",
+      data: {
+        labels: plH.map((h) => h.symbol),
+        datasets: [{ data: plH.map((h) => h.plAbs), backgroundColor: plH.map((h) => (h.plAbs >= 0 ? "#3fb950" : "#f85149")), borderWidth: 0 }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => inr0(c.parsed.y) } } },
+        scales: { x: { ticks: { font: { size: 10 } } } },
+      },
+    });
+  }
+
+  const series = data.valueSeries || [];
+  if (series.length) {
+    chartOn("valueChart", {
+      type: "line",
+      data: {
+        labels: series.map((p) => p.date),
+        datasets: [
+          { label: "Value", data: series.map((p) => p.value), borderColor: "#58a6ff", backgroundColor: "rgba(88,166,255,0.12)", fill: true, tension: 0.25, pointRadius: series.length > 30 ? 0 : 3 },
+          { label: "Invested", data: series.map((p) => p.invested), borderColor: "#9aa3af", borderDash: [5, 4], fill: false, tension: 0, pointRadius: 0 },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${inr0(c.parsed.y)}` } } },
+        scales: { y: { ticks: { callback: (v) => inr0(v) } } },
+      },
+    });
+  } else {
+    const c = document.getElementById("valueChart");
+    if (c && c.parentElement && !c.parentElement.querySelector(".muted")) {
+      c.parentElement.appendChild(el("p", { class: "muted", text: "Builds up as the daily job runs." }));
+    }
+  }
+}
+
+// ---- track record -----------------------------------------------------------
+
+function renderTrack(data) {
+  const root = document.getElementById("track");
+  root.innerHTML = "";
+  const t = data.track || {};
+  const cal = data.calibration || {};
+  const row = el("div", { class: "row" });
+  if (t.rate == null) {
+    row.appendChild(el("span", { class: "big", text: "No scored calls yet" }));
+    row.appendChild(el("span", { class: "muted", text: "directional calls get scored vs the index after a day" }));
+  } else {
+    row.appendChild(el("span", { class: "big", text: `${Math.round(t.rate * 100)}% hit rate` }));
+    row.appendChild(el("span", { class: "muted", text: `${t.right}/${t.right + t.wrong} beat the index` }));
+  }
+  if (cal.scored > 0 && Array.isArray(cal.buckets)) {
+    const parts = cal.buckets.filter((b) => b.count > 0).map((b) => `${b.confidence} ${Math.round((b.rate ?? 0) * 100)}% (${b.count})`).join(" · ");
+    const brier = cal.brier != null ? ` · Brier ${cal.brier.toFixed(2)}` : "";
+    row.appendChild(el("span", { class: "muted", text: `Confidence: ${parts}${brier}` }));
+  }
+  root.appendChild(row);
+  root.appendChild(el("p", { class: "note", text: '"Right" = the pick beat just holding the NIFTY/SENSEX over ~1 day. Hold/Watch not scored. ~50% is a coin flip; Brier 0.25 = always guessing 50/50.' }));
+}
+
+// ---- overview holdings (compact, clickable) ---------------------------------
+
+function holdingCard(h) {
+  const card = el("div", { class: "stock clickable" });
   card.appendChild(
     el("div", { class: "top" }, [
       el("div", {}, [
         el("div", { class: "sym" }, [`${h.symbol} `, el("span", { class: "muted", text: `(${h.exchange})` })]),
         el("div", { class: "name", text: h.name || "" }),
       ]),
-      el("div", {}, [pill, el("span", { class: "conf", text: h.confidence })]),
+      el("div", {}, [el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance }), el("span", { class: "conf", text: h.confidence })]),
     ]),
   );
-
   if (h.price != null) {
     const line = el("div", { class: "priceline" });
-    line.appendChild(document.createTextNode(`${inr(h.price)}`));
+    line.appendChild(document.createTextNode(inr(h.price)));
     if (h.dayChangePct != null) {
       line.appendChild(document.createTextNode("  "));
       line.appendChild(el("span", { class: cls(h.dayChangePct), text: pct(h.dayChangePct) + " today" }));
     }
     card.appendChild(line);
-
-    const pl = el("div", { class: "priceline" });
     if (h.plPct != null && h.plAbs != null) {
-      pl.appendChild(el("span", { class: cls(h.plPct), text: `${pct(h.plPct)} (${h.plAbs >= 0 ? "+" : ""}${inr(h.plAbs)})` }));
-      pl.appendChild(document.createTextNode(`  ·  ${h.qty} @ ${inr(h.buyPrice)}  ·  val ${inr0(h.value)}`));
+      card.appendChild(
+        el("div", { class: "priceline" }, [
+          el("span", { class: cls(h.plPct), text: `${pct(h.plPct)} (${h.plAbs >= 0 ? "+" : ""}${inr(h.plAbs)})` }),
+          document.createTextNode(`  ·  val ${inr0(h.value)}`),
+        ]),
+      );
     }
-    card.appendChild(pl);
   } else {
     card.appendChild(el("div", { class: "priceline muted", text: `Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}` }));
   }
-
-  if (h.reasoning) card.appendChild(el("p", { class: "reasoning", text: h.reasoning }));
-  if (h.keyNews && h.keyNews.length) {
-    const ul = el("ul", { class: "news" });
-    h.keyNews.forEach((n) => ul.appendChild(el("li", { text: n })));
-    card.appendChild(ul);
-  }
-  const src = sourcesRow(h.sources);
-  if (src) card.appendChild(src);
+  card.appendChild(el("div", { class: "muted", text: "Tap for prediction + charts →" }));
+  card.addEventListener("click", () => {
+    location.hash = "#/" + encodeURIComponent(h.symbol);
+  });
   return card;
 }
 
 function renderHoldings(data) {
   const root = document.getElementById("holdings");
   root.innerHTML = "";
-  // Show biggest positions first.
-  const holdings = [...(data.holdings || [])].sort(
-    (a, b) => (b.value ?? 0) - (a.value ?? 0),
-  );
+  const holdings = [...(data.holdings || [])].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   holdings.forEach((h) => root.appendChild(holdingCard(h)));
 }
 
@@ -332,10 +264,7 @@ function ideaCard(idea) {
   const card = el("div", { class: "stock idea" });
   card.appendChild(
     el("div", { class: "top" }, [
-      el("div", {}, [
-        el("div", { class: "sym", text: idea.symbol }),
-        idea.name ? el("div", { class: "name", text: idea.name }) : null,
-      ]),
+      el("div", {}, [el("div", { class: "sym", text: idea.symbol }), idea.name ? el("div", { class: "name", text: idea.name }) : null]),
       el("span", { class: "pill watch", text: "Research" }),
     ]),
   );
@@ -348,13 +277,160 @@ function renderIdeas(data) {
   const root = document.getElementById("ideas");
   root.innerHTML = "";
   const ideas = (data.ideas && data.ideas.items) || [];
-  if (!ideas.length) {
-    root.appendChild(el("p", { class: "muted", text: "No ideas generated this run." }));
-  } else {
-    ideas.forEach((i) => root.appendChild(ideaCard(i)));
-  }
+  if (!ideas.length) root.appendChild(el("p", { class: "muted", text: "No ideas generated this run." }));
+  else ideas.forEach((i) => root.appendChild(ideaCard(i)));
   const src = sourcesRow(data.ideas && data.ideas.sources);
   if (src) root.appendChild(src);
+}
+
+// ---- per-stock detail -------------------------------------------------------
+
+function renderDetail(h) {
+  const root = document.getElementById("detail");
+  if (detailChart) {
+    detailChart.destroy();
+    detailChart = null;
+  }
+  root.innerHTML = "";
+
+  root.appendChild(el("a", { class: "back", href: "#" }, ["← Back to portfolio"]));
+
+  root.appendChild(
+    el("div", { class: "d-head" }, [
+      el("div", {}, [
+        el("h2", { class: "d-title" }, [`${h.symbol} `, el("span", { class: "muted", text: `(${h.exchange})` })]),
+        el("div", { class: "d-name", text: h.name || "" }),
+      ]),
+      el("div", {}, [el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance }), el("span", { class: "conf", text: h.confidence + " confidence" })]),
+    ]),
+  );
+
+  // Position line
+  const pos = el("div", { class: "d-pos" });
+  if (h.price != null) {
+    pos.appendChild(document.createTextNode(inr(h.price)));
+    if (h.dayChangePct != null) {
+      pos.appendChild(document.createTextNode("  "));
+      pos.appendChild(el("span", { class: cls(h.dayChangePct), text: pct(h.dayChangePct) + " today" }));
+    }
+    if (h.plPct != null && h.plAbs != null) {
+      pos.appendChild(document.createTextNode("   ·   P/L "));
+      pos.appendChild(el("span", { class: cls(h.plPct), text: `${pct(h.plPct)} (${h.plAbs >= 0 ? "+" : ""}${inr(h.plAbs)})` }));
+    }
+    pos.appendChild(document.createTextNode(`   ·   ${h.qty} @ ${inr(h.buyPrice)}  ·  value ${inr0(h.value)}`));
+  } else {
+    pos.appendChild(document.createTextNode(`Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}`));
+  }
+  root.appendChild(pos);
+
+  // Prediction
+  const pred = el("div", { class: "pred" });
+  pred.appendChild(el("h3", { text: "Prediction (information, not advice)" }));
+  pred.appendChild(el("div", {}, [el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance }), el("span", { class: "conf", text: h.confidence + " confidence" })]));
+  if (h.reasoning) pred.appendChild(el("p", { class: "reasoning", text: h.reasoning }));
+  if (h.keyNews && h.keyNews.length) {
+    const ul = el("ul", { class: "news" });
+    h.keyNews.forEach((n) => ul.appendChild(el("li", { text: n })));
+    pred.appendChild(ul);
+  }
+  const src = sourcesRow(h.sources);
+  if (src) pred.appendChild(src);
+  root.appendChild(pred);
+
+  // Price chart
+  const hist = h.priceHistory || [];
+  const chartCard = el("div", { class: "chart-card" }, [el("h3", { text: "Price — last ~6 months" })]);
+  if (hist.length > 1) {
+    const canvas = el("canvas", { id: "detailPriceChart" });
+    chartCard.appendChild(canvas);
+    root.appendChild(chartCard);
+    detailChart = chartOn("detailPriceChart", {
+      type: "line",
+      data: {
+        labels: hist.map((p) => p.t),
+        datasets: [
+          { label: h.symbol, data: hist.map((p) => p.c), borderColor: "#58a6ff", backgroundColor: "rgba(88,166,255,0.12)", fill: true, tension: 0.2, pointRadius: 0 },
+          { label: "Avg buy", data: hist.map(() => h.buyPrice), borderColor: "#9aa3af", borderDash: [5, 4], fill: false, pointRadius: 0 },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${inr(c.parsed.y)}` } } },
+        scales: { x: { ticks: { maxTicksLimit: 8, font: { size: 10 } } }, y: { ticks: { callback: (v) => inr0(v) } } },
+      },
+    });
+  } else {
+    chartCard.appendChild(el("p", { class: "muted", text: "Price history unavailable for this symbol." }));
+    root.appendChild(chartCard);
+  }
+
+  // Past calls for this stock
+  const callsCard = el("div", { class: "card", style: "margin-top:14px" }, [el("h3", { class: "muted", text: "This stock's past calls (scored vs the index)" })]);
+  const calls = h.recentCalls || [];
+  if (!calls.length) {
+    callsCard.appendChild(el("p", { class: "muted", text: "No past calls on record yet — they'll appear here as the daily job runs." }));
+  } else {
+    const table = el("table", { class: "calls" });
+    table.appendChild(
+      el("tr", {}, [el("th", { text: "Date" }), el("th", { text: "Call" }), el("th", { text: "Outcome" }), el("th", { text: "Stock vs index" })]),
+    );
+    calls.forEach((c) => {
+      let vs = "—";
+      if (typeof c.stockReturnPct === "number" && typeof c.benchmarkReturnPct === "number") {
+        vs = `${pct(c.stockReturnPct)} vs ${pct(c.benchmarkReturnPct)}`;
+      } else if (typeof c.stockReturnPct === "number") {
+        vs = pct(c.stockReturnPct);
+      }
+      table.appendChild(
+        el("tr", {}, [
+          el("td", { text: c.date }),
+          el("td", { text: `${c.stance} (${c.confidence})` }),
+          el("td", {}, [el("span", { class: `tag ${c.outcome}`, text: c.outcome })]),
+          el("td", { text: vs }),
+        ]),
+      );
+    });
+    callsCard.appendChild(table);
+  }
+  root.appendChild(callsCard);
+}
+
+// ---- routing ----------------------------------------------------------------
+
+function renderOverview() {
+  renderSummary(DATA);
+  renderIndices(DATA);
+  renderCharts(DATA);
+  renderTrack(DATA);
+  renderHoldings(DATA);
+  renderIdeas(DATA);
+}
+
+function route() {
+  if (!DATA) return;
+  const detail = document.getElementById("detail");
+  const overview = document.getElementById("overview");
+  const m = (location.hash || "").match(/^#\/(.+)$/);
+  if (m) {
+    const sym = decodeURIComponent(m[1]);
+    const h = (DATA.holdings || []).find((x) => x.symbol === sym);
+    if (h) {
+      renderDetail(h);
+      detail.classList.remove("hidden");
+      overview.classList.add("hidden");
+      window.scrollTo(0, 0);
+      return;
+    }
+  }
+  detail.classList.add("hidden");
+  detail.innerHTML = "";
+  if (detailChart) {
+    detailChart.destroy();
+    detailChart = null;
+  }
+  overview.classList.remove("hidden");
+  renderOverview();
 }
 
 function renderMeta(data) {
@@ -375,12 +451,10 @@ function renderMeta(data) {
     if (/credit balance/i.test(reason)) why = "the Anthropic credit balance is too low";
     else if (/authentication|api key|x-api-key|resolve auth/i.test(reason))
       why = "no API key was set for this run (a placeholder snapshot generated outside GitHub Actions)";
-    else if (/rate.?limit|overloaded|429|529/i.test(reason))
-      why = "the Anthropic API was rate-limited or overloaded";
+    else if (/rate.?limit|overloaded|429|529/i.test(reason)) why = "the Anthropic API was rate-limited or overloaded";
     else if (reason) why = reason;
     banner.textContent =
-      "⚠️ Claude reads unavailable" +
-      (why ? " — " + why : "") +
+      "⚠️ Claude reads unavailable" + (why ? " — " + why : "") +
       ". Prices, totals and charts are live; the buy/hold/sell reads fill in on the next successful run on GitHub.";
   } else {
     banner.classList.add("hidden");
@@ -391,17 +465,14 @@ async function main() {
   try {
     const res = await fetch(`./briefing.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    renderMeta(data);
-    renderSummary(data);
-    renderIndices(data);
-    renderCharts(data);
-    renderTrack(data);
-    renderHoldings(data);
-    renderIdeas(data);
+    DATA = await res.json();
+    renderMeta(DATA);
+    route();
+    window.addEventListener("hashchange", route);
   } catch (err) {
-    document.getElementById("meta").innerHTML = "";
-    document.getElementById("meta").appendChild(
+    const meta = document.getElementById("meta");
+    meta.innerHTML = "";
+    meta.appendChild(
       el("span", {
         class: "error",
         text: `Could not load briefing.json (${err.message}). The first scheduled run hasn't published data yet, or Pages isn't serving /docs.`,
