@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-06-15T18:59:34.258Z",
+  "generatedAt": "2026-06-15T21:36:27.377Z",
   "date": "2026-06-15",
   "model": "claude-opus-4-8",
   "disclaimer": "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
   "degraded": true,
+  "degradedReason": "Could not resolve authentication method. Expected one of apiKey, authToken, credentials, config, or profile to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
   "totals": {
     "invested": 491290.23,
     "value": 544088.3,

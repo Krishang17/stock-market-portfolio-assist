@@ -370,8 +370,18 @@ function renderMeta(data) {
   const banner = document.getElementById("banner");
   if (data.degraded) {
     banner.classList.remove("hidden");
+    const reason = data.degradedReason || "";
+    let why = "";
+    if (/credit balance/i.test(reason)) why = "the Anthropic credit balance is too low";
+    else if (/authentication|api key|x-api-key|resolve auth/i.test(reason))
+      why = "no API key was set for this run (a placeholder snapshot generated outside GitHub Actions)";
+    else if (/rate.?limit|overloaded|429|529/i.test(reason))
+      why = "the Anthropic API was rate-limited or overloaded";
+    else if (reason) why = reason;
     banner.textContent =
-      "⚠️ Claude analysis was unavailable for this run — most likely the Anthropic account has no credit balance (Plans & Billing). Prices, totals and charts are live; only the stance/reasoning are placeholders until analysis runs.";
+      "⚠️ Claude reads unavailable" +
+      (why ? " — " + why : "") +
+      ". Prices, totals and charts are live; the buy/hold/sell reads fill in on the next successful run on GitHub.";
   } else {
     banner.classList.add("hidden");
   }

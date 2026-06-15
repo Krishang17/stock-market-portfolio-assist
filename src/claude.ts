@@ -38,6 +38,19 @@ function model(): string {
   return process.env.MODEL?.trim() || DEFAULT_MODEL;
 }
 
+// Capture WHY analysis fell back, so the dashboard can show the real reason
+// (e.g. "credit balance too low" vs "no API key") instead of guessing.
+let lastFailureReason: string | null = null;
+export function getLastFailureReason(): string | null {
+  return lastFailureReason;
+}
+function noteFailure(err: unknown): void {
+  const raw = err instanceof Error ? err.message : String(err);
+  // Pull the human-readable message out of an API error JSON if present.
+  const m = raw.match(/"message"\s*:\s*"([^"]+)"/);
+  lastFailureReason = (m ? m[1] : raw).slice(0, 240);
+}
+
 // web_search runs server-side; dynamic filtering is built into this version.
 const WEB_SEARCH_TOOL = {
   type: "web_search_20260209",
@@ -293,17 +306,25 @@ Search for current news on this company, then return your JSON read now.`;
       `[claude] analyzeHolding failed for ${holding.symbol}:`,
       err instanceof Error ? err.message : err,
     );
+    noteFailure(err);
     return fallbackAnalysis();
   }
 
   const json = extractJsonObject(result.text);
-  if (!json) return fallbackAnalysis();
+  if (!json) {
+    lastFailureReason ??= "the model returned output with no JSON";
+    return fallbackAnalysis();
+  }
   try {
     const parsed = normalizeAnalysis(JSON.parse(json));
-    if (!parsed) return fallbackAnalysis();
+    if (!parsed) {
+      lastFailureReason ??= "the model returned JSON that didn't match the expected shape";
+      return fallbackAnalysis();
+    }
     parsed.sources = result.sources;
     return parsed;
   } catch {
+    lastFailureReason ??= "the model returned invalid JSON";
     return fallbackAnalysis();
   }
 }
@@ -338,6 +359,7 @@ Suggest 2-3 liquid Indian-listed stocks I do NOT already hold, each with a one-l
       "[claude] suggestIdeas failed:",
       err instanceof Error ? err.message : err,
     );
+    noteFailure(err);
     return { ideas: [], sources: [] };
   }
 

@@ -9,7 +9,7 @@ import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 
-import { analyzeHolding, suggestIdeas } from "./claude";
+import { analyzeHolding, getLastFailureReason, suggestIdeas } from "./claude";
 import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate";
 import {
   MARKET_INDICES,
@@ -293,13 +293,16 @@ async function main(): Promise<void> {
 
   // 7. Write the dashboard snapshot.
   const { right, wrong, rate } = computeHitRate(history);
+  const degraded = views.some((v) => v.analysis.unavailable === true);
+  const degradedReason = degraded ? getLastFailureReason() : null;
   const snapshot = {
     generatedAt: new Date().toISOString(),
     date: today,
     model: process.env.MODEL?.trim() || "claude-opus-4-8",
     disclaimer:
       "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
-    degraded: views.some((v) => v.analysis.unavailable === true),
+    degraded,
+    degradedReason,
     totals,
     indices,
     valueSeries: series.slice(-90),
