@@ -24,8 +24,8 @@ import type {
   Stance,
 } from "./types";
 
-// The user asked for "a current Claude Sonnet model, configurable via MODEL".
-const DEFAULT_MODEL = "claude-sonnet-4-6";
+// Default Claude model; overridable via the MODEL env var / repo variable.
+const DEFAULT_MODEL = "claude-opus-4-8";
 
 // Lazy singleton so importing this module never throws when ANTHROPIC_API_KEY
 // is absent (e.g. during local type-checking).

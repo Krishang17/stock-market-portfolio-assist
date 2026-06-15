@@ -220,7 +220,7 @@ async function main(): Promise<void> {
   const snapshot = {
     generatedAt: new Date().toISOString(),
     date: today,
-    model: process.env.MODEL?.trim() || "claude-sonnet-4-6",
+    model: process.env.MODEL?.trim() || "claude-opus-4-8",
     disclaimer:
       "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
     degraded: views.some((v) => v.analysis.unavailable === true),

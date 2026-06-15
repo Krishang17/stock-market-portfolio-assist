@@ -41,7 +41,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           # Optional repo variable; falls back to the in-code default.
-          MODEL: ${{ vars.MODEL || 'claude-sonnet-4-6' }}
+          MODEL: ${{ vars.MODEL || 'claude-opus-4-8' }}
         run: npm run briefing
 
       - name: Commit updated data
