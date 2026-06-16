@@ -64,6 +64,12 @@ let detailBench = false;
 let filterText = "";
 let sortKey = "value";
 
+// client-side (localStorage) watchlist + personal holdings, and the latest live
+// price map (ticker -> {price, prev}) shared by holdings/indices/watchlist/etc.
+let WATCH = [];
+let MYHOLD = [];
+const LIVE_PRICES = new Map();
+
 /** Read a CSS custom property off :root (so charts follow the theme). */
 function getCssVar(name) {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -884,6 +890,8 @@ function renderOverview() {
   renderCharts(DATA);
   renderTrack(DATA);
   renderHoldings(DATA);
+  renderWatchlist();
+  renderMyHoldings();
   renderIdeas(DATA);
 }
 
@@ -998,6 +1006,8 @@ function liveSymbols() {
   const set = new Set();
   (DATA.holdings || []).forEach((h) => set.add(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS")));
   (DATA.indices || []).forEach((ix) => ix.symbol && set.add(ix.symbol));
+  WATCH.forEach((w) => set.add(w.symbol + (w.exchange === "BSE" ? ".BO" : ".NS")));
+  MYHOLD.forEach((h) => set.add(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS")));
   return [...set];
 }
 
@@ -1014,26 +1024,30 @@ function parseSpark(j) {
   return map;
 }
 
-async function fetchLive() {
-  const tickers = liveSymbols();
-  if (!tickers.length) return null;
-  const spark = `https://query1.finance.yahoo.com/v7/finance/spark?symbols=${encodeURIComponent(tickers.join(","))}&range=1d&interval=1d`;
+async function proxiedJson(targetUrl) {
   const prefixes = [];
   const userProxy = localStorage.getItem("liveProxy");
   if (userProxy) prefixes.push(userProxy);
   prefixes.push(...BUILTIN_PROXIES, ""); // "" = direct (works only if CORS ever allowed)
   for (const p of prefixes) {
     try {
-      const url = p ? p + encodeURIComponent(spark) : spark;
+      const url = p ? p + encodeURIComponent(targetUrl) : targetUrl;
       const res = await fetch(url, { signal: AbortSignal.timeout(12000) });
       if (!res.ok) continue;
-      const map = parseSpark(await res.json());
-      if (map && map.size) return map;
+      return await res.json();
     } catch {
       /* try next proxy */
     }
   }
   return null;
+}
+
+async function fetchLive() {
+  const tickers = liveSymbols();
+  if (!tickers.length) return null;
+  const spark = `https://query1.finance.yahoo.com/v7/finance/spark?symbols=${encodeURIComponent(tickers.join(","))}&range=1d&interval=1d`;
+  const j = await proxiedJson(spark);
+  return j ? parseSpark(j) : null;
 }
 
 function recomputeTotals() {
@@ -1054,6 +1068,7 @@ function recomputeTotals() {
 }
 
 function applyLive(map) {
+  map.forEach((v, k) => LIVE_PRICES.set(k, v));
   (DATA.holdings || []).forEach((h) => {
     const q = map.get(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS"));
     if (q && q.price != null) {
@@ -1109,6 +1124,8 @@ function renderLiveViews() {
     renderMovers(DATA);
     renderHealth(DATA);
     renderHoldings(DATA);
+    renderWatchlist();
+    renderMyHoldings();
   }
 }
 
@@ -1162,6 +1179,298 @@ function startLive() {
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible" && marketIsOpen()) liveTick(false);
   });
+}
+
+// ---- search · watchlist · personal holdings (client-side, localStorage) -----
+// Search Indian stocks (Yahoo search via the same proxy), add to a watchlist
+// (live prices) or to a personal holdings list with quantity + buy price (live
+// value/P&L). Stored in the browser only; "Copy for portfolio.json" promotes
+// them to the AI-analysed portfolio.
+
+function loadJSON(key, fallback) {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    return Array.isArray(v) ? v : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function saveJSON(key, val) {
+  try {
+    localStorage.setItem(key, JSON.stringify(val));
+  } catch {
+    /* quota / private mode */
+  }
+}
+
+const liveOf = (it) => LIVE_PRICES.get(it.symbol + (it.exchange === "BSE" ? ".BO" : ".NS"));
+const exCode = (label) => (label === "BSE" ? "BO" : "NS");
+
+async function searchStocks(q) {
+  const url = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(q)}&quotesCount=12&newsCount=0`;
+  const j = await proxiedJson(url);
+  const quotes = (j && j.quotes) || [];
+  return quotes
+    .filter((x) => x.symbol && /\.(NS|BO)$/.test(x.symbol))
+    .map((x) => ({
+      symbol: x.symbol.replace(/\.(NS|BO)$/, ""),
+      exchange: x.symbol.endsWith(".BO") ? "BSE" : "NSE",
+      name: x.shortname || x.longname || x.symbol,
+    }));
+}
+
+let searchTimer = null;
+function wireFinder() {
+  const input = document.getElementById("stockSearch");
+  if (input)
+    input.addEventListener("input", () => {
+      clearTimeout(searchTimer);
+      const q = input.value.trim();
+      const r = document.getElementById("searchResults");
+      if (q.length < 2) {
+        if (r) r.innerHTML = "";
+        return;
+      }
+      searchTimer = setTimeout(() => runSearch(q), 350);
+    });
+  const modal = document.getElementById("modal");
+  if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+}
+
+async function runSearch(q) {
+  const root = document.getElementById("searchResults");
+  if (!root) return;
+  root.innerHTML = "";
+  root.appendChild(el("p", { class: "muted", text: "Searching…" }));
+  let results = [];
+  try {
+    results = await searchStocks(q);
+  } catch {
+    /* handled below */
+  }
+  root.innerHTML = "";
+  if (!results.length) {
+    root.appendChild(el("p", { class: "muted", text: "No Indian-listed matches (or search is blocked — try “setup”)." }));
+    return;
+  }
+  results.forEach((r) => root.appendChild(searchResultRow(r)));
+}
+
+function inWatch(it) {
+  return WATCH.some((w) => w.symbol === it.symbol && w.exchange === it.exchange);
+}
+
+function searchResultRow(r) {
+  const watchBtn = el("button", { class: "rbtn", text: inWatch(r) ? "★ Watching" : "☆ Watch" });
+  watchBtn.addEventListener("click", () => {
+    toggleWatch(r);
+    watchBtn.textContent = inWatch(r) ? "★ Watching" : "☆ Watch";
+  });
+  const addBtn = el("button", { class: "rbtn", text: "+ Add" });
+  addBtn.addEventListener("click", () => openAddDialog(r));
+  return el("div", { class: "sr-item" }, [
+    el("div", { class: "sr-info" }, [
+      el("div", { class: "sym" }, [r.symbol + " ", el("span", { class: "muted", text: `(${r.exchange})` })]),
+      el("div", { class: "name", text: r.name || "" }),
+    ]),
+    el("div", { class: "sr-actions" }, [watchBtn, addBtn]),
+  ]);
+}
+
+function toggleWatch(it) {
+  if (inWatch(it)) WATCH = WATCH.filter((w) => !(w.symbol === it.symbol && w.exchange === it.exchange));
+  else WATCH.push({ symbol: it.symbol, name: it.name, exchange: it.exchange });
+  saveJSON("watchlist", WATCH);
+  renderWatchlist();
+  liveTick(true);
+}
+function removeWatch(it) {
+  WATCH = WATCH.filter((w) => !(w.symbol === it.symbol && w.exchange === it.exchange));
+  saveJSON("watchlist", WATCH);
+  renderWatchlist();
+}
+
+function renderWatchlist() {
+  const root = document.getElementById("watchlist");
+  if (!root) return;
+  root.innerHTML = "";
+  if (!WATCH.length) {
+    root.appendChild(el("p", { class: "muted", text: "No watched stocks yet — search above and tap ☆ Watch." }));
+    return;
+  }
+  WATCH.forEach((w) => {
+    const q = liveOf(w);
+    const rm = el("button", { class: "rbtn", text: "✕" });
+    rm.title = "Remove from watchlist";
+    rm.addEventListener("click", () => removeWatch(w));
+    const card = el("div", { class: "stock" }, [
+      el("div", { class: "top" }, [
+        el("div", {}, [
+          el("div", { class: "sym" }, [w.symbol + " ", el("span", { class: "muted", text: `(${w.exchange})` })]),
+          el("div", { class: "name", text: w.name || "" }),
+        ]),
+        rm,
+      ]),
+    ]);
+    const line = el("div", { class: "priceline" });
+    if (q && q.price != null) {
+      line.appendChild(document.createTextNode(inr(q.price)));
+      if (q.prev) {
+        const d = ((q.price - q.prev) / q.prev) * 100;
+        line.appendChild(document.createTextNode("  "));
+        line.appendChild(el("span", { class: cls(d), text: pct(d) + " today" }));
+      }
+    } else {
+      line.appendChild(el("span", { class: "muted", text: "price pending…" }));
+    }
+    card.appendChild(line);
+    card.appendChild(researchLinks(w.symbol, exCode(w.exchange)));
+    const add = el("button", { class: "rbtn", text: "+ Add to holdings" });
+    add.addEventListener("click", () => openAddDialog(w));
+    card.appendChild(add);
+    root.appendChild(card);
+  });
+}
+
+function openAddDialog(item) {
+  const modal = document.getElementById("modal");
+  const body = document.getElementById("modalBody");
+  if (!modal || !body) return;
+  body.innerHTML = "";
+  body.appendChild(el("h3", { class: "modal-title", text: `Add ${item.symbol} (${item.exchange})` }));
+  if (item.name) body.appendChild(el("p", { class: "muted", text: item.name }));
+  const qty = el("input", { type: "number", min: "0", step: "any", placeholder: "Quantity (shares)", class: "modal-input" });
+  const price = el("input", { type: "number", min: "0", step: "any", placeholder: "Avg buy price (₹)", class: "modal-input" });
+  const err = el("p", { class: "modal-err" });
+  body.appendChild(qty);
+  body.appendChild(price);
+  body.appendChild(err);
+  const addBtn = el("button", { class: "rbtn active", text: "Add to my holdings" });
+  addBtn.addEventListener("click", () => {
+    const qn = parseFloat(qty.value);
+    const pn = parseFloat(price.value);
+    if (!(qn > 0) || !(pn > 0)) {
+      err.textContent = "Enter a quantity and price greater than 0.";
+      return;
+    }
+    addHolding({ symbol: item.symbol, name: item.name, exchange: item.exchange, qty: qn, buyPrice: pn });
+    closeModal();
+  });
+  const cancel = el("button", { class: "rbtn", text: "Cancel" });
+  cancel.addEventListener("click", closeModal);
+  body.appendChild(el("div", { class: "modal-actions" }, [addBtn, cancel]));
+  modal.classList.remove("hidden");
+  if (qty.focus) qty.focus();
+}
+function closeModal() {
+  const m = document.getElementById("modal");
+  if (m) m.classList.add("hidden");
+}
+
+function addHolding(item) {
+  const i = MYHOLD.findIndex((x) => x.symbol === item.symbol && x.exchange === item.exchange);
+  if (i >= 0) {
+    const o = MYHOLD[i];
+    const tot = o.qty + item.qty;
+    o.buyPrice = (o.buyPrice * o.qty + item.buyPrice * item.qty) / tot; // weighted average
+    o.qty = tot;
+  } else {
+    MYHOLD.push({ symbol: item.symbol, name: item.name, exchange: item.exchange, qty: item.qty, buyPrice: item.buyPrice });
+  }
+  saveJSON("myHoldings", MYHOLD);
+  renderMyHoldings();
+  liveTick(true);
+  toast(`Added ${item.symbol} to your holdings`);
+}
+function removeHolding(it) {
+  MYHOLD = MYHOLD.filter((x) => !(x.symbol === it.symbol && x.exchange === it.exchange));
+  saveJSON("myHoldings", MYHOLD);
+  renderMyHoldings();
+}
+
+function renderMyHoldings() {
+  const root = document.getElementById("myholdings");
+  if (!root) return;
+  root.innerHTML = "";
+  if (!MYHOLD.length) {
+    root.appendChild(el("p", { class: "muted", text: "None yet — search above, tap “+ Add”, then enter quantity & price." }));
+    return;
+  }
+  let tInv = 0;
+  let tVal = 0;
+  let invPriced = 0;
+  let priced = 0;
+  MYHOLD.forEach((h) => {
+    const q = liveOf(h);
+    const price = q && q.price != null ? q.price : null;
+    const inv = h.qty * h.buyPrice;
+    tInv += inv;
+    const rm = el("button", { class: "rbtn", text: "✕" });
+    rm.title = "Remove";
+    rm.addEventListener("click", () => removeHolding(h));
+    const card = el("div", { class: "stock" }, [
+      el("div", { class: "top" }, [
+        el("div", {}, [
+          el("div", { class: "sym" }, [h.symbol + " ", el("span", { class: "muted", text: `(${h.exchange})` })]),
+          el("div", { class: "name", text: h.name || "" }),
+        ]),
+        rm,
+      ]),
+      el("div", { class: "priceline muted", text: `${h.qty} @ ${inr(h.buyPrice)} · invested ${inr0(inv)}` }),
+    ]);
+    if (price != null) {
+      const val = h.qty * price;
+      tVal += val;
+      invPriced += inv;
+      priced++;
+      const plAbs = (price - h.buyPrice) * h.qty;
+      const plPct = (price / h.buyPrice - 1) * 100;
+      const line = el("div", { class: "priceline" }, [
+        document.createTextNode(inr(price) + "  "),
+        el("span", { class: cls(plPct), text: `${pct(plPct)} (${plAbs >= 0 ? "+" : ""}${inr(plAbs)})` }),
+        document.createTextNode(`  ·  val ${inr0(val)}`),
+      ]);
+      card.appendChild(line);
+    } else {
+      card.appendChild(el("div", { class: "priceline muted", text: "live price pending…" }));
+    }
+    root.appendChild(card);
+  });
+
+  const total = el("div", { class: "stock myhold-total" }, [el("div", { class: "sym", text: "Total — added holdings" })]);
+  total.appendChild(el("div", { class: "priceline", text: `Invested ${inr0(tInv)}` }));
+  if (priced) {
+    const plAll = tVal - invPriced;
+    total.appendChild(
+      el("div", { class: "priceline" }, [
+        document.createTextNode(`Value ${inr0(tVal)}  `),
+        el("span", { class: cls(plAll), text: `${plAll >= 0 ? "+" : ""}${inr0(plAll)}` }),
+      ]),
+    );
+  }
+  const copyBtn = el("button", { class: "rbtn", text: "Copy for portfolio.json" });
+  copyBtn.addEventListener("click", copyHoldingsForPortfolio);
+  total.appendChild(copyBtn);
+  total.appendChild(
+    el("p", { class: "muted", text: "Saved in your browser. To have the AI analyse these, add them to portfolio.json (copy above) or via Actions → Run workflow." }),
+  );
+  root.appendChild(total);
+}
+
+function copyHoldingsForPortfolio() {
+  const payload = MYHOLD.map((h) => ({
+    symbol: h.symbol,
+    name: h.name,
+    exchange: exCode(h.exchange),
+    qty: h.qty,
+    buyPrice: round2(h.buyPrice),
+  }));
+  const text = JSON.stringify(payload, null, 2);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => toast("Copied holdings JSON"), () => toast("Copy failed"));
+  } else {
+    toast("Clipboard unavailable");
+  }
 }
 
 // ---- meta + boot ------------------------------------------------------------
@@ -1228,7 +1537,10 @@ function wireControls() {
 
 async function main() {
   initTheme();
+  WATCH = loadJSON("watchlist", []);
+  MYHOLD = loadJSON("myHoldings", []);
   wireControls();
+  wireFinder();
   try {
     const res = await fetch(`./briefing.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

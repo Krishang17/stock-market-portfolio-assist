@@ -63,6 +63,18 @@
         </div>
         <section id="holdings" class="grid"></section>
 
+        <h2 class="section-title">Find &amp; add stocks <span class="muted">— search NSE/BSE, watch or add to holdings</span></h2>
+        <section id="finder" class="card finder">
+          <input id="stockSearch" type="search" placeholder="Search Indian stocks — e.g. TATA, INFY, RELIANCE" aria-label="Search Indian stocks" />
+          <div id="searchResults" class="search-results"></div>
+        </section>
+
+        <h2 class="section-title">★ Watchlist <span class="muted">— live prices, saved in your browser</span></h2>
+        <section id="watchlist" class="grid"></section>
+
+        <h2 class="section-title">My added holdings <span class="muted">— live value, saved in your browser</span></h2>
+        <section id="myholdings" class="grid"></section>
+
         <h2 class="section-title">What to buy tomorrow <span class="muted">— ideas to research, not advice</span></h2>
         <section id="ideas" class="grid"></section>
       </div>
@@ -77,6 +89,8 @@
         </p>
       </footer>
     </main>
+
+    <div id="modal" class="modal hidden"><div class="modal-card" id="modalBody"></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
