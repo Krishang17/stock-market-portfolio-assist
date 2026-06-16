@@ -33,6 +33,11 @@
 
       <!-- Overview -->
       <div id="overview">
+        <section id="finder" class="card finder">
+          <input id="stockSearch" type="search" placeholder="🔎 Search Indian stocks to watch or add — e.g. TATA, INFY, RELIANCE" aria-label="Search Indian stocks" />
+          <div id="searchResults" class="search-results"></div>
+        </section>
+
         <section id="summary" class="summary"></section>
         <section id="indices" class="indices"></section>
         <section id="movers" class="movers hidden"></section>
@@ -62,18 +67,10 @@
           </div>
         </div>
         <section id="holdings" class="grid"></section>
-
-        <h2 class="section-title">Find &amp; add stocks <span class="muted">— search NSE/BSE, watch or add to holdings</span></h2>
-        <section id="finder" class="card finder">
-          <input id="stockSearch" type="search" placeholder="Search Indian stocks — e.g. TATA, INFY, RELIANCE" aria-label="Search Indian stocks" />
-          <div id="searchResults" class="search-results"></div>
-        </section>
+        <p id="holdingsNote" class="muted holdings-note"></p>
 
         <h2 class="section-title">★ Watchlist <span class="muted">— live prices, saved in your browser</span></h2>
         <section id="watchlist" class="grid"></section>
-
-        <h2 class="section-title">My added holdings <span class="muted">— live value, saved in your browser</span></h2>
-        <section id="myholdings" class="grid"></section>
 
         <h2 class="section-title">What to buy tomorrow <span class="muted">— ideas to research, not advice</span></h2>
         <section id="ideas" class="grid"></section>

@@ -66,8 +66,10 @@ let sortKey = "value";
 
 // client-side (localStorage) watchlist + personal holdings, and the latest live
 // price map (ticker -> {price, prev}) shared by holdings/indices/watchlist/etc.
+// CANON = the server's analysed holdings; DATA.holdings = CANON + your additions.
 let WATCH = [];
 let MYHOLD = [];
+let CANON = [];
 const LIVE_PRICES = new Map();
 
 /** Read a CSS custom property off :root (so charts follow the theme). */
@@ -507,13 +509,24 @@ function renderTrack(data) {
 
 function holdingCard(h) {
   const card = el("div", { class: "stock clickable" });
+  const right = [el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance })];
+  if (h.confidence) right.push(el("span", { class: "conf", text: h.confidence }));
+  if (h.local) {
+    const rm = el("button", { class: "rbtn rm", text: "✕" });
+    rm.title = "Remove from holdings";
+    rm.addEventListener("click", (e) => {
+      e.stopPropagation();
+      removeHolding(h);
+    });
+    right.push(rm);
+  }
   card.appendChild(
     el("div", { class: "top" }, [
       el("div", {}, [
         el("div", { class: "sym" }, [`${h.symbol} `, el("span", { class: "muted", text: `(${h.exchange})` })]),
         el("div", { class: "name", text: h.name || "" }),
       ]),
-      el("div", {}, [el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance }), el("span", { class: "conf", text: h.confidence })]),
+      el("div", { class: "top-right" }, right),
     ]),
   );
   if (h.price != null) {
@@ -533,11 +546,11 @@ function holdingCard(h) {
       );
     }
   } else {
-    card.appendChild(el("div", { class: "priceline muted", text: `Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}` }));
+    card.appendChild(el("div", { class: "priceline muted", text: `${h.local ? "Price pending" : "Price unavailable"} · ${h.qty} @ ${inr(h.buyPrice)}` }));
   }
   const spark = sparklineSVG((h.priceHistory || []).slice(-SPARK_DAYS));
   if (spark) card.appendChild(el("div", { class: "spark-wrap" }, [spark]));
-  card.appendChild(el("div", { class: "muted tap-hint", text: "Tap for prediction + charts →" }));
+  card.appendChild(el("div", { class: "muted tap-hint", text: h.local ? "Added by you · tap for details →" : "Tap for prediction + charts →" }));
   card.addEventListener("click", () => {
     location.hash = "#/" + encodeURIComponent(h.symbol);
   });
@@ -574,9 +587,23 @@ function renderHoldings(data) {
   const hs = sortedFilteredHoldings(data);
   if (!hs.length) {
     root.appendChild(el("p", { class: "muted", text: "No holdings match your filter." }));
-    return;
+  } else {
+    hs.forEach((h) => root.appendChild(holdingCard(h)));
   }
-  hs.forEach((h) => root.appendChild(holdingCard(h)));
+  const note = document.getElementById("holdingsNote");
+  if (note) {
+    note.innerHTML = "";
+    if (MYHOLD.length) {
+      note.appendChild(document.createTextNode(`${MYHOLD.length} added by you (live price only — no AI read yet). `));
+      const a = el("a", { href: "#", class: "copy-link", text: "Copy for portfolio.json" });
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        copyHoldingsForPortfolio();
+      });
+      note.appendChild(a);
+      note.appendChild(document.createTextNode(" to get the AI read on the next run."));
+    }
+  }
 }
 
 // Research links for a tip, built from the (resolved) ticker + exchange.
@@ -774,6 +801,17 @@ function renderDetail(h) {
   fillPos(pos, h);
   root.appendChild(pos);
 
+  // Stocks you added locally have a live price but no server-side analysis yet.
+  if (h.local) {
+    root.appendChild(
+      el("div", { class: "card", style: "margin-top:14px" }, [
+        el("h3", { class: "muted", text: "Added by you" }),
+        el("p", { text: "Live price only — no AI read, news or charts yet. Add this to portfolio.json (use “Copy for portfolio.json” on the dashboard, or Actions → Run workflow) and it'll be fully analysed on the next run." }),
+      ]),
+    );
+    return;
+  }
+
   // Stats derived from price history
   const stats = computeSeriesStats(h.priceHistory);
   if (stats) {
@@ -891,7 +929,6 @@ function renderOverview() {
   renderTrack(DATA);
   renderHoldings(DATA);
   renderWatchlist();
-  renderMyHoldings();
   renderIdeas(DATA);
 }
 
@@ -1007,7 +1044,6 @@ function liveSymbols() {
   (DATA.holdings || []).forEach((h) => set.add(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS")));
   (DATA.indices || []).forEach((ix) => ix.symbol && set.add(ix.symbol));
   WATCH.forEach((w) => set.add(w.symbol + (w.exchange === "BSE" ? ".BO" : ".NS")));
-  MYHOLD.forEach((h) => set.add(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS")));
   return [...set];
 }
 
@@ -1125,7 +1161,6 @@ function renderLiveViews() {
     renderHealth(DATA);
     renderHoldings(DATA);
     renderWatchlist();
-    renderMyHoldings();
   }
 }
 
@@ -1367,7 +1402,47 @@ function closeModal() {
   if (m) m.classList.add("hidden");
 }
 
+// Convert a saved (localStorage) holding into the DATA.holdings shape, pulling
+// in the latest live price so it shows value/P&L like any other holding.
+function localAsHolding(h) {
+  const q = liveOf(h);
+  const price = q && q.price != null ? q.price : null;
+  return {
+    symbol: h.symbol,
+    name: h.name,
+    exchange: h.exchange,
+    qty: h.qty,
+    buyPrice: h.buyPrice,
+    price,
+    dayChangePct: price != null && q && q.prev ? ((price - q.prev) / q.prev) * 100 : null,
+    value: price != null ? round2(price * h.qty) : null,
+    invested: round2(h.buyPrice * h.qty),
+    plPct: price != null ? (price / h.buyPrice - 1) * 100 : null,
+    plAbs: price != null ? (price - h.buyPrice) * h.qty : null,
+    action: "Added",
+    confidence: "",
+    reasoning: "",
+    keyNews: [],
+    sources: [],
+    recentCalls: [],
+    priceHistory: [],
+    local: true,
+  };
+}
+
+// DATA.holdings = the server's analysed holdings (CANON) + your local additions
+// (skipping any that duplicate a server holding).
+function rebuildHoldings() {
+  const canonKeys = new Set(CANON.map((h) => h.symbol + "|" + h.exchange));
+  const locals = MYHOLD.filter((h) => !canonKeys.has(h.symbol + "|" + h.exchange)).map(localAsHolding);
+  DATA.holdings = CANON.concat(locals);
+}
+
 function addHolding(item) {
+  if (CANON.some((h) => h.symbol === item.symbol && h.exchange === item.exchange)) {
+    toast(`${item.symbol} is already in your holdings`);
+    return;
+  }
   const i = MYHOLD.findIndex((x) => x.symbol === item.symbol && x.exchange === item.exchange);
   if (i >= 0) {
     const o = MYHOLD[i];
@@ -1378,83 +1453,21 @@ function addHolding(item) {
     MYHOLD.push({ symbol: item.symbol, name: item.name, exchange: item.exchange, qty: item.qty, buyPrice: item.buyPrice });
   }
   saveJSON("myHoldings", MYHOLD);
-  renderMyHoldings();
-  liveTick(true);
+  rebuildHoldings();
+  renderHoldings(DATA);
+  liveTick(true); // fetch the new symbol's price + refresh totals/charts
   toast(`Added ${item.symbol} to your holdings`);
 }
+
 function removeHolding(it) {
   MYHOLD = MYHOLD.filter((x) => !(x.symbol === it.symbol && x.exchange === it.exchange));
   saveJSON("myHoldings", MYHOLD);
-  renderMyHoldings();
-}
-
-function renderMyHoldings() {
-  const root = document.getElementById("myholdings");
-  if (!root) return;
-  root.innerHTML = "";
-  if (!MYHOLD.length) {
-    root.appendChild(el("p", { class: "muted", text: "None yet — search above, tap “+ Add”, then enter quantity & price." }));
-    return;
-  }
-  let tInv = 0;
-  let tVal = 0;
-  let invPriced = 0;
-  let priced = 0;
-  MYHOLD.forEach((h) => {
-    const q = liveOf(h);
-    const price = q && q.price != null ? q.price : null;
-    const inv = h.qty * h.buyPrice;
-    tInv += inv;
-    const rm = el("button", { class: "rbtn", text: "✕" });
-    rm.title = "Remove";
-    rm.addEventListener("click", () => removeHolding(h));
-    const card = el("div", { class: "stock" }, [
-      el("div", { class: "top" }, [
-        el("div", {}, [
-          el("div", { class: "sym" }, [h.symbol + " ", el("span", { class: "muted", text: `(${h.exchange})` })]),
-          el("div", { class: "name", text: h.name || "" }),
-        ]),
-        rm,
-      ]),
-      el("div", { class: "priceline muted", text: `${h.qty} @ ${inr(h.buyPrice)} · invested ${inr0(inv)}` }),
-    ]);
-    if (price != null) {
-      const val = h.qty * price;
-      tVal += val;
-      invPriced += inv;
-      priced++;
-      const plAbs = (price - h.buyPrice) * h.qty;
-      const plPct = (price / h.buyPrice - 1) * 100;
-      const line = el("div", { class: "priceline" }, [
-        document.createTextNode(inr(price) + "  "),
-        el("span", { class: cls(plPct), text: `${pct(plPct)} (${plAbs >= 0 ? "+" : ""}${inr(plAbs)})` }),
-        document.createTextNode(`  ·  val ${inr0(val)}`),
-      ]);
-      card.appendChild(line);
-    } else {
-      card.appendChild(el("div", { class: "priceline muted", text: "live price pending…" }));
-    }
-    root.appendChild(card);
-  });
-
-  const total = el("div", { class: "stock myhold-total" }, [el("div", { class: "sym", text: "Total — added holdings" })]);
-  total.appendChild(el("div", { class: "priceline", text: `Invested ${inr0(tInv)}` }));
-  if (priced) {
-    const plAll = tVal - invPriced;
-    total.appendChild(
-      el("div", { class: "priceline" }, [
-        document.createTextNode(`Value ${inr0(tVal)}  `),
-        el("span", { class: cls(plAll), text: `${plAll >= 0 ? "+" : ""}${inr0(plAll)}` }),
-      ]),
-    );
-  }
-  const copyBtn = el("button", { class: "rbtn", text: "Copy for portfolio.json" });
-  copyBtn.addEventListener("click", copyHoldingsForPortfolio);
-  total.appendChild(copyBtn);
-  total.appendChild(
-    el("p", { class: "muted", text: "Saved in your browser. To have the AI analyse these, add them to portfolio.json (copy above) or via Actions → Run workflow." }),
-  );
-  root.appendChild(total);
+  rebuildHoldings();
+  recomputeTotals();
+  renderSummary(DATA);
+  renderMovers(DATA);
+  renderHealth(DATA);
+  renderHoldings(DATA);
 }
 
 function copyHoldingsForPortfolio() {
@@ -1545,6 +1558,8 @@ async function main() {
     const res = await fetch(`./briefing.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     DATA = await res.json();
+    CANON = (DATA.holdings || []).slice(); // the server's analysed holdings
+    rebuildHoldings(); // fold in any stocks you've added locally
     renderMeta(DATA);
     route();
     window.addEventListener("hashchange", route);
