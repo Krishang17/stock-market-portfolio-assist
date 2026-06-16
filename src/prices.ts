@@ -86,10 +86,10 @@ export interface PricePoint {
   c: number; // close
 }
 
-/** Daily close history for a ticker (default ~6 months), for the detail chart. */
+/** Daily close history for a ticker (default ~1 year), for the detail chart. */
 export async function fetchHistory(
   ticker: string,
-  days = 180,
+  days = 365,
 ): Promise<PricePoint[]> {
   try {
     const period1 = new Date(Date.now() - days * 24 * 60 * 60 * 1000);

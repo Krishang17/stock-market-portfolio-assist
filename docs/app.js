@@ -39,8 +39,34 @@ const PALETTE = [
   "#ff7b72", "#7ee787", "#ffa657", "#a5d6ff", "#f0883e", "#d2a8ff",
 ];
 
+// Chart date ranges for the per-stock detail view (count of trading days).
+const RANGES = [
+  { key: "1M", days: 22 },
+  { key: "3M", days: 66 },
+  { key: "6M", days: 132 },
+  { key: "1Y", days: 252 },
+  { key: "MAX", days: null },
+];
+const INDEX_NAME = { "^NSEI": "NIFTY 50", "^BSESN": "SENSEX", "^NSEBANK": "BANK NIFTY" };
+const BENCH_FOR_LABEL = { NSE: "^NSEI", BSE: "^BSESN" };
+const SPARK_DAYS = 66; // ~3 months for the card sparklines
+
 let DATA = null;
 let detailChart = null;
+
+// detail-chart state (kept across prev/next navigation for a smooth UX)
+let currentDetail = null;
+let detailRange = 132; // 6M default
+let detailBench = false;
+
+// holdings list state
+let filterText = "";
+let sortKey = "value";
+
+/** Read a CSS custom property off :root (so charts follow the theme). */
+function getCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
 
 /** Create a chart, destroying any previous one bound to the same canvas. */
 function chartOn(canvasId, config) {
@@ -49,6 +75,70 @@ function chartOn(canvasId, config) {
   if (!c) return null;
   Chart.getChart(c)?.destroy();
   return new Chart(c, config);
+}
+
+/** Point Chart.js defaults at the current theme's colours. */
+function applyChartTheme() {
+  if (typeof Chart === "undefined") return;
+  Chart.defaults.color = getCssVar("--muted") || "#9aa3af";
+  Chart.defaults.borderColor = getCssVar("--border") || "#2a2f3a";
+  Chart.defaults.font.family = "inherit";
+}
+
+// A thin vertical guide line at the hovered point (works with mode:'index').
+const crosshairPlugin = {
+  id: "crosshair",
+  afterDraw(chart) {
+    const active = chart._active;
+    if (!active || !active.length || !chart.chartArea) return;
+    const x = active[0].element.x;
+    const { top, bottom } = chart.chartArea;
+    const ctx = chart.ctx;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 3]);
+    ctx.strokeStyle = "rgba(154,163,175,0.55)";
+    ctx.stroke();
+    ctx.restore();
+  },
+};
+
+// Shared options for the zoomable/hoverable time-series charts.
+function timeSeriesOptions({ yFmt, rebased }) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { labels: { boxWidth: 12, font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: (c) =>
+            rebased
+              ? `${c.dataset.label}: ${c.parsed.y.toFixed(1)} (base 100)`
+              : `${c.dataset.label}: ${inr(c.parsed.y)}`,
+        },
+      },
+      // Ignored gracefully if chartjs-plugin-zoom didn't load.
+      zoom: {
+        zoom: {
+          wheel: { enabled: true },
+          pinch: { enabled: true },
+          drag: { enabled: true, backgroundColor: "rgba(88,166,255,0.15)" },
+          mode: "x",
+        },
+        pan: { enabled: true, mode: "x", modifierKey: "shift" },
+        limits: { x: { minRange: 3 } },
+      },
+    },
+    scales: {
+      x: { ticks: { maxTicksLimit: 8, font: { size: 10 } } },
+      y: { ticks: { callback: (v) => yFmt(v) } },
+    },
+  };
 }
 
 function sourcesRow(sources) {
@@ -67,6 +157,116 @@ function sourcesRow(sources) {
     row.appendChild(a);
   });
   return row;
+}
+
+// ---- small shared helpers ---------------------------------------------------
+
+function fmtRelative(iso) {
+  const then = new Date(iso).getTime();
+  if (!isFinite(then)) return "";
+  const s = (Date.now() - then) / 1000;
+  if (s < 90) return "just now";
+  const m = s / 60;
+  if (m < 90) return `${Math.round(m)}m ago`;
+  const h = m / 60;
+  if (h < 36) return `${Math.round(h)}h ago`;
+  return `${Math.round(h / 24)}d ago`;
+}
+
+/** Tiny inline SVG sparkline from [{t,c}] points (green up / red down). */
+function sparklineSVG(points) {
+  if (!points || points.length < 2) return null;
+  const vals = points.map((p) => p.c);
+  const min = Math.min(...vals);
+  const max = Math.max(...vals);
+  const span = max - min || 1;
+  const w = 132;
+  const h = 30;
+  const stepX = w / (vals.length - 1);
+  const coords = vals.map(
+    (v, i) => `${(i * stepX).toFixed(1)},${(h - ((v - min) / span) * h).toFixed(1)}`,
+  );
+  const up = vals[vals.length - 1] >= vals[0];
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("class", "spark");
+  const poly = document.createElementNS(NS, "polyline");
+  poly.setAttribute("points", coords.join(" "));
+  poly.setAttribute("fill", "none");
+  poly.setAttribute("stroke", up ? "#3fb950" : "#f85149");
+  poly.setAttribute("stroke-width", "1.5");
+  poly.setAttribute("stroke-linejoin", "round");
+  poly.setAttribute("stroke-linecap", "round");
+  svg.appendChild(poly);
+  return svg;
+}
+
+/** Stats derived purely from a price-history array (no extra data needed). */
+function computeSeriesStats(hist) {
+  if (!hist || hist.length < 2) return null;
+  const vals = hist.map((p) => p.c);
+  const last = vals[vals.length - 1];
+  const high = Math.max(...vals);
+  const low = Math.min(...vals);
+  const retLast = (n) => {
+    const i = vals.length - 1 - n;
+    return i >= 0 ? (last / vals[i] - 1) * 100 : null;
+  };
+  let sum = 0;
+  let sum2 = 0;
+  let n = 0;
+  for (let i = 1; i < vals.length; i++) {
+    const r = Math.log(vals[i] / vals[i - 1]);
+    if (isFinite(r)) {
+      sum += r;
+      sum2 += r * r;
+      n++;
+    }
+  }
+  const mean = n ? sum / n : 0;
+  const variance = n ? Math.max(0, sum2 / n - mean * mean) : 0;
+  const vol = n ? Math.sqrt(variance) * Math.sqrt(252) * 100 : null;
+  return {
+    high,
+    low,
+    last,
+    pctBelowHigh: ((last - high) / high) * 100,
+    ret1m: retLast(22),
+    ret6m: retLast(132),
+    // History is capped at ~1y, so the oldest point is ~1y ago.
+    ret1y: vals.length > 1 ? (last / vals[0] - 1) * 100 : null,
+    vol,
+  };
+}
+
+function benchPointsFor(h) {
+  const sym = h.benchmarkSymbol || BENCH_FOR_LABEL[h.exchange];
+  return (DATA.indexHistory && DATA.indexHistory[sym]) || [];
+}
+function benchNameFor(h) {
+  const sym = h.benchmarkSymbol || BENCH_FOR_LABEL[h.exchange];
+  return INDEX_NAME[sym] || "Index";
+}
+
+/** Holdings in the canonical overview order (value, high → low). */
+function orderedSymbols() {
+  return [...(DATA.holdings || [])]
+    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0))
+    .map((h) => h.symbol);
+}
+
+function toast(msg) {
+  let t = document.getElementById("toast");
+  if (!t) {
+    t = el("div", { id: "toast", class: "toast" });
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove("show"), 1800);
 }
 
 // ---- summary + indices ------------------------------------------------------
@@ -117,13 +317,97 @@ function renderIndices(data) {
   });
 }
 
+// ---- today's movers ---------------------------------------------------------
+
+function renderMovers(data) {
+  const root = document.getElementById("movers");
+  if (!root) return;
+  root.innerHTML = "";
+  const withDay = (data.holdings || []).filter((h) => typeof h.dayChangePct === "number");
+  if (!withDay.length) {
+    root.classList.add("hidden");
+    return;
+  }
+  const sorted = [...withDay].sort((a, b) => b.dayChangePct - a.dayChangePct);
+  const gainers = sorted.filter((h) => h.dayChangePct > 0).slice(0, 3);
+  const negs = sorted.filter((h) => h.dayChangePct < 0);
+  const losers = negs.slice(-3).reverse();
+  const make = (label, arr) => {
+    if (!arr.length) return null;
+    const wrap = el("div", { class: "movers-group" }, [el("span", { class: "mlabel", text: label })]);
+    arr.forEach((h) => {
+      const chip = el("button", { class: "mchip" }, [
+        el("span", { class: "ms", text: h.symbol }),
+        el("span", { class: cls(h.dayChangePct), text: " " + pct(h.dayChangePct) }),
+      ]);
+      chip.addEventListener("click", () => {
+        location.hash = "#/" + encodeURIComponent(h.symbol);
+      });
+      wrap.appendChild(chip);
+    });
+    return wrap;
+  };
+  const g = make("▲ Gainers", gainers);
+  const l = make("▼ Losers", losers);
+  if (!g && !l) {
+    root.classList.add("hidden");
+    return;
+  }
+  root.classList.remove("hidden");
+  if (g) root.appendChild(g);
+  if (l) root.appendChild(l);
+}
+
+// ---- portfolio health / risk insights --------------------------------------
+
+function renderHealth(data) {
+  const root = document.getElementById("health");
+  if (!root) return;
+  root.innerHTML = "";
+  const t = data.totals || {};
+  const hs = (data.holdings || []).filter((h) => h.value != null && h.value > 0);
+  if (!hs.length || !t.value) {
+    root.classList.add("hidden");
+    return;
+  }
+  root.classList.remove("hidden");
+  const byVal = [...hs].sort((a, b) => b.value - a.value);
+  const top = byVal[0];
+  const topPct = (top.value / t.value) * 100;
+  const top3 = (byVal.slice(0, 3).reduce((s, h) => s + h.value, 0) / t.value) * 100;
+  const withPl = (data.holdings || []).filter((h) => typeof h.plPct === "number");
+  const losers = withPl.filter((h) => h.plPct < 0);
+  const worst = losers.length ? losers.reduce((w, h) => (h.plPct < w.plPct ? h : w)) : null;
+  const best = withPl.length ? withPl.reduce((b, h) => (h.plPct > b.plPct ? h : b)) : null;
+
+  root.appendChild(el("h3", { class: "muted", text: "Portfolio health" }));
+  const row = el("div", { class: "health-row" });
+  const chip = (label, val, klass) =>
+    el("div", { class: "hchip" }, [
+      el("div", { class: "label", text: label }),
+      el("div", { class: "v" + (klass ? " " + klass : ""), text: val }),
+    ]);
+  row.appendChild(chip("Largest position", `${top.symbol} · ${topPct.toFixed(0)}%`, topPct > 30 ? "neg" : null));
+  row.appendChild(chip("Top-3 concentration", `${top3.toFixed(0)}%`, top3 > 60 ? "neg" : null));
+  row.appendChild(chip("Holdings in loss", `${losers.length}/${(data.holdings || []).length}`));
+  if (best) row.appendChild(chip("Best performer", `${best.symbol} · ${pct(best.plPct)}`, "pos"));
+  if (worst) row.appendChild(chip("Worst performer", `${worst.symbol} · ${pct(worst.plPct)}`, "neg"));
+  root.appendChild(row);
+  if (topPct > 30) {
+    root.appendChild(
+      el("p", {
+        class: "note",
+        text: `⚠️ ${top.symbol} is ${topPct.toFixed(0)}% of your portfolio — that's concentrated. Spreading it out reduces single-stock risk.`,
+      }),
+    );
+  }
+}
+
 // ---- overview charts --------------------------------------------------------
 
 function renderCharts(data) {
   if (typeof Chart === "undefined") return;
-  Chart.defaults.color = "#9aa3af";
-  Chart.defaults.borderColor = "#2a2f3a";
-  Chart.defaults.font.family = "inherit";
+  applyChartTheme();
 
   const holdings = data.holdings || [];
   const priced = holdings.filter((h) => h.price != null && h.value != null);
@@ -175,13 +459,11 @@ function renderCharts(data) {
           { label: "Invested", data: series.map((p) => p.invested), borderColor: "#9aa3af", borderDash: [5, 4], fill: false, tension: 0, pointRadius: 0 },
         ],
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${inr0(c.parsed.y)}` } } },
-        scales: { y: { ticks: { callback: (v) => inr0(v) } } },
-      },
+      options: timeSeriesOptions({ yFmt: (v) => inr0(v), rebased: false }),
+      plugins: [crosshairPlugin],
     });
+    const vc = document.getElementById("valueChart");
+    if (vc) vc.ondblclick = () => Chart.getChart(vc)?.resetZoom?.();
   } else {
     const c = document.getElementById("valueChart");
     if (c && c.parentElement && !c.parentElement.querySelector(".muted")) {
@@ -246,18 +528,48 @@ function holdingCard(h) {
   } else {
     card.appendChild(el("div", { class: "priceline muted", text: `Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}` }));
   }
-  card.appendChild(el("div", { class: "muted", text: "Tap for prediction + charts →" }));
+  const spark = sparklineSVG((h.priceHistory || []).slice(-SPARK_DAYS));
+  if (spark) card.appendChild(el("div", { class: "spark-wrap" }, [spark]));
+  card.appendChild(el("div", { class: "muted tap-hint", text: "Tap for prediction + charts →" }));
   card.addEventListener("click", () => {
     location.hash = "#/" + encodeURIComponent(h.symbol);
   });
   return card;
 }
 
+function sortedFilteredHoldings(data) {
+  let hs = [...(data.holdings || [])];
+  const q = filterText.trim().toLowerCase();
+  if (q) hs = hs.filter((h) => h.symbol.toLowerCase().includes(q) || (h.name || "").toLowerCase().includes(q));
+  const num = (v) => (typeof v === "number" ? v : -Infinity);
+  switch (sortKey) {
+    case "plPct":
+      hs.sort((a, b) => num(b.plPct) - num(a.plPct));
+      break;
+    case "day":
+      hs.sort((a, b) => num(b.dayChangePct) - num(a.dayChangePct));
+      break;
+    case "name":
+      hs.sort((a, b) => (a.name || a.symbol).localeCompare(b.name || b.symbol));
+      break;
+    case "stance":
+      hs.sort((a, b) => (a.stance || "").localeCompare(b.stance || ""));
+      break;
+    default:
+      hs.sort((a, b) => num(b.value) - num(a.value));
+  }
+  return hs;
+}
+
 function renderHoldings(data) {
   const root = document.getElementById("holdings");
   root.innerHTML = "";
-  const holdings = [...(data.holdings || [])].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
-  holdings.forEach((h) => root.appendChild(holdingCard(h)));
+  const hs = sortedFilteredHoldings(data);
+  if (!hs.length) {
+    root.appendChild(el("p", { class: "muted", text: "No holdings match your filter." }));
+    return;
+  }
+  hs.forEach((h) => root.appendChild(holdingCard(h)));
 }
 
 function ideaCard(idea) {
@@ -283,7 +595,99 @@ function renderIdeas(data) {
   if (src) root.appendChild(src);
 }
 
+// ---- export / share ---------------------------------------------------------
+
+function csvCell(v) {
+  const s = v == null ? "" : String(v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+function exportCSV() {
+  if (!DATA) return;
+  const rows = [
+    ["Symbol", "Name", "Exchange", "Qty", "BuyPrice", "Price", "DayChange%", "Value", "Invested", "P/L", "P/L%", "Stance", "Confidence"],
+  ];
+  (DATA.holdings || []).forEach((h) =>
+    rows.push([h.symbol, h.name || "", h.exchange, h.qty, h.buyPrice, h.price ?? "", h.dayChangePct ?? "", h.value ?? "", h.invested ?? "", h.plAbs ?? "", h.plPct ?? "", h.stance, h.confidence]),
+  );
+  const csv = rows.map((r) => r.map(csvCell).join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = el("a", { href: url, download: `portfolio-${DATA.date || "snapshot"}.csv` });
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast("Downloaded CSV");
+}
+
+function copySummary() {
+  if (!DATA) return;
+  const t = DATA.totals || {};
+  const lines = [`Portfolio — ${DATA.date || ""}`];
+  if (t.value != null) {
+    lines.push(
+      `Value ${inr0(t.value)} · Invested ${inr0(t.invested)} · P/L ${(t.pnlAbs >= 0 ? "+" : "")}${inr0(t.pnlAbs)} (${t.pnlPct != null ? pct(t.pnlPct) : "—"})`,
+    );
+  }
+  lines.push("");
+  [...(DATA.holdings || [])]
+    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0))
+    .forEach((h) => {
+      lines.push(`${h.symbol}: ${h.action || h.stance} (${h.confidence})${h.plPct != null ? " · " + pct(h.plPct) : ""}`);
+    });
+  const text = lines.join("\n");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => toast("Copied summary"), () => toast("Copy failed"));
+  } else {
+    toast("Clipboard unavailable");
+  }
+}
+
 // ---- per-stock detail -------------------------------------------------------
+
+function drawDetailChart() {
+  const h = currentDetail;
+  if (!h) return;
+  if (detailChart) {
+    detailChart.destroy();
+    detailChart = null;
+  }
+  const full = h.priceHistory || [];
+  const vis = detailRange == null ? full : full.slice(Math.max(0, full.length - detailRange));
+  if (vis.length < 2) return;
+  applyChartTheme();
+  const labels = vis.map((p) => p.t);
+
+  let datasets;
+  let yFmt;
+  let rebased = false;
+  if (detailBench) {
+    rebased = true;
+    const idxMap = new Map(benchPointsFor(h).map((p) => [p.t, p.c]));
+    const idxVals = vis.map((p) => (idxMap.has(p.t) ? idxMap.get(p.t) : null));
+    const sBase = vis[0].c;
+    const iBase = idxVals.find((v) => v != null);
+    datasets = [
+      { label: h.symbol, data: vis.map((p) => (p.c / sBase) * 100), borderColor: "#58a6ff", backgroundColor: "rgba(88,166,255,0.12)", fill: true, tension: 0.2, pointRadius: 0 },
+      { label: benchNameFor(h), data: idxVals.map((v) => (v == null || !iBase ? null : (v / iBase) * 100)), borderColor: "#d29922", backgroundColor: "transparent", fill: false, tension: 0.2, pointRadius: 0, spanGaps: true },
+    ];
+    yFmt = (v) => v.toFixed(0);
+  } else {
+    datasets = [
+      { label: h.symbol, data: vis.map((p) => p.c), borderColor: "#58a6ff", backgroundColor: "rgba(88,166,255,0.12)", fill: true, tension: 0.2, pointRadius: 0 },
+      { label: "Avg buy", data: vis.map(() => h.buyPrice), borderColor: "#9aa3af", borderDash: [5, 4], fill: false, pointRadius: 0 },
+    ];
+    yFmt = (v) => inr0(v);
+  }
+
+  detailChart = chartOn("detailPriceChart", {
+    type: "line",
+    data: { labels, datasets },
+    options: timeSeriesOptions({ yFmt, rebased }),
+    plugins: [crosshairPlugin],
+  });
+}
 
 function renderDetail(h) {
   const root = document.getElementById("detail");
@@ -293,7 +697,24 @@ function renderDetail(h) {
   }
   root.innerHTML = "";
 
-  root.appendChild(el("a", { class: "back", href: "#" }, ["← Back to portfolio"]));
+  // Back + prev/next navigation
+  const order = orderedSymbols();
+  const idx = order.indexOf(h.symbol);
+  const prevSym = idx > 0 ? order[idx - 1] : null;
+  const nextSym = idx >= 0 && idx < order.length - 1 ? order[idx + 1] : null;
+  const navRow = el("div", { class: "detail-nav" });
+  navRow.appendChild(el("a", { class: "back", href: "#" }, ["← Back to portfolio"]));
+  const navBtns = el("div", { class: "nav-btns" });
+  const prevB = el("button", { class: "rbtn", text: "‹ Prev" });
+  if (!prevSym) prevB.disabled = true;
+  else prevB.addEventListener("click", () => { location.hash = "#/" + encodeURIComponent(prevSym); });
+  const nextB = el("button", { class: "rbtn", text: "Next ›" });
+  if (!nextSym) nextB.disabled = true;
+  else nextB.addEventListener("click", () => { location.hash = "#/" + encodeURIComponent(nextSym); });
+  navBtns.appendChild(prevB);
+  navBtns.appendChild(nextB);
+  navRow.appendChild(navBtns);
+  root.appendChild(navRow);
 
   root.appendChild(
     el("div", { class: "d-head" }, [
@@ -323,6 +744,27 @@ function renderDetail(h) {
   }
   root.appendChild(pos);
 
+  // Stats derived from price history
+  const stats = computeSeriesStats(h.priceHistory);
+  if (stats) {
+    const grid = el("div", { class: "stat-grid" });
+    const add = (label, val, klass) =>
+      grid.appendChild(
+        el("div", { class: "mini-stat" }, [
+          el("div", { class: "label", text: label }),
+          el("div", { class: "v" + (klass ? " " + klass : ""), text: val }),
+        ]),
+      );
+    add("1Y high", inr0(stats.high));
+    add("1Y low", inr0(stats.low));
+    add("Below high", pct(stats.pctBelowHigh), cls(stats.pctBelowHigh));
+    if (stats.ret1m != null) add("1M return", pct(stats.ret1m), cls(stats.ret1m));
+    if (stats.ret6m != null) add("6M return", pct(stats.ret6m), cls(stats.ret6m));
+    if (stats.ret1y != null) add("1Y return", pct(stats.ret1y), cls(stats.ret1y));
+    if (stats.vol != null) add("Volatility (ann.)", `${stats.vol.toFixed(0)}%`);
+    root.appendChild(el("div", { class: "card stat-card" }, [el("h3", { class: "muted", text: "Stats (from price history)" }), grid]));
+  }
+
   // Prediction
   const pred = el("div", { class: "pred" });
   pred.appendChild(el("h3", { text: "Prediction (information, not advice)" }));
@@ -337,29 +779,41 @@ function renderDetail(h) {
   if (src) pred.appendChild(src);
   root.appendChild(pred);
 
-  // Price chart
+  // Price chart (range toggles + benchmark overlay + hover crosshair + zoom)
   const hist = h.priceHistory || [];
-  const chartCard = el("div", { class: "chart-card" }, [el("h3", { text: "Price — last ~6 months" })]);
+  const chartCard = el("div", { class: "chart-card" }, [el("h3", { text: "Price history" })]);
   if (hist.length > 1) {
-    const canvas = el("canvas", { id: "detailPriceChart" });
-    chartCard.appendChild(canvas);
-    root.appendChild(chartCard);
-    detailChart = chartOn("detailPriceChart", {
-      type: "line",
-      data: {
-        labels: hist.map((p) => p.t),
-        datasets: [
-          { label: h.symbol, data: hist.map((p) => p.c), borderColor: "#58a6ff", backgroundColor: "rgba(88,166,255,0.12)", fill: true, tension: 0.2, pointRadius: 0 },
-          { label: "Avg buy", data: hist.map(() => h.buyPrice), borderColor: "#9aa3af", borderDash: [5, 4], fill: false, pointRadius: 0 },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${inr(c.parsed.y)}` } } },
-        scales: { x: { ticks: { maxTicksLimit: 8, font: { size: 10 } } }, y: { ticks: { callback: (v) => inr0(v) } } },
-      },
+    const toolbar = el("div", { class: "chart-toolbar" });
+    RANGES.forEach((r) => {
+      const b = el("button", { class: "rbtn range" + (r.days === detailRange ? " active" : ""), text: r.key });
+      b.addEventListener("click", () => {
+        detailRange = r.days;
+        toolbar.querySelectorAll(".range").forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        drawDetailChart();
+      });
+      toolbar.appendChild(b);
     });
+    const benchBtn = el("button", { class: "rbtn bench" + (detailBench ? " active" : ""), text: "vs " + benchNameFor(h) });
+    benchBtn.addEventListener("click", () => {
+      detailBench = !detailBench;
+      benchBtn.classList.toggle("active", detailBench);
+      drawDetailChart();
+    });
+    toolbar.appendChild(benchBtn);
+    const resetBtn = el("button", { class: "rbtn", text: "Reset zoom" });
+    resetBtn.addEventListener("click", () => detailChart?.resetZoom?.());
+    toolbar.appendChild(resetBtn);
+    chartCard.appendChild(toolbar);
+
+    const canvas = el("canvas", { id: "detailPriceChart" });
+    chartCard.appendChild(el("div", { class: "canvas-wrap" }, [canvas]));
+    chartCard.appendChild(el("p", { class: "chart-hint muted", text: "Hover for prices · scroll or drag a box to zoom · shift-drag to pan · double-click to reset" }));
+    root.appendChild(chartCard);
+
+    currentDetail = h;
+    drawDetailChart();
+    canvas.addEventListener("dblclick", () => detailChart?.resetZoom?.());
   } else {
     chartCard.appendChild(el("p", { class: "muted", text: "Price history unavailable for this symbol." }));
     root.appendChild(chartCard);
@@ -401,6 +855,8 @@ function renderDetail(h) {
 function renderOverview() {
   renderSummary(DATA);
   renderIndices(DATA);
+  renderMovers(DATA);
+  renderHealth(DATA);
   renderCharts(DATA);
   renderTrack(DATA);
   renderHoldings(DATA);
@@ -429,9 +885,67 @@ function route() {
     detailChart.destroy();
     detailChart = null;
   }
+  currentDetail = null;
   overview.classList.remove("hidden");
   renderOverview();
 }
+
+// ---- theme ------------------------------------------------------------------
+
+function updateThemeBtn() {
+  const b = document.getElementById("themeToggle");
+  if (!b) return;
+  const light = document.documentElement.getAttribute("data-theme") === "light";
+  b.textContent = light ? "🌙" : "☀️";
+  b.title = light ? "Switch to dark" : "Switch to light";
+}
+
+function initTheme() {
+  if (localStorage.getItem("theme") === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+  updateThemeBtn();
+}
+
+function toggleTheme() {
+  const light = document.documentElement.getAttribute("data-theme") === "light";
+  if (light) {
+    document.documentElement.removeAttribute("data-theme");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+  }
+  updateThemeBtn();
+  route(); // re-render charts with the new palette
+}
+
+// ---- keyboard ---------------------------------------------------------------
+
+function onKey(e) {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const tag = (e.target && e.target.tagName) || "";
+  const typing = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
+  const m = (location.hash || "").match(/^#\/(.+)$/);
+  if (m) {
+    const sym = decodeURIComponent(m[1]);
+    const order = orderedSymbols();
+    const i = order.indexOf(sym);
+    if (e.key === "ArrowRight" && i >= 0 && i < order.length - 1) location.hash = "#/" + encodeURIComponent(order[i + 1]);
+    else if (e.key === "ArrowLeft" && i > 0) location.hash = "#/" + encodeURIComponent(order[i - 1]);
+    else if (e.key === "Escape") location.hash = "#";
+    return;
+  }
+  if (!typing && e.key === "/") {
+    const s = document.getElementById("search");
+    if (s) {
+      e.preventDefault();
+      s.focus();
+    }
+  }
+}
+
+// ---- meta + boot ------------------------------------------------------------
 
 function renderMeta(data) {
   const meta = document.getElementById("meta");
@@ -441,7 +955,8 @@ function renderMeta(data) {
   } catch {
     /* keep raw */
   }
-  meta.textContent = `Last updated ${when} · model ${data.model || "—"}`;
+  const rel = fmtRelative(data.generatedAt);
+  meta.textContent = `Last updated ${when}${rel ? ` (${rel})` : ""} · model ${data.model || "—"}`;
 
   const banner = document.getElementById("banner");
   if (data.degraded) {
@@ -461,7 +976,23 @@ function renderMeta(data) {
   }
 }
 
+function wireControls() {
+  const search = document.getElementById("search");
+  if (search) search.addEventListener("input", () => { filterText = search.value; renderHoldings(DATA); });
+  const sortSel = document.getElementById("sort");
+  if (sortSel) sortSel.addEventListener("change", () => { sortKey = sortSel.value; renderHoldings(DATA); });
+  const csvBtn = document.getElementById("exportCsv");
+  if (csvBtn) csvBtn.addEventListener("click", exportCSV);
+  const copyBtn = document.getElementById("copySummary");
+  if (copyBtn) copyBtn.addEventListener("click", copySummary);
+  const themeBtn = document.getElementById("themeToggle");
+  if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
+  document.addEventListener("keydown", onKey);
+}
+
 async function main() {
+  initTheme();
+  wireControls();
   try {
     const res = await fetch(`./briefing.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

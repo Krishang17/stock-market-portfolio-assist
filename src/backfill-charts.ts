@@ -9,7 +9,12 @@ import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 
-import { fetchHistory, toYahooSymbol } from "./prices";
+import {
+  fetchHistory,
+  indexSymbolFor,
+  toYahooSymbol,
+  type PricePoint,
+} from "./prices";
 import type { CallRecord, Exchange, History } from "./types";
 
 const ROOT = process.cwd();
@@ -64,12 +69,33 @@ async function main(): Promise<void> {
   const holdings: any[] = snapshot.holdings ?? [];
   let charted = 0;
 
+  // Benchmark index history (free) for the "vs index" overlay on detail charts.
+  const benchSymbols = Array.from(
+    new Set(
+      holdings.map((h) =>
+        indexSymbolFor(
+          codeBySymbol.get(String(h.symbol).toUpperCase()) ??
+            codeFromLabel(h.exchange),
+        ),
+      ),
+    ),
+  );
+  const benchSeries = await Promise.all(
+    benchSymbols.map((s) => fetchHistory(s)),
+  );
+  const indexHistory: Record<string, PricePoint[]> = {};
+  benchSymbols.forEach((s, i) => {
+    indexHistory[s] = benchSeries[i];
+  });
+  snapshot.indexHistory = indexHistory;
+
   await Promise.all(
     holdings.map(async (h) => {
       const code =
         codeBySymbol.get(String(h.symbol).toUpperCase()) ??
         codeFromLabel(h.exchange);
       const ticker = toYahooSymbol(h.symbol, code);
+      h.benchmarkSymbol = indexSymbolFor(code);
 
       h.priceHistory = await fetchHistory(ticker);
       if (h.priceHistory.length > 1) charted++;

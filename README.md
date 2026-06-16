@@ -10,6 +10,13 @@ holding:
 - a few **new stock ideas** to research, and
 - a running, **benchmark-relative track record** of how past calls did.
 
+Click any holding for a **detail page**: an interactive ~1-year price chart
+(hover for prices, scroll/drag to zoom, toggle **vs NIFTY/SENSEX**), the
+prediction and sources, derived stats (1Y high/low, drawdown, returns,
+volatility), and that stock's past calls. The overview adds today's **top
+movers**, a **portfolio-health** panel (concentration / best-worst), inline
+sparklines, search + sort, a **light/dark** toggle, and **CSV / copy** export.
+
 It runs entirely on GitHub — a [GitHub Actions cron](.github/workflows/briefing.yml)
 generates the data, commits it, and GitHub Pages serves the dashboard. **No
 server, no Telegram.** TypeScript on Node 22.

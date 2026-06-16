@@ -3,13 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f1115" />
     <title>Portfolio Briefing</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <main id="app">
       <header class="site-header">
-        <h1>Portfolio Briefing</h1>
+        <div class="header-top">
+          <h1>Portfolio Briefing</h1>
+          <button id="themeToggle" class="ghost-btn" title="Toggle theme" aria-label="Toggle theme">☀️</button>
+        </div>
         <p class="disclaimer">
           ⚠️ Information, not financial advice. Short-term calls are close to a
           coin flip — the track record below is here to show that honestly.
@@ -26,6 +30,8 @@
       <div id="overview">
         <section id="summary" class="summary"></section>
         <section id="indices" class="indices"></section>
+        <section id="movers" class="movers hidden"></section>
+        <section id="health" class="card health hidden"></section>
 
         <section class="charts">
           <div class="chart-card"><h3>Allocation by value</h3><canvas id="allocChart"></canvas></div>
@@ -35,7 +41,21 @@
 
         <section id="track" class="card track"></section>
 
-        <h2 class="section-title">Your holdings <span class="muted">— click a stock for its prediction + charts</span></h2>
+        <div class="section-head">
+          <h2 class="section-title">Your holdings <span class="muted">— click a stock for its prediction + charts</span></h2>
+          <div class="toolbar">
+            <input id="search" type="search" placeholder="Filter…  ( press / )" aria-label="Filter holdings" />
+            <select id="sort" aria-label="Sort holdings">
+              <option value="value">Sort: Value</option>
+              <option value="plPct">Sort: P/L %</option>
+              <option value="day">Sort: Day change</option>
+              <option value="name">Sort: Name</option>
+              <option value="stance">Sort: Call</option>
+            </select>
+            <button id="exportCsv" class="ghost-btn" title="Download holdings as CSV">⬇ CSV</button>
+            <button id="copySummary" class="ghost-btn" title="Copy a text summary">⧉ Copy</button>
+          </div>
+        </div>
         <section id="holdings" class="grid"></section>
 
         <h2 class="section-title">Ideas to research <span class="muted">— starting points, not calls</span></h2>
@@ -53,6 +73,8 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

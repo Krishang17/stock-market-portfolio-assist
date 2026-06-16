@@ -17,6 +17,7 @@ import {
   fetchQuote,
   indexSymbolFor,
   toYahooSymbol,
+  type PricePoint,
   type Quote,
 } from "./prices";
 import type {
@@ -228,12 +229,25 @@ async function main(): Promise<void> {
   const quotes = await Promise.all(
     portfolio.map((h) => getQuote(toYahooSymbol(h.symbol, h.exchange))),
   );
-  // Daily price history per holding (free Yahoo calls) for the detail charts.
+  // Daily price history per holding (free Yahoo calls) — ~1y for the detail
+  // charts (range toggles + 52-week stats on the dashboard).
   const histories = await Promise.all(
-    portfolio.map((h) => fetchHistory(toYahooSymbol(h.symbol, h.exchange))),
+    portfolio.map((h) => fetchHistory(toYahooSymbol(h.symbol, h.exchange), 365)),
   );
   // Benchmark index level(s) — fetched once (cached) for scoring today's calls.
   for (const h of portfolio) await getRaw(indexSymbolFor(h.exchange));
+  // Benchmark index price history (free) so detail charts can overlay the stock
+  // against its index, rebased to 100. Keyed by Yahoo symbol (^NSEI / ^BSESN).
+  const benchSymbols = Array.from(
+    new Set(portfolio.map((h) => indexSymbolFor(h.exchange))),
+  );
+  const benchSeries = await Promise.all(
+    benchSymbols.map((s) => fetchHistory(s, 365)),
+  );
+  const indexHistory: Record<string, PricePoint[]> = {};
+  benchSymbols.forEach((s, i) => {
+    indexHistory[s] = benchSeries[i];
+  });
 
   const ideasPromise = suggestIdeas(portfolio.map((p) => p.symbol)).catch(
     (err) => {
@@ -346,6 +360,7 @@ async function main(): Promise<void> {
     valueSeries: series.slice(-90),
     track: { right, wrong, rate },
     calibration,
+    indexHistory,
     holdings: views.map((v, i) => {
       const { holding, price, dayChangePct, analysis } = v;
       const plPct =
@@ -370,6 +385,7 @@ async function main(): Promise<void> {
         keyNews: analysis.keyNews,
         sources: analysis.sources ?? [],
         unavailable: analysis.unavailable === true,
+        benchmarkSymbol: indexSymbolFor(holding.exchange),
         priceHistory: histories[i],
         recentCalls: recentCallsFor(history, holding.symbol, holding.exchange, 8).map(
           (c) => ({
