@@ -309,10 +309,38 @@ body {
   font-size: 14px;
   margin: 2px 0;
 }
+.idea .why strong {
+  color: var(--muted);
+  font-weight: 600;
+}
 .idea .risk {
   font-size: 13px;
   color: #f0b3ae;
   margin: 2px 0;
+}
+.idea .risk strong {
+  font-weight: 600;
+}
+
+/* research-link chips on tip cards */
+.research-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+.rlink {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.rlink:hover {
+  border-color: var(--blue);
 }
 
 .error {

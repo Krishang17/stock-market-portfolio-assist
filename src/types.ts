@@ -48,6 +48,11 @@ export interface Idea {
   name?: string;
   why: string;
   risk: string;
+  // Optional free-Yahoo enrichment (resolved exchange + live price + sparkline).
+  exchange?: Exchange | null;
+  price?: number | null;
+  dayChangePct?: number | null;
+  priceHistory?: { t: string; c: number }[];
 }
 
 /** A persisted call plus its eventual evaluated outcome. */

@@ -343,7 +343,7 @@ Honesty rules:
 
 Output ONLY a single minified JSON array, no code fences and no other text:
 [{"symbol":"TICKER","name":"Company","why":"one short line","risk":"one short line"}]
-Return 2 or 3 ideas.`;
+Return 5 or 6 ideas, spanning different sectors.`;
 
 export interface IdeasResult {
   ideas: Idea[];
@@ -352,11 +352,11 @@ export interface IdeasResult {
 
 export async function suggestIdeas(held: string[]): Promise<IdeasResult> {
   const user = `I already hold: ${held.join(", ") || "(nothing yet)"}.
-Suggest 2-3 liquid Indian-listed stocks I do NOT already hold, each with a one-line reason to look into it and a one-line key risk. Return the JSON array now.`;
+Suggest 5-6 liquid Indian-listed stocks I do NOT already hold, across different sectors, each with a one-line reason to look into it and a one-line key risk. Return the JSON array now.`;
 
   let result: WebSearchResult;
   try {
-    result = await askWithWebSearch(IDEAS_SYSTEM, user, 2000);
+    result = await askWithWebSearch(IDEAS_SYSTEM, user, 3000);
   } catch (err) {
     console.error(
       "[claude] suggestIdeas failed:",
@@ -382,7 +382,7 @@ Suggest 2-3 liquid Indian-listed stocks I do NOT already hold, each with a one-l
           typeof (x as Record<string, unknown>).risk === "string",
       )
       .filter((x) => !heldSet.has(String(x.symbol).toUpperCase()))
-      .slice(0, 3)
+      .slice(0, 6)
       .map((x) => ({
         symbol: String(x.symbol),
         name: typeof x.name === "string" ? x.name : undefined,

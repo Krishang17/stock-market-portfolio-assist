@@ -11,6 +11,7 @@ import path from "node:path";
 
 import {
   fetchHistory,
+  fetchIdeaData,
   indexSymbolFor,
   toYahooSymbol,
   type PricePoint,
@@ -114,6 +115,18 @@ async function main(): Promise<void> {
       );
     }),
   );
+
+  // Enrich the research tips with free Yahoo price + sparkline data so the
+  // dashboard's tip cards show a live price + mini chart (no Claude calls).
+  if (snapshot.ideas && Array.isArray(snapshot.ideas.items)) {
+    snapshot.ideas.items = await Promise.all(
+      snapshot.ideas.items.map(async (idea: any) => ({
+        ...idea,
+        ...(await fetchIdeaData(idea.symbol)),
+      })),
+    );
+    console.log(`[backfill] enriched ${snapshot.ideas.items.length} tip(s) with price + sparkline`);
+  }
 
   // Note in the snapshot that charts/past-calls were backfilled for free,
   // without re-running the (paid) analysis. Reads keep their original date.

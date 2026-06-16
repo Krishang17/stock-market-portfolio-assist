@@ -118,3 +118,27 @@ export async function fetchHistory(
     return [];
   }
 }
+
+export interface IdeaData {
+  exchange: Exchange | null;
+  price: number | null;
+  dayChangePct: number | null;
+  priceHistory: PricePoint[];
+}
+
+/**
+ * Resolve a bare idea ticker (no exchange known) to live data: tries NSE then
+ * BSE and returns the first that has a price, with ~6 months of history for a
+ * sparkline. All free Yahoo calls; returns nulls if neither resolves.
+ */
+export async function fetchIdeaData(symbol: string): Promise<IdeaData> {
+  for (const ex of ["NS", "BO"] as Exchange[]) {
+    const ticker = toYahooSymbol(symbol, ex);
+    const q = await fetchQuote(ticker);
+    if (q.price != null) {
+      const priceHistory = await fetchHistory(ticker, 180);
+      return { exchange: ex, price: q.price, dayChangePct: q.changePercent, priceHistory };
+    }
+  }
+  return { exchange: null, price: null, dayChangePct: null, priceHistory: [] };
+}

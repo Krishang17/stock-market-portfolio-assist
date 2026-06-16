@@ -572,16 +572,52 @@ function renderHoldings(data) {
   hs.forEach((h) => root.appendChild(holdingCard(h)));
 }
 
+// Research links for a tip, built from the (resolved) ticker + exchange.
+function researchLinks(symbol, exchange) {
+  const sym = encodeURIComponent(symbol);
+  const ySuffix = exchange === "BO" ? ".BO" : ".NS";
+  const tvEx = exchange === "BO" ? "BSE" : "NSE";
+  const links = [
+    ["Screener", `https://www.screener.in/company/${sym}/`],
+    ["Chart", `https://www.tradingview.com/symbols/${tvEx}-${sym}/`],
+    ["Yahoo", `https://finance.yahoo.com/quote/${sym}${ySuffix}`],
+    ["News", `https://news.google.com/search?q=${sym}%20stock`],
+  ];
+  const row = el("div", { class: "research-links" });
+  links.forEach(([label, href]) => {
+    const a = el("a", { class: "rlink", href, target: "_blank", rel: "noopener noreferrer" }, [label]);
+    a.addEventListener("click", (e) => e.stopPropagation()); // don't trigger the card
+    row.appendChild(a);
+  });
+  return row;
+}
+
 function ideaCard(idea) {
-  const card = el("div", { class: "stock idea" });
+  const card = el("div", { class: "stock idea clickable" });
   card.appendChild(
     el("div", { class: "top" }, [
       el("div", {}, [el("div", { class: "sym", text: idea.symbol }), idea.name ? el("div", { class: "name", text: idea.name }) : null]),
       el("span", { class: "pill watch", text: "Research" }),
     ]),
   );
-  if (idea.why) card.appendChild(el("p", { class: "why", text: idea.why }));
-  if (idea.risk) card.appendChild(el("p", { class: "risk", text: `Risk: ${idea.risk}` }));
+  if (typeof idea.price === "number") {
+    const line = el("div", { class: "priceline" });
+    line.appendChild(document.createTextNode(inr(idea.price)));
+    if (typeof idea.dayChangePct === "number") {
+      line.appendChild(document.createTextNode("  "));
+      line.appendChild(el("span", { class: cls(idea.dayChangePct), text: pct(idea.dayChangePct) + " today" }));
+    }
+    card.appendChild(line);
+  }
+  const spark = sparklineSVG((idea.priceHistory || []).slice(-SPARK_DAYS));
+  if (spark) card.appendChild(el("div", { class: "spark-wrap" }, [spark]));
+  if (idea.why) card.appendChild(el("p", { class: "why" }, [el("strong", { text: "Why " }), document.createTextNode(idea.why)]));
+  if (idea.risk) card.appendChild(el("p", { class: "risk" }, [el("strong", { text: "Risk " }), document.createTextNode(idea.risk)]));
+  card.appendChild(researchLinks(idea.symbol, idea.exchange));
+  // Whole card opens Screener.in (the go-to fundamentals site for Indian stocks).
+  card.addEventListener("click", () => {
+    window.open(`https://www.screener.in/company/${encodeURIComponent(idea.symbol)}/`, "_blank", "noopener");
+  });
   return card;
 }
 

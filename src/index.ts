@@ -14,6 +14,7 @@ import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate"
 import {
   MARKET_INDICES,
   fetchHistory,
+  fetchIdeaData,
   fetchQuote,
   indexSymbolFor,
   toYahooSymbol,
@@ -340,8 +341,12 @@ async function main(): Promise<void> {
     }
   }
 
-  // 6. Research ideas (kicked off in parallel above).
+  // 6. Research ideas (kicked off in parallel above), enriched with free Yahoo
+  //    price + sparkline data so the dashboard's tip cards are clickable.
   const { ideas, sources: ideaSources } = await ideasPromise;
+  const enrichedIdeas = await Promise.all(
+    ideas.map(async (idea) => ({ ...idea, ...(await fetchIdeaData(idea.symbol)) })),
+  );
 
   // 7. Write the dashboard snapshot.
   const { right, wrong, rate } = computeHitRate(history);
@@ -399,7 +404,7 @@ async function main(): Promise<void> {
         ),
       };
     }),
-    ideas: { items: ideas, sources: ideaSources },
+    ideas: { items: enrichedIdeas, sources: ideaSources },
   };
 
   try {
