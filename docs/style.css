@@ -472,6 +472,46 @@ body {
   --shadow: 0 1px 3px rgba(140, 149, 159, 0.25);
 }
 
+/* live-price bar */
+.live-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.live-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex: none;
+}
+.live-status.live .dot {
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(63, 185, 80, 0.2);
+}
+.live-status.error .dot {
+  background: var(--red);
+}
+.live-status.loading .dot {
+  background: var(--amber);
+}
+.live-setup {
+  font-size: 12px;
+  text-decoration: none;
+}
+.live-setup:hover {
+  text-decoration: underline;
+}
+
 /* header row + ghost buttons */
 .header-top {
   display: flex;

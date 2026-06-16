@@ -19,6 +19,11 @@
           coin flip — the track record below is here to show that honestly.
         </p>
         <p id="meta" class="meta">Loading…</p>
+        <div class="live-bar">
+          <span id="liveStatus" class="live-status"><span class="dot"></span><span class="live-text">Prices: starting…</span></span>
+          <button id="refreshBtn" class="ghost-btn" title="Refresh prices now">↻ Refresh</button>
+          <a id="liveSetup" class="live-setup muted" href="#" title="Use your own proxy / Cloudflare Worker for reliable live prices">setup</a>
+        </div>
       </header>
 
       <div id="banner" class="banner hidden"></div>
@@ -67,7 +72,8 @@
           Prices via Yahoo Finance (unofficial). Analysis by Claude with live web
           search; the links under each card are the sources it consulted. Calls
           are scored as outperformance vs the NIFTY/SENSEX; Hold/Watch are not
-          scored. This page shows the latest scheduled run — it is not live.
+          scored. Prices refresh live in your browser during market hours; the
+          AI reads and tips are from the latest scheduled run (not live).
         </p>
       </footer>
     </main>

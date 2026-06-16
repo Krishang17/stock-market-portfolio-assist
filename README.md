@@ -156,6 +156,40 @@ Edit the `cron` in [`.github/workflows/briefing.yml`](.github/workflows/briefing
 (UTC; IST = UTC + 5:30). GitHub cron is best-effort and can be delayed, and
 scheduled workflows pause after ~60 days of repo inactivity.
 
+## Live prices (free, in-browser)
+
+The AI reads/tips refresh once a day, but **prices refresh live in your
+browser** — every minute during market hours, plus an **↻ Refresh** button for
+an instant update. It pulls Yahoo's free batch quote endpoint for all your
+holdings + indices in a single request and updates the prices, P/L, totals,
+movers and day-changes in place. No server, no API key, no cost.
+
+Yahoo doesn't send CORS headers, so the page routes the request through a
+proxy: it tries public proxies automatically (zero setup, but they can rate-
+limit or go down). For rock-solid live prices, deploy your own **free
+Cloudflare Worker** and click **“setup”** on the dashboard to paste its URL
+(stored in your browser only):
+
+```js
+// Cloudflare Worker — free tier (100k req/day). Restricts to Yahoo for safety.
+export default {
+  async fetch(req) {
+    const target = new URL(req.url).searchParams.get("url");
+    if (!target || !/^https:\/\/query[12]\.finance\.yahoo\.com\//.test(target)) {
+      return new Response("bad url", { status: 400 });
+    }
+    const r = await fetch(target, { headers: { "user-agent": "Mozilla/5.0" } });
+    return new Response(await r.text(), {
+      status: r.status,
+      headers: { "content-type": "application/json", "access-control-allow-origin": "*" },
+    });
+  },
+};
+```
+
+Then set the proxy prefix to `https://<your-worker>.workers.dev/?url=`. If live
+prices ever fail, the dashboard simply keeps showing the last snapshot.
+
 ## License
 
 MIT. Use at your own risk — again, **information, not financial advice.**

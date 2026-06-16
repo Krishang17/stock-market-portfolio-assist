@@ -18,6 +18,7 @@ const inr0 = (n) =>
 
 const pct = (n) => `${n >= 0 ? "+" : ""}${n.toFixed(2)}%`;
 const cls = (n) => (n >= 0 ? "pos" : "neg");
+const round2 = (n) => Math.round(n * 100) / 100;
 
 function el(tag, props = {}, children = []) {
   const node = document.createElement(tag);
@@ -764,20 +765,7 @@ function renderDetail(h) {
 
   // Position line
   const pos = el("div", { class: "d-pos" });
-  if (h.price != null) {
-    pos.appendChild(document.createTextNode(inr(h.price)));
-    if (h.dayChangePct != null) {
-      pos.appendChild(document.createTextNode("  "));
-      pos.appendChild(el("span", { class: cls(h.dayChangePct), text: pct(h.dayChangePct) + " today" }));
-    }
-    if (h.plPct != null && h.plAbs != null) {
-      pos.appendChild(document.createTextNode("   ·   P/L "));
-      pos.appendChild(el("span", { class: cls(h.plPct), text: `${pct(h.plPct)} (${h.plAbs >= 0 ? "+" : ""}${inr(h.plAbs)})` }));
-    }
-    pos.appendChild(document.createTextNode(`   ·   ${h.qty} @ ${inr(h.buyPrice)}  ·  value ${inr0(h.value)}`));
-  } else {
-    pos.appendChild(document.createTextNode(`Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}`));
-  }
+  fillPos(pos, h);
   root.appendChild(pos);
 
   // Stats derived from price history
@@ -981,6 +969,201 @@ function onKey(e) {
   }
 }
 
+// ---- live prices ------------------------------------------------------------
+// The snapshot's reads/tips are from the last scheduled run, but PRICES can be
+// refreshed live in-browser (free) from Yahoo's batch "spark" endpoint. Yahoo
+// doesn't send CORS headers, so we go through a proxy: a user-configured one
+// (e.g. their own Cloudflare Worker) first, then public fallbacks, then direct.
+// If everything fails we keep the snapshot values — never worse than before.
+
+const LIVE_INTERVAL_MS = 60000; // 1 minute
+const BUILTIN_PROXIES = [
+  "https://corsproxy.io/?url=",
+  "https://api.allorigins.win/raw?url=",
+];
+
+const nowTime = () => new Date().toLocaleTimeString();
+
+// IST market hours: Mon–Fri 09:15–15:30 (epoch-shift trick → timezone-agnostic).
+function marketIsOpen() {
+  const ist = new Date(Date.now() + 330 * 60000);
+  const day = ist.getUTCDay();
+  if (day === 0 || day === 6) return false;
+  const mins = ist.getUTCHours() * 60 + ist.getUTCMinutes();
+  return mins >= 9 * 60 + 15 && mins <= 15 * 60 + 30;
+}
+
+/** Yahoo tickers for everything on the page (holdings + indices). */
+function liveSymbols() {
+  const set = new Set();
+  (DATA.holdings || []).forEach((h) => set.add(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS")));
+  (DATA.indices || []).forEach((ix) => ix.symbol && set.add(ix.symbol));
+  return [...set];
+}
+
+function parseSpark(j) {
+  const res = j && j.spark && j.spark.result;
+  if (!Array.isArray(res)) return null;
+  const map = new Map();
+  for (const s of res) {
+    const m = s && s.response && s.response[0] && s.response[0].meta;
+    const price = m && m.regularMarketPrice;
+    const prev = m && (m.chartPreviousClose != null ? m.chartPreviousClose : m.previousClose);
+    if (typeof price === "number") map.set(s.symbol, { price, prev: typeof prev === "number" ? prev : null });
+  }
+  return map;
+}
+
+async function fetchLive() {
+  const tickers = liveSymbols();
+  if (!tickers.length) return null;
+  const spark = `https://query1.finance.yahoo.com/v7/finance/spark?symbols=${encodeURIComponent(tickers.join(","))}&range=1d&interval=1d`;
+  const prefixes = [];
+  const userProxy = localStorage.getItem("liveProxy");
+  if (userProxy) prefixes.push(userProxy);
+  prefixes.push(...BUILTIN_PROXIES, ""); // "" = direct (works only if CORS ever allowed)
+  for (const p of prefixes) {
+    try {
+      const url = p ? p + encodeURIComponent(spark) : spark;
+      const res = await fetch(url, { signal: AbortSignal.timeout(12000) });
+      if (!res.ok) continue;
+      const map = parseSpark(await res.json());
+      if (map && map.size) return map;
+    } catch {
+      /* try next proxy */
+    }
+  }
+  return null;
+}
+
+function recomputeTotals() {
+  const hs = (DATA.holdings || []).filter((h) => h.price != null);
+  const invested = hs.reduce((s, h) => s + h.buyPrice * h.qty, 0);
+  const value = hs.reduce((s, h) => s + h.price * h.qty, 0);
+  const pnlAbs = value - invested;
+  DATA.totals = {
+    ...(DATA.totals || {}),
+    invested: round2(invested),
+    value: round2(value),
+    pnlAbs: round2(pnlAbs),
+    pnlPct: invested > 0 ? round2((pnlAbs / invested) * 100) : null,
+    holdings: (DATA.holdings || []).length,
+    priced: hs.length,
+    unpriced: (DATA.holdings || []).length - hs.length,
+  };
+}
+
+function applyLive(map) {
+  (DATA.holdings || []).forEach((h) => {
+    const q = map.get(h.symbol + (h.exchange === "BSE" ? ".BO" : ".NS"));
+    if (q && q.price != null) {
+      h.price = q.price;
+      if (q.prev) h.dayChangePct = ((q.price - q.prev) / q.prev) * 100;
+      h.value = round2(q.price * h.qty);
+      h.plPct = ((q.price - h.buyPrice) / h.buyPrice) * 100;
+      h.plAbs = (q.price - h.buyPrice) * h.qty;
+    }
+  });
+  (DATA.indices || []).forEach((ix) => {
+    const q = map.get(ix.symbol);
+    if (q && q.price != null) {
+      ix.price = q.price;
+      if (q.prev) ix.changePercent = ((q.price - q.prev) / q.prev) * 100;
+    }
+  });
+  recomputeTotals();
+}
+
+function fillPos(pos, h) {
+  pos.innerHTML = "";
+  if (h.price != null) {
+    pos.appendChild(document.createTextNode(inr(h.price)));
+    if (h.dayChangePct != null) {
+      pos.appendChild(document.createTextNode("  "));
+      pos.appendChild(el("span", { class: cls(h.dayChangePct), text: pct(h.dayChangePct) + " today" }));
+    }
+    if (h.plPct != null && h.plAbs != null) {
+      pos.appendChild(document.createTextNode("   ·   P/L "));
+      pos.appendChild(el("span", { class: cls(h.plPct), text: `${pct(h.plPct)} (${h.plAbs >= 0 ? "+" : ""}${inr(h.plAbs)})` }));
+    }
+    pos.appendChild(document.createTextNode(`   ·   ${h.qty} @ ${inr(h.buyPrice)}  ·  value ${inr0(h.value)}`));
+  } else {
+    pos.appendChild(document.createTextNode(`Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}`));
+  }
+}
+
+// Re-render only the price-driven views (don't rebuild charts → no flicker).
+function renderLiveViews() {
+  const m = (location.hash || "").match(/^#\/(.+)$/);
+  if (m && currentDetail) {
+    const h = (DATA.holdings || []).find((x) => x.symbol === currentDetail.symbol);
+    const detailEl = document.getElementById("detail");
+    const pos = detailEl && detailEl.querySelector(".d-pos");
+    if (h && pos) {
+      currentDetail = h;
+      fillPos(pos, h);
+    }
+  } else {
+    renderSummary(DATA);
+    renderIndices(DATA);
+    renderMovers(DATA);
+    renderHealth(DATA);
+    renderHoldings(DATA);
+  }
+}
+
+function setLiveStatus(state, text) {
+  const wrap = document.getElementById("liveStatus");
+  if (!wrap) return;
+  wrap.className = "live-status " + state;
+  const t = wrap.querySelector(".live-text");
+  if (t && text != null) t.textContent = text;
+}
+
+let liveBusy = false;
+let liveTimer = null;
+
+async function liveTick(manual) {
+  if (liveBusy || !DATA) return;
+  liveBusy = true;
+  const btn = document.getElementById("refreshBtn");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "↻ …";
+  }
+  setLiveStatus("loading", "Refreshing prices…");
+  try {
+    const map = await fetchLive();
+    if (map && map.size) {
+      applyLive(map);
+      renderLiveViews();
+      const open = marketIsOpen();
+      setLiveStatus(open ? "live" : "closed", `${open ? "Prices live" : "Market closed"} · updated ${nowTime()}`);
+    } else {
+      setLiveStatus("error", "Live prices unavailable — showing last snapshot (click “setup”)");
+    }
+  } catch {
+    setLiveStatus("error", "Live prices unavailable — showing last snapshot");
+  } finally {
+    liveBusy = false;
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "↻ Refresh";
+    }
+  }
+}
+
+function startLive() {
+  if (liveTimer) clearInterval(liveTimer);
+  liveTick(false); // one fetch now so you see live prices immediately
+  liveTimer = setInterval(() => {
+    if (document.visibilityState === "visible" && marketIsOpen()) liveTick(false);
+  }, LIVE_INTERVAL_MS);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && marketIsOpen()) liveTick(false);
+  });
+}
+
 // ---- meta + boot ------------------------------------------------------------
 
 function renderMeta(data) {
@@ -1023,6 +1206,23 @@ function wireControls() {
   if (copyBtn) copyBtn.addEventListener("click", copySummary);
   const themeBtn = document.getElementById("themeToggle");
   if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
+  const refreshBtn = document.getElementById("refreshBtn");
+  if (refreshBtn) refreshBtn.addEventListener("click", () => liveTick(true));
+  const liveSetup = document.getElementById("liveSetup");
+  if (liveSetup)
+    liveSetup.addEventListener("click", (e) => {
+      e.preventDefault();
+      const cur = localStorage.getItem("liveProxy") || "";
+      const v = window.prompt(
+        "Optional: a CORS proxy / Cloudflare Worker prefix for reliable live prices.\nThe target URL is appended url-encoded, e.g.  https://my-worker.workers.dev/?url=\nLeave blank to use the public proxies.",
+        cur,
+      );
+      if (v !== null) {
+        if (v.trim()) localStorage.setItem("liveProxy", v.trim());
+        else localStorage.removeItem("liveProxy");
+        liveTick(true);
+      }
+    });
   document.addEventListener("keydown", onKey);
 }
 
@@ -1036,6 +1236,7 @@ async function main() {
     renderMeta(DATA);
     route();
     window.addEventListener("hashchange", route);
+    startLive(); // refresh prices live (every minute + on demand)
   } catch (err) {
     const meta = document.getElementById("meta");
     meta.innerHTML = "";
