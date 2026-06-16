@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-15T21:56:32.855Z",
-  "date": "2026-06-15",
-  "model": "claude-opus-4-8",
+  "generatedAt": "2026-06-16T16:50:27.762Z",
+  "date": "2026-06-16",
+  "model": "claude-sonnet-4-6",
   "disclaimer": "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
   "degraded": false,
   "degradedReason": null,
   "totals": {
     "invested": 491290.23,
-    "value": 544088.3,
-    "pnlAbs": 52798.07,
-    "pnlPct": 10.75,
+    "value": 547961.15,
+    "pnlAbs": 56670.92,
+    "pnlPct": 11.54,
     "holdings": 11,
     "priced": 11,
     "unpriced": 0
@@ -18,20 +18,20 @@
     {
       "label": "SENSEX",
       "symbol": "^BSESN",
-      "price": 76264.33,
-      "changePercent": 0.97497016
+      "price": 76808.48,
+      "changePercent": 0.71350324
     },
     {
       "label": "NIFTY 50",
       "symbol": "^NSEI",
-      "price": 23853.9,
-      "changePercent": 0.9778647
+      "price": 23989.15,
+      "changePercent": 0.56699324
     },
     {
       "label": "BANK NIFTY",
       "symbol": "^NSEBANK",
-      "price": 57198.8,
-      "changePercent": 0.6758802
+      "price": 57297.15,
+      "changePercent": 0.17194007
     }
   ],
   "valueSeries": [
@@ -40,6 +40,12 @@
       "value": 544088.3,
       "invested": 491290.23,
       "pnlAbs": 52798.07
+    },
+    {
+      "date": "2026-06-16",
+      "value": 547961.15,
+      "invested": 491290.23,
+      "pnlAbs": 56670.92
     }
   ],
   "track": {
@@ -74,6 +80,994 @@
     "scored": 0,
     "brier": null
   },
+  "indexHistory": {
+    "^NSEI": [
+      {
+        "t": "2025-06-16",
+        "c": 24946.5
+      },
+      {
+        "t": "2025-06-17",
+        "c": 24853.4
+      },
+      {
+        "t": "2025-06-18",
+        "c": 24812.05
+      },
+      {
+        "t": "2025-06-19",
+        "c": 24793.25
+      },
+      {
+        "t": "2025-06-20",
+        "c": 25112.4
+      },
+      {
+        "t": "2025-06-23",
+        "c": 24971.9
+      },
+      {
+        "t": "2025-06-24",
+        "c": 25044.35
+      },
+      {
+        "t": "2025-06-25",
+        "c": 25244.75
+      },
+      {
+        "t": "2025-06-26",
+        "c": 25549
+      },
+      {
+        "t": "2025-06-27",
+        "c": 25637.8
+      },
+      {
+        "t": "2025-06-30",
+        "c": 25517.05
+      },
+      {
+        "t": "2025-07-01",
+        "c": 25541.8
+      },
+      {
+        "t": "2025-07-02",
+        "c": 25453.4
+      },
+      {
+        "t": "2025-07-03",
+        "c": 25405.3
+      },
+      {
+        "t": "2025-07-04",
+        "c": 25461
+      },
+      {
+        "t": "2025-07-07",
+        "c": 25461.3
+      },
+      {
+        "t": "2025-07-08",
+        "c": 25522.5
+      },
+      {
+        "t": "2025-07-09",
+        "c": 25476.1
+      },
+      {
+        "t": "2025-07-10",
+        "c": 25355.25
+      },
+      {
+        "t": "2025-07-11",
+        "c": 25149.85
+      },
+      {
+        "t": "2025-07-14",
+        "c": 25082.3
+      },
+      {
+        "t": "2025-07-15",
+        "c": 25195.8
+      },
+      {
+        "t": "2025-07-16",
+        "c": 25212.05
+      },
+      {
+        "t": "2025-07-17",
+        "c": 25111.45
+      },
+      {
+        "t": "2025-07-18",
+        "c": 24968.4
+      },
+      {
+        "t": "2025-07-21",
+        "c": 25090.7
+      },
+      {
+        "t": "2025-07-22",
+        "c": 25060.9
+      },
+      {
+        "t": "2025-07-23",
+        "c": 25219.9
+      },
+      {
+        "t": "2025-07-24",
+        "c": 25062.1
+      },
+      {
+        "t": "2025-07-25",
+        "c": 24837
+      },
+      {
+        "t": "2025-07-28",
+        "c": 24680.9
+      },
+      {
+        "t": "2025-07-29",
+        "c": 24821.1
+      },
+      {
+        "t": "2025-07-30",
+        "c": 24855.05
+      },
+      {
+        "t": "2025-07-31",
+        "c": 24768.35
+      },
+      {
+        "t": "2025-08-01",
+        "c": 24565.35
+      },
+      {
+        "t": "2025-08-04",
+        "c": 24722.75
+      },
+      {
+        "t": "2025-08-05",
+        "c": 24649.55
+      },
+      {
+        "t": "2025-08-06",
+        "c": 24574.2
+      },
+      {
+        "t": "2025-08-07",
+        "c": 24596.15
+      },
+      {
+        "t": "2025-08-08",
+        "c": 24363.3
+      },
+      {
+        "t": "2025-08-11",
+        "c": 24585.05
+      },
+      {
+        "t": "2025-08-12",
+        "c": 24487.4
+      },
+      {
+        "t": "2025-08-13",
+        "c": 24619.35
+      },
+      {
+        "t": "2025-08-14",
+        "c": 24631.3
+      },
+      {
+        "t": "2025-08-18",
+        "c": 24876.95
+      },
+      {
+        "t": "2025-08-19",
+        "c": 24980.65
+      },
+      {
+        "t": "2025-08-20",
+        "c": 25050.55
+      },
+      {
+        "t": "2025-08-21",
+        "c": 25083.75
+      },
+      {
+        "t": "2025-08-22",
+        "c": 24870.1
+      },
+      {
+        "t": "2025-08-25",
+        "c": 24967.75
+      },
+      {
+        "t": "2025-08-26",
+        "c": 24712.05
+      },
+      {
+        "t": "2025-08-28",
+        "c": 24500.9
+      },
+      {
+        "t": "2025-08-29",
+        "c": 24426.85
+      },
+      {
+        "t": "2025-09-01",
+        "c": 24625.05
+      },
+      {
+        "t": "2025-09-02",
+        "c": 24579.6
+      },
+      {
+        "t": "2025-09-03",
+        "c": 24715.05
+      },
+      {
+        "t": "2025-09-04",
+        "c": 24734.3
+      },
+      {
+        "t": "2025-09-05",
+        "c": 24741
+      },
+      {
+        "t": "2025-09-08",
+        "c": 24773.15
+      },
+      {
+        "t": "2025-09-09",
+        "c": 24868.6
+      },
+      {
+        "t": "2025-09-10",
+        "c": 24973.1
+      },
+      {
+        "t": "2025-09-11",
+        "c": 25005.5
+      },
+      {
+        "t": "2025-09-12",
+        "c": 25114
+      },
+      {
+        "t": "2025-09-15",
+        "c": 25069.2
+      },
+      {
+        "t": "2025-09-16",
+        "c": 25239.1
+      },
+      {
+        "t": "2025-09-17",
+        "c": 25330.25
+      },
+      {
+        "t": "2025-09-18",
+        "c": 25423.6
+      },
+      {
+        "t": "2025-09-19",
+        "c": 25327.05
+      },
+      {
+        "t": "2025-09-22",
+        "c": 25202.35
+      },
+      {
+        "t": "2025-09-23",
+        "c": 25169.5
+      },
+      {
+        "t": "2025-09-24",
+        "c": 25056.9
+      },
+      {
+        "t": "2025-09-25",
+        "c": 24890.85
+      },
+      {
+        "t": "2025-09-26",
+        "c": 24654.7
+      },
+      {
+        "t": "2025-09-29",
+        "c": 24634.9
+      },
+      {
+        "t": "2025-09-30",
+        "c": 24611.1
+      },
+      {
+        "t": "2025-10-01",
+        "c": 24836.3
+      },
+      {
+        "t": "2025-10-03",
+        "c": 24894.25
+      },
+      {
+        "t": "2025-10-06",
+        "c": 25077.65
+      },
+      {
+        "t": "2025-10-07",
+        "c": 25108.3
+      },
+      {
+        "t": "2025-10-08",
+        "c": 25046.15
+      },
+      {
+        "t": "2025-10-09",
+        "c": 25181.8
+      },
+      {
+        "t": "2025-10-10",
+        "c": 25285.35
+      },
+      {
+        "t": "2025-10-13",
+        "c": 25227.35
+      },
+      {
+        "t": "2025-10-14",
+        "c": 25145.5
+      },
+      {
+        "t": "2025-10-15",
+        "c": 25323.55
+      },
+      {
+        "t": "2025-10-16",
+        "c": 25585.3
+      },
+      {
+        "t": "2025-10-17",
+        "c": 25709.85
+      },
+      {
+        "t": "2025-10-20",
+        "c": 25843.15
+      },
+      {
+        "t": "2025-10-21",
+        "c": 25868.6
+      },
+      {
+        "t": "2025-10-23",
+        "c": 25891.4
+      },
+      {
+        "t": "2025-10-24",
+        "c": 25795.15
+      },
+      {
+        "t": "2025-10-27",
+        "c": 25966.05
+      },
+      {
+        "t": "2025-10-28",
+        "c": 25936.2
+      },
+      {
+        "t": "2025-10-29",
+        "c": 26053.9
+      },
+      {
+        "t": "2025-10-30",
+        "c": 25877.85
+      },
+      {
+        "t": "2025-10-31",
+        "c": 25722.1
+      },
+      {
+        "t": "2025-11-03",
+        "c": 25763.35
+      },
+      {
+        "t": "2025-11-04",
+        "c": 25597.65
+      },
+      {
+        "t": "2025-11-06",
+        "c": 25509.7
+      },
+      {
+        "t": "2025-11-07",
+        "c": 25492.3
+      },
+      {
+        "t": "2025-11-10",
+        "c": 25574.35
+      },
+      {
+        "t": "2025-11-11",
+        "c": 25694.95
+      },
+      {
+        "t": "2025-11-12",
+        "c": 25875.8
+      },
+      {
+        "t": "2025-11-13",
+        "c": 25879.15
+      },
+      {
+        "t": "2025-11-14",
+        "c": 25910.05
+      },
+      {
+        "t": "2025-11-17",
+        "c": 26013.45
+      },
+      {
+        "t": "2025-11-18",
+        "c": 25910.05
+      },
+      {
+        "t": "2025-11-19",
+        "c": 26052.65
+      },
+      {
+        "t": "2025-11-20",
+        "c": 26192.15
+      },
+      {
+        "t": "2025-11-21",
+        "c": 26068.15
+      },
+      {
+        "t": "2025-11-24",
+        "c": 25959.5
+      },
+      {
+        "t": "2025-11-25",
+        "c": 25884.8
+      },
+      {
+        "t": "2025-11-26",
+        "c": 26205.3
+      },
+      {
+        "t": "2025-11-27",
+        "c": 26215.55
+      },
+      {
+        "t": "2025-11-28",
+        "c": 26202.95
+      },
+      {
+        "t": "2025-12-01",
+        "c": 26175.75
+      },
+      {
+        "t": "2025-12-02",
+        "c": 26032.2
+      },
+      {
+        "t": "2025-12-03",
+        "c": 25986
+      },
+      {
+        "t": "2025-12-04",
+        "c": 26033.75
+      },
+      {
+        "t": "2025-12-05",
+        "c": 26186.45
+      },
+      {
+        "t": "2025-12-08",
+        "c": 25960.55
+      },
+      {
+        "t": "2025-12-09",
+        "c": 25839.65
+      },
+      {
+        "t": "2025-12-10",
+        "c": 25758
+      },
+      {
+        "t": "2025-12-11",
+        "c": 25898.55
+      },
+      {
+        "t": "2025-12-12",
+        "c": 26046.95
+      },
+      {
+        "t": "2025-12-15",
+        "c": 26027.3
+      },
+      {
+        "t": "2025-12-16",
+        "c": 25860.1
+      },
+      {
+        "t": "2025-12-17",
+        "c": 25818.55
+      },
+      {
+        "t": "2025-12-18",
+        "c": 25815.55
+      },
+      {
+        "t": "2025-12-19",
+        "c": 25966.4
+      },
+      {
+        "t": "2025-12-22",
+        "c": 26172.4
+      },
+      {
+        "t": "2025-12-23",
+        "c": 26177.15
+      },
+      {
+        "t": "2025-12-24",
+        "c": 26142.1
+      },
+      {
+        "t": "2025-12-26",
+        "c": 26042.3
+      },
+      {
+        "t": "2025-12-29",
+        "c": 25942.1
+      },
+      {
+        "t": "2025-12-30",
+        "c": 25938.85
+      },
+      {
+        "t": "2025-12-31",
+        "c": 26129.6
+      },
+      {
+        "t": "2026-01-01",
+        "c": 26146.55
+      },
+      {
+        "t": "2026-01-02",
+        "c": 26328.55
+      },
+      {
+        "t": "2026-01-05",
+        "c": 26250.3
+      },
+      {
+        "t": "2026-01-06",
+        "c": 26178.7
+      },
+      {
+        "t": "2026-01-07",
+        "c": 26140.75
+      },
+      {
+        "t": "2026-01-08",
+        "c": 25876.85
+      },
+      {
+        "t": "2026-01-09",
+        "c": 25683.3
+      },
+      {
+        "t": "2026-01-12",
+        "c": 25790.25
+      },
+      {
+        "t": "2026-01-13",
+        "c": 25732.3
+      },
+      {
+        "t": "2026-01-14",
+        "c": 25665.6
+      },
+      {
+        "t": "2026-01-16",
+        "c": 25694.35
+      },
+      {
+        "t": "2026-01-19",
+        "c": 25585.5
+      },
+      {
+        "t": "2026-01-20",
+        "c": 25232.5
+      },
+      {
+        "t": "2026-01-21",
+        "c": 25157.5
+      },
+      {
+        "t": "2026-01-22",
+        "c": 25289.9
+      },
+      {
+        "t": "2026-01-23",
+        "c": 25048.65
+      },
+      {
+        "t": "2026-01-27",
+        "c": 25175.4
+      },
+      {
+        "t": "2026-01-28",
+        "c": 25342.75
+      },
+      {
+        "t": "2026-01-29",
+        "c": 25418.9
+      },
+      {
+        "t": "2026-01-30",
+        "c": 25320.65
+      },
+      {
+        "t": "2026-02-02",
+        "c": 25088.4
+      },
+      {
+        "t": "2026-02-03",
+        "c": 25727.55
+      },
+      {
+        "t": "2026-02-04",
+        "c": 25776
+      },
+      {
+        "t": "2026-02-05",
+        "c": 25642.8
+      },
+      {
+        "t": "2026-02-06",
+        "c": 25693.7
+      },
+      {
+        "t": "2026-02-09",
+        "c": 25867.3
+      },
+      {
+        "t": "2026-02-10",
+        "c": 25935.15
+      },
+      {
+        "t": "2026-02-11",
+        "c": 25953.85
+      },
+      {
+        "t": "2026-02-12",
+        "c": 25807.2
+      },
+      {
+        "t": "2026-02-13",
+        "c": 25471.1
+      },
+      {
+        "t": "2026-02-16",
+        "c": 25682.75
+      },
+      {
+        "t": "2026-02-17",
+        "c": 25725.4
+      },
+      {
+        "t": "2026-02-18",
+        "c": 25819.35
+      },
+      {
+        "t": "2026-02-19",
+        "c": 25454.35
+      },
+      {
+        "t": "2026-02-20",
+        "c": 25571.25
+      },
+      {
+        "t": "2026-02-23",
+        "c": 25713
+      },
+      {
+        "t": "2026-02-24",
+        "c": 25424.65
+      },
+      {
+        "t": "2026-02-25",
+        "c": 25482.5
+      },
+      {
+        "t": "2026-02-26",
+        "c": 25496.55
+      },
+      {
+        "t": "2026-02-27",
+        "c": 25178.65
+      },
+      {
+        "t": "2026-03-02",
+        "c": 24865.7
+      },
+      {
+        "t": "2026-03-04",
+        "c": 24480.5
+      },
+      {
+        "t": "2026-03-05",
+        "c": 24765.9
+      },
+      {
+        "t": "2026-03-06",
+        "c": 24450.45
+      },
+      {
+        "t": "2026-03-09",
+        "c": 24028.05
+      },
+      {
+        "t": "2026-03-10",
+        "c": 24261.6
+      },
+      {
+        "t": "2026-03-11",
+        "c": 23866.85
+      },
+      {
+        "t": "2026-03-12",
+        "c": 23639.15
+      },
+      {
+        "t": "2026-03-13",
+        "c": 23151.1
+      },
+      {
+        "t": "2026-03-16",
+        "c": 23408.8
+      },
+      {
+        "t": "2026-03-17",
+        "c": 23581.15
+      },
+      {
+        "t": "2026-03-18",
+        "c": 23777.8
+      },
+      {
+        "t": "2026-03-19",
+        "c": 23002.15
+      },
+      {
+        "t": "2026-03-20",
+        "c": 23114.5
+      },
+      {
+        "t": "2026-03-23",
+        "c": 22512.65
+      },
+      {
+        "t": "2026-03-24",
+        "c": 22912.4
+      },
+      {
+        "t": "2026-03-25",
+        "c": 23306.45
+      },
+      {
+        "t": "2026-03-27",
+        "c": 22819.6
+      },
+      {
+        "t": "2026-03-30",
+        "c": 22331.4
+      },
+      {
+        "t": "2026-04-01",
+        "c": 22679.4
+      },
+      {
+        "t": "2026-04-02",
+        "c": 22713.1
+      },
+      {
+        "t": "2026-04-06",
+        "c": 22968.25
+      },
+      {
+        "t": "2026-04-07",
+        "c": 23123.65
+      },
+      {
+        "t": "2026-04-08",
+        "c": 23997.35
+      },
+      {
+        "t": "2026-04-09",
+        "c": 23775.1
+      },
+      {
+        "t": "2026-04-10",
+        "c": 24050.6
+      },
+      {
+        "t": "2026-04-13",
+        "c": 23842.65
+      },
+      {
+        "t": "2026-04-15",
+        "c": 24231.3
+      },
+      {
+        "t": "2026-04-16",
+        "c": 24196.75
+      },
+      {
+        "t": "2026-04-17",
+        "c": 24353.55
+      },
+      {
+        "t": "2026-04-20",
+        "c": 24364.85
+      },
+      {
+        "t": "2026-04-21",
+        "c": 24576.6
+      },
+      {
+        "t": "2026-04-22",
+        "c": 24378.1
+      },
+      {
+        "t": "2026-04-23",
+        "c": 24173.05
+      },
+      {
+        "t": "2026-04-24",
+        "c": 23897.95
+      },
+      {
+        "t": "2026-04-27",
+        "c": 24092.7
+      },
+      {
+        "t": "2026-04-28",
+        "c": 23995.7
+      },
+      {
+        "t": "2026-04-29",
+        "c": 24177.65
+      },
+      {
+        "t": "2026-04-30",
+        "c": 23997.55
+      },
+      {
+        "t": "2026-05-04",
+        "c": 24119.3
+      },
+      {
+        "t": "2026-05-05",
+        "c": 24032.8
+      },
+      {
+        "t": "2026-05-06",
+        "c": 24330.95
+      },
+      {
+        "t": "2026-05-07",
+        "c": 24326.65
+      },
+      {
+        "t": "2026-05-08",
+        "c": 24176.15
+      },
+      {
+        "t": "2026-05-11",
+        "c": 23815.85
+      },
+      {
+        "t": "2026-05-12",
+        "c": 23379.55
+      },
+      {
+        "t": "2026-05-13",
+        "c": 23412.6
+      },
+      {
+        "t": "2026-05-14",
+        "c": 23689.6
+      },
+      {
+        "t": "2026-05-15",
+        "c": 23643.5
+      },
+      {
+        "t": "2026-05-18",
+        "c": 23649.95
+      },
+      {
+        "t": "2026-05-19",
+        "c": 23618
+      },
+      {
+        "t": "2026-05-20",
+        "c": 23659
+      },
+      {
+        "t": "2026-05-21",
+        "c": 23654.7
+      },
+      {
+        "t": "2026-05-22",
+        "c": 23719.3
+      },
+      {
+        "t": "2026-05-25",
+        "c": 24031.7
+      },
+      {
+        "t": "2026-05-26",
+        "c": 23913.7
+      },
+      {
+        "t": "2026-05-27",
+        "c": 23907.15
+      },
+      {
+        "t": "2026-05-29",
+        "c": 23547.75
+      },
+      {
+        "t": "2026-06-01",
+        "c": 23382.6
+      },
+      {
+        "t": "2026-06-02",
+        "c": 23483.55
+      },
+      {
+        "t": "2026-06-03",
+        "c": 23405.6
+      },
+      {
+        "t": "2026-06-04",
+        "c": 23416.55
+      },
+      {
+        "t": "2026-06-05",
+        "c": 23366.7
+      },
+      {
+        "t": "2026-06-08",
+        "c": 23123
+      },
+      {
+        "t": "2026-06-09",
+        "c": 23242.1
+      },
+      {
+        "t": "2026-06-10",
+        "c": 23214.95
+      },
+      {
+        "t": "2026-06-11",
+        "c": 23161.6
+      },
+      {
+        "t": "2026-06-12",
+        "c": 23622.9
+      },
+      {
+        "t": "2026-06-16",
+        "c": 23989.15
+      }
+    ]
+  },
   "holdings": [
     {
       "symbol": "LT",
@@ -81,48 +1075,49 @@
       "exchange": "NSE",
       "qty": 50,
       "buyPrice": 3556.92,
-      "price": 4169.8,
-      "dayChangePct": 2.9758167,
-      "value": 208490,
+      "price": 4186.4,
+      "dayChangePct": 0.398103,
+      "value": 209320,
       "invested": 177846,
-      "plPct": 17.230637742766216,
-      "plAbs": 30644.000000000007,
+      "plPct": 17.697333648212485,
+      "plAbs": 31473.999999999978,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "This is information, not advice — over one trading day direction is essentially a coin flip and I can't reliably beat the index. Q4 showed a ~3% YoY profit dip and cautious H1FY27 margin guidance, which weighs against, but continued strong order wins (JSW Steel, Middle East T&D) support the longer-term order book. The mixed signal and your large unrealized gain argue for holding rather than acting on short-term noise.",
+      "reasoning": "L&T's fundamentals are solid — record order inflows, 8.7% revenue growth in FY26, and geopolitical tailwinds from Middle East reconstruction — but the stock is near recent highs at ₹4,186 and short-term outperformance vs. Nifty is a coin flip. No adverse news found post-AGM, but no fresh catalyst either to justify adding at this level. Uncertainty remains high given no scored directional calls yet.",
       "keyNews": [
-        "Q4: ~3% YoY profit dip, cautious margin guidance, ₹38 dividend",
-        "L&T wins largest-ever domestic metals order from JSW Steel",
-        "Middle East EPC substation orders for T&D business"
+        "L&T shares surged ~4% on easing geopolitical tensions; analysts cite ₹4,400–₹4,600 technical targets",
+        "Record Q3FY26 order inflows of ₹1,35,581 crore — highest-ever quarterly inflow",
+        "FY2026 annual revenue up 8.7% to ₹1,61,039 crore; 81st AGM held June 5, 2026"
       ],
       "sources": [
         {
-          "url": "https://www.larsentoubro.com/news-stories",
-          "title": "News & Stories | L&T Corporate"
+          "url": "https://hdfcsky.com/stocks/larsen-toubro-ltd",
+          "title": "Larsen & Toubro Share Price Today, LT Stock Price Live, Larsen & Toubro Ltd. Stock Price Charts, Live BSE/NSE, Larsen & Toubro Ltd. Buy/Sell Signals, Technical Analysis, F&O Quotes, Market Reports and Real-Time Quotes"
         },
         {
-          "url": "https://trendlyne.com/latest-news/only-news/800/LT/larsen-toubro-ltd/",
-          "title": "L&T News and Updates"
+          "url": "https://stockanalysis.com/quote/nse/LT/",
+          "title": "Larsen & Toubro (NSE:LT) Stock Price & Overview"
+        },
+        {
+          "url": "https://stockinvest.us/stock/LT.NS",
+          "title": "Larsen & Toubro Limited Stock Price Forecast. Should You Buy LT.NS?"
+        },
+        {
+          "url": "https://groww.in/stocks/larsen-toubro-ltd",
+          "title": "Larsen & Toubro Share Price, Stock Price, LIVE NSE/BSE - Groww"
         },
         {
           "url": "https://finance.yahoo.com/quote/LT.NS/",
           "title": "Larsen & Toubro Limited (LT.NS) Stock Price, News, Quote & History - Yahoo Finance"
         },
         {
-          "url": "https://www.marketbeat.com/stocks/OTCMKTS/LTOUF/news",
-          "title": "www.marketbeat.com"
-        },
-        {
-          "url": "https://www.business-standard.com/markets/larsen-toubro-ltd-share-price-348/news/page-3",
-          "title": "Sunday, December 21, 2025 | 05:59 PM ISTहिंदी में पढें"
-        },
-        {
-          "url": "https://uk.marketscreener.com/quote/stock/LARSEN-TOUBRO-LIMITED-6491923/news-key-events/",
-          "title": "news key events"
+          "url": "https://www.torusdigital.com/stocks/larsen-toubro-ltd-share-price",
+          "title": "L&T Share Price Today: Larsen & Toubro Stock Price Live NSE/BSE | Torus Digital"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -1119,19 +2114,30 @@
         {
           "t": "2026-06-15",
           "c": 4169.8
+        },
+        {
+          "t": "2026-06-16",
+          "c": 4186.4
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 0.7386445393064545,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "SCILAL",
@@ -1139,29 +2145,33 @@
       "exchange": "NSE",
       "qty": 500,
       "buyPrice": 45.42,
-      "price": 46.02,
-      "dayChangePct": 2.4259963,
-      "value": 23010,
+      "price": 46.29,
+      "dayChangePct": 0.58670247,
+      "value": 23145,
       "invested": 22710,
-      "plPct": 1.321003963011892,
-      "plAbs": 300.0000000000007,
+      "plPct": 1.9154557463672333,
+      "plAbs": 434.99999999999875,
       "stance": "Watch",
       "confidence": "Low",
       "action": "Watch",
-      "reasoning": "This is information, not advice — over one trading day the move is essentially a coin flip versus the index. Recent Q4FY26 results showed a net loss of ₹0.84 crore, a reversal from a prior-year profit, and the company was fined by BSE/NSE for board composition lapses. The stock is a thinly-tracked SCI demerger asset with no near-term catalyst I can confirm, so I have no edge here.",
+      "reasoning": "SCILAL remains a Government of India non-core asset disposal vehicle with thin operational revenues — Q4 FY26 results showed a small net loss of ₹0.84 Cr, though full-year FY26 swung to net profit of ₹28.82 Cr; stock is trading near its listing price and well off its 52-week high of ₹60.34, with the 200-DMA (≈₹48.72) acting as overhead resistance. No material near-term catalyst (asset sale or disinvestment news) was found, and short-term direction vs. the index is essentially a coin flip — this is information only, not financial advice.",
       "keyNews": [
-        "Q4FY26 net loss ₹0.84 cr, operating losses deepen",
-        "BSE/NSE fines for board composition non-compliance",
-        "Stock volatile within ~₹34-60 52-week range"
+        "FY26 full-year net profit ₹28.82 Cr vs net loss in FY25; Q4 FY26 still showed a small loss",
+        "52-week range ₹34.30–₹60.34; stock trading below 200-DMA of ~₹48.72",
+        "Regulatory fines from BSE & NSE (₹9.77 lakh each) for board composition issues"
       ],
       "sources": [
         {
-          "url": "https://dhan.co/stocks/sci-land-assets-ltd-share-price/",
-          "title": "SCI Land & Assets Share Price Today - SCILAL Live Updates NSE/BSE | Dhan"
+          "url": "https://www.tickertape.in/stocks/shipping-corporation-of-india-land-and-assets-SCIL",
+          "title": "SCILAL Share Price Live: Shipping Corporation of India Land and Assets NSE Today"
         },
         {
-          "url": "https://trendlyne.com/equity/2154480/SCILAL/shipping-corporation-of-india-land-and-assets-ltd/",
-          "title": "SCIL (SCILAL) Live Share Price Today on NSE/BSE, Stock Analysis and Price Estimates"
+          "url": "https://www.tradingview.com/symbols/NSE-SCILAL/",
+          "title": "SCILAL Stock Price and Chart — NSE:SCILAL — TradingView"
+        },
+        {
+          "url": "https://www.motilaloswal.com/share-market/shipping-corporation-of-india-land-assets-ltd",
+          "title": "Shipping Corporation of India Land & Assets Ltd: Share Price Today - Live Updates | Motilal Oswal"
         },
         {
           "url": "https://www.5paisa.com/stocks/scilal-share-price",
@@ -1172,15 +2182,12 @@
           "title": "SCILAL Share Price Today - SCI Land & Assets on NSE/BSE | ScanX"
         },
         {
-          "url": "https://www.nseindia.com/get-quote/equity/SCILAL/Shipping-Corporation-of-India-Land-and-Assets-Limited",
-          "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
-        },
-        {
-          "url": "https://www.nseindia.com/get-quotes/equity?symbol=SCILAL",
-          "title": "Shipping Corporation of India Land and Assets Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+          "url": "https://cn.tradingview.com/symbols/NSE-SCILAL",
+          "title": "NSE SCILAL"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -2173,19 +3180,30 @@
         {
           "t": "2026-06-15",
           "c": 46.02
+        },
+        {
+          "t": "2026-06-16",
+          "c": 46.29
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Watch",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.1303780964797996,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "JIOFIN",
@@ -2193,48 +3211,49 @@
       "exchange": "NSE",
       "qty": 50,
       "buyPrice": 107.89,
-      "price": 239.52,
-      "dayChangePct": 1.538855,
-      "value": 11976,
+      "price": 241.95,
+      "dayChangePct": 1.014526,
+      "value": 12097.5,
       "invested": 5394.5,
-      "plPct": 122.0038928538326,
-      "plAbs": 6581.5,
+      "plPct": 124.25618685698396,
+      "plAbs": 6703,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "Recent results show solid growth (Q2 FY26 income up 44% YoY) and the Jio BlackRock AMC raised ~₹17,800 crore in its debut NFOs, but the stock trades near its 52-week low on a very rich ~99x P/E with no clear next-day catalyst. Over one trading day, direction is essentially a coin flip and I have no edge versus simply holding the index. This is information, not advice; your large unrealized gain is already in hand.",
+      "reasoning": "JIOFIN is flat around ₹242, consistent with prior Hold calls; JioBlackRock's AMC business is gaining traction with multiple debt fund launches, and management recently engaged institutional investors at Citi and BofA conferences, but FY2026 earnings declined 3.2% even as revenue rose 33%, flagging profitability concerns at a still-rich valuation. Short-term direction versus the index is essentially a coin flip with no clear near-term catalyst visible; the stock is information, not advice.",
       "keyNews": [
-        "Jio BlackRock MF raises ₹17,800 cr in debut NFOs, enters top 35 fund houses",
-        "Q2 FY26 consolidated income up 44% YoY; core income tops treasury",
-        "Stock near 52-week low (~₹223) on lofty ~99x P/E"
+        "Jio Financial revenue +33% in FY2026 but earnings fell 3.2% YoY",
+        "Management engaged institutional investors at Citi India & BofA Asia conferences (June 2026)",
+        "JioBlackRock MF expanding with debt/money-market fund launches"
       ],
       "sources": [
-        {
-          "url": "https://finance.yahoo.com/quote/JIOFIN.NS/news/",
-          "title": "Jio Financial Services Limited (JIOFIN.NS) Latest Stock News & Headlines - Yahoo Finance"
-        },
-        {
-          "url": "https://www.nseindia.com/get-quotes/equity?symbol=JIOFIN",
-          "title": "NSE India - Jio Financial Services Limited Stock Price Today, Live NSE Share Price, Latest News"
-        },
-        {
-          "url": "https://finance.yahoo.com/quote/JIOFIN.BO/",
-          "title": "Jio Financial Services Limited (JIOFIN.BO) Stock Price, News, Quote & History - Yahoo Finance"
-        },
         {
           "url": "https://trendlyne.com/equity/1564869/JIOFIN/jio-financial-services-ltd/",
           "title": "Jio Financial (JIOFIN) Live Share Price Today on NSE/BSE, Stock Analysis and Price Estimates"
         },
         {
-          "url": "https://www.cnbc.com/quotes/JIOFIN-IN",
-          "title": "JIOFIN-IN: Jio Financial Services Ltd - Stock Price, Quote and News - CNBC"
+          "url": "https://stockanalysis.com/quote/nse/JIOFIN/",
+          "title": "Jio Financial Services (NSE:JIOFIN) Stock Price & Overview"
         },
         {
           "url": "https://finance.yahoo.com/quote/JIOFIN.NS/",
           "title": "Jio Financial Services Limited (JIOFIN.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/diversified-financials/nse-jiofin/jio-financial-services-shares",
+          "title": "Jio Financial Services (NSEI:JIOFIN) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://www.google.com/finance/beta/quote/JIOFIN:NSE",
+          "title": "Jio Financial Services Ltd (JIOFIN) Stock Price & News - Google Finance"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jio_Financial_Services",
+          "title": "Jio Financial Services"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -3231,19 +4250,30 @@
         {
           "t": "2026-06-15",
           "c": 239.52
+        },
+        {
+          "t": "2026-06-16",
+          "c": 241.95
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 1.1606546426185638,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "RELIANCE",
@@ -3251,44 +4281,49 @@
       "exchange": "NSE",
       "qty": 150,
       "buyPrice": 1226.71,
-      "price": 1307,
-      "dayChangePct": 1.0827533,
-      "value": 196050,
+      "price": 1328.8,
+      "dayChangePct": 1.6679456,
+      "value": 199320,
       "invested": 184006.5,
-      "plPct": 6.545149220272107,
-      "plAbs": 12043.499999999995,
+      "plPct": 8.322260354933107,
+      "plAbs": 15313.499999999987,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "This is information, not advice; over about one trading day, beating the index is close to a coin flip and I can't predict it reliably. The main recent catalyst — a Meta partnership to build a 168MW AI data centre in Jamnagar (announced June 9-10) — is positive but several days old and likely already absorbed by the price. Brokerages remain constructive longer-term, but I see no fresh same-day trigger to expect short-term outperformance or underperformance versus NIFTY/SENSEX.",
-      "keyNews": [],
+      "reasoning": "Moody's recent upgrade of RIL's senior unsecured notes from Baa2 to Baa1 (stable) is a mild positive signal, but Q4 FY26 earnings were weak — net profit fell ~12.6% YoY with EBITDA margin compressing sharply to 14.78%. At ₹1,328, the stock sits well below its 52-week high of ₹1,611 with no clear near-term catalyst visible; short-term direction vs the index is close to a coin flip, so no basis to add aggressively here.",
+      "keyNews": [
+        "Moody's upgrades RIL senior notes from Baa2 to Baa1 with stable outlook",
+        "Q4 FY26 net profit down ~12.6% YoY to ₹16,971 cr; EBITDA margin compressed to 14.78%",
+        "RIL racing to import battery equipment from China ahead of potential export restrictions"
+      ],
       "sources": [
         {
           "url": "https://finance.yahoo.com/quote/RELIANCE.NS/",
           "title": "Reliance Industries Limited (RELIANCE.NS) Stock Price, News, Quote & History - Yahoo Finance"
         },
         {
-          "url": "https://www.msn.com/en-in/money/stockdetails/reliance-in-stock/fi-ahjo52",
-          "title": "Reliance Industries Ltd (RELIANCE) Stock, Price, News, ..."
+          "url": "https://www.indmoney.com/stocks/reliance-industries-ltd-share-price",
+          "title": "Reliance Share Price Today, Live Chart, News, Target Price"
         },
         {
           "url": "https://www.google.com/finance/beta/quote/RELIANCE:NSE",
           "title": "Reliance Industries Ltd (RELIANCE) Stock Price & News - Google Finance"
         },
         {
-          "url": "https://stockanalysis.com/quote/nse/RELIANCE/",
-          "title": "Reliance Industries (NSE:RELIANCE) Stock Price & Overview"
-        },
-        {
-          "url": "https://www.tickertape.in/stocks/reliance-industries-RELI",
-          "title": "RELIANCE Share Price Live: Reliance Industries NSE Today"
-        },
-        {
-          "url": "https://www.nseindia.com/get-quote/equity/RELIANCE/Reliance-Industries-Limited",
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=RELIANCE",
           "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
+        },
+        {
+          "url": "https://tr.tradingview.com/news/moneycontrol%3A31eb4371b094b%3A0-reliance-standalone-june-2025-net-sales-at-rs-116-341-00-crore-down-10-44-y-o-y",
+          "title": "moneycontrol%3A31eb4371b094b%3A0 reliance standalone june 2025 net sales at rs 116 341 00 crore down 10 44 y o y"
+        },
+        {
+          "url": "https://www.business-standard.com/markets/reliance-industries-ltd-share-price-476/news/page-3",
+          "title": "Tuesday, December 30, 2025 | 12:47 PM ISTहिंदी में पढें"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -4285,11 +5320,15 @@
         {
           "t": "2026-06-15",
           "c": 1307
+        },
+        {
+          "t": "2026-06-16",
+          "c": 1328.8
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
@@ -4298,19 +5337,27 @@
         },
         {
           "date": "2026-06-15",
-          "stance": "Watch",
+          "stance": "Hold",
           "confidence": "Low",
-          "outcome": "pending",
-          "stockReturnPct": null,
-          "benchmarkReturnPct": null
+          "outcome": "unscored",
+          "stockReturnPct": 1.8668706962509551,
+          "benchmarkReturnPct": 0.6009499494841419
         },
         {
           "date": "2026-06-15",
           "stance": "Watch",
           "confidence": "Low",
-          "outcome": "pending",
-          "stockReturnPct": null,
-          "benchmarkReturnPct": null
+          "outcome": "unscored",
+          "stockReturnPct": 1.8668706962509551,
+          "benchmarkReturnPct": 0.6009499494841419
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 1.8434942247380182,
+          "benchmarkReturnPct": 0.5488922641806004
         },
         {
           "date": "2026-06-14",
@@ -4343,17 +5390,8 @@
           "outcome": "unscored",
           "stockReturnPct": 1.9876952200662545,
           "benchmarkReturnPct": 1.0534015780704342
-        },
-        {
-          "date": "2026-06-11",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.07103954534690704,
-          "benchmarkReturnPct": 0.6193842743541067
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "PARAS",
@@ -4361,25 +5399,37 @@
       "exchange": "NSE",
       "qty": 10,
       "buyPrice": 910.85,
-      "price": 1108.15,
-      "dayChangePct": 1.0025976,
-      "value": 11081.5,
+      "price": 1089.35,
+      "dayChangePct": -1.6965256,
+      "value": 10893.5,
       "invested": 9108.5,
-      "plPct": 21.66108579897898,
-      "plAbs": 1973.0000000000007,
+      "plPct": 19.597079650875543,
+      "plAbs": 1784.9999999999989,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "Recent order wins (₹52.82 cr from BEL, ₹3.8M from Elbit, a London investor roadshow) have fueled a sharp run, but the stock has already jumped over 30% in 2026 and looks extended, raising near-term profit-booking risk. Defence peers recently saw profit-booking and the broader market faces Iran-Israel geopolitical volatility, so one-day direction here is close to a coin flip. This is information, not advice, and I have no scored track record on this name to lean on.",
+      "reasoning": "Q4 FY26 net profit rose 74% YoY to ₹34.38 cr on 58% revenue growth, and a ₹52.82 cr BEL electro-optics order was secured in June — fundamentals are improving. However, the stock is already up ~20% from buy price and has drifted lower over recent sessions (~₹1,022 intraday vs prior ₹1,091), suggesting near-term momentum is uncertain. Short-term outperformance vs the index is close to a coin flip; no directional calls here have been scored yet, so confidence stays low.",
       "keyNews": [
-        "Paras wins ₹52.82 cr electro-optics order from Bharat Electronics",
-        "Secures $3.8M electro-optics order from Israel's Elbit Security Systems",
-        "Stock up 30%+ in 2026 amid order-inflow momentum; defence peers saw profit-booking"
+        "Q4 FY26 PAT up 74% YoY to ₹34.38 cr; revenue up 58% to ₹171 cr",
+        "Paras Defence secures ₹52.82 cr BEL order for electro-optics (June 2025)",
+        "Stock up ~5.9% intraday to ~₹1,022 on strong order inflow news alongside defence sector rally"
       ],
       "sources": [
         {
+          "url": "https://simplywall.st/stocks/in/capital-goods/nse-paras/paras-defence-and-space-technologies-shares",
+          "title": "Paras Defence and Space Technologies (NSEI:PARAS) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://uk.marketscreener.com/quote/stock/PARAS-DEFENCE-AND-SPACE-T-127643614/",
+          "title": "Paras Defence and Space Technologies Limited Share Price (PARAS) - Stock NSE India S.E. - MarketScreener UK"
+        },
+        {
           "url": "https://finance.yahoo.com/quote/PARAS.NS/",
           "title": "Paras Defence and Space Technologies Limited (PARAS.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.torusdigital.com/stocks/paras-defence-and-space-technologies-ltd-share-price",
+          "title": "Paras Defence and Space Technologies Ltd Share Price Today : PARAS Stock Price Live NSE/BSE | Torus Digital"
         },
         {
           "url": "https://www.screener.in/company/PARAS/consolidated/",
@@ -4388,21 +5438,10 @@
         {
           "url": "https://groww.in/stocks/paras-defence-and-space-technologies-ltd",
           "title": "Paras Defence and Space Technologies Share Price, Stock Price, LIVE NSE/BSE - Groww"
-        },
-        {
-          "url": "https://scanx.trade/stock-news/paras-defence-space-technolo-ltd",
-          "title": "Paras Defence Space Tech Share News - Latest Updates, Live News & More | ScanX"
-        },
-        {
-          "url": "https://www.business-standard.com/markets/news/data-patterns-paras-defence-soar-9-zoom-up-to-111-from-2026-lows-126060900686_1.html",
-          "title": "Data Patterns, Paras Defence soar 9%; zoom up to 111% from 2026 lows | Markets News - Business Standard"
-        },
-        {
-          "url": "https://www.tipranks.com/stocks/in:paras/stock-news",
-          "title": "stock news"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -5399,19 +6438,30 @@
         {
           "t": "2026-06-15",
           "c": 1108.15
+        },
+        {
+          "t": "2026-06-16",
+          "c": 1089.35
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -1.5295763208951874,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "BEL",
@@ -5419,18 +6469,26 @@
       "exchange": "NSE",
       "qty": 80,
       "buyPrice": 257.17,
-      "price": 409.55,
-      "dayChangePct": 0.75030446,
-      "value": 32764,
+      "price": 407.55,
+      "dayChangePct": -0.48834085,
+      "value": 32604,
       "invested": 20573.6,
-      "plPct": 59.252634444142004,
-      "plAbs": 12190.4,
+      "plPct": 58.47493875646459,
+      "plAbs": 12030.4,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "BEL posted solid Q4 FY26 results with net profit up about 4.6% to ₹2,225 crore on ~11.7% revenue growth, and continues to win defence orders (recently ₹608 crore), supporting its order book. These are positive fundamentals but are already known to the market, so one-day direction versus the index is essentially a coin flip. This is information, not advice; I have no scored track record on this stock yet, so confidence stays low.",
-      "keyNews": [],
+      "reasoning": "BEL's fundamentals remain solid — record FY26 turnover of ~₹26,750 crore, order book near ₹74,000 crore, and a steady stream of fresh defence contract wins (₹608 crore in May, ₹585 crore in June). However, the stock is already up ~58% from your buy price and trades near recent highs; valuation scrutiny has been flagged by analysts even amid the strong order flow. Short-term direction at ~₹407 is genuinely uncertain and close to a coin flip versus the broader index — no catalyst visible today to break that range.",
+      "keyNews": [
+        "BEL bags ₹608 cr defence orders for radar, avionics & electronic warfare systems (May 2026)",
+        "BEL FY26 record turnover ~₹26,750 cr; order book ~₹74,000 cr as of April 2026",
+        "Analysts flag high valuation even as defence order pipeline remains strong"
+      ],
       "sources": [
+        {
+          "url": "https://aninews.in/news/business/bel-secures-fresh-orders-worth-rs-585-crore-since-june-520250620195328/",
+          "title": "BEL secures fresh orders worth Rs 585 crore since June 5"
+        },
         {
           "url": "https://www.indmoney.com/stocks/bharat-electronics-ltd-share-price",
           "title": "BEL Share Price Today, Live Chart, News, Target Price"
@@ -5440,23 +6498,20 @@
           "title": "BEL Share Price Live: Bharat Electronics NSE Today"
         },
         {
-          "url": "https://www.hdfcsec.com/market/company/BharatElectronicsLtd-2298",
-          "title": "BEL Share Price Today - Bharat Electronics Ltd Share/Stock Price Live NSE/BSE | HDFC Securities"
+          "url": "https://upstox.com/news/market-news/stocks/bel-shares-jump-2-on-reports-of-iaf-eyeing-large-procurement-of-hammer-precision-weapon-key-details/article-194970/",
+          "title": "BEL shares jump 2% amid weak market; latest buzz you need to know"
         },
         {
-          "url": "https://finance.yahoo.com/quote/BEL.NS/",
-          "title": "Bharat Electronics Limited (BEL.NS) Stock Price, News, Quote & History - Yahoo Finance"
+          "url": "https://groww.in/stocks/bharat-electronics-ltd",
+          "title": "Bharat Electronics Share Price, Stock Price, LIVE NSE/BSE - Groww"
         },
         {
-          "url": "https://www.torusdigital.com/stocks/bharat-electronics-ltd-share-price",
-          "title": "Bharat Electronics Ltd Share Price Today: BEL Stock Price Live NSE/BSE | Torus Digital"
-        },
-        {
-          "url": "https://www.tipranks.com/stocks/in:bel/stock-news",
-          "title": "stock news"
+          "url": "https://www.screener.in/company/BEL/consolidated/",
+          "title": "Bharat Electronics Ltd share price | About Bharat Electron | Key Insights - Screener"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -6453,19 +7508,30 @@
         {
           "t": "2026-06-15",
           "c": 409.55
+        },
+        {
+          "t": "2026-06-16",
+          "c": 407.55
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.30521303870101324,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "HINDZINC",
@@ -6473,48 +7539,49 @@
       "exchange": "NSE",
       "qty": 16,
       "buyPrice": 628.24,
-      "price": 563.85,
-      "dayChangePct": 0.7054744,
-      "value": 9021.6,
+      "price": 564.3,
+      "dayChangePct": 0.079810634,
+      "value": 9028.8,
       "invested": 10051.84,
-      "plPct": -10.249267795746846,
-      "plAbs": -1030.2399999999998,
+      "plPct": -10.177639118808107,
+      "plAbs": -1023.0400000000009,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "This is information, not advice; over one day the move is essentially a coin flip versus the index. The stock is being driven mainly by volatile silver/zinc prices and recently fell on geopolitical-led metal weakness, while a broker notes valuations already reflect spot prices, limiting near-term upside. The high dividend yield offers some support, but I have no reliable short-term edge here.",
+      "reasoning": "HINDZINC is trading near ₹564, well below your buy price of ₹628, with the 52-week range spanning ₹413–₹733 signalling high volatility tied to global zinc and silver prices. FY25 EPS grew to ₹24.48 from ₹18.34 in FY24 reflecting strong fundamentals, but the stock has already corrected ~23% from its January 2026 highs. Short-term direction is close to a coin flip, dependent on LME zinc moves and broader market sentiment — no new near-term catalyst is clearly visible.",
       "keyNews": [
-        "Stock slips ~4% as silver prices drop on West Asia tensions",
-        "Broker: HINDZINC valuation already reflects spot prices, limited upside",
-        "Healthy dividend (~₹21/share over 12 months) provides some support"
+        "52-week range ₹413–₹733; stock ~23% off Jan 2026 record high of ₹733",
+        "FY25 EPS ₹24.48 (up from ₹18.34 in FY24); strong operating metrics",
+        "Ex-dividend date Jun 17 2025 passed; next dividend event may be a catalyst to watch"
       ],
       "sources": [
         {
           "url": "https://www.tickertape.in/stocks/hindustan-zinc-HZNC",
-          "title": "HINDZINC Share Price Today: Hindustan Zinc Stock ..."
+          "title": "HINDZINC Share Price Live: Hindustan Zinc NSE Today"
         },
         {
           "url": "https://finance.yahoo.com/quote/HINDZINC.NS/",
           "title": "Hindustan Zinc Limited (HINDZINC.NS) Stock Price, News, Quote & History - Yahoo Finance"
         },
         {
-          "url": "https://www.cnbc.com/quotes/HINDZINC-IN",
-          "title": "HINDZINC-IN: Hindustan Zinc Ltd - Stock Price, Quote and News - CNBC"
+          "url": "https://www.tradingview.com/symbols/NSE-HINDZINC/",
+          "title": "HINDZINC Stock Price and Chart — NSE:HINDZINC — TradingView"
         },
         {
           "url": "https://groww.in/stocks/hindustan-zinc-ltd",
           "title": "Hindustan Zinc Share Price, Stock Price, LIVE NSE/BSE - Groww"
         },
         {
-          "url": "https://www.nseindia.com/get-quotes/equity?symbol=HINDZINC",
-          "title": "Hindustan Zinc Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+          "url": "https://en.wikipedia.org/wiki/Hindustan_Zinc",
+          "title": "Hindustan Zinc"
         },
         {
-          "url": "https://ticker.finology.in/company/HINDZINC",
-          "title": "Hindustan Zinc Share Price Today, Dividend & Stock Analysis"
+          "url": "https://www.screener.in/company/HINDZINC/",
+          "title": "Hindustan Zinc Ltd share price | About Hindustan Zinc | Key Insights - Screener"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -7511,19 +8578,30 @@
         {
           "t": "2026-06-15",
           "c": 563.85
+        },
+        {
+          "t": "2026-06-16",
+          "c": 564.3
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.3724394785847296,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "POWERGRID",
@@ -7531,37 +8609,41 @@
       "exchange": "NSE",
       "qty": 25,
       "buyPrice": 282.63,
-      "price": 285.7,
-      "dayChangePct": 0.31601983,
-      "value": 7142.5,
+      "price": 285.15,
+      "dayChangePct": -0.19251603,
+      "value": 7128.75,
       "invested": 7065.75,
-      "plPct": 1.0862258075929638,
-      "plAbs": 76.74999999999983,
+      "plPct": 0.8916250928776074,
+      "plAbs": 62.999999999999545,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "Power Grid's Q2 FY26 profit fell about 6% YoY to roughly ₹3,566 crore on slightly weaker revenue, while it keeps winning large transmission tenders that support its multi-year capex story. No major fresh catalyst is due in the next trading day, so short-term direction versus the index is essentially a coin flip. This is information, not advice, and I have no scored track record here to lean on.",
-      "keyNews": [],
+      "reasoning": "POWERGRID's fundamentals remain intact — large order book (~₹1.45 lakh crore) and a raised FY26 capex target of ₹35,000 crore signal long-term momentum, but Q2 FY26 net profit declined ~6% YoY and the board recently convened to consider fresh debt (unsecured term loan), adding near-term uncertainty. At ₹285.15, barely above cost basis, short-term direction vs. the index is essentially a coin flip; no new catalyst justifies adding risk today.",
+      "keyNews": [
+        "Board met June 10 to consider fund-raising via unsecured term loan facility",
+        "POWERGRID raised FY26 capex target to ₹35,000 cr (from ₹32,000 cr); order book ~₹1.45 lakh crore",
+        "Q2 FY26 net profit fell ~6% YoY to ₹3,566 cr despite 2% revenue growth"
+      ],
       "sources": [
+        {
+          "url": "https://www.screener.in/company/POWERGRID/consolidated/",
+          "title": "Power Grid Corporation of India Ltd share price | About Power Grid Corpn | Key Insights - Screener"
+        },
         {
           "url": "https://www.tickertape.in/stocks/power-grid-corporation-of-india-PGRD",
           "title": "POWERGRID Share Price Live: Power Grid Corporation of India NSE Today"
         },
         {
-          "url": "https://www.google.com/finance/beta/quote/POWERGRID:NSE",
-          "title": "Power Grid Corporation of India Ltd (POWERGRID) Stock Price & News - Google Finance"
+          "url": "https://groww.in/stocks/power-grid-corporation-of-india-ltd",
+          "title": "Power Grid Corporation of India Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://in.tradingview.com/symbols/NSE-POWERGRID/",
+          "title": "Power Grid Corporation of India Limited"
         },
         {
           "url": "https://www.nseindia.com/get-quotes/equity?symbol=POWERGRID",
           "title": "Power Grid Corporation of India Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
-        },
-        {
-          "url": "https://www.msn.com/en-in/money/stockdetails/powergrid-in-stock/fi-ahjha2",
-          "title": "Power Grid Corporation of India Ltd (POWERGRID)"
-        },
-        {
-          "url": "https://groww.in/stocks/power-grid-corporation-of-india-ltd",
-          "title": "Power Grid Corporation of India Share Price, Stock Price, LIVE NSE/BSE - Groww"
         },
         {
           "url": "https://www.nseindia.com/get-quote/equity/POWERGRID/Power-Grid-Corporation-of-India-Limited",
@@ -7569,6 +8651,7 @@
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -8565,19 +9648,30 @@
         {
           "t": "2026-06-15",
           "c": 285.7
+        },
+        {
+          "t": "2026-06-16",
+          "c": 285.15
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.14000700035000646,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "JWL",
@@ -8585,44 +9679,49 @@
       "exchange": "NSE",
       "qty": 25,
       "buyPrice": 275.06,
-      "price": 275.5,
-      "dayChangePct": -0.036286686,
-      "value": 6887.5,
+      "price": 276.8,
+      "dayChangePct": 0.4718649,
+      "value": 6920,
       "invested": 6876.5,
-      "plPct": 0.1599650985239576,
-      "plAbs": 10.999999999999943,
+      "plPct": 0.6325892532538389,
+      "plAbs": 43.50000000000023,
       "stance": "Watch",
       "confidence": "Low",
       "action": "Watch",
-      "reasoning": "This is information, not advice, and one-day direction is essentially a coin flip. Recent Q4 FY26 results were weak with profit down ~72% YoY and a fourth straight soft quarter, which weighs on sentiment. A board meeting on 30 May 2026 is a near-term unknown, so I'd watch rather than add at the index-beating bar.",
-      "keyNews": [],
+      "reasoning": "JWL's Q4 FY26 results were notably weak — net profit fell ~72% QoQ to ₹28.83 crore and revenue declined ~25% QoQ, signalling a meaningful earnings deterioration. The stock is already well off its 52-week high of ~₹414 and recent price action is flat near cost; no fresh positive catalysts (orders, contracts) were found for June. Short-term direction vs the NIFTY is genuinely unclear with this earnings overhang, and no scored calls yet make any confidence claim unwarranted.",
+      "keyNews": [
+        "Q4 FY26 net profit collapsed ~72% QoQ to ₹28.83 Cr; revenue down ~25% QoQ to ₹780 Cr",
+        "Stock ~37% below 52-week high of ₹414; 52-week low at ₹235.65",
+        "JEM Energy (EV subsidiary) signed MoUs with Chalukya Power and Pickrene — minor positive"
+      ],
       "sources": [
         {
-          "url": "https://www.google.com/finance/quote/JWL:NSE",
-          "title": "Jupiter Wagons Ltd (JWL) Stock Price & News - Google Finance"
+          "url": "https://www.tickertape.in/stocks/commercial-engineers-and-body-builders-co-CEBB",
+          "title": "JWL Share Price Live: Jupiter Wagons NSE Today"
         },
         {
-          "url": "https://www.cnbc.com/quotes/JWL-IN",
-          "title": "JWL-IN: Jupiter Wagons Ltd - Stock Price, Quote and News - CNBC"
+          "url": "https://www.indmoney.com/stocks/jupiter-wagons-ltd-share-price",
+          "title": "Jupiter Wagons Share Price Today – JWL Stock Price, Live NSE/BSE Charts"
         },
         {
           "url": "https://finance.yahoo.com/quote/JWL.NS/",
           "title": "Jupiter Wagons Limited (JWL.NS) Stock Price, News, Quote & History - Yahoo Finance"
         },
         {
-          "url": "https://www.nseindia.com/get-quotes/equity?symbol=JWL",
-          "title": "NSE India - Jupiter Wagons Limited Stock Price Today, Live NSE Share Price, Latest News"
+          "url": "https://trendlyne.com/latest-news/245/JWL/jupiter-wagons-ltd/",
+          "title": "Jupiter Wagons News, Corporate filings and Earnings/Conference Calls"
         },
         {
-          "url": "https://finance.yahoo.com/quote/JWL.NS/history/",
-          "title": "Jupiter Wagons Limited (JWL.NS) Stock Historical Prices & Data - Yahoo Finance"
+          "url": "https://en.wikipedia.org/wiki/Jupiter_Wagons",
+          "title": "Jupiter Wagons"
         },
         {
-          "url": "https://www.tradingview.com/symbols/NSE-JWL/",
-          "title": "NSE:JWL - Jupiter Wagons Limited"
+          "url": "https://groww.in/stocks/commercial-engineers-body-builders-company-ltd",
+          "title": "Jupiter Wagons Share Price, Stock Price, LIVE NSE/BSE - Groww"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -9619,19 +10718,30 @@
         {
           "t": "2026-06-15",
           "c": 275.5
+        },
+        {
+          "t": "2026-06-16",
+          "c": 276.8
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Watch",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 0.1814882032667775,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "CPPLUS",
@@ -9639,48 +10749,49 @@
       "exchange": "NSE",
       "qty": 4,
       "buyPrice": 3601.26,
-      "price": 3366.3,
-      "dayChangePct": -0.28436428,
-      "value": 13465.2,
+      "price": 3376.9,
+      "dayChangePct": 0.3148814,
+      "value": 13507.6,
       "invested": 14405.04,
-      "plPct": -6.524383132570268,
-      "plAbs": -939.8400000000001,
+      "plPct": -6.230041707624557,
+      "plAbs": -897.4400000000005,
       "stance": "Hold",
       "confidence": "Low",
       "action": "Hold",
-      "reasoning": "Recent results were strong, with Q4 FY26 net profit up ~208% and revenue up ~45% year-on-year, but valuation is very rich (P/E ~113) and the stock is highly volatile and currently below my buy price. This is information, not advice, and one-day direction versus the index is close to a coin flip. I have no scored history on this name, so I keep confidence low.",
+      "reasoning": "CP Plus delivered a strong Q4 FY26 — PAT tripled YoY to ₹169 Cr, revenue up 45.5%, and management has raised FY27 guidance to ₹6,000–6,500 Cr — but the stock is already down ~6% from your buy price and has pulled back from recent all-time highs near ₹3,537, suggesting much of the good news may be priced in. Short-term direction is essentially a coin flip; no new material catalyst or negative development was found today to justify adding or trimming. Stay patient but humble about near-term moves.",
       "keyNews": [
-        "Q4 FY26 net profit +207% YoY to ~Rs169 cr, revenue ~Rs1424 cr",
-        "Q3 FY26 (Dec quarter) net profit +138.8% YoY",
-        "High valuation: P/E ~113, near 52-week high earlier"
+        "CP Plus Q4 FY26 PAT triples to ₹169 Cr; revenue up 45.5% YoY to ₹1,422 Cr",
+        "Management raises FY27 revenue guidance to ₹6,000–6,500 Cr with 14–15% EBITDA margin target",
+        "Stock hit all-time high ₹3,537 in early June 2026 on institutional interest; currently pulling back"
       ],
       "sources": [
         {
+          "url": "https://www.tickertape.in/stocks/aditya-infotech-CPP",
+          "title": "CPPLUS Share Price Live: Aditya Infotech NSE Today"
+        },
+        {
           "url": "https://www.indmoney.com/stocks/aditya-infotech-ltd-share-price",
           "title": "Aditya Infotech Share Price Today – CPPLUS Stock Price, Live NSE/BSE Charts"
+        },
+        {
+          "url": "https://groww.in/stocks/aditya-infotech-ltd",
+          "title": "Aditya Infotech Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/CPPLUS.NS/history/",
+          "title": "ADITYA INFOTECH LIMITED (CPPLUS.NS) Stock Historical Prices & Data - Yahoo Finance"
         },
         {
           "url": "https://finance.yahoo.com/quote/CPPLUS.NS/",
           "title": "ADITYA INFOTECH LIMITED (CPPLUS.NS) Stock Price, News, Quote & History - Yahoo Finance"
         },
         {
-          "url": "https://www.screener.in/company/CPPLUS/consolidated/",
-          "title": "Aditya Infotech Ltd share price | About Aditya Infotech | Key Insights - Screener"
-        },
-        {
-          "url": "https://www.equitypandit.com/historical-data/cpplus",
-          "title": "Aditya Infotech Share Price, Historical Data, CPPLUS share price history, Live NSE/BSE, Stock Price Today, and Target, Latest News and Analysis"
-        },
-        {
           "url": "https://www.cnbc.com/quotes/CPPLUS-IN",
           "title": "CPPLUS-IN: Aditya Infotech Ltd - Stock Price, Quote and News - CNBC"
-        },
-        {
-          "url": "https://www.nseindia.com/get-quotes/equity?symbol=CPPLUS",
-          "title": "NSE India - Aditya Infotech Limited Stock Price Today, Live NSE Share Price, Latest News"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-08-05",
@@ -10533,19 +11644,30 @@
         {
           "t": "2026-06-15",
           "c": 3366.3
+        },
+        {
+          "t": "2026-06-16",
+          "c": 3376.9
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 0.3059739179514409,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     },
     {
       "symbol": "VEDL",
@@ -10553,20 +11675,20 @@
       "exchange": "NSE",
       "qty": 80,
       "buyPrice": 415.65,
-      "price": 302.5,
-      "dayChangePct": -2.3090568,
-      "value": 24200,
+      "price": 299.95,
+      "dayChangePct": -0.84297115,
+      "value": 23996,
       "invested": 33252,
-      "plPct": -27.22242271141585,
-      "plAbs": -9051.999999999998,
-      "stance": "Hold",
+      "plPct": -27.835919643931188,
+      "plAbs": -9256,
+      "stance": "Watch",
       "confidence": "Low",
-      "action": "Hold",
-      "reasoning": "Vedanta just completed its five-way demerger, with four entities listing this week, so the remaining VEDL share now reflects a narrower business and pricing is still settling out. A recent ED FEMA search concluded without penalty but adds overhang, and short-term direction here is essentially a coin flip. This is information, not advice, and I have no edge predicting one-day moves around such a structural event.",
+      "action": "Watch",
+      "reasoning": "VEDL is down ~2.7% on June 16 and faces a near-certain passive-selling headwind as MSCI removes it from its Global Standard Indexes effective June 22 — index-tracking funds will be forced sellers. The residual entity post-demerger now reflects only the copper/zinc/residual businesses, and its fundamentals and analyst coverage are still being re-rated; average broker target is ~₹308, but EPS is forecast to fall ~55% in FY27. Short-term direction is close to a coin flip even without the MSCI overhang; with it, near-term risk skews to the downside.",
       "keyNews": [
-        "Four Vedanta demerged entities list on NSE/BSE this week",
-        "ED FEMA search concluded with no penalty or operational impact",
-        "Brokerages flag aluminium as main value driver post-split"
+        "MSCI to remove VEDL from Global Standard Indexes effective June 22, 2026, post-demerger",
+        "Four demerged entities (VAML, VEDPOWER, VISL, VOGL) listed on NSE/BSE on June 15, 2026",
+        "VEDL stock dipped 2.7% on June 16; analysts flag short-term volatility, EPS seen -55% in FY27"
       ],
       "sources": [
         {
@@ -10574,27 +11696,28 @@
           "title": "VEDL Share Price Live: Vedanta NSE Today"
         },
         {
-          "url": "https://anandrathi.com/stocks/vedanta/share-price/100295",
-          "title": "Vedanta Share Price Today - Live Vedanta Stock Price NSE/BSE"
-        },
-        {
-          "url": "https://finance.yahoo.com/quote/VEDL.NS/",
-          "title": "Vedanta Limited (VEDL.NS) Stock Price, News, Quote & History - Yahoo Finance"
+          "url": "https://hdfcsky.com/news/market-preview-june-12-2026-lenskart-block-deal-vedanta-demerger-listings-dabur-fda-notice-happiest-minds-ai-launch-adani-data-centre-acquisition-to-keep-indian-investors-busy-on-friday",
+          "title": "Market Preview, June 12, 2026: Lenskart Block Deal, Vedanta Demerger Listings, Dabur FDA Notice, Happiest Minds AI Launch, Adani Data Centre Acquisition to Keep Indian Investors Busy on Friday - HDFCSky"
         },
         {
           "url": "https://groww.in/stocks/vedanta-ltd",
           "title": "Vedanta Share Price, Stock Price, LIVE NSE/BSE - Groww"
         },
         {
-          "url": "https://www.bajajfinserv.in/investments/vedl-share-price",
-          "title": "Vedanta Limited Share Price Today Live NSE/BSE"
+          "url": "https://upstox.com/news/market-news/stocks/vedanta-demerger-four-entities-to-list-on-june-15-what-shareholders-need-to-know/article-195209/",
+          "title": "Vedanta demerger: Four newly carved-out companies set for market debut on June 15; details to know"
         },
         {
-          "url": "https://ticker.finology.in/company/VEDL",
-          "title": "Vedanta Share Price Today, Quarterly Results & Stock Analysis"
+          "url": "https://upstox.com/news/market-news/stocks/vedanta-aluminium-lists-at-522-on-the-nse-all-four-demerged-vedanta-entities-now-trading-on-exchanges/article-195311/",
+          "title": "Vedanta Aluminium lists at ₹522 on the NSE; all four demerged Vedanta entities now trading on exchanges"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Vedanta_Limited",
+          "title": "Vedanta Limited"
         }
       ],
       "unavailable": false,
+      "benchmarkSymbol": "^NSEI",
       "priceHistory": [
         {
           "t": "2025-06-16",
@@ -11591,19 +12714,30 @@
         {
           "t": "2026-06-15",
           "c": 302.5
+        },
+        {
+          "t": "2026-06-16",
+          "c": 299.95
         }
       ],
       "recentCalls": [
         {
-          "date": "2026-06-15",
+          "date": "2026-06-16",
           "stance": "Hold",
           "confidence": "Low",
           "outcome": "pending",
           "stockReturnPct": null,
           "benchmarkReturnPct": null
+        },
+        {
+          "date": "2026-06-15",
+          "stance": "Hold",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -1.1074380165289277,
+          "benchmarkReturnPct": 0.6009499494841419
         }
-      ],
-      "benchmarkSymbol": "^NSEI"
+      ]
     }
   ],
   "ideas": {
@@ -11611,11 +12745,11 @@
       {
         "symbol": "ICICIBANK",
         "name": "ICICI Bank",
-        "why": "Analysts largely rate it Buy on robust fundamentals, double-digit NII growth and clean asset quality",
-        "risk": "Tougher deposit competition and net-interest-margin pressure could weigh on earnings",
+        "why": "Consistently improving RoA/RoE, strong retail+SME loan book growth, and well-provisioned balance sheet make it a core private-banking name worth studying",
+        "risk": "Any broad NPA cycle or rate-cut-driven NIM compression could pressure earnings",
         "exchange": "NS",
-        "price": 1327.6,
-        "dayChangePct": -0.98449236,
+        "price": 1334.3,
+        "dayChangePct": 0.5046756,
         "priceHistory": [
           {
             "t": "2025-12-18",
@@ -12100,17 +13234,21 @@
           {
             "t": "2026-06-15",
             "c": 1327.6
+          },
+          {
+            "t": "2026-06-16",
+            "c": 1334.3
           }
         ]
       },
       {
         "symbol": "INFY",
         "name": "Infosys",
-        "why": "Buy-skewed analyst coverage with large deal wins including a ~$1.59B UK NHS contract and an AI-led order pipeline",
-        "risk": "Cautious global IT demand and currency swings can pressure growth and margins",
+        "why": "Large-cap IT bellwether with a healthy deal-win pipeline, cost-efficiency drive, and steady USD revenue growth — a liquid proxy for India's IT export story",
+        "risk": "Slowdown in US/EU discretionary tech spending and visa/offshoring policy changes remain key headwinds",
         "exchange": "NS",
-        "price": 1134.9,
-        "dayChangePct": 1.6571121,
+        "price": 1143.6,
+        "dayChangePct": 0.7665831,
         "priceHistory": [
           {
             "t": "2025-12-18",
@@ -12595,17 +13733,1019 @@
           {
             "t": "2026-06-15",
             "c": 1134.9
+          },
+          {
+            "t": "2026-06-16",
+            "c": 1143.6
+          }
+        ]
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "name": "Sun Pharmaceutical Industries",
+        "why": "Market-leading domestic formulations franchise plus a growing specialty-US business (Ilumya, Winlevi) diversifies revenue well beyond generics",
+        "risk": "US FDA plant observations or pricing erosion in the US generics market can hurt margins quickly",
+        "exchange": "NS",
+        "price": 1800.7,
+        "dayChangePct": -0.29346892,
+        "priceHistory": [
+          {
+            "t": "2025-12-18",
+            "c": 1745.9
+          },
+          {
+            "t": "2025-12-19",
+            "c": 1744.9
+          },
+          {
+            "t": "2025-12-22",
+            "c": 1769.8
+          },
+          {
+            "t": "2025-12-23",
+            "c": 1755.9
+          },
+          {
+            "t": "2025-12-24",
+            "c": 1737
+          },
+          {
+            "t": "2025-12-26",
+            "c": 1719.5
+          },
+          {
+            "t": "2025-12-29",
+            "c": 1717.2
+          },
+          {
+            "t": "2025-12-30",
+            "c": 1720.2
+          },
+          {
+            "t": "2025-12-31",
+            "c": 1719.7
+          },
+          {
+            "t": "2026-01-01",
+            "c": 1721.1
+          },
+          {
+            "t": "2026-01-02",
+            "c": 1728
+          },
+          {
+            "t": "2026-01-05",
+            "c": 1728.9
+          },
+          {
+            "t": "2026-01-06",
+            "c": 1760.2
+          },
+          {
+            "t": "2026-01-07",
+            "c": 1782.6
+          },
+          {
+            "t": "2026-01-08",
+            "c": 1760.7
+          },
+          {
+            "t": "2026-01-09",
+            "c": 1729.9
+          },
+          {
+            "t": "2026-01-12",
+            "c": 1736
+          },
+          {
+            "t": "2026-01-13",
+            "c": 1728.7
+          },
+          {
+            "t": "2026-01-14",
+            "c": 1700.7
+          },
+          {
+            "t": "2026-01-15",
+            "c": 1700.7
+          },
+          {
+            "t": "2026-01-16",
+            "c": 1668.9
+          },
+          {
+            "t": "2026-01-19",
+            "c": 1675.4
+          },
+          {
+            "t": "2026-01-20",
+            "c": 1613.8
+          },
+          {
+            "t": "2026-01-21",
+            "c": 1612.9
+          },
+          {
+            "t": "2026-01-22",
+            "c": 1634.2
+          },
+          {
+            "t": "2026-01-23",
+            "c": 1631.9
+          },
+          {
+            "t": "2026-01-27",
+            "c": 1638.9
+          },
+          {
+            "t": "2026-01-28",
+            "c": 1610.6
+          },
+          {
+            "t": "2026-01-29",
+            "c": 1589.3
+          },
+          {
+            "t": "2026-01-30",
+            "c": 1595.3
+          },
+          {
+            "t": "2026-02-02",
+            "c": 1627.9
+          },
+          {
+            "t": "2026-02-03",
+            "c": 1702.1
+          },
+          {
+            "t": "2026-02-04",
+            "c": 1704.4
+          },
+          {
+            "t": "2026-02-05",
+            "c": 1702.6
+          },
+          {
+            "t": "2026-02-06",
+            "c": 1695.1
+          },
+          {
+            "t": "2026-02-09",
+            "c": 1704.6
+          },
+          {
+            "t": "2026-02-10",
+            "c": 1707.8
+          },
+          {
+            "t": "2026-02-11",
+            "c": 1711.1
+          },
+          {
+            "t": "2026-02-12",
+            "c": 1714.9
+          },
+          {
+            "t": "2026-02-13",
+            "c": 1697.5
+          },
+          {
+            "t": "2026-02-16",
+            "c": 1700.5
+          },
+          {
+            "t": "2026-02-17",
+            "c": 1717.1
+          },
+          {
+            "t": "2026-02-18",
+            "c": 1724.4
+          },
+          {
+            "t": "2026-02-19",
+            "c": 1713.4
+          },
+          {
+            "t": "2026-02-20",
+            "c": 1724.4
+          },
+          {
+            "t": "2026-02-23",
+            "c": 1732.3
+          },
+          {
+            "t": "2026-02-24",
+            "c": 1731.8
+          },
+          {
+            "t": "2026-02-25",
+            "c": 1764.2
+          },
+          {
+            "t": "2026-02-26",
+            "c": 1785.7
+          },
+          {
+            "t": "2026-02-27",
+            "c": 1737
+          },
+          {
+            "t": "2026-03-02",
+            "c": 1752.5
+          },
+          {
+            "t": "2026-03-04",
+            "c": 1750.5
+          },
+          {
+            "t": "2026-03-05",
+            "c": 1784.5
+          },
+          {
+            "t": "2026-03-06",
+            "c": 1799.4
+          },
+          {
+            "t": "2026-03-09",
+            "c": 1807.4
+          },
+          {
+            "t": "2026-03-10",
+            "c": 1812.8
+          },
+          {
+            "t": "2026-03-11",
+            "c": 1825.9
+          },
+          {
+            "t": "2026-03-12",
+            "c": 1825.3
+          },
+          {
+            "t": "2026-03-13",
+            "c": 1801.6
+          },
+          {
+            "t": "2026-03-16",
+            "c": 1783.2
+          },
+          {
+            "t": "2026-03-17",
+            "c": 1794.4
+          },
+          {
+            "t": "2026-03-18",
+            "c": 1778.3
+          },
+          {
+            "t": "2026-03-19",
+            "c": 1744.4
+          },
+          {
+            "t": "2026-03-20",
+            "c": 1777.1
+          },
+          {
+            "t": "2026-03-23",
+            "c": 1758.4
+          },
+          {
+            "t": "2026-03-24",
+            "c": 1753.3
+          },
+          {
+            "t": "2026-03-25",
+            "c": 1795.4
+          },
+          {
+            "t": "2026-03-27",
+            "c": 1793.6
+          },
+          {
+            "t": "2026-03-30",
+            "c": 1757.2
+          },
+          {
+            "t": "2026-04-01",
+            "c": 1728.5
+          },
+          {
+            "t": "2026-04-02",
+            "c": 1693.6
+          },
+          {
+            "t": "2026-04-06",
+            "c": 1694.6
+          },
+          {
+            "t": "2026-04-07",
+            "c": 1718
+          },
+          {
+            "t": "2026-04-08",
+            "c": 1714.6
+          },
+          {
+            "t": "2026-04-09",
+            "c": 1717.1
+          },
+          {
+            "t": "2026-04-10",
+            "c": 1654.9
+          },
+          {
+            "t": "2026-04-13",
+            "c": 1652.2
+          },
+          {
+            "t": "2026-04-15",
+            "c": 1696.6
+          },
+          {
+            "t": "2026-04-16",
+            "c": 1693.1
+          },
+          {
+            "t": "2026-04-17",
+            "c": 1675.5
+          },
+          {
+            "t": "2026-04-20",
+            "c": 1668.6
+          },
+          {
+            "t": "2026-04-21",
+            "c": 1665.2
+          },
+          {
+            "t": "2026-04-22",
+            "c": 1669.8
+          },
+          {
+            "t": "2026-04-23",
+            "c": 1680.1
+          },
+          {
+            "t": "2026-04-24",
+            "c": 1620.4
+          },
+          {
+            "t": "2026-04-27",
+            "c": 1733.5
+          },
+          {
+            "t": "2026-04-28",
+            "c": 1747.3
+          },
+          {
+            "t": "2026-04-29",
+            "c": 1778.7
+          },
+          {
+            "t": "2026-04-30",
+            "c": 1808.3
+          },
+          {
+            "t": "2026-05-01",
+            "c": 1808.3
+          },
+          {
+            "t": "2026-05-04",
+            "c": 1823.5
+          },
+          {
+            "t": "2026-05-05",
+            "c": 1820.8
+          },
+          {
+            "t": "2026-05-06",
+            "c": 1850.2
+          },
+          {
+            "t": "2026-05-07",
+            "c": 1834.4
+          },
+          {
+            "t": "2026-05-08",
+            "c": 1847.9
+          },
+          {
+            "t": "2026-05-11",
+            "c": 1872.7
+          },
+          {
+            "t": "2026-05-12",
+            "c": 1845.7
+          },
+          {
+            "t": "2026-05-13",
+            "c": 1824.8
+          },
+          {
+            "t": "2026-05-14",
+            "c": 1863.2
+          },
+          {
+            "t": "2026-05-15",
+            "c": 1878.2
+          },
+          {
+            "t": "2026-05-18",
+            "c": 1905.8
+          },
+          {
+            "t": "2026-05-19",
+            "c": 1882.3
+          },
+          {
+            "t": "2026-05-20",
+            "c": 1880.3
+          },
+          {
+            "t": "2026-05-21",
+            "c": 1891.3
+          },
+          {
+            "t": "2026-05-22",
+            "c": 1844.6
+          },
+          {
+            "t": "2026-05-25",
+            "c": 1840.6
+          },
+          {
+            "t": "2026-05-26",
+            "c": 1840.8
+          },
+          {
+            "t": "2026-05-27",
+            "c": 1844.3
+          },
+          {
+            "t": "2026-05-28",
+            "c": 1844.3
+          },
+          {
+            "t": "2026-05-29",
+            "c": 1799.2
+          },
+          {
+            "t": "2026-06-01",
+            "c": 1796.5
+          },
+          {
+            "t": "2026-06-02",
+            "c": 1789.9
+          },
+          {
+            "t": "2026-06-03",
+            "c": 1788.5
+          },
+          {
+            "t": "2026-06-04",
+            "c": 1780.1
+          },
+          {
+            "t": "2026-06-05",
+            "c": 1782.2
+          },
+          {
+            "t": "2026-06-08",
+            "c": 1788.8
+          },
+          {
+            "t": "2026-06-09",
+            "c": 1779
+          },
+          {
+            "t": "2026-06-10",
+            "c": 1786.4
+          },
+          {
+            "t": "2026-06-11",
+            "c": 1794.2
+          },
+          {
+            "t": "2026-06-12",
+            "c": 1807.7
+          },
+          {
+            "t": "2026-06-15",
+            "c": 1806
+          },
+          {
+            "t": "2026-06-16",
+            "c": 1800.7
+          }
+        ]
+      },
+      {
+        "symbol": "MARUTI",
+        "name": "Maruti Suzuki India",
+        "why": "Dominant ~40% passenger-vehicle market share, ramp-up of SUV portfolio, and upcoming EV launches position it to capture India's premiumisation trend",
+        "risk": "Yen appreciation raises input costs, and rising EV competition from Tata/Mahindra could erode share over time",
+        "exchange": "NS",
+        "price": 13691,
+        "dayChangePct": -0.8257878,
+        "priceHistory": [
+          {
+            "t": "2025-12-18",
+            "c": 16329
+          },
+          {
+            "t": "2025-12-19",
+            "c": 16414
+          },
+          {
+            "t": "2025-12-22",
+            "c": 16649
+          },
+          {
+            "t": "2025-12-23",
+            "c": 16585
+          },
+          {
+            "t": "2025-12-24",
+            "c": 16703
+          },
+          {
+            "t": "2025-12-26",
+            "c": 16596
+          },
+          {
+            "t": "2025-12-29",
+            "c": 16542
+          },
+          {
+            "t": "2025-12-30",
+            "c": 16647
+          },
+          {
+            "t": "2025-12-31",
+            "c": 16697
+          },
+          {
+            "t": "2026-01-01",
+            "c": 16708
+          },
+          {
+            "t": "2026-01-02",
+            "c": 16960
+          },
+          {
+            "t": "2026-01-05",
+            "c": 17155
+          },
+          {
+            "t": "2026-01-06",
+            "c": 17292
+          },
+          {
+            "t": "2026-01-07",
+            "c": 16809
+          },
+          {
+            "t": "2026-01-08",
+            "c": 16664
+          },
+          {
+            "t": "2026-01-09",
+            "c": 16501
+          },
+          {
+            "t": "2026-01-12",
+            "c": 16582
+          },
+          {
+            "t": "2026-01-13",
+            "c": 16426
+          },
+          {
+            "t": "2026-01-14",
+            "c": 16152
+          },
+          {
+            "t": "2026-01-15",
+            "c": 16152
+          },
+          {
+            "t": "2026-01-16",
+            "c": 15859
+          },
+          {
+            "t": "2026-01-19",
+            "c": 16176
+          },
+          {
+            "t": "2026-01-20",
+            "c": 15879
+          },
+          {
+            "t": "2026-01-21",
+            "c": 15770
+          },
+          {
+            "t": "2026-01-22",
+            "c": 15765
+          },
+          {
+            "t": "2026-01-23",
+            "c": 15469
+          },
+          {
+            "t": "2026-01-27",
+            "c": 15245
+          },
+          {
+            "t": "2026-01-28",
+            "c": 14877
+          },
+          {
+            "t": "2026-01-29",
+            "c": 14502
+          },
+          {
+            "t": "2026-01-30",
+            "c": 14599
+          },
+          {
+            "t": "2026-02-02",
+            "c": 14384
+          },
+          {
+            "t": "2026-02-03",
+            "c": 14782
+          },
+          {
+            "t": "2026-02-04",
+            "c": 15071
+          },
+          {
+            "t": "2026-02-05",
+            "c": 15059
+          },
+          {
+            "t": "2026-02-06",
+            "c": 14997
+          },
+          {
+            "t": "2026-02-09",
+            "c": 14978
+          },
+          {
+            "t": "2026-02-10",
+            "c": 15146
+          },
+          {
+            "t": "2026-02-11",
+            "c": 15412
+          },
+          {
+            "t": "2026-02-12",
+            "c": 15326
+          },
+          {
+            "t": "2026-02-13",
+            "c": 15237
+          },
+          {
+            "t": "2026-02-16",
+            "c": 15051
+          },
+          {
+            "t": "2026-02-17",
+            "c": 15179
+          },
+          {
+            "t": "2026-02-18",
+            "c": 15164
+          },
+          {
+            "t": "2026-02-19",
+            "c": 14903
+          },
+          {
+            "t": "2026-02-20",
+            "c": 14977
+          },
+          {
+            "t": "2026-02-23",
+            "c": 15072
+          },
+          {
+            "t": "2026-02-24",
+            "c": 14926
+          },
+          {
+            "t": "2026-02-25",
+            "c": 15070
+          },
+          {
+            "t": "2026-02-26",
+            "c": 15213
+          },
+          {
+            "t": "2026-02-27",
+            "c": 14857
+          },
+          {
+            "t": "2026-03-02",
+            "c": 14388
+          },
+          {
+            "t": "2026-03-04",
+            "c": 14158
+          },
+          {
+            "t": "2026-03-05",
+            "c": 14415
+          },
+          {
+            "t": "2026-03-06",
+            "c": 14159
+          },
+          {
+            "t": "2026-03-09",
+            "c": 13508
+          },
+          {
+            "t": "2026-03-10",
+            "c": 13867
+          },
+          {
+            "t": "2026-03-11",
+            "c": 13497
+          },
+          {
+            "t": "2026-03-12",
+            "c": 13011
+          },
+          {
+            "t": "2026-03-13",
+            "c": 12591
+          },
+          {
+            "t": "2026-03-16",
+            "c": 12757
+          },
+          {
+            "t": "2026-03-17",
+            "c": 12972
+          },
+          {
+            "t": "2026-03-18",
+            "c": 13048
+          },
+          {
+            "t": "2026-03-19",
+            "c": 12599
+          },
+          {
+            "t": "2026-03-20",
+            "c": 12601
+          },
+          {
+            "t": "2026-03-23",
+            "c": 12355
+          },
+          {
+            "t": "2026-03-24",
+            "c": 12464
+          },
+          {
+            "t": "2026-03-25",
+            "c": 12711
+          },
+          {
+            "t": "2026-03-27",
+            "c": 12389
+          },
+          {
+            "t": "2026-03-30",
+            "c": 12306
+          },
+          {
+            "t": "2026-04-01",
+            "c": 12509
+          },
+          {
+            "t": "2026-04-02",
+            "c": 12631
+          },
+          {
+            "t": "2026-04-06",
+            "c": 12688
+          },
+          {
+            "t": "2026-04-07",
+            "c": 12798
+          },
+          {
+            "t": "2026-04-08",
+            "c": 13602
+          },
+          {
+            "t": "2026-04-09",
+            "c": 13589
+          },
+          {
+            "t": "2026-04-10",
+            "c": 13709
+          },
+          {
+            "t": "2026-04-13",
+            "c": 13076
+          },
+          {
+            "t": "2026-04-15",
+            "c": 13289
+          },
+          {
+            "t": "2026-04-16",
+            "c": 13335
+          },
+          {
+            "t": "2026-04-17",
+            "c": 13453
+          },
+          {
+            "t": "2026-04-20",
+            "c": 13450
+          },
+          {
+            "t": "2026-04-21",
+            "c": 13461
+          },
+          {
+            "t": "2026-04-22",
+            "c": 13337
+          },
+          {
+            "t": "2026-04-23",
+            "c": 13160
+          },
+          {
+            "t": "2026-04-24",
+            "c": 13048
+          },
+          {
+            "t": "2026-04-27",
+            "c": 13222
+          },
+          {
+            "t": "2026-04-28",
+            "c": 12892
+          },
+          {
+            "t": "2026-04-29",
+            "c": 13257
+          },
+          {
+            "t": "2026-04-30",
+            "c": 13314
+          },
+          {
+            "t": "2026-05-01",
+            "c": 13314
+          },
+          {
+            "t": "2026-05-04",
+            "c": 13580
+          },
+          {
+            "t": "2026-05-05",
+            "c": 13426
+          },
+          {
+            "t": "2026-05-06",
+            "c": 13722
+          },
+          {
+            "t": "2026-05-07",
+            "c": 13770
+          },
+          {
+            "t": "2026-05-08",
+            "c": 13726
+          },
+          {
+            "t": "2026-05-11",
+            "c": 13483
+          },
+          {
+            "t": "2026-05-12",
+            "c": 13172
+          },
+          {
+            "t": "2026-05-13",
+            "c": 13103
+          },
+          {
+            "t": "2026-05-14",
+            "c": 13075
+          },
+          {
+            "t": "2026-05-15",
+            "c": 13221
+          },
+          {
+            "t": "2026-05-18",
+            "c": 13016
+          },
+          {
+            "t": "2026-05-19",
+            "c": 12956
+          },
+          {
+            "t": "2026-05-20",
+            "c": 13003
+          },
+          {
+            "t": "2026-05-21",
+            "c": 13010
+          },
+          {
+            "t": "2026-05-22",
+            "c": 12987
+          },
+          {
+            "t": "2026-05-25",
+            "c": 13170
+          },
+          {
+            "t": "2026-05-26",
+            "c": 13208
+          },
+          {
+            "t": "2026-05-27",
+            "c": 13364
+          },
+          {
+            "t": "2026-05-28",
+            "c": 13364
+          },
+          {
+            "t": "2026-05-29",
+            "c": 13127
+          },
+          {
+            "t": "2026-06-01",
+            "c": 12946
+          },
+          {
+            "t": "2026-06-02",
+            "c": 13022
+          },
+          {
+            "t": "2026-06-03",
+            "c": 13044
+          },
+          {
+            "t": "2026-06-04",
+            "c": 13064
+          },
+          {
+            "t": "2026-06-05",
+            "c": 13050
+          },
+          {
+            "t": "2026-06-08",
+            "c": 12912
+          },
+          {
+            "t": "2026-06-09",
+            "c": 13120
+          },
+          {
+            "t": "2026-06-10",
+            "c": 13073
+          },
+          {
+            "t": "2026-06-11",
+            "c": 13098
+          },
+          {
+            "t": "2026-06-12",
+            "c": 13366
+          },
+          {
+            "t": "2026-06-15",
+            "c": 13805
+          },
+          {
+            "t": "2026-06-16",
+            "c": 13691
           }
         ]
       },
       {
         "symbol": "TITAN",
         "name": "Titan Company",
-        "why": "High-quality consumer-discretionary franchise with strong jewellery growth and a 2x-by-FY30 expansion plan backed by brokerages",
-        "risk": "Gold-price volatility and discretionary-spending slowdowns can hit demand and margins",
+        "why": "Branded jewellery (Tanishq) + watches + eyewear give diversified consumer exposure with strong pricing power and a pan-India retail network",
+        "risk": "Gold price spikes compress jewellery margins and can temporarily suppress discretionary demand",
         "exchange": "NS",
-        "price": 4283.5,
-        "dayChangePct": 2.378107,
+        "price": 4338,
+        "dayChangePct": 1.272324,
         "priceHistory": [
           {
             "t": "2025-12-18",
@@ -13090,1019 +15230,537 @@
           {
             "t": "2026-06-15",
             "c": 4283.5
+          },
+          {
+            "t": "2026-06-16",
+            "c": 4338
+          }
+        ]
+      },
+      {
+        "symbol": "COALINDIA",
+        "name": "Coal India",
+        "why": "Near-monopoly domestic coal producer with high dividend yield, strong free cash flow, and continued thermal-power demand keeping volumes robust",
+        "risk": "Government price/supply mandates and India's long-term energy-transition away from coal are structural overhangs",
+        "exchange": "NS",
+        "price": 450.95,
+        "dayChangePct": 1.5538846,
+        "priceHistory": [
+          {
+            "t": "2025-12-18",
+            "c": 385.3
+          },
+          {
+            "t": "2025-12-19",
+            "c": 385.6
+          },
+          {
+            "t": "2025-12-22",
+            "c": 386.25
+          },
+          {
+            "t": "2025-12-23",
+            "c": 400.4
+          },
+          {
+            "t": "2025-12-24",
+            "c": 402.35
+          },
+          {
+            "t": "2025-12-26",
+            "c": 402.15
+          },
+          {
+            "t": "2025-12-29",
+            "c": 400.65
+          },
+          {
+            "t": "2025-12-30",
+            "c": 398
+          },
+          {
+            "t": "2025-12-31",
+            "c": 399
+          },
+          {
+            "t": "2026-01-01",
+            "c": 400.45
+          },
+          {
+            "t": "2026-01-02",
+            "c": 427.9
+          },
+          {
+            "t": "2026-01-05",
+            "c": 427.45
+          },
+          {
+            "t": "2026-01-06",
+            "c": 427.05
+          },
+          {
+            "t": "2026-01-07",
+            "c": 431.65
+          },
+          {
+            "t": "2026-01-08",
+            "c": 425.25
+          },
+          {
+            "t": "2026-01-09",
+            "c": 418.35
+          },
+          {
+            "t": "2026-01-12",
+            "c": 432.3
+          },
+          {
+            "t": "2026-01-13",
+            "c": 428.9
+          },
+          {
+            "t": "2026-01-14",
+            "c": 432.2
+          },
+          {
+            "t": "2026-01-15",
+            "c": 432.2
+          },
+          {
+            "t": "2026-01-16",
+            "c": 431
+          },
+          {
+            "t": "2026-01-19",
+            "c": 430.15
+          },
+          {
+            "t": "2026-01-20",
+            "c": 415.3
+          },
+          {
+            "t": "2026-01-21",
+            "c": 414.05
+          },
+          {
+            "t": "2026-01-22",
+            "c": 423.2
+          },
+          {
+            "t": "2026-01-23",
+            "c": 418.4
+          },
+          {
+            "t": "2026-01-27",
+            "c": 422.9
+          },
+          {
+            "t": "2026-01-28",
+            "c": 444.05
+          },
+          {
+            "t": "2026-01-29",
+            "c": 455.75
+          },
+          {
+            "t": "2026-01-30",
+            "c": 440.75
+          },
+          {
+            "t": "2026-02-02",
+            "c": 423.5
+          },
+          {
+            "t": "2026-02-03",
+            "c": 429.4
+          },
+          {
+            "t": "2026-02-04",
+            "c": 434.9
+          },
+          {
+            "t": "2026-02-05",
+            "c": 431.85
+          },
+          {
+            "t": "2026-02-06",
+            "c": 432.8
+          },
+          {
+            "t": "2026-02-09",
+            "c": 431.7
+          },
+          {
+            "t": "2026-02-10",
+            "c": 430.95
+          },
+          {
+            "t": "2026-02-11",
+            "c": 423.25
+          },
+          {
+            "t": "2026-02-12",
+            "c": 419.15
+          },
+          {
+            "t": "2026-02-13",
+            "c": 408.95
+          },
+          {
+            "t": "2026-02-16",
+            "c": 422.5
+          },
+          {
+            "t": "2026-02-17",
+            "c": 421.55
+          },
+          {
+            "t": "2026-02-18",
+            "c": 418
+          },
+          {
+            "t": "2026-02-19",
+            "c": 416.15
+          },
+          {
+            "t": "2026-02-20",
+            "c": 423.55
+          },
+          {
+            "t": "2026-02-23",
+            "c": 426
+          },
+          {
+            "t": "2026-02-24",
+            "c": 430.95
+          },
+          {
+            "t": "2026-02-25",
+            "c": 438.6
+          },
+          {
+            "t": "2026-02-26",
+            "c": 433.5
+          },
+          {
+            "t": "2026-02-27",
+            "c": 430.65
+          },
+          {
+            "t": "2026-03-02",
+            "c": 426.25
+          },
+          {
+            "t": "2026-03-04",
+            "c": 435.15
+          },
+          {
+            "t": "2026-03-05",
+            "c": 449.4
+          },
+          {
+            "t": "2026-03-06",
+            "c": 440.45
+          },
+          {
+            "t": "2026-03-09",
+            "c": 437.65
+          },
+          {
+            "t": "2026-03-10",
+            "c": 443.55
+          },
+          {
+            "t": "2026-03-11",
+            "c": 446.75
+          },
+          {
+            "t": "2026-03-12",
+            "c": 470.1
+          },
+          {
+            "t": "2026-03-13",
+            "c": 467
+          },
+          {
+            "t": "2026-03-16",
+            "c": 460.3
+          },
+          {
+            "t": "2026-03-17",
+            "c": 462.25
+          },
+          {
+            "t": "2026-03-18",
+            "c": 455.2
+          },
+          {
+            "t": "2026-03-19",
+            "c": 454.2
+          },
+          {
+            "t": "2026-03-20",
+            "c": 468.15
+          },
+          {
+            "t": "2026-03-23",
+            "c": 455.25
+          },
+          {
+            "t": "2026-03-24",
+            "c": 442.1
+          },
+          {
+            "t": "2026-03-25",
+            "c": 443.7
+          },
+          {
+            "t": "2026-03-27",
+            "c": 445.05
+          },
+          {
+            "t": "2026-03-30",
+            "c": 450.45
+          },
+          {
+            "t": "2026-04-01",
+            "c": 449.4
+          },
+          {
+            "t": "2026-04-02",
+            "c": 449.35
+          },
+          {
+            "t": "2026-04-06",
+            "c": 459.55
+          },
+          {
+            "t": "2026-04-07",
+            "c": 463
+          },
+          {
+            "t": "2026-04-08",
+            "c": 449.25
+          },
+          {
+            "t": "2026-04-09",
+            "c": 454.1
+          },
+          {
+            "t": "2026-04-10",
+            "c": 434.1
+          },
+          {
+            "t": "2026-04-13",
+            "c": 435.1
+          },
+          {
+            "t": "2026-04-15",
+            "c": 435.8
+          },
+          {
+            "t": "2026-04-16",
+            "c": 432.75
+          },
+          {
+            "t": "2026-04-17",
+            "c": 438.75
+          },
+          {
+            "t": "2026-04-20",
+            "c": 441.75
+          },
+          {
+            "t": "2026-04-21",
+            "c": 443.15
+          },
+          {
+            "t": "2026-04-22",
+            "c": 444.15
+          },
+          {
+            "t": "2026-04-23",
+            "c": 450.65
+          },
+          {
+            "t": "2026-04-24",
+            "c": 456
+          },
+          {
+            "t": "2026-04-27",
+            "c": 452.5
+          },
+          {
+            "t": "2026-04-28",
+            "c": 467
+          },
+          {
+            "t": "2026-04-29",
+            "c": 479.9
+          },
+          {
+            "t": "2026-04-30",
+            "c": 481.45
+          },
+          {
+            "t": "2026-05-01",
+            "c": 481.45
+          },
+          {
+            "t": "2026-05-04",
+            "c": 479.95
+          },
+          {
+            "t": "2026-05-05",
+            "c": 472.6
+          },
+          {
+            "t": "2026-05-06",
+            "c": 470.2
+          },
+          {
+            "t": "2026-05-07",
+            "c": 466.65
+          },
+          {
+            "t": "2026-05-08",
+            "c": 456.4
+          },
+          {
+            "t": "2026-05-11",
+            "c": 464.45
+          },
+          {
+            "t": "2026-05-12",
+            "c": 463.05
+          },
+          {
+            "t": "2026-05-13",
+            "c": 462.25
+          },
+          {
+            "t": "2026-05-14",
+            "c": 454.05
+          },
+          {
+            "t": "2026-05-15",
+            "c": 462.2
+          },
+          {
+            "t": "2026-05-18",
+            "c": 462.1
+          },
+          {
+            "t": "2026-05-19",
+            "c": 456.95
+          },
+          {
+            "t": "2026-05-20",
+            "c": 458.7
+          },
+          {
+            "t": "2026-05-21",
+            "c": 460.2
+          },
+          {
+            "t": "2026-05-22",
+            "c": 456.55
+          },
+          {
+            "t": "2026-05-25",
+            "c": 458
+          },
+          {
+            "t": "2026-05-26",
+            "c": 458.15
+          },
+          {
+            "t": "2026-05-27",
+            "c": 463.05
+          },
+          {
+            "t": "2026-05-28",
+            "c": 463.05
+          },
+          {
+            "t": "2026-05-29",
+            "c": 457.9
+          },
+          {
+            "t": "2026-06-01",
+            "c": 472.6
+          },
+          {
+            "t": "2026-06-02",
+            "c": 472.15
+          },
+          {
+            "t": "2026-06-03",
+            "c": 472.3
+          },
+          {
+            "t": "2026-06-04",
+            "c": 481.65
+          },
+          {
+            "t": "2026-06-05",
+            "c": 472.3
+          },
+          {
+            "t": "2026-06-08",
+            "c": 464.9
+          },
+          {
+            "t": "2026-06-09",
+            "c": 466.9
+          },
+          {
+            "t": "2026-06-10",
+            "c": 451
+          },
+          {
+            "t": "2026-06-11",
+            "c": 446.2
+          },
+          {
+            "t": "2026-06-12",
+            "c": 443.5
+          },
+          {
+            "t": "2026-06-15",
+            "c": 444.05
+          },
+          {
+            "t": "2026-06-16",
+            "c": 450.95
           }
         ]
       }
     ],
     "sources": [
       {
-        "url": "https://www.smallcase.com/lists/large-cap-stocks/",
-        "title": "List of the Best Large Cap Stocks in India (2026)"
+        "url": "https://www.businesstoday.in/markets/stock-picks",
+        "title": "Best Stock Picks: Stock Market Recommendation, BSE, NSE Brokerages Advice"
       },
       {
-        "url": "https://enrichmoney.in/blog-article/nifty-100-index-top-large-cap-stocks-2025",
-        "title": "Nifty 100 Index Explained: Top Large-Cap Stocks Driving India's Growth"
+        "url": "https://www.shareindia.com/knowledge-center/share-market/fastest-growing-sectors-in-the-indian-stock-market-for-2025",
+        "title": "Fastest Growing Sectors in the Indian Stock Market for 2025 - Share India"
       },
       {
-        "url": "https://www.tickertape.in/stocks/collections/nifty-50-stocks",
-        "title": "Nifty 50 Stocks: Top Nifty 50 Shares in India (2026)"
+        "url": "https://geplcapital.com/knowledge-centers/blog-article/blog-article-best-stocks-to-invest-in-for-short-term-2025",
+        "title": "5 best stocks to invest in India for short term in 2025"
       },
       {
-        "url": "https://www.torusdigital.com/share-market-today/large-cap-stocks",
-        "title": "Large Cap Stocks 2025: List of Top Large Cap Companies in India"
+        "url": "https://www.smallcase.com/lists/growth-stocks/",
+        "title": "List of High Growth Stocks in India"
       },
       {
-        "url": "https://www.moneyworks4me.com/best-index/nse-stocks/top-nifty-50-companies-list",
-        "title": "Nifty 50 Companies - List of all Nifty 50 Stocks | Nifty 50 Companies Weightage 2026 | MoneyWorks4Me"
+        "url": "https://dhan.co/stocks/market/stocks-for-next-5-years/",
+        "title": "Stocks for Next 5 Years - List of Best Stocks for Next 5 Years | Dhan"
       },
       {
-        "url": "https://dhan.co/stocks/market/top-10-stocks-in-nifty-50/",
-        "title": "Nifty 50 Top 10 Stocks - Explore Top 10 Among Nifty 50 | Dhan"
-      }
-    ]
-  },
-  "chartsBackfilledAt": "2026-06-16T01:22:52.478Z",
-  "indexHistory": {
-    "^NSEI": [
-      {
-        "t": "2025-06-16",
-        "c": 24946.5
-      },
-      {
-        "t": "2025-06-17",
-        "c": 24853.4
-      },
-      {
-        "t": "2025-06-18",
-        "c": 24812.05
-      },
-      {
-        "t": "2025-06-19",
-        "c": 24793.25
-      },
-      {
-        "t": "2025-06-20",
-        "c": 25112.4
-      },
-      {
-        "t": "2025-06-23",
-        "c": 24971.9
-      },
-      {
-        "t": "2025-06-24",
-        "c": 25044.35
-      },
-      {
-        "t": "2025-06-25",
-        "c": 25244.75
-      },
-      {
-        "t": "2025-06-26",
-        "c": 25549
-      },
-      {
-        "t": "2025-06-27",
-        "c": 25637.8
-      },
-      {
-        "t": "2025-06-30",
-        "c": 25517.05
-      },
-      {
-        "t": "2025-07-01",
-        "c": 25541.8
-      },
-      {
-        "t": "2025-07-02",
-        "c": 25453.4
-      },
-      {
-        "t": "2025-07-03",
-        "c": 25405.3
-      },
-      {
-        "t": "2025-07-04",
-        "c": 25461
-      },
-      {
-        "t": "2025-07-07",
-        "c": 25461.3
-      },
-      {
-        "t": "2025-07-08",
-        "c": 25522.5
-      },
-      {
-        "t": "2025-07-09",
-        "c": 25476.1
-      },
-      {
-        "t": "2025-07-10",
-        "c": 25355.25
-      },
-      {
-        "t": "2025-07-11",
-        "c": 25149.85
-      },
-      {
-        "t": "2025-07-14",
-        "c": 25082.3
-      },
-      {
-        "t": "2025-07-15",
-        "c": 25195.8
-      },
-      {
-        "t": "2025-07-16",
-        "c": 25212.05
-      },
-      {
-        "t": "2025-07-17",
-        "c": 25111.45
-      },
-      {
-        "t": "2025-07-18",
-        "c": 24968.4
-      },
-      {
-        "t": "2025-07-21",
-        "c": 25090.7
-      },
-      {
-        "t": "2025-07-22",
-        "c": 25060.9
-      },
-      {
-        "t": "2025-07-23",
-        "c": 25219.9
-      },
-      {
-        "t": "2025-07-24",
-        "c": 25062.1
-      },
-      {
-        "t": "2025-07-25",
-        "c": 24837
-      },
-      {
-        "t": "2025-07-28",
-        "c": 24680.9
-      },
-      {
-        "t": "2025-07-29",
-        "c": 24821.1
-      },
-      {
-        "t": "2025-07-30",
-        "c": 24855.05
-      },
-      {
-        "t": "2025-07-31",
-        "c": 24768.35
-      },
-      {
-        "t": "2025-08-01",
-        "c": 24565.35
-      },
-      {
-        "t": "2025-08-04",
-        "c": 24722.75
-      },
-      {
-        "t": "2025-08-05",
-        "c": 24649.55
-      },
-      {
-        "t": "2025-08-06",
-        "c": 24574.2
-      },
-      {
-        "t": "2025-08-07",
-        "c": 24596.15
-      },
-      {
-        "t": "2025-08-08",
-        "c": 24363.3
-      },
-      {
-        "t": "2025-08-11",
-        "c": 24585.05
-      },
-      {
-        "t": "2025-08-12",
-        "c": 24487.4
-      },
-      {
-        "t": "2025-08-13",
-        "c": 24619.35
-      },
-      {
-        "t": "2025-08-14",
-        "c": 24631.3
-      },
-      {
-        "t": "2025-08-18",
-        "c": 24876.95
-      },
-      {
-        "t": "2025-08-19",
-        "c": 24980.65
-      },
-      {
-        "t": "2025-08-20",
-        "c": 25050.55
-      },
-      {
-        "t": "2025-08-21",
-        "c": 25083.75
-      },
-      {
-        "t": "2025-08-22",
-        "c": 24870.1
-      },
-      {
-        "t": "2025-08-25",
-        "c": 24967.75
-      },
-      {
-        "t": "2025-08-26",
-        "c": 24712.05
-      },
-      {
-        "t": "2025-08-28",
-        "c": 24500.9
-      },
-      {
-        "t": "2025-08-29",
-        "c": 24426.85
-      },
-      {
-        "t": "2025-09-01",
-        "c": 24625.05
-      },
-      {
-        "t": "2025-09-02",
-        "c": 24579.6
-      },
-      {
-        "t": "2025-09-03",
-        "c": 24715.05
-      },
-      {
-        "t": "2025-09-04",
-        "c": 24734.3
-      },
-      {
-        "t": "2025-09-05",
-        "c": 24741
-      },
-      {
-        "t": "2025-09-08",
-        "c": 24773.15
-      },
-      {
-        "t": "2025-09-09",
-        "c": 24868.6
-      },
-      {
-        "t": "2025-09-10",
-        "c": 24973.1
-      },
-      {
-        "t": "2025-09-11",
-        "c": 25005.5
-      },
-      {
-        "t": "2025-09-12",
-        "c": 25114
-      },
-      {
-        "t": "2025-09-15",
-        "c": 25069.2
-      },
-      {
-        "t": "2025-09-16",
-        "c": 25239.1
-      },
-      {
-        "t": "2025-09-17",
-        "c": 25330.25
-      },
-      {
-        "t": "2025-09-18",
-        "c": 25423.6
-      },
-      {
-        "t": "2025-09-19",
-        "c": 25327.05
-      },
-      {
-        "t": "2025-09-22",
-        "c": 25202.35
-      },
-      {
-        "t": "2025-09-23",
-        "c": 25169.5
-      },
-      {
-        "t": "2025-09-24",
-        "c": 25056.9
-      },
-      {
-        "t": "2025-09-25",
-        "c": 24890.85
-      },
-      {
-        "t": "2025-09-26",
-        "c": 24654.7
-      },
-      {
-        "t": "2025-09-29",
-        "c": 24634.9
-      },
-      {
-        "t": "2025-09-30",
-        "c": 24611.1
-      },
-      {
-        "t": "2025-10-01",
-        "c": 24836.3
-      },
-      {
-        "t": "2025-10-03",
-        "c": 24894.25
-      },
-      {
-        "t": "2025-10-06",
-        "c": 25077.65
-      },
-      {
-        "t": "2025-10-07",
-        "c": 25108.3
-      },
-      {
-        "t": "2025-10-08",
-        "c": 25046.15
-      },
-      {
-        "t": "2025-10-09",
-        "c": 25181.8
-      },
-      {
-        "t": "2025-10-10",
-        "c": 25285.35
-      },
-      {
-        "t": "2025-10-13",
-        "c": 25227.35
-      },
-      {
-        "t": "2025-10-14",
-        "c": 25145.5
-      },
-      {
-        "t": "2025-10-15",
-        "c": 25323.55
-      },
-      {
-        "t": "2025-10-16",
-        "c": 25585.3
-      },
-      {
-        "t": "2025-10-17",
-        "c": 25709.85
-      },
-      {
-        "t": "2025-10-20",
-        "c": 25843.15
-      },
-      {
-        "t": "2025-10-21",
-        "c": 25868.6
-      },
-      {
-        "t": "2025-10-23",
-        "c": 25891.4
-      },
-      {
-        "t": "2025-10-24",
-        "c": 25795.15
-      },
-      {
-        "t": "2025-10-27",
-        "c": 25966.05
-      },
-      {
-        "t": "2025-10-28",
-        "c": 25936.2
-      },
-      {
-        "t": "2025-10-29",
-        "c": 26053.9
-      },
-      {
-        "t": "2025-10-30",
-        "c": 25877.85
-      },
-      {
-        "t": "2025-10-31",
-        "c": 25722.1
-      },
-      {
-        "t": "2025-11-03",
-        "c": 25763.35
-      },
-      {
-        "t": "2025-11-04",
-        "c": 25597.65
-      },
-      {
-        "t": "2025-11-06",
-        "c": 25509.7
-      },
-      {
-        "t": "2025-11-07",
-        "c": 25492.3
-      },
-      {
-        "t": "2025-11-10",
-        "c": 25574.35
-      },
-      {
-        "t": "2025-11-11",
-        "c": 25694.95
-      },
-      {
-        "t": "2025-11-12",
-        "c": 25875.8
-      },
-      {
-        "t": "2025-11-13",
-        "c": 25879.15
-      },
-      {
-        "t": "2025-11-14",
-        "c": 25910.05
-      },
-      {
-        "t": "2025-11-17",
-        "c": 26013.45
-      },
-      {
-        "t": "2025-11-18",
-        "c": 25910.05
-      },
-      {
-        "t": "2025-11-19",
-        "c": 26052.65
-      },
-      {
-        "t": "2025-11-20",
-        "c": 26192.15
-      },
-      {
-        "t": "2025-11-21",
-        "c": 26068.15
-      },
-      {
-        "t": "2025-11-24",
-        "c": 25959.5
-      },
-      {
-        "t": "2025-11-25",
-        "c": 25884.8
-      },
-      {
-        "t": "2025-11-26",
-        "c": 26205.3
-      },
-      {
-        "t": "2025-11-27",
-        "c": 26215.55
-      },
-      {
-        "t": "2025-11-28",
-        "c": 26202.95
-      },
-      {
-        "t": "2025-12-01",
-        "c": 26175.75
-      },
-      {
-        "t": "2025-12-02",
-        "c": 26032.2
-      },
-      {
-        "t": "2025-12-03",
-        "c": 25986
-      },
-      {
-        "t": "2025-12-04",
-        "c": 26033.75
-      },
-      {
-        "t": "2025-12-05",
-        "c": 26186.45
-      },
-      {
-        "t": "2025-12-08",
-        "c": 25960.55
-      },
-      {
-        "t": "2025-12-09",
-        "c": 25839.65
-      },
-      {
-        "t": "2025-12-10",
-        "c": 25758
-      },
-      {
-        "t": "2025-12-11",
-        "c": 25898.55
-      },
-      {
-        "t": "2025-12-12",
-        "c": 26046.95
-      },
-      {
-        "t": "2025-12-15",
-        "c": 26027.3
-      },
-      {
-        "t": "2025-12-16",
-        "c": 25860.1
-      },
-      {
-        "t": "2025-12-17",
-        "c": 25818.55
-      },
-      {
-        "t": "2025-12-18",
-        "c": 25815.55
-      },
-      {
-        "t": "2025-12-19",
-        "c": 25966.4
-      },
-      {
-        "t": "2025-12-22",
-        "c": 26172.4
-      },
-      {
-        "t": "2025-12-23",
-        "c": 26177.15
-      },
-      {
-        "t": "2025-12-24",
-        "c": 26142.1
-      },
-      {
-        "t": "2025-12-26",
-        "c": 26042.3
-      },
-      {
-        "t": "2025-12-29",
-        "c": 25942.1
-      },
-      {
-        "t": "2025-12-30",
-        "c": 25938.85
-      },
-      {
-        "t": "2025-12-31",
-        "c": 26129.6
-      },
-      {
-        "t": "2026-01-01",
-        "c": 26146.55
-      },
-      {
-        "t": "2026-01-02",
-        "c": 26328.55
-      },
-      {
-        "t": "2026-01-05",
-        "c": 26250.3
-      },
-      {
-        "t": "2026-01-06",
-        "c": 26178.7
-      },
-      {
-        "t": "2026-01-07",
-        "c": 26140.75
-      },
-      {
-        "t": "2026-01-08",
-        "c": 25876.85
-      },
-      {
-        "t": "2026-01-09",
-        "c": 25683.3
-      },
-      {
-        "t": "2026-01-12",
-        "c": 25790.25
-      },
-      {
-        "t": "2026-01-13",
-        "c": 25732.3
-      },
-      {
-        "t": "2026-01-14",
-        "c": 25665.6
-      },
-      {
-        "t": "2026-01-16",
-        "c": 25694.35
-      },
-      {
-        "t": "2026-01-19",
-        "c": 25585.5
-      },
-      {
-        "t": "2026-01-20",
-        "c": 25232.5
-      },
-      {
-        "t": "2026-01-21",
-        "c": 25157.5
-      },
-      {
-        "t": "2026-01-22",
-        "c": 25289.9
-      },
-      {
-        "t": "2026-01-23",
-        "c": 25048.65
-      },
-      {
-        "t": "2026-01-27",
-        "c": 25175.4
-      },
-      {
-        "t": "2026-01-28",
-        "c": 25342.75
-      },
-      {
-        "t": "2026-01-29",
-        "c": 25418.9
-      },
-      {
-        "t": "2026-01-30",
-        "c": 25320.65
-      },
-      {
-        "t": "2026-02-02",
-        "c": 25088.4
-      },
-      {
-        "t": "2026-02-03",
-        "c": 25727.55
-      },
-      {
-        "t": "2026-02-04",
-        "c": 25776
-      },
-      {
-        "t": "2026-02-05",
-        "c": 25642.8
-      },
-      {
-        "t": "2026-02-06",
-        "c": 25693.7
-      },
-      {
-        "t": "2026-02-09",
-        "c": 25867.3
-      },
-      {
-        "t": "2026-02-10",
-        "c": 25935.15
-      },
-      {
-        "t": "2026-02-11",
-        "c": 25953.85
-      },
-      {
-        "t": "2026-02-12",
-        "c": 25807.2
-      },
-      {
-        "t": "2026-02-13",
-        "c": 25471.1
-      },
-      {
-        "t": "2026-02-16",
-        "c": 25682.75
-      },
-      {
-        "t": "2026-02-17",
-        "c": 25725.4
-      },
-      {
-        "t": "2026-02-18",
-        "c": 25819.35
-      },
-      {
-        "t": "2026-02-19",
-        "c": 25454.35
-      },
-      {
-        "t": "2026-02-20",
-        "c": 25571.25
-      },
-      {
-        "t": "2026-02-23",
-        "c": 25713
-      },
-      {
-        "t": "2026-02-24",
-        "c": 25424.65
-      },
-      {
-        "t": "2026-02-25",
-        "c": 25482.5
-      },
-      {
-        "t": "2026-02-26",
-        "c": 25496.55
-      },
-      {
-        "t": "2026-02-27",
-        "c": 25178.65
-      },
-      {
-        "t": "2026-03-02",
-        "c": 24865.7
-      },
-      {
-        "t": "2026-03-04",
-        "c": 24480.5
-      },
-      {
-        "t": "2026-03-05",
-        "c": 24765.9
-      },
-      {
-        "t": "2026-03-06",
-        "c": 24450.45
-      },
-      {
-        "t": "2026-03-09",
-        "c": 24028.05
-      },
-      {
-        "t": "2026-03-10",
-        "c": 24261.6
-      },
-      {
-        "t": "2026-03-11",
-        "c": 23866.85
-      },
-      {
-        "t": "2026-03-12",
-        "c": 23639.15
-      },
-      {
-        "t": "2026-03-13",
-        "c": 23151.1
-      },
-      {
-        "t": "2026-03-16",
-        "c": 23408.8
-      },
-      {
-        "t": "2026-03-17",
-        "c": 23581.15
-      },
-      {
-        "t": "2026-03-18",
-        "c": 23777.8
-      },
-      {
-        "t": "2026-03-19",
-        "c": 23002.15
-      },
-      {
-        "t": "2026-03-20",
-        "c": 23114.5
-      },
-      {
-        "t": "2026-03-23",
-        "c": 22512.65
-      },
-      {
-        "t": "2026-03-24",
-        "c": 22912.4
-      },
-      {
-        "t": "2026-03-25",
-        "c": 23306.45
-      },
-      {
-        "t": "2026-03-27",
-        "c": 22819.6
-      },
-      {
-        "t": "2026-03-30",
-        "c": 22331.4
-      },
-      {
-        "t": "2026-04-01",
-        "c": 22679.4
-      },
-      {
-        "t": "2026-04-02",
-        "c": 22713.1
-      },
-      {
-        "t": "2026-04-06",
-        "c": 22968.25
-      },
-      {
-        "t": "2026-04-07",
-        "c": 23123.65
-      },
-      {
-        "t": "2026-04-08",
-        "c": 23997.35
-      },
-      {
-        "t": "2026-04-09",
-        "c": 23775.1
-      },
-      {
-        "t": "2026-04-10",
-        "c": 24050.6
-      },
-      {
-        "t": "2026-04-13",
-        "c": 23842.65
-      },
-      {
-        "t": "2026-04-15",
-        "c": 24231.3
-      },
-      {
-        "t": "2026-04-16",
-        "c": 24196.75
-      },
-      {
-        "t": "2026-04-17",
-        "c": 24353.55
-      },
-      {
-        "t": "2026-04-20",
-        "c": 24364.85
-      },
-      {
-        "t": "2026-04-21",
-        "c": 24576.6
-      },
-      {
-        "t": "2026-04-22",
-        "c": 24378.1
-      },
-      {
-        "t": "2026-04-23",
-        "c": 24173.05
-      },
-      {
-        "t": "2026-04-24",
-        "c": 23897.95
-      },
-      {
-        "t": "2026-04-27",
-        "c": 24092.7
-      },
-      {
-        "t": "2026-04-28",
-        "c": 23995.7
-      },
-      {
-        "t": "2026-04-29",
-        "c": 24177.65
-      },
-      {
-        "t": "2026-04-30",
-        "c": 23997.55
-      },
-      {
-        "t": "2026-05-04",
-        "c": 24119.3
-      },
-      {
-        "t": "2026-05-05",
-        "c": 24032.8
-      },
-      {
-        "t": "2026-05-06",
-        "c": 24330.95
-      },
-      {
-        "t": "2026-05-07",
-        "c": 24326.65
-      },
-      {
-        "t": "2026-05-08",
-        "c": 24176.15
-      },
-      {
-        "t": "2026-05-11",
-        "c": 23815.85
-      },
-      {
-        "t": "2026-05-12",
-        "c": 23379.55
-      },
-      {
-        "t": "2026-05-13",
-        "c": 23412.6
-      },
-      {
-        "t": "2026-05-14",
-        "c": 23689.6
-      },
-      {
-        "t": "2026-05-15",
-        "c": 23643.5
-      },
-      {
-        "t": "2026-05-18",
-        "c": 23649.95
-      },
-      {
-        "t": "2026-05-19",
-        "c": 23618
-      },
-      {
-        "t": "2026-05-20",
-        "c": 23659
-      },
-      {
-        "t": "2026-05-21",
-        "c": 23654.7
-      },
-      {
-        "t": "2026-05-22",
-        "c": 23719.3
-      },
-      {
-        "t": "2026-05-25",
-        "c": 24031.7
-      },
-      {
-        "t": "2026-05-26",
-        "c": 23913.7
-      },
-      {
-        "t": "2026-05-27",
-        "c": 23907.15
-      },
-      {
-        "t": "2026-05-29",
-        "c": 23547.75
-      },
-      {
-        "t": "2026-06-01",
-        "c": 23382.6
-      },
-      {
-        "t": "2026-06-02",
-        "c": 23483.55
-      },
-      {
-        "t": "2026-06-03",
-        "c": 23405.6
-      },
-      {
-        "t": "2026-06-04",
-        "c": 23416.55
-      },
-      {
-        "t": "2026-06-05",
-        "c": 23366.7
-      },
-      {
-        "t": "2026-06-08",
-        "c": 23123
-      },
-      {
-        "t": "2026-06-09",
-        "c": 23242.1
-      },
-      {
-        "t": "2026-06-10",
-        "c": 23214.95
-      },
-      {
-        "t": "2026-06-11",
-        "c": 23161.6
-      },
-      {
-        "t": "2026-06-12",
-        "c": 23622.9
+        "url": "https://www.nseindia.com/market-data/top-gainers-losers",
+        "title": "Top Gainers, Top Losers - Best Stocks to Buy | Best Stocks to Invest in for First Time Investor- NSE India"
       }
     ]
   }

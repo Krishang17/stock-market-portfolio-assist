@@ -436,7 +436,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1331.4,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.8434942247380182,
+      "benchmarkReturnPct": 0.5488922641806004,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -451,7 +457,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 2190.2,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.3277816331251469,
+      "benchmarkReturnPct": 0.5488922641806004,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -466,7 +478,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 787.25,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.2279799408512204,
+      "benchmarkReturnPct": 0.5488922641806004,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -510,7 +528,13 @@
           "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1331.4,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.8668706962509551,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -554,7 +578,13 @@
           "title": "www.tipranks.com"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 2190.2,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.304347826086949,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -598,7 +628,13 @@
           "title": "HDFC Bank Ltd (HDFCBANK) Stock Price & News - Google Finance"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 787.25,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.2735575995368897,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -642,7 +678,13 @@
           "title": "news key events"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 4200.6,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 0.7386445393064545,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -686,7 +728,13 @@
           "title": "Shipping Corporation of India Land and Assets Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 45.96,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": -0.1303780964797996,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -730,7 +778,13 @@
           "title": "Jio Financial Services Limited (JIOFIN.NS) Stock Price, News, Quote & History - Yahoo Finance"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 242.3,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.1606546426185638,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -770,7 +824,13 @@
           "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1331.4,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 1.8668706962509551,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -814,7 +874,13 @@
           "title": "stock news"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1091.2,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": -1.5295763208951874,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -854,7 +920,13 @@
           "title": "stock news"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 408.3,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": -0.30521303870101324,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -898,7 +970,13 @@
           "title": "Hindustan Zinc Share Price Today, Dividend & Stock Analysis"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 561.75,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": -0.3724394785847296,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -938,7 +1016,13 @@
           "title": "Power Grid Corporation of India Limited (INE752E01010)"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 285.3,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": -0.14000700035000646,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -978,7 +1062,13 @@
           "title": "NSE:JWL - Jupiter Wagons Limited"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 276,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 0.1814882032667775,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -1022,7 +1112,13 @@
           "title": "NSE India - Aditya Infotech Limited Stock Price Today, Live NSE Share Price, Latest News"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 3376.6,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": 0.3059739179514409,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
     },
     {
       "date": "2026-06-15",
@@ -1064,6 +1160,980 @@
         {
           "url": "https://ticker.finology.in/company/VEDL",
           "title": "Vedanta Share Price Today, Quarterly Results & Stock Analysis"
+        }
+      ],
+      "outcome": "unscored",
+      "evaluatedPrice": 299.15,
+      "evaluatedIndexPrice": 23997.25,
+      "stockReturnPct": -1.1074380165289277,
+      "benchmarkReturnPct": 0.6009499494841419,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-16"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "LT",
+      "exchange": "NS",
+      "name": "Larsen & Toubro",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 4200.6,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "L&T's underlying fundamentals look solid — FY25 Q4 PAT rose 25% and analysts flag Middle East reconstruction upside — but the stock appears to have run up sharply on the geopolitical sentiment trade, and short-term direction vs. the index from here is genuinely a coin flip. No scored calls exist to calibrate on, so confidence is kept low; holding a ~18% unrealised gain with no new material catalyst is reasonable but adding at current levels carries timing risk.",
+      "keyNews": [
+        "L&T shares surged ~4% on easing geopolitical tensions, briefly hitting ₹4,215 on NSE",
+        "FY25 Q4 net profit +25% YoY to ₹5,497 cr; ₹34/share dividend declared",
+        "Analysts bullish on Middle East reconstruction opportunity; technical targets cited at ₹4,400–₹4,600"
+      ],
+      "sources": [
+        {
+          "url": "https://hdfcsky.com/stocks/larsen-toubro-ltd",
+          "title": "Larsen & Toubro Share Price Today, LT Stock Price Live, Larsen & Toubro Ltd. Stock Price Charts, Live BSE/NSE, Larsen & Toubro Ltd. Buy/Sell Signals, Technical Analysis, F&O Quotes, Market Reports and Real-Time Quotes"
+        },
+        {
+          "url": "https://stockanalysis.com/quote/nse/LT/",
+          "title": "Larsen & Toubro (NSE:LT) Stock Price & Overview"
+        },
+        {
+          "url": "https://stockinvest.us/stock/LT.NS",
+          "title": "Larsen & Toubro Limited Stock Price Forecast. Should You Buy LT.NS?"
+        },
+        {
+          "url": "https://groww.in/stocks/larsen-toubro-ltd",
+          "title": "Larsen & Toubro Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/LT.NS/",
+          "title": "Larsen & Toubro Limited (LT.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.torusdigital.com/stocks/larsen-toubro-ltd-share-price",
+          "title": "L&T Share Price Today: Larsen & Toubro Stock Price Live NSE/BSE | Torus Digital"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "SCILAL",
+      "exchange": "NS",
+      "name": "SCI Land & Assets",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 45.96,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "SCILAL posted a ₹84 lakh net loss in Q4 FY26 (vs. a massive ₹224 cr loss a year ago, so year-on-year improvement is real), and full-year FY26 net profit was ₹28.82 cr with revenue up 27% — but operating losses widened sharply in Q4. A May 2026 MOU with NBCC to upgrade the Maritime Training Institute in Powai is a potential catalyst for asset monetisation, though timelines are unclear. With no scored calls yet, very thin revenue base, widening operating losses in the latest quarter, and the stock sitting just marginally above cost, short-term direction vs. the index is a near-coin-flip — no conviction to add or trim right now.",
+      "keyNews": [
+        "Q4 FY26 net loss ₹84 lakh; operating losses widened to ₹20.31 cr despite 19% revenue growth YoY",
+        "FY26 full-year net profit ₹28.82 cr, revenue up 27.32% to ₹23.3 cr — annual recovery vs. prior year",
+        "SCI signed MOU with NBCC (May 6, 2026) to upgrade Maritime Training Institute Powai — asset monetisation watch"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/shipping-corporation-of-india-land-and-assets-SCIL",
+          "title": "SCILAL Share Price Live: Shipping Corporation of India Land and Assets NSE Today"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/SCILAL.NS/history/",
+          "title": "Shipping Corporation of India Land and Assets Limited (SCILAL.NS) Stock Historical Prices & Data - Yahoo Finance"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/shipping-corporation-of-india-land-and-assets-ltd-share-price",
+          "title": "Shipping Corporation Share Price Today – SCILAL Stock Price, Live NSE/BSE Charts"
+        },
+        {
+          "url": "https://www.tradingview.com/symbols/NSE-SCILAL/",
+          "title": "SCILAL Stock Price and Chart — NSE:SCILAL — TradingView"
+        },
+        {
+          "url": "https://trendlyne.com/equity/2154480/SCILAL/shipping-corporation-of-india-land-and-assets-ltd/",
+          "title": "SCIL (SCILAL) Live Share Price Today on NSE/BSE, Stock Analysis and Price Estimates"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/real-estate-management-and-development/nse-scilal/shipping-corporation-of-india-land-and-assets-shares/news/shipping-corporation-of-india-land-and-assets-reports-first",
+          "title": "shipping corporation of india land and assets reports first"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "JIOFIN",
+      "exchange": "NS",
+      "name": "Jio Financial Services",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 242.3,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "JIOFIN trades at ~₹242, up ~2.9% today, with no major fresh catalysts — recent activity is limited to routine institutional roadshows (BofA Asia Conference June 9, virtual non-deal roadshow June 8) where only public information was disclosed. FY26 saw revenue grow ~33% YoY but the stock trades at a stretched P/E (~101x vs industry ~21x), and Trendlyne flags it as an 'Expensive Underperformer' with weak momentum; short-term direction vs the index is highly uncertain and close to a coin flip.",
+      "keyNews": [
+        "Executives attended BofA 2026 Asia Conference (Jun 9) & virtual institutional roadshow (Jun 8) — no new disclosures",
+        "Block deal: 26.8 lakh shares at ₹231.4 (~₹62 cr) flagged recently, suggesting institutional activity",
+        "FY26 revenue +33% YoY but P/E ~101x vs industry ~21x; analyst consensus mixed (Sell per Bitget aggregator, Strong Buy per StockAnalysis)"
+      ],
+      "sources": [
+        {
+          "url": "https://www.google.com/finance/beta/quote/JIOFIN:NSE",
+          "title": "Jio Financial Services Ltd (JIOFIN) Stock Price & News - Google Finance"
+        },
+        {
+          "url": "https://groww.in/stocks/jio-financial-services-ltd",
+          "title": "JIO Financial Services Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/JIOFIN.NS/",
+          "title": "Jio Financial Services Limited (JIOFIN.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=JIOFIN",
+          "title": "Jio Financial Services Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+        },
+        {
+          "url": "https://www.screener.in/company/JIOFIN/consolidated/",
+          "title": "Jio Financial Services Ltd share price | About Jio Financial | Key Insights - Screener"
+        },
+        {
+          "url": "https://trendlyne.com/equity/1564869/JIOFIN/jio-financial-services-ltd/",
+          "title": "Jio Financial (JIOFIN) Live Share Price Today on NSE/BSE, Stock Analysis and Price Estimates"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "RELIANCE",
+      "exchange": "NS",
+      "name": "Reliance Industries",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 1331.4,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "The primary near-term catalyst is the widely-anticipated Jio Platforms DRHP filing expected in the second half of June 2026, which could act as a sentiment boost, but the actual listing is now pushed to H2FY27. The stock is already up ~8.5% from your buy price; short-term direction vs the index is genuinely uncertain with no strong fresh fundamental trigger today. Prior calls have been Watch/Hold, and with no scored directional track record here, humility is warranted.",
+      "keyNews": [
+        "Reliance Jio & NSE IPO DRHPs reportedly to be filed with SEBI in second half of June 2026",
+        "Jio IPO listing now expected in H2 FY27, later than Mukesh Ambani's earlier H1 2026 guidance",
+        "Recent NSE block trade: ~4 lakh shares at ₹1313.50 — likely institutional activity"
+      ],
+      "sources": [
+        {
+          "url": "https://finance.yahoo.com/quote/RELIANCE.NS/",
+          "title": "Reliance Industries Limited (RELIANCE.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.businesstoday.in/markets/ipo-corner/story/nse-reliance-jio-may-file-drhps-soon-can-these-giant-ipos-revive-indias-primary-market-536888-2026-06-15",
+          "title": "NSE, Reliance Jio may file DRHPs soon: Can these giant IPOs revive India's primary market? - BusinessToday"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/reliance-industries-ltd-share-price",
+          "title": "Reliance Share Price Today, Live Chart, News, Target Price"
+        },
+        {
+          "url": "https://scanx.trade/stock-news/reliance-industries-ltd",
+          "title": "Reliance Industries Share News - Latest Updates, Live News & More | ScanX"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quote/equity/RELIANCE/Reliance-Industries-Limited",
+          "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
+        },
+        {
+          "url": "https://tw.tradingview.com/chart/RELIANCE/QbrNS06E-Reliance-Investors-View-for-May-June-July",
+          "title": "QbrNS06E Reliance Investors View for May June July"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "PARAS",
+      "exchange": "NS",
+      "name": "Paras Defence & Space Technologies",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 1091.2,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "PARAS has pulled back sharply from its May 2025 peak (~₹1800) to current levels, but recent order wins (₹52.82 Cr BEL electro-optics order, Jun 2025) and modest FY26 revenue growth (~12% YoY in optics) keep the fundamental story intact. The stock was up ~6% on Aug 20 on sector tailwinds, though it remains well below peak — short-term direction is essentially a coin flip and beating the index over one day is hard to predict. No scored directional calls exist yet, so confidence stays low.",
+      "keyNews": [
+        "Rs 52.82 Cr electro-optics order received from BEL (Jun 2025), execution by Sep 2027",
+        "FY26 optics/optronic revenue ~12% YoY growth; board recommended ₹1 final dividend",
+        "Stock surged ~6% on Aug 20, 2025 amid broader defence sector buying"
+      ],
+      "sources": [
+        {
+          "url": "https://simplywall.st/stocks/in/capital-goods/nse-paras/paras-defence-and-space-technologies-shares",
+          "title": "Paras Defence and Space Technologies (NSEI:PARAS) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://uk.marketscreener.com/quote/stock/PARAS-DEFENCE-AND-SPACE-T-127643614/",
+          "title": "Paras Defence and Space Technologies Limited Share Price (PARAS) - Stock NSE India S.E. - MarketScreener UK"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/PARAS.NS/",
+          "title": "Paras Defence and Space Technologies Limited (PARAS.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.torusdigital.com/stocks/paras-defence-and-space-technologies-ltd-share-price",
+          "title": "Paras Defence and Space Technologies Ltd Share Price Today : PARAS Stock Price Live NSE/BSE | Torus Digital"
+        },
+        {
+          "url": "https://www.screener.in/company/PARAS/consolidated/",
+          "title": "Paras Defence and Space Technologies Ltd share price | About Paras Defence | Key Insights - Screener"
+        },
+        {
+          "url": "https://groww.in/stocks/paras-defence-and-space-technologies-ltd",
+          "title": "Paras Defence and Space Technologies Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "BEL",
+      "exchange": "NS",
+      "name": "Bharat Electronics",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 408.3,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "BEL's fundamentals remain solid — FY26 revenue rose ~16% YoY to ₹27,480 cr and the order book sits near ₹74,000 cr, giving strong multi-year revenue visibility; brokerages (HDFC Securities, Elara) maintain 'add/accumulate' with targets around ₹470–510, but margins shrank ~28.3% in the latest quarter and the stock is already up ~59% from your buy price, trading near fair-value estimates. Short-term direction is close to a coin flip; no scored calls on this stock yet, so confidence stays low.",
+      "keyNews": [
+        "BEL secured ₹585 cr in fresh orders since June 5, 2025 (fire control, comms systems)",
+        "FY26 revenue +16% YoY to ₹27,480 cr; PAT ₹6,048 cr; order book ~₹74,000 cr",
+        "Brokerages trimmed targets but maintained 'add/accumulate'; EBITDA margins compressed to 28.3%"
+      ],
+      "sources": [
+        {
+          "url": "https://aninews.in/news/business/bel-secures-fresh-orders-worth-rs-585-crore-since-june-520250620195328/",
+          "title": "BEL secures fresh orders worth Rs 585 crore since June 5"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/bharat-electronics-ltd-share-price",
+          "title": "BEL Share Price Today, Live Chart, News, Target Price"
+        },
+        {
+          "url": "https://upstox.com/news/market-news/stocks/bel-shares-jump-2-on-reports-of-iaf-eyeing-large-procurement-of-hammer-precision-weapon-key-details/article-194970/",
+          "title": "BEL shares jump 2% amid weak market; latest buzz you need to know"
+        },
+        {
+          "url": "https://groww.in/stocks/bharat-electronics-ltd",
+          "title": "Bharat Electronics Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://www.screener.in/company/BEL/consolidated/",
+          "title": "Bharat Electronics Ltd share price | About Bharat Electron | Key Insights - Screener"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=BEL",
+          "title": "Bharat Electronics Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "HINDZINC",
+      "exchange": "NS",
+      "name": "Hindustan Zinc",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 561.75,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "HINDZINC is down ~10.6% from your buy price and fell ~6% on June 15 alongside broad metals sector weakness; the long-term capacity expansion story and solid dividend yield (~3.3%) provide some support, but near-term LME zinc price uncertainty and revenue decline keep risk elevated. Short-term direction is essentially a coin flip — no reliable edge to add or trim here.",
+      "keyNews": [
+        "Stock hit -6.14% on June 15, 2026, with metals sector broadly under pressure (NALCO -11%)",
+        "FY25 EPS up to ₹24.48 from ₹18.34 — underlying earnings growth intact",
+        "Company targeting doubling of metal capacity to 2M tonnes; Q4 FY26 dividend of ₹11/share declared"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/hindustan-zinc-HZNC",
+          "title": "HINDZINC Share Price Live: Hindustan Zinc NSE Today"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/HINDZINC.NS/",
+          "title": "Hindustan Zinc Limited (HINDZINC.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.tradingview.com/symbols/NSE-HINDZINC/",
+          "title": "HINDZINC Stock Price and Chart — NSE:HINDZINC — TradingView"
+        },
+        {
+          "url": "https://groww.in/stocks/hindustan-zinc-ltd",
+          "title": "Hindustan Zinc Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/materials/nse-hindzinc/hindustan-zinc-shares",
+          "title": "Hindustan Zinc (NSEI:HINDZINC) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://www.screener.in/company/HINDZINC/",
+          "title": "Hindustan Zinc Ltd share price | About Hindustan Zinc | Key Insights - Screener"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "POWERGRID",
+      "exchange": "NS",
+      "name": "Power Grid Corporation of India",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 285.3,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "POWERGRID's board met June 10, 2026 and approved a JPY 80 billion JBIC unsecured term loan and a ₹485 crore SCADA upgrade — constructive for long-term capex, but neutral to mildly positive near-term. Stock has lagged the index over the past year and sits just marginally above your buy price, so risk/reward for a one-day outperformance call is too thin to act on. Short-term direction is close to a coin flip; no catalyst strong enough to shift that today.",
+      "keyNews": [
+        "Board approves JPY 80B JBIC term loan & ₹485 cr SCADA upgrade (Jun 10, 2026)",
+        "Stock up ~5 sessions in a row heading into the board meeting",
+        "POWERGRID -4.94% vs NIFTY +8.04% over past year — relative underperformance a headwind"
+      ],
+      "sources": [
+        {
+          "url": "https://www.screener.in/company/POWERGRID/consolidated/",
+          "title": "Power Grid Corporation of India Ltd share price | About Power Grid Corpn | Key Insights - Screener"
+        },
+        {
+          "url": "https://www.tickertape.in/stocks/power-grid-corporation-of-india-PGRD",
+          "title": "POWERGRID Share Price Live: Power Grid Corporation of India NSE Today"
+        },
+        {
+          "url": "https://groww.in/stocks/power-grid-corporation-of-india-ltd",
+          "title": "Power Grid Corporation of India Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://www.business-standard.com/markets/news/powergrid-stock-gains-2-after-acquiring-mel-power-transmission-for-8-5-cr-125060500708_1.html",
+          "title": "PowerGrid stock gains 2% after acquiring MEL Power Transmission for ₹8.5 cr | Markets News - Business Standard"
+        },
+        {
+          "url": "https://in.tradingview.com/symbols/NSE-POWERGRID/",
+          "title": "Power Grid Corporation of India Limited"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=POWERGRID",
+          "title": "Power Grid Corporation of India Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "JWL",
+      "exchange": "NS",
+      "name": "Jupiter Wagons",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 276,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "Q4 FY26 results were materially weak — net profit down 72% YoY and revenue down 25% YoY — creating near-term sentiment overhang; the stock appears to have slipped below your ₹276 level. The long-term story (₹4,675 cr order book, BESS diversification) remains intact but the poor quarterly print and absence of any scored directional track record here demands caution. Short-term direction is close to a coin flip and this note is information only, not advice.",
+      "keyNews": [
+        "Q4 FY26 net profit plunges 72% YoY to ₹29 cr; revenue falls 25% YoY to ₹780 cr",
+        "FY27 order book at ₹4,675 cr provides revenue visibility",
+        "Subsidiary signs MoUs for 110 MWh BESS deployments with renewable energy developers"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/commercial-engineers-and-body-builders-co-CEBB",
+          "title": "JWL Share Price Live: Jupiter Wagons NSE Today"
+        },
+        {
+          "url": "https://ts2.tech/en/jupiter-wagons-share-price-surges-on-promoter-stake-hike-latest-news-analyst-targets-and-jwl-stock-outlook-dec-22-2025/",
+          "title": "Jupiter Wagons Share Price Surges on Promoter Stake Hike: Latest News, Analyst Targets, and JWL Stock Outlook (Dec 22, 2025)"
+        },
+        {
+          "url": "https://www.tradingview.com/symbols/NSE-JWL/",
+          "title": "NSE:JWL - Jupiter Wagons Limited"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/JWL.NS/",
+          "title": "Jupiter Wagons Limited (JWL.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://groww.in/stocks/commercial-engineers-body-builders-company-ltd",
+          "title": "Jupiter Wagons Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://www.screener.in/company/JWL/",
+          "title": "Jupiter Wagons Ltd share price | About Jupiter Wagons | Key Insights - Screener"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "CPPLUS",
+      "exchange": "NS",
+      "name": "Aditya Infotech (CP PLUS)",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 3376.6,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "Q4 FY26 results were strong — revenue up ~45.5% YoY and PAT up ~208% YoY — with management raising FY27 guidance to ₹6,000–6,500 Cr, and the stock has recently pulled back ~4.3% from your buy price. However, the stock is already up significantly post-IPO (Aug 2025) and a new JV (Corelink, cable manufacturing, June 10) adds execution risk; short-term direction after a post-results run is genuinely unpredictable, and no new near-term catalyst is evident today.",
+      "keyNews": [
+        "Q4 FY26 PAT up 208% YoY to ₹169 Cr; FY27 revenue guidance raised to ₹6,000–6,500 Cr",
+        "45.4% market share in Indian video surveillance by Q3 FY26, aided by regulatory tailwinds",
+        "New JV Corelink Cable Technology incorporated June 10, 2026 for backward integration into cable manufacturing"
+      ],
+      "sources": [
+        {
+          "url": "https://upstox.com/news/market-news/stocks/cp-plus-operator-aditya-infotech-s-share-price-in-focus-as-q1-net-profit-rises-46-to-33-crore-revenue-up-16/article-179941/",
+          "title": "CP Plus operator Aditya Infotech's share price rises nearly 8% as Q1 net profit up 46% to ₹33 crore"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/CPPLUS.NS/history/",
+          "title": "ADITYA INFOTECH LIMITED (CPPLUS.NS) Stock Historical Prices & Data - Yahoo Finance"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=CPPLUS",
+          "title": "Aditya Infotech Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/CPPLUS.NS/",
+          "title": "ADITYA INFOTECH LIMITED (CPPLUS.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.torusdigital.com/stocks/aditya-infotech-ltd-share-price",
+          "title": "Aditya Infotech Ltd Share Price Today : CPPLUS Stock Price Live NSE/BSE | Torus Digital"
+        },
+        {
+          "url": "https://www.cnbc.com/quotes/CPPLUS-IN",
+          "title": "CPPLUS-IN: Aditya Infotech Ltd - Stock Price, Quote and News - CNBC"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "VEDL",
+      "exchange": "NS",
+      "name": "Vedanta",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 299.15,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23997.25,
+      "reasoning": "The demerger of 4 entities (Aluminium, Power, Oil & Gas, Iron & Steel) has now completed and listed with mixed debut — Aluminium opened strongly but Oil & Gas hit a lower circuit, making net value impact for VEDL holders unclear day-to-day. Q4 FY26 profits surged ~92% YoY and a ₹7/share interim dividend (record date June 24) provides near-term income support, but parent Vedanta Resources' heavy debt load remains an overhang. Short-term direction is essentially a coin flip at this stage; no scored track record here warrants any confidence. This is information only, not financial advice.",
+      "keyNews": [
+        "4 demerged entities listed: Aluminium Metal strong (+ve), Oil & Gas hits 5% lower circuit (mixed debut)",
+        "Q4 FY26 net profit up ~92% YoY to ₹6,698 Cr",
+        "₹7/share interim dividend declared, record date June 24 2025"
+      ],
+      "sources": [
+        {
+          "url": "https://www.indmoney.com/stocks/vedanta-ltd-share-price",
+          "title": "Vedanta Share Price Today – VEDL Stock Price, Live NSE/BSE Charts"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/materials/nse-vedl/vedanta-shares/future",
+          "title": "Vedanta (NSEI:VEDL) Stock Forecast & Analyst Predictions - Simply Wall St"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/VEDL.NS/history/",
+          "title": "Vedanta Limited (VEDL.NS) Stock Historical Prices & Data - Yahoo Finance"
+        },
+        {
+          "url": "https://www.tickertape.in/stocks/vedanta-VDAN",
+          "title": "VEDL Share Price Live: Vedanta NSE Today"
+        },
+        {
+          "url": "https://groww.in/stocks/vedanta-ltd",
+          "title": "Vedanta Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://in.tradingview.com/symbols/NSE-VEDL/",
+          "title": "Vedanta Ltd. - Stock AnalysisDate : 02-Dec-2025"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "LT",
+      "exchange": "NS",
+      "name": "Larsen & Toubro",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 4186.4,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "L&T's fundamentals are solid — record order inflows, 8.7% revenue growth in FY26, and geopolitical tailwinds from Middle East reconstruction — but the stock is near recent highs at ₹4,186 and short-term outperformance vs. Nifty is a coin flip. No adverse news found post-AGM, but no fresh catalyst either to justify adding at this level. Uncertainty remains high given no scored directional calls yet.",
+      "keyNews": [
+        "L&T shares surged ~4% on easing geopolitical tensions; analysts cite ₹4,400–₹4,600 technical targets",
+        "Record Q3FY26 order inflows of ₹1,35,581 crore — highest-ever quarterly inflow",
+        "FY2026 annual revenue up 8.7% to ₹1,61,039 crore; 81st AGM held June 5, 2026"
+      ],
+      "sources": [
+        {
+          "url": "https://hdfcsky.com/stocks/larsen-toubro-ltd",
+          "title": "Larsen & Toubro Share Price Today, LT Stock Price Live, Larsen & Toubro Ltd. Stock Price Charts, Live BSE/NSE, Larsen & Toubro Ltd. Buy/Sell Signals, Technical Analysis, F&O Quotes, Market Reports and Real-Time Quotes"
+        },
+        {
+          "url": "https://stockanalysis.com/quote/nse/LT/",
+          "title": "Larsen & Toubro (NSE:LT) Stock Price & Overview"
+        },
+        {
+          "url": "https://stockinvest.us/stock/LT.NS",
+          "title": "Larsen & Toubro Limited Stock Price Forecast. Should You Buy LT.NS?"
+        },
+        {
+          "url": "https://groww.in/stocks/larsen-toubro-ltd",
+          "title": "Larsen & Toubro Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/LT.NS/",
+          "title": "Larsen & Toubro Limited (LT.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.torusdigital.com/stocks/larsen-toubro-ltd-share-price",
+          "title": "L&T Share Price Today: Larsen & Toubro Stock Price Live NSE/BSE | Torus Digital"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "SCILAL",
+      "exchange": "NS",
+      "name": "SCI Land & Assets",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 46.29,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "SCILAL remains a Government of India non-core asset disposal vehicle with thin operational revenues — Q4 FY26 results showed a small net loss of ₹0.84 Cr, though full-year FY26 swung to net profit of ₹28.82 Cr; stock is trading near its listing price and well off its 52-week high of ₹60.34, with the 200-DMA (≈₹48.72) acting as overhead resistance. No material near-term catalyst (asset sale or disinvestment news) was found, and short-term direction vs. the index is essentially a coin flip — this is information only, not financial advice.",
+      "keyNews": [
+        "FY26 full-year net profit ₹28.82 Cr vs net loss in FY25; Q4 FY26 still showed a small loss",
+        "52-week range ₹34.30–₹60.34; stock trading below 200-DMA of ~₹48.72",
+        "Regulatory fines from BSE & NSE (₹9.77 lakh each) for board composition issues"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/shipping-corporation-of-india-land-and-assets-SCIL",
+          "title": "SCILAL Share Price Live: Shipping Corporation of India Land and Assets NSE Today"
+        },
+        {
+          "url": "https://www.tradingview.com/symbols/NSE-SCILAL/",
+          "title": "SCILAL Stock Price and Chart — NSE:SCILAL — TradingView"
+        },
+        {
+          "url": "https://www.motilaloswal.com/share-market/shipping-corporation-of-india-land-assets-ltd",
+          "title": "Shipping Corporation of India Land & Assets Ltd: Share Price Today - Live Updates | Motilal Oswal"
+        },
+        {
+          "url": "https://www.5paisa.com/stocks/scilal-share-price",
+          "title": "Shipping Corporation of India Land And Assets Share Price"
+        },
+        {
+          "url": "https://scanx.trade/company/sci-land-assets-ltd",
+          "title": "SCILAL Share Price Today - SCI Land & Assets on NSE/BSE | ScanX"
+        },
+        {
+          "url": "https://cn.tradingview.com/symbols/NSE-SCILAL",
+          "title": "NSE SCILAL"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "JIOFIN",
+      "exchange": "NS",
+      "name": "Jio Financial Services",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 241.95,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "JIOFIN is flat around ₹242, consistent with prior Hold calls; JioBlackRock's AMC business is gaining traction with multiple debt fund launches, and management recently engaged institutional investors at Citi and BofA conferences, but FY2026 earnings declined 3.2% even as revenue rose 33%, flagging profitability concerns at a still-rich valuation. Short-term direction versus the index is essentially a coin flip with no clear near-term catalyst visible; the stock is information, not advice.",
+      "keyNews": [
+        "Jio Financial revenue +33% in FY2026 but earnings fell 3.2% YoY",
+        "Management engaged institutional investors at Citi India & BofA Asia conferences (June 2026)",
+        "JioBlackRock MF expanding with debt/money-market fund launches"
+      ],
+      "sources": [
+        {
+          "url": "https://trendlyne.com/equity/1564869/JIOFIN/jio-financial-services-ltd/",
+          "title": "Jio Financial (JIOFIN) Live Share Price Today on NSE/BSE, Stock Analysis and Price Estimates"
+        },
+        {
+          "url": "https://stockanalysis.com/quote/nse/JIOFIN/",
+          "title": "Jio Financial Services (NSE:JIOFIN) Stock Price & Overview"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/JIOFIN.NS/",
+          "title": "Jio Financial Services Limited (JIOFIN.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/diversified-financials/nse-jiofin/jio-financial-services-shares",
+          "title": "Jio Financial Services (NSEI:JIOFIN) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://www.google.com/finance/beta/quote/JIOFIN:NSE",
+          "title": "Jio Financial Services Ltd (JIOFIN) Stock Price & News - Google Finance"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jio_Financial_Services",
+          "title": "Jio Financial Services"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "RELIANCE",
+      "exchange": "NS",
+      "name": "Reliance Industries",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 1328.8,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "Moody's recent upgrade of RIL's senior unsecured notes from Baa2 to Baa1 (stable) is a mild positive signal, but Q4 FY26 earnings were weak — net profit fell ~12.6% YoY with EBITDA margin compressing sharply to 14.78%. At ₹1,328, the stock sits well below its 52-week high of ₹1,611 with no clear near-term catalyst visible; short-term direction vs the index is close to a coin flip, so no basis to add aggressively here.",
+      "keyNews": [
+        "Moody's upgrades RIL senior notes from Baa2 to Baa1 with stable outlook",
+        "Q4 FY26 net profit down ~12.6% YoY to ₹16,971 cr; EBITDA margin compressed to 14.78%",
+        "RIL racing to import battery equipment from China ahead of potential export restrictions"
+      ],
+      "sources": [
+        {
+          "url": "https://finance.yahoo.com/quote/RELIANCE.NS/",
+          "title": "Reliance Industries Limited (RELIANCE.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/reliance-industries-ltd-share-price",
+          "title": "Reliance Share Price Today, Live Chart, News, Target Price"
+        },
+        {
+          "url": "https://www.google.com/finance/beta/quote/RELIANCE:NSE",
+          "title": "Reliance Industries Ltd (RELIANCE) Stock Price & News - Google Finance"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=RELIANCE",
+          "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
+        },
+        {
+          "url": "https://tr.tradingview.com/news/moneycontrol%3A31eb4371b094b%3A0-reliance-standalone-june-2025-net-sales-at-rs-116-341-00-crore-down-10-44-y-o-y",
+          "title": "moneycontrol%3A31eb4371b094b%3A0 reliance standalone june 2025 net sales at rs 116 341 00 crore down 10 44 y o y"
+        },
+        {
+          "url": "https://www.business-standard.com/markets/reliance-industries-ltd-share-price-476/news/page-3",
+          "title": "Tuesday, December 30, 2025 | 12:47 PM ISTहिंदी में पढें"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "PARAS",
+      "exchange": "NS",
+      "name": "Paras Defence & Space Technologies",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 1089.35,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "Q4 FY26 net profit rose 74% YoY to ₹34.38 cr on 58% revenue growth, and a ₹52.82 cr BEL electro-optics order was secured in June — fundamentals are improving. However, the stock is already up ~20% from buy price and has drifted lower over recent sessions (~₹1,022 intraday vs prior ₹1,091), suggesting near-term momentum is uncertain. Short-term outperformance vs the index is close to a coin flip; no directional calls here have been scored yet, so confidence stays low.",
+      "keyNews": [
+        "Q4 FY26 PAT up 74% YoY to ₹34.38 cr; revenue up 58% to ₹171 cr",
+        "Paras Defence secures ₹52.82 cr BEL order for electro-optics (June 2025)",
+        "Stock up ~5.9% intraday to ~₹1,022 on strong order inflow news alongside defence sector rally"
+      ],
+      "sources": [
+        {
+          "url": "https://simplywall.st/stocks/in/capital-goods/nse-paras/paras-defence-and-space-technologies-shares",
+          "title": "Paras Defence and Space Technologies (NSEI:PARAS) - Stock Analysis - Simply Wall St"
+        },
+        {
+          "url": "https://uk.marketscreener.com/quote/stock/PARAS-DEFENCE-AND-SPACE-T-127643614/",
+          "title": "Paras Defence and Space Technologies Limited Share Price (PARAS) - Stock NSE India S.E. - MarketScreener UK"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/PARAS.NS/",
+          "title": "Paras Defence and Space Technologies Limited (PARAS.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.torusdigital.com/stocks/paras-defence-and-space-technologies-ltd-share-price",
+          "title": "Paras Defence and Space Technologies Ltd Share Price Today : PARAS Stock Price Live NSE/BSE | Torus Digital"
+        },
+        {
+          "url": "https://www.screener.in/company/PARAS/consolidated/",
+          "title": "Paras Defence and Space Technologies Ltd share price | About Paras Defence | Key Insights - Screener"
+        },
+        {
+          "url": "https://groww.in/stocks/paras-defence-and-space-technologies-ltd",
+          "title": "Paras Defence and Space Technologies Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "BEL",
+      "exchange": "NS",
+      "name": "Bharat Electronics",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 407.55,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "BEL's fundamentals remain solid — record FY26 turnover of ~₹26,750 crore, order book near ₹74,000 crore, and a steady stream of fresh defence contract wins (₹608 crore in May, ₹585 crore in June). However, the stock is already up ~58% from your buy price and trades near recent highs; valuation scrutiny has been flagged by analysts even amid the strong order flow. Short-term direction at ~₹407 is genuinely uncertain and close to a coin flip versus the broader index — no catalyst visible today to break that range.",
+      "keyNews": [
+        "BEL bags ₹608 cr defence orders for radar, avionics & electronic warfare systems (May 2026)",
+        "BEL FY26 record turnover ~₹26,750 cr; order book ~₹74,000 cr as of April 2026",
+        "Analysts flag high valuation even as defence order pipeline remains strong"
+      ],
+      "sources": [
+        {
+          "url": "https://aninews.in/news/business/bel-secures-fresh-orders-worth-rs-585-crore-since-june-520250620195328/",
+          "title": "BEL secures fresh orders worth Rs 585 crore since June 5"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/bharat-electronics-ltd-share-price",
+          "title": "BEL Share Price Today, Live Chart, News, Target Price"
+        },
+        {
+          "url": "https://www.tickertape.in/stocks/bharat-electronics-BAJE",
+          "title": "BEL Share Price Live: Bharat Electronics NSE Today"
+        },
+        {
+          "url": "https://upstox.com/news/market-news/stocks/bel-shares-jump-2-on-reports-of-iaf-eyeing-large-procurement-of-hammer-precision-weapon-key-details/article-194970/",
+          "title": "BEL shares jump 2% amid weak market; latest buzz you need to know"
+        },
+        {
+          "url": "https://groww.in/stocks/bharat-electronics-ltd",
+          "title": "Bharat Electronics Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://www.screener.in/company/BEL/consolidated/",
+          "title": "Bharat Electronics Ltd share price | About Bharat Electron | Key Insights - Screener"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "HINDZINC",
+      "exchange": "NS",
+      "name": "Hindustan Zinc",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 564.3,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "HINDZINC is trading near ₹564, well below your buy price of ₹628, with the 52-week range spanning ₹413–₹733 signalling high volatility tied to global zinc and silver prices. FY25 EPS grew to ₹24.48 from ₹18.34 in FY24 reflecting strong fundamentals, but the stock has already corrected ~23% from its January 2026 highs. Short-term direction is close to a coin flip, dependent on LME zinc moves and broader market sentiment — no new near-term catalyst is clearly visible.",
+      "keyNews": [
+        "52-week range ₹413–₹733; stock ~23% off Jan 2026 record high of ₹733",
+        "FY25 EPS ₹24.48 (up from ₹18.34 in FY24); strong operating metrics",
+        "Ex-dividend date Jun 17 2025 passed; next dividend event may be a catalyst to watch"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/hindustan-zinc-HZNC",
+          "title": "HINDZINC Share Price Live: Hindustan Zinc NSE Today"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/HINDZINC.NS/",
+          "title": "Hindustan Zinc Limited (HINDZINC.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.tradingview.com/symbols/NSE-HINDZINC/",
+          "title": "HINDZINC Stock Price and Chart — NSE:HINDZINC — TradingView"
+        },
+        {
+          "url": "https://groww.in/stocks/hindustan-zinc-ltd",
+          "title": "Hindustan Zinc Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Hindustan_Zinc",
+          "title": "Hindustan Zinc"
+        },
+        {
+          "url": "https://www.screener.in/company/HINDZINC/",
+          "title": "Hindustan Zinc Ltd share price | About Hindustan Zinc | Key Insights - Screener"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "POWERGRID",
+      "exchange": "NS",
+      "name": "Power Grid Corporation of India",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 285.15,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "POWERGRID's fundamentals remain intact — large order book (~₹1.45 lakh crore) and a raised FY26 capex target of ₹35,000 crore signal long-term momentum, but Q2 FY26 net profit declined ~6% YoY and the board recently convened to consider fresh debt (unsecured term loan), adding near-term uncertainty. At ₹285.15, barely above cost basis, short-term direction vs. the index is essentially a coin flip; no new catalyst justifies adding risk today.",
+      "keyNews": [
+        "Board met June 10 to consider fund-raising via unsecured term loan facility",
+        "POWERGRID raised FY26 capex target to ₹35,000 cr (from ₹32,000 cr); order book ~₹1.45 lakh crore",
+        "Q2 FY26 net profit fell ~6% YoY to ₹3,566 cr despite 2% revenue growth"
+      ],
+      "sources": [
+        {
+          "url": "https://www.screener.in/company/POWERGRID/consolidated/",
+          "title": "Power Grid Corporation of India Ltd share price | About Power Grid Corpn | Key Insights - Screener"
+        },
+        {
+          "url": "https://www.tickertape.in/stocks/power-grid-corporation-of-india-PGRD",
+          "title": "POWERGRID Share Price Live: Power Grid Corporation of India NSE Today"
+        },
+        {
+          "url": "https://groww.in/stocks/power-grid-corporation-of-india-ltd",
+          "title": "Power Grid Corporation of India Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://in.tradingview.com/symbols/NSE-POWERGRID/",
+          "title": "Power Grid Corporation of India Limited"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quotes/equity?symbol=POWERGRID",
+          "title": "Power Grid Corporation of India Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
+        },
+        {
+          "url": "https://www.nseindia.com/get-quote/equity/POWERGRID/Power-Grid-Corporation-of-India-Limited",
+          "title": "Power Grid Corporation of India Limited (INE752E01010)"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "JWL",
+      "exchange": "NS",
+      "name": "Jupiter Wagons",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 276.8,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "JWL's Q4 FY26 results were notably weak — net profit fell ~72% QoQ to ₹28.83 crore and revenue declined ~25% QoQ, signalling a meaningful earnings deterioration. The stock is already well off its 52-week high of ~₹414 and recent price action is flat near cost; no fresh positive catalysts (orders, contracts) were found for June. Short-term direction vs the NIFTY is genuinely unclear with this earnings overhang, and no scored calls yet make any confidence claim unwarranted.",
+      "keyNews": [
+        "Q4 FY26 net profit collapsed ~72% QoQ to ₹28.83 Cr; revenue down ~25% QoQ to ₹780 Cr",
+        "Stock ~37% below 52-week high of ₹414; 52-week low at ₹235.65",
+        "JEM Energy (EV subsidiary) signed MoUs with Chalukya Power and Pickrene — minor positive"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/commercial-engineers-and-body-builders-co-CEBB",
+          "title": "JWL Share Price Live: Jupiter Wagons NSE Today"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/jupiter-wagons-ltd-share-price",
+          "title": "Jupiter Wagons Share Price Today – JWL Stock Price, Live NSE/BSE Charts"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/JWL.NS/",
+          "title": "Jupiter Wagons Limited (JWL.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://trendlyne.com/latest-news/245/JWL/jupiter-wagons-ltd/",
+          "title": "Jupiter Wagons News, Corporate filings and Earnings/Conference Calls"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Jupiter_Wagons",
+          "title": "Jupiter Wagons"
+        },
+        {
+          "url": "https://groww.in/stocks/commercial-engineers-body-builders-company-ltd",
+          "title": "Jupiter Wagons Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "CPPLUS",
+      "exchange": "NS",
+      "name": "Aditya Infotech (CP PLUS)",
+      "stance": "Hold",
+      "confidence": "Low",
+      "priceAtCall": 3376.9,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "CP Plus delivered a strong Q4 FY26 — PAT tripled YoY to ₹169 Cr, revenue up 45.5%, and management has raised FY27 guidance to ₹6,000–6,500 Cr — but the stock is already down ~6% from your buy price and has pulled back from recent all-time highs near ₹3,537, suggesting much of the good news may be priced in. Short-term direction is essentially a coin flip; no new material catalyst or negative development was found today to justify adding or trimming. Stay patient but humble about near-term moves.",
+      "keyNews": [
+        "CP Plus Q4 FY26 PAT triples to ₹169 Cr; revenue up 45.5% YoY to ₹1,422 Cr",
+        "Management raises FY27 revenue guidance to ₹6,000–6,500 Cr with 14–15% EBITDA margin target",
+        "Stock hit all-time high ₹3,537 in early June 2026 on institutional interest; currently pulling back"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/aditya-infotech-CPP",
+          "title": "CPPLUS Share Price Live: Aditya Infotech NSE Today"
+        },
+        {
+          "url": "https://www.indmoney.com/stocks/aditya-infotech-ltd-share-price",
+          "title": "Aditya Infotech Share Price Today – CPPLUS Stock Price, Live NSE/BSE Charts"
+        },
+        {
+          "url": "https://groww.in/stocks/aditya-infotech-ltd",
+          "title": "Aditya Infotech Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/CPPLUS.NS/history/",
+          "title": "ADITYA INFOTECH LIMITED (CPPLUS.NS) Stock Historical Prices & Data - Yahoo Finance"
+        },
+        {
+          "url": "https://finance.yahoo.com/quote/CPPLUS.NS/",
+          "title": "ADITYA INFOTECH LIMITED (CPPLUS.NS) Stock Price, News, Quote & History - Yahoo Finance"
+        },
+        {
+          "url": "https://www.cnbc.com/quotes/CPPLUS-IN",
+          "title": "CPPLUS-IN: Aditya Infotech Ltd - Stock Price, Quote and News - CNBC"
+        }
+      ],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-16",
+      "symbol": "VEDL",
+      "exchange": "NS",
+      "name": "Vedanta",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 299.95,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 23989.15,
+      "reasoning": "VEDL is down ~2.7% on June 16 and faces a near-certain passive-selling headwind as MSCI removes it from its Global Standard Indexes effective June 22 — index-tracking funds will be forced sellers. The residual entity post-demerger now reflects only the copper/zinc/residual businesses, and its fundamentals and analyst coverage are still being re-rated; average broker target is ~₹308, but EPS is forecast to fall ~55% in FY27. Short-term direction is close to a coin flip even without the MSCI overhang; with it, near-term risk skews to the downside.",
+      "keyNews": [
+        "MSCI to remove VEDL from Global Standard Indexes effective June 22, 2026, post-demerger",
+        "Four demerged entities (VAML, VEDPOWER, VISL, VOGL) listed on NSE/BSE on June 15, 2026",
+        "VEDL stock dipped 2.7% on June 16; analysts flag short-term volatility, EPS seen -55% in FY27"
+      ],
+      "sources": [
+        {
+          "url": "https://www.tickertape.in/stocks/vedanta-VDAN",
+          "title": "VEDL Share Price Live: Vedanta NSE Today"
+        },
+        {
+          "url": "https://hdfcsky.com/news/market-preview-june-12-2026-lenskart-block-deal-vedanta-demerger-listings-dabur-fda-notice-happiest-minds-ai-launch-adani-data-centre-acquisition-to-keep-indian-investors-busy-on-friday",
+          "title": "Market Preview, June 12, 2026: Lenskart Block Deal, Vedanta Demerger Listings, Dabur FDA Notice, Happiest Minds AI Launch, Adani Data Centre Acquisition to Keep Indian Investors Busy on Friday - HDFCSky"
+        },
+        {
+          "url": "https://groww.in/stocks/vedanta-ltd",
+          "title": "Vedanta Share Price, Stock Price, LIVE NSE/BSE - Groww"
+        },
+        {
+          "url": "https://upstox.com/news/market-news/stocks/vedanta-demerger-four-entities-to-list-on-june-15-what-shareholders-need-to-know/article-195209/",
+          "title": "Vedanta demerger: Four newly carved-out companies set for market debut on June 15; details to know"
+        },
+        {
+          "url": "https://upstox.com/news/market-news/stocks/vedanta-aluminium-lists-at-522-on-the-nse-all-four-demerged-vedanta-entities-now-trading-on-exchanges/article-195311/",
+          "title": "Vedanta Aluminium lists at ₹522 on the NSE; all four demerged Vedanta entities now trading on exchanges"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Vedanta_Limited",
+          "title": "Vedanta Limited"
         }
       ],
       "outcome": "pending"
