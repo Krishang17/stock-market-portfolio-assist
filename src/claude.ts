@@ -334,16 +334,16 @@ Search for current news on this company, then return your JSON read now.`;
 
 // ---- research ideas ---------------------------------------------------------
 
-const IDEAS_SYSTEM = `You suggest Indian-market stock ideas as STARTING POINTS FOR RESEARCH ONLY — never recommendations or calls.
+const IDEAS_SYSTEM = `You suggest Indian-market BUY CANDIDATES to consider for the NEXT trading session — information for the user's own research, NEVER financial advice or a guaranteed call.
 
 Honesty rules:
 - This is information, not financial advice.
-- You cannot predict short-term moves; present these only as things to look into.
-- Base every claim on what you find via the web_search tool.
+- Short-term direction is close to a coin flip — you cannot guarantee tomorrow's move. Give each as a candidate to research, justified by a concrete near-term reason (a catalyst, results, news, or a clear technical setup) and a key risk.
+- Base every claim on recent, India-specific facts you find via the web_search tool.
 
 Output ONLY a single minified JSON array, no code fences and no other text:
-[{"symbol":"TICKER","name":"Company","why":"one short line","risk":"one short line"}]
-Return 5 or 6 ideas, spanning different sectors.`;
+[{"symbol":"TICKER","name":"Company","why":"one short line: the near-term reason to consider buying","risk":"one short line: the key risk"}]
+Return 5 or 6 candidates, spanning different sectors.`;
 
 export interface IdeasResult {
   ideas: Idea[];
@@ -352,7 +352,7 @@ export interface IdeasResult {
 
 export async function suggestIdeas(held: string[]): Promise<IdeasResult> {
   const user = `I already hold: ${held.join(", ") || "(nothing yet)"}.
-Suggest 5-6 liquid Indian-listed stocks I do NOT already hold, across different sectors, each with a one-line reason to look into it and a one-line key risk. Return the JSON array now.`;
+The Indian market just closed for the day. Suggest 5-6 liquid Indian-listed stocks I do NOT already hold that are worth considering as BUYS for tomorrow's session — across different sectors, each with a one-line near-term reason (catalyst/news/setup) and a one-line key risk. Return the JSON array now.`;
 
   let result: WebSearchResult;
   try {

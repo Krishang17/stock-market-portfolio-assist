@@ -625,7 +625,7 @@ function renderIdeas(data) {
   const root = document.getElementById("ideas");
   root.innerHTML = "";
   const ideas = (data.ideas && data.ideas.items) || [];
-  if (!ideas.length) root.appendChild(el("p", { class: "muted", text: "No ideas generated this run." }));
+  if (!ideas.length) root.appendChild(el("p", { class: "muted", text: "No buy candidates generated this run." }));
   else ideas.forEach((i) => root.appendChild(ideaCard(i)));
   const src = sourcesRow(data.ideas && data.ideas.sources);
   if (src) root.appendChild(src);

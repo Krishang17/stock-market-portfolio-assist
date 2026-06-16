@@ -113,9 +113,10 @@ safe equivalent.)
 
 ## Running and testing
 
-- **Automatic:** the workflow runs daily (`cron: "0 3 * * *"` = 08:30 IST). It
-  generates `docs/briefing.json` + updates `data/history.json`, commits them, and
-  Pages republishes the dashboard.
+- **Automatic:** the workflow runs every weekday (`cron: "15 10 * * 1-5"` =
+  15:45 IST, just after the 15:30 close) so the brief reflects the full trading
+  day and can suggest what to buy tomorrow. It generates `docs/briefing.json` +
+  updates `data/history.json`, commits them, and Pages republishes the dashboard.
 - **Manual:** repo → **Actions → Morning Briefing → Run workflow** (pick the
   branch). Note: a green run only means it didn't crash — check the **dashboard**
   (or the run logs) to confirm Claude actually produced reads vs. fallbacks.
