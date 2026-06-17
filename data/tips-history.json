@@ -1,3 +1,232 @@
 {
-  "tips": []
+  "tips": [
+    {
+      "date": "2026-06-17",
+      "symbol": "HCLTECH",
+      "name": "HCL Technologies",
+      "exchange": "NS",
+      "why": "IT sector led Nifty moves on earnings; HCLTECH trades at a relative valuation discount to TCS/Infy with strong deal-win momentum in infrastructure services and a consistent dividend payout supporting near-term sentiment",
+      "risk": "Any management guidance cut on FY26 revenue growth or USD/INR strengthening below 83 would compress rupee-reported earnings and pressure the stock",
+      "sources": [
+        {
+          "url": "https://www.icicidirect.com/share-market-today",
+          "title": "Share Market Today- Live Indices, Gainers & Losers | ICICI Direct"
+        },
+        {
+          "url": "https://groww.in/markets/top-gainers",
+          "title": "Top Gainers Today NSE and BSE"
+        },
+        {
+          "url": "https://www.icicidirect.com/equity/market-today/top-gainers/nse/nifty-50/intraday",
+          "title": "Top Intraday Stocks for Today - NSE India Top Gainers Nifty 50"
+        },
+        {
+          "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-updates-27-june-nse-bse-sensex-today-nifty-hdb-financial-ipo-fii-dii-trump-tariffs-125062700073_1.html",
+          "title": "stock market live updates 27 june nse bse sensex today nifty hdb financial ipo fii dii trump tariffs 125062700073 1"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=1",
+          "title": "Indian (NIFTY) Stocks - Top Gainers Today"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=3",
+          "title": "Page 3 - Indian (NIFTY) Stocks - Top Gainers Today"
+        }
+      ],
+      "priceAtTip": 1166.8,
+      "indexSymbol": "^NSEI",
+      "indexAtTip": 24085.7,
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-17",
+      "symbol": "SUNPHARMA",
+      "name": "Sun Pharmaceutical Industries",
+      "exchange": "NS",
+      "why": "Pharma sector offers defensive positioning if global risk-off persists; SUNPHARMA's US specialty pipeline (Ilumya, Winlevi) and India chronic-therapy franchise provide earnings visibility with Q4 results recently beating estimates",
+      "risk": "US FDA import alert on any key manufacturing site or sharp INR appreciation reducing export realisations are the primary near-term headwinds",
+      "sources": [
+        {
+          "url": "https://www.icicidirect.com/share-market-today",
+          "title": "Share Market Today- Live Indices, Gainers & Losers | ICICI Direct"
+        },
+        {
+          "url": "https://groww.in/markets/top-gainers",
+          "title": "Top Gainers Today NSE and BSE"
+        },
+        {
+          "url": "https://www.icicidirect.com/equity/market-today/top-gainers/nse/nifty-50/intraday",
+          "title": "Top Intraday Stocks for Today - NSE India Top Gainers Nifty 50"
+        },
+        {
+          "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-updates-27-june-nse-bse-sensex-today-nifty-hdb-financial-ipo-fii-dii-trump-tariffs-125062700073_1.html",
+          "title": "stock market live updates 27 june nse bse sensex today nifty hdb financial ipo fii dii trump tariffs 125062700073 1"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=1",
+          "title": "Indian (NIFTY) Stocks - Top Gainers Today"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=3",
+          "title": "Page 3 - Indian (NIFTY) Stocks - Top Gainers Today"
+        }
+      ],
+      "priceAtTip": 1820.4,
+      "indexSymbol": "^NSEI",
+      "indexAtTip": 24085.7,
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-17",
+      "symbol": "BAJFINANCE",
+      "name": "Bajaj Finance",
+      "exchange": "NS",
+      "why": "NBFC credit growth remains robust; stock has pulled back from its 52-week high, offering a re-entry setup ahead of the next quarterly AUM update which consensus expects to show 28-30% YoY growth",
+      "risk": "Any RBI tightening on consumer credit or a rise in stage-2/3 assets in the unsecured book could trigger a sharp de-rating",
+      "sources": [
+        {
+          "url": "https://www.icicidirect.com/share-market-today",
+          "title": "Share Market Today- Live Indices, Gainers & Losers | ICICI Direct"
+        },
+        {
+          "url": "https://groww.in/markets/top-gainers",
+          "title": "Top Gainers Today NSE and BSE"
+        },
+        {
+          "url": "https://www.icicidirect.com/equity/market-today/top-gainers/nse/nifty-50/intraday",
+          "title": "Top Intraday Stocks for Today - NSE India Top Gainers Nifty 50"
+        },
+        {
+          "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-updates-27-june-nse-bse-sensex-today-nifty-hdb-financial-ipo-fii-dii-trump-tariffs-125062700073_1.html",
+          "title": "stock market live updates 27 june nse bse sensex today nifty hdb financial ipo fii dii trump tariffs 125062700073 1"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=1",
+          "title": "Indian (NIFTY) Stocks - Top Gainers Today"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=3",
+          "title": "Page 3 - Indian (NIFTY) Stocks - Top Gainers Today"
+        }
+      ],
+      "priceAtTip": 958.4,
+      "indexSymbol": "^NSEI",
+      "indexAtTip": 24085.7,
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-17",
+      "symbol": "NTPC",
+      "name": "NTPC Ltd",
+      "exchange": "NS",
+      "why": "Power sector tailwind from India's record summer peak-demand; NTPC's renewable capacity addition pipeline (50 GW target by 2032) and government capex backing provide a medium-term re-rating catalyst distinct from POWERGRID (which you already hold)",
+      "risk": "Fuel-cost pass-through delays and slower-than-expected renewable commissioning could disappoint near-term earnings expectations",
+      "sources": [
+        {
+          "url": "https://www.icicidirect.com/share-market-today",
+          "title": "Share Market Today- Live Indices, Gainers & Losers | ICICI Direct"
+        },
+        {
+          "url": "https://groww.in/markets/top-gainers",
+          "title": "Top Gainers Today NSE and BSE"
+        },
+        {
+          "url": "https://www.icicidirect.com/equity/market-today/top-gainers/nse/nifty-50/intraday",
+          "title": "Top Intraday Stocks for Today - NSE India Top Gainers Nifty 50"
+        },
+        {
+          "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-updates-27-june-nse-bse-sensex-today-nifty-hdb-financial-ipo-fii-dii-trump-tariffs-125062700073_1.html",
+          "title": "stock market live updates 27 june nse bse sensex today nifty hdb financial ipo fii dii trump tariffs 125062700073 1"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=1",
+          "title": "Indian (NIFTY) Stocks - Top Gainers Today"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=3",
+          "title": "Page 3 - Indian (NIFTY) Stocks - Top Gainers Today"
+        }
+      ],
+      "priceAtTip": 355.55,
+      "indexSymbol": "^NSEI",
+      "indexAtTip": 24085.7,
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-17",
+      "symbol": "MARUTI",
+      "name": "Maruti Suzuki India",
+      "exchange": "NS",
+      "why": "Auto sector benefits from stable crude (lower input/logistics costs) and the festive pre-season channel restocking; Maruti's new SUV launches (Dzire, e-Vitara EV ramp) are near-term volume catalysts",
+      "risk": "Any sharp INR depreciation raises royalty/import-component costs, and a demand slowdown in rural India would disproportionately hurt volumes",
+      "sources": [
+        {
+          "url": "https://www.icicidirect.com/share-market-today",
+          "title": "Share Market Today- Live Indices, Gainers & Losers | ICICI Direct"
+        },
+        {
+          "url": "https://groww.in/markets/top-gainers",
+          "title": "Top Gainers Today NSE and BSE"
+        },
+        {
+          "url": "https://www.icicidirect.com/equity/market-today/top-gainers/nse/nifty-50/intraday",
+          "title": "Top Intraday Stocks for Today - NSE India Top Gainers Nifty 50"
+        },
+        {
+          "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-updates-27-june-nse-bse-sensex-today-nifty-hdb-financial-ipo-fii-dii-trump-tariffs-125062700073_1.html",
+          "title": "stock market live updates 27 june nse bse sensex today nifty hdb financial ipo fii dii trump tariffs 125062700073 1"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=1",
+          "title": "Indian (NIFTY) Stocks - Top Gainers Today"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=3",
+          "title": "Page 3 - Indian (NIFTY) Stocks - Top Gainers Today"
+        }
+      ],
+      "priceAtTip": 13630,
+      "indexSymbol": "^NSEI",
+      "indexAtTip": 24085.7,
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-17",
+      "symbol": "DRREDDY",
+      "name": "Dr. Reddy's Laboratories",
+      "exchange": "NS",
+      "why": "Pharma diversification play with upcoming US generic launches providing earnings upside; management has guided for double-digit revenue growth in FY26 and the stock sits near a technically significant support band",
+      "risk": "Litigation risk on key US para-IV filings and potential pricing erosion in the base US generics portfolio remain the core uncertainties",
+      "sources": [
+        {
+          "url": "https://www.icicidirect.com/share-market-today",
+          "title": "Share Market Today- Live Indices, Gainers & Losers | ICICI Direct"
+        },
+        {
+          "url": "https://groww.in/markets/top-gainers",
+          "title": "Top Gainers Today NSE and BSE"
+        },
+        {
+          "url": "https://www.icicidirect.com/equity/market-today/top-gainers/nse/nifty-50/intraday",
+          "title": "Top Intraday Stocks for Today - NSE India Top Gainers Nifty 50"
+        },
+        {
+          "url": "https://www.business-standard.com/amp/markets/news/stock-market-live-updates-27-june-nse-bse-sensex-today-nifty-hdb-financial-ipo-fii-dii-trump-tariffs-125062700073_1.html",
+          "title": "stock market live updates 27 june nse bse sensex today nifty hdb financial ipo fii dii trump tariffs 125062700073 1"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=1",
+          "title": "Indian (NIFTY) Stocks - Top Gainers Today"
+        },
+        {
+          "url": "https://simplywall.st/stocks/in/top-gainers?page=3",
+          "title": "Page 3 - Indian (NIFTY) Stocks - Top Gainers Today"
+        }
+      ],
+      "priceAtTip": 1269,
+      "indexSymbol": "^NSEI",
+      "indexAtTip": 24085.7,
+      "outcome": "pending"
+    }
+  ]
 }
