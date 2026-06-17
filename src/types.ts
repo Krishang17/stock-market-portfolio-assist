@@ -88,6 +88,36 @@ export interface History {
   calls: CallRecord[];
 }
 
+/**
+ * A persisted buy-tip plus the information used to generate it (why/risk/sources)
+ * and its eventual benchmark-relative outcome. Stored in data/tips-history.json
+ * so the tips can be SCORED over time and fed back into the prompt as context.
+ */
+export interface TipRecord {
+  date: string; // YYYY-MM-DD of the run that suggested it
+  symbol: string;
+  name?: string;
+  exchange: Exchange | null; // resolved NS/BO, or null if it couldn't be resolved
+  why: string; // the near-term reason given
+  risk: string; // the key risk given
+  sources: Source[]; // the links the run consulted for ideas
+  priceAtTip: number | null;
+  indexSymbol: string | null; // benchmark captured at tip time
+  indexAtTip: number | null;
+
+  // Evaluation (filled in on a later run):
+  outcome: Outcome; // "pending" until evaluated
+  evaluatedPrice?: number | null;
+  stockReturnPct?: number | null;
+  benchmarkReturnPct?: number | null;
+  evaluatedDate?: string;
+}
+
+/** The whole persisted tips record (data/tips-history.json). */
+export interface TipHistory {
+  tips: TipRecord[];
+}
+
 /** Empirical performance of all scored directional calls in one confidence bucket. */
 export interface ConfidenceBucket {
   confidence: Confidence;

@@ -286,6 +286,7 @@ export async function analyzeHolding(
   price: number | null,
   recent: CallRecord[],
   calibration: Calibration,
+  worldText = "",
 ): Promise<Analysis> {
   const exch = holding.exchange === "NS" ? "NSE" : "BSE";
   const priceLine =
@@ -299,7 +300,7 @@ ${formatRecentCalls(recent)}
 
 ${formatCalibration(calibration)}
 
-Search for current news on this company, then return your JSON read now.`;
+${worldText ? worldText + "\n\n" : ""}Search for current news on this company, then return your JSON read now.`;
 
   let result: WebSearchResult;
   try {
@@ -350,9 +351,15 @@ export interface IdeasResult {
   sources: Source[];
 }
 
-export async function suggestIdeas(held: string[]): Promise<IdeasResult> {
+export async function suggestIdeas(
+  held: string[],
+  worldText = "",
+  tipsText = "",
+): Promise<IdeasResult> {
   const user = `I already hold: ${held.join(", ") || "(nothing yet)"}.
-The Indian market just closed for the day. Suggest 5-6 liquid Indian-listed stocks I do NOT already hold that are worth considering as BUYS for tomorrow's session — across different sectors, each with a one-line near-term reason (catalyst/news/setup) and a one-line key risk. Return the JSON array now.`;
+The Indian market just closed for the day. Suggest 5-6 liquid Indian-listed stocks I do NOT already hold that are worth considering as BUYS for tomorrow's session — across different sectors, each with a one-line near-term reason (catalyst/news/setup) and a one-line key risk.
+
+${tipsText ? tipsText + "\n\n" : ""}${worldText ? worldText + "\n\n" : ""}Return the JSON array now.`;
 
   let result: WebSearchResult;
   try {
@@ -393,4 +400,59 @@ The Indian market just closed for the day. Suggest 5-6 liquid Indian-listed stoc
   } catch {
     return { ideas: [], sources: result.sources };
   }
+}
+
+// ---- world / market brief ---------------------------------------------------
+// One web-search call per run summarising the major world + Indian developments,
+// so the per-holding reads and tips are made with awareness of big events. The
+// points are also shown on the dashboard and woven into the prompts as context.
+
+const WORLD_SYSTEM = `You are a markets desk assistant. Using web_search, summarise the MOST market-moving world + Indian developments right now (macro data, central-bank/policy moves, geopolitics, commodities/oil, currency, major earnings) that a retail Indian-equity investor should know for the next session. Be factual, current and specific; no hype, no advice, no price targets.
+
+Output ONLY a single minified JSON object, no code fences and no other text:
+{"points":["one short factual point", up to 5]}`;
+
+export interface WorldBrief {
+  points: string[];
+  sources: Source[];
+}
+
+export async function getWorldBrief(): Promise<WorldBrief> {
+  let result: WebSearchResult;
+  try {
+    result = await askWithWebSearch(
+      WORLD_SYSTEM,
+      "Search the latest and return today's market-moving world brief as JSON now.",
+      1200,
+    );
+  } catch (err) {
+    console.error(
+      "[claude] getWorldBrief failed:",
+      err instanceof Error ? err.message : err,
+    );
+    noteFailure(err);
+    return { points: [], sources: [] };
+  }
+  const json = extractJsonObject(result.text);
+  let points: string[] = [];
+  if (json) {
+    try {
+      const p = JSON.parse(json);
+      if (Array.isArray(p.points)) {
+        points = p.points.filter((x: unknown): x is string => typeof x === "string").slice(0, 5);
+      }
+    } catch {
+      /* leave points empty */
+    }
+  }
+  return { points, sources: result.sources };
+}
+
+/** Format a world brief as prompt context. */
+export function formatWorldBrief(points: string[]): string {
+  if (!points || !points.length) return "";
+  return (
+    "Today's market-moving world/market context (factor in only where genuinely relevant):\n" +
+    points.map((p) => `- ${p}`).join("\n")
+  );
 }

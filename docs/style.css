@@ -746,6 +746,31 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* world watch */
+.worldwatch {
+  margin-top: 14px;
+}
+.worldwatch.hidden {
+  display: none;
+}
+.worldwatch h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+/* tips track-record banner (spans the tips grid) */
+.tips-track {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+.tips-track .big {
+  font-size: 15px;
+  font-weight: 700;
+}
+
 /* holdings: local-add support */
 .top-right {
   display: flex;

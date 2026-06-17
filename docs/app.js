@@ -412,6 +412,27 @@ function renderHealth(data) {
   }
 }
 
+// ---- world watch ------------------------------------------------------------
+
+function renderWorldWatch(data) {
+  const root = document.getElementById("worldwatch");
+  if (!root) return;
+  root.innerHTML = "";
+  const wb = data.worldBrief;
+  const points = (wb && wb.points) || [];
+  if (!points.length) {
+    root.classList.add("hidden");
+    return;
+  }
+  root.classList.remove("hidden");
+  root.appendChild(el("h3", { class: "muted", text: "🌍 World watch — major events factored into today's reads" }));
+  const ul = el("ul", { class: "news" });
+  points.forEach((p) => ul.appendChild(el("li", { text: p })));
+  root.appendChild(ul);
+  const src = sourcesRow(wb.sources);
+  if (src) root.appendChild(src);
+}
+
 // ---- overview charts --------------------------------------------------------
 
 function renderCharts(data) {
@@ -477,6 +498,32 @@ function renderCharts(data) {
     const c = document.getElementById("valueChart");
     if (c && c.parentElement && !c.parentElement.querySelector(".muted")) {
       c.parentElement.appendChild(el("p", { class: "muted", text: "Builds up as the daily job runs." }));
+    }
+  }
+
+  // Performance: you vs the AI tips vs NIFTY, each rebased to 100.
+  const perf = data.performance;
+  const perfHasData = perf && Array.isArray(perf.dates) && perf.dates.some((_, i) => (perf.tips && perf.tips[i] != null) || (perf.you && perf.you[i] != null));
+  if (perfHasData) {
+    chartOn("perfChart", {
+      type: "line",
+      data: {
+        labels: perf.dates,
+        datasets: [
+          { label: "You", data: perf.you || [], borderColor: "#58a6ff", backgroundColor: "rgba(88,166,255,0.10)", fill: false, tension: 0.2, pointRadius: 0, spanGaps: true },
+          { label: "AI tips", data: perf.tips || [], borderColor: "#3fb950", backgroundColor: "transparent", fill: false, tension: 0.2, pointRadius: 0, spanGaps: true },
+          { label: "NIFTY", data: perf.nifty || [], borderColor: "#9aa3af", borderDash: [5, 4], fill: false, tension: 0.2, pointRadius: 0, spanGaps: true },
+        ],
+      },
+      options: timeSeriesOptions({ yFmt: (v) => v.toFixed(0), rebased: true }),
+      plugins: [crosshairPlugin],
+    });
+    const pc = document.getElementById("perfChart");
+    if (pc) pc.ondblclick = () => Chart.getChart(pc)?.resetZoom?.();
+  } else {
+    const c = document.getElementById("perfChart");
+    if (c && c.parentElement && !c.parentElement.querySelector(".muted")) {
+      c.parentElement.appendChild(el("p", { class: "muted", text: "Builds up once the tips have a day to play out." }));
     }
   }
 }
@@ -658,6 +705,18 @@ function ideaCard(idea) {
 function renderIdeas(data) {
   const root = document.getElementById("ideas");
   root.innerHTML = "";
+  const track = data.ideas && data.ideas.track;
+  if (track && track.scored > 0) {
+    const bits = [`${Math.round((track.rate ?? 0) * 100)}% beat the index (${track.right}/${track.scored})`];
+    if (typeof track.avgReturnPct === "number") bits.push(`avg ${pct(track.avgReturnPct)} / tip`);
+    if (typeof track.avgVsIndexPct === "number") bits.push(`${pct(track.avgVsIndexPct)} vs index`);
+    root.appendChild(
+      el("div", { class: "card tips-track" }, [
+        el("span", { class: "big", text: "Tips track record: " }),
+        el("span", { class: "muted", text: bits.join(" · ") }),
+      ]),
+    );
+  }
   const ideas = (data.ideas && data.ideas.items) || [];
   if (!ideas.length) root.appendChild(el("p", { class: "muted", text: "No buy candidates generated this run." }));
   else ideas.forEach((i) => root.appendChild(ideaCard(i)));
@@ -925,6 +984,7 @@ function renderOverview() {
   renderIndices(DATA);
   renderMovers(DATA);
   renderHealth(DATA);
+  renderWorldWatch(DATA);
   renderCharts(DATA);
   renderTrack(DATA);
   renderHoldings(DATA);

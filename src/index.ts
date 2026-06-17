@@ -9,8 +9,21 @@ import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 
-import { analyzeHolding, getLastFailureReason, suggestIdeas } from "./claude";
-import { computeCalibration, computeHitRate, evaluatePending } from "./evaluate";
+import {
+  analyzeHolding,
+  formatWorldBrief,
+  getLastFailureReason,
+  getWorldBrief,
+  suggestIdeas,
+} from "./claude";
+import {
+  buildTipsEquitySeries,
+  computeCalibration,
+  computeHitRate,
+  computeTipsTrack,
+  evaluatePending,
+  evaluatePendingTips,
+} from "./evaluate";
 import {
   MARKET_INDICES,
   fetchHistory,
@@ -28,11 +41,14 @@ import type {
   History,
   Holding,
   Stance,
+  TipHistory,
+  TipRecord,
 } from "./types";
 
 const ROOT = process.cwd();
 const PORTFOLIO_PATH = path.join(ROOT, "portfolio.json");
 const HISTORY_PATH = path.join(ROOT, "data", "history.json");
+const TIPS_HISTORY_PATH = path.join(ROOT, "data", "tips-history.json");
 const VALUE_HISTORY_PATH = path.join(ROOT, "data", "value-history.json");
 // The dashboard (docs/) is served by GitHub Pages and reads this snapshot.
 const SNAPSHOT_PATH = path.join(ROOT, "docs", "briefing.json");
@@ -134,6 +150,42 @@ function saveHistory(history: History): void {
   fs.writeFileSync(HISTORY_PATH, JSON.stringify(history, null, 2) + "\n");
 }
 
+function loadTipHistory(): TipHistory {
+  try {
+    const obj = JSON.parse(fs.readFileSync(TIPS_HISTORY_PATH, "utf8"));
+    if (obj && Array.isArray(obj.tips)) return obj as TipHistory;
+  } catch {
+    /* missing or invalid -> start fresh */
+  }
+  return { tips: [] };
+}
+
+function saveTipHistory(tips: TipHistory): void {
+  fs.mkdirSync(path.dirname(TIPS_HISTORY_PATH), { recursive: true });
+  fs.writeFileSync(TIPS_HISTORY_PATH, JSON.stringify(tips, null, 2) + "\n");
+}
+
+/** Compact text of recent scored tips + the running rate, for the prompt. */
+function formatTipsLearning(tips: TipHistory): string {
+  const scored = tips.tips.filter((t) => t.outcome === "right" || t.outcome === "wrong");
+  if (!scored.length) return "Your past buy-tips: none scored yet — be selective and humble.";
+  const right = scored.filter((t) => t.outcome === "right").length;
+  const recent = [...scored].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 10);
+  const lines = recent.map((t) => {
+    const r = typeof t.stockReturnPct === "number" ? `${t.stockReturnPct >= 0 ? "+" : ""}${t.stockReturnPct.toFixed(1)}%` : "?";
+    const vi =
+      typeof t.benchmarkReturnPct === "number"
+        ? ` vs index ${t.benchmarkReturnPct >= 0 ? "+" : ""}${t.benchmarkReturnPct.toFixed(1)}%`
+        : "";
+    return `- ${t.date} ${t.symbol}: ${t.outcome} (${r}${vi})`;
+  });
+  return (
+    `How YOUR past buy-tips actually did vs the index (context only — you are NOT retrained or improving): ` +
+    `${right}/${scored.length} beat the index. Recent tips:\n${lines.join("\n")}\n` +
+    `Learn from the misses: prefer ideas with a concrete near-term catalyst, avoid repeating losing patterns, and don't suggest names just to fill the list.`
+  );
+}
+
 function loadValueHistory(): ValuePoint[] {
   try {
     const arr = JSON.parse(fs.readFileSync(VALUE_HISTORY_PATH, "utf8"));
@@ -208,14 +260,31 @@ async function main(): Promise<void> {
   }
 
   const history = loadHistory();
+  const tipHistory = loadTipHistory();
 
-  // 1. Evaluate how the PREVIOUS run's calls turned out.
+  // Kick off the world/market brief now (one web-search call) so it overlaps the
+  // free Yahoo fetches; its context feeds both the reads and the tips below.
+  const worldPromise = getWorldBrief().catch((err) => {
+    console.error("[main] world brief failed:", err instanceof Error ? err.message : err);
+    return { points: [], sources: [] };
+  });
+
+  // 1. Evaluate how the PREVIOUS run's calls AND tips turned out.
   try {
     const resolved = await evaluatePending(history, getRaw, today);
     console.log(`[main] evaluated ${resolved} prior call(s).`);
   } catch (err) {
     console.error(
       "[main] evaluation step failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+  try {
+    const resolvedTips = await evaluatePendingTips(tipHistory, getRaw, today);
+    console.log(`[main] evaluated ${resolvedTips} prior tip(s).`);
+  } catch (err) {
+    console.error(
+      "[main] tip evaluation failed:",
       err instanceof Error ? err.message : err,
     );
   }
@@ -250,15 +319,23 @@ async function main(): Promise<void> {
     indexHistory[s] = benchSeries[i];
   });
 
-  const ideasPromise = suggestIdeas(portfolio.map((p) => p.symbol)).catch(
-    (err) => {
-      console.error(
-        "[main] ideas step failed:",
-        err instanceof Error ? err.message : err,
-      );
-      return { ideas: [], sources: [] };
-    },
-  );
+  // World context (awaited now — it was fetched in parallel above) + how our own
+  // past tips did, both woven into the prompts ("learning from mistakes").
+  const world = await worldPromise;
+  const worldText = formatWorldBrief(world.points);
+  const tipsText = formatTipsLearning(tipHistory);
+
+  const ideasPromise = suggestIdeas(
+    portfolio.map((p) => p.symbol),
+    worldText,
+    tipsText,
+  ).catch((err) => {
+    console.error(
+      "[main] ideas step failed:",
+      err instanceof Error ? err.message : err,
+    );
+    return { ideas: [], sources: [] };
+  });
 
   const analyses = await mapLimit(portfolio, 5, (holding, i) =>
     analyzeHolding(
@@ -266,6 +343,7 @@ async function main(): Promise<void> {
       quotes[i].price,
       recentCallsFor(history, holding.symbol, holding.exchange, 5),
       calibration,
+      worldText,
     ),
   );
 
@@ -348,6 +426,36 @@ async function main(): Promise<void> {
     ideas.map(async (idea) => ({ ...idea, ...(await fetchIdeaData(idea.symbol)) })),
   );
 
+  // 6b. Record today's tips WITH the info used to generate them, so they can be
+  //     scored on a later run and fed back into the prompt. Then build the tips
+  //     track record + a combined "you vs tips vs NIFTY" performance series.
+  for (const idea of enrichedIdeas) {
+    const ex = idea.exchange ?? null;
+    const indexSymbol = ex ? indexSymbolFor(ex) : null;
+    const indexAtTip = indexSymbol ? await getRaw(indexSymbol) : null;
+    const tip: TipRecord = {
+      date: today,
+      symbol: idea.symbol,
+      name: idea.name,
+      exchange: ex,
+      why: idea.why,
+      risk: idea.risk,
+      sources: ideaSources,
+      priceAtTip: idea.price ?? null,
+      indexSymbol,
+      indexAtTip,
+      outcome: "pending",
+    };
+    tipHistory.tips.push(tip);
+  }
+  const tipsTrack = computeTipsTrack(tipHistory);
+  const tipsEquity = buildTipsEquitySeries(tipHistory);
+  const performance = buildPerformance(
+    series.slice(-120),
+    tipsEquity,
+    indexHistory["^NSEI"] ?? [],
+  );
+
   // 7. Write the dashboard snapshot.
   const { right, wrong, rate } = computeHitRate(history);
   const degraded = views.some((v) => v.analysis.unavailable === true);
@@ -366,6 +474,8 @@ async function main(): Promise<void> {
     track: { right, wrong, rate },
     calibration,
     indexHistory,
+    worldBrief: { points: world.points, sources: world.sources },
+    performance,
     holdings: views.map((v, i) => {
       const { holding, price, dayChangePct, analysis } = v;
       const plPct =
@@ -404,7 +514,7 @@ async function main(): Promise<void> {
         ),
       };
     }),
-    ideas: { items: enrichedIdeas, sources: ideaSources },
+    ideas: { items: enrichedIdeas, sources: ideaSources, track: tipsTrack },
   };
 
   try {
@@ -419,7 +529,7 @@ async function main(): Promise<void> {
     );
   }
 
-  // 8. Persist today's calls so the record survives to the next run.
+  // 8. Persist today's calls + tips so the records survive to the next run.
   history.calls.push(...newCalls);
   try {
     saveHistory(history);
@@ -430,6 +540,45 @@ async function main(): Promise<void> {
       err instanceof Error ? err.message : err,
     );
   }
+  try {
+    saveTipHistory(tipHistory);
+    console.log(`[main] saved tips history (${tipHistory.tips.length} total).`);
+  } catch (err) {
+    console.error(
+      "[main] failed to write tips history:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+}
+
+/**
+ * Combined performance series: your portfolio, the AI tips strategy, and NIFTY —
+ * each rebased to 100 from where its data begins, over the value-history dates.
+ */
+function buildPerformance(
+  valueSeries: ValuePoint[],
+  tipsEquity: { date: string; value: number }[],
+  niftyPts: PricePoint[],
+): { dates: string[]; you: (number | null)[]; tips: (number | null)[]; nifty: (number | null)[] } {
+  const youMap = new Map(valueSeries.map((p) => [p.date, p.value]));
+  const tipsMap = new Map(tipsEquity.map((p) => [p.date, p.value]));
+  const niftyMap = new Map(niftyPts.map((p) => [p.t, p.c]));
+  const dates = Array.from(new Set([...youMap.keys(), ...tipsMap.keys()])).sort();
+  const rebase = (get: (d: string) => number | null | undefined): (number | null)[] => {
+    let base: number | null = null;
+    return dates.map((d) => {
+      const v = get(d);
+      if (v == null) return null;
+      if (base == null) base = v;
+      return base ? round2((v / base) * 100) : null;
+    });
+  };
+  return {
+    dates,
+    you: rebase((d) => youMap.get(d)),
+    tips: rebase((d) => tipsMap.get(d)),
+    nifty: rebase((d) => (niftyMap.has(d) ? niftyMap.get(d) : null)),
+  };
 }
 
 main().catch((err) => {

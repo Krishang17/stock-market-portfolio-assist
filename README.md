@@ -17,6 +17,13 @@ volatility), and that stock's past calls. The overview adds today's **top
 movers**, a **portfolio-health** panel (concentration / best-worst), inline
 sparklines, search + sort, a **light/dark** toggle, and **CSV / copy** export.
 
+It also **scores its own buy-tips** vs the index over time (stored in
+`data/tips-history.json`, with the reasoning/sources used) and plots **you vs
+the AI tips vs NIFTY** rebased to 100, so you can see how good the tips actually
+are. Past tip outcomes are fed back into the prompt as context (honest feedback,
+**not** retraining). Each run also pulls a short **world-news brief** so the
+reads and tips are made with awareness of major macro/geopolitical events.
+
 It runs entirely on GitHub — a [GitHub Actions cron](.github/workflows/briefing.yml)
 generates the data, commits it, and GitHub Pages serves the dashboard. **No
 server, no Telegram.** TypeScript on Node 22.

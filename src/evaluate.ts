@@ -22,6 +22,7 @@ import type {
   History,
   Outcome,
   Stance,
+  TipHistory,
 } from "./types";
 
 /**
@@ -181,6 +182,123 @@ export function computeCalibration(history: History): Calibration {
   });
 
   return { buckets, scored, brier: scored > 0 ? brierSum / scored : null };
+}
+
+// ---- buy-tips track record --------------------------------------------------
+// Tips are BUY ideas, so a tip is "right" if it OUTPERFORMED the index over the
+// ~1-trading-day window after it was suggested (same yardstick as the calls).
+
+/** Score every still-pending tip from previous runs against its benchmark. */
+export async function evaluatePendingTips(
+  tips: TipHistory,
+  getRawPrice: RawPriceGetter,
+  todayISO: string,
+): Promise<number> {
+  let resolved = 0;
+  for (const t of tips.tips) {
+    if (t.outcome !== "pending") continue;
+    if (t.date === todayISO) continue; // needs at least one trading day
+    if (t.priceAtTip == null || !t.exchange) {
+      t.outcome = "unscored";
+      t.evaluatedDate = todayISO;
+      resolved++;
+      continue;
+    }
+    const now = await getRawPrice(toYahooSymbol(t.symbol, t.exchange));
+    if (now == null) continue; // retry next run
+    const stockReturn = now / t.priceAtTip - 1;
+
+    let benchmarkReturn = 0;
+    let benchmarked = false;
+    if (t.indexSymbol && t.indexAtTip != null) {
+      const indexNow = await getRawPrice(t.indexSymbol);
+      if (indexNow != null) {
+        benchmarkReturn = indexNow / t.indexAtTip - 1;
+        benchmarked = true;
+      }
+    }
+    const delta = stockReturn - benchmarkReturn;
+    t.outcome = delta > 0 ? "right" : delta < 0 ? "wrong" : "unscored";
+    t.evaluatedPrice = now;
+    t.stockReturnPct = stockReturn * 100;
+    t.benchmarkReturnPct = benchmarked ? benchmarkReturn * 100 : null;
+    t.evaluatedDate = todayISO;
+    resolved++;
+  }
+  return resolved;
+}
+
+export interface TipsTrack {
+  right: number;
+  wrong: number;
+  scored: number;
+  rate: number | null; // right / (right+wrong)
+  avgReturnPct: number | null; // mean ~1-day return of scored tips
+  avgVsIndexPct: number | null; // mean outperformance vs the index
+}
+
+/** Running track record across all scored tips. */
+export function computeTipsTrack(tips: TipHistory): TipsTrack {
+  let right = 0;
+  let wrong = 0;
+  let rSum = 0;
+  let rN = 0;
+  let vSum = 0;
+  let vN = 0;
+  for (const t of tips.tips) {
+    if (t.outcome === "right") right++;
+    else if (t.outcome === "wrong") wrong++;
+    else continue;
+    if (typeof t.stockReturnPct === "number") {
+      rSum += t.stockReturnPct;
+      rN++;
+      if (typeof t.benchmarkReturnPct === "number") {
+        vSum += t.stockReturnPct - t.benchmarkReturnPct;
+        vN++;
+      }
+    }
+  }
+  const total = right + wrong;
+  return {
+    right,
+    wrong,
+    scored: total,
+    rate: total > 0 ? right / total : null,
+    avgReturnPct: rN > 0 ? rSum / rN : null,
+    avgVsIndexPct: vN > 0 ? vSum / vN : null,
+  };
+}
+
+/**
+ * Equity curve for the tips treated as an equal-weight, daily-rebalanced 1-day
+ * strategy: for each evaluation date, compound the average return of the tips
+ * scored that day. Returned as an index that starts at 100.
+ */
+export function buildTipsEquitySeries(
+  tips: TipHistory,
+): { date: string; value: number }[] {
+  const byDate = new Map<string, number[]>();
+  for (const t of tips.tips) {
+    if (
+      (t.outcome === "right" || t.outcome === "wrong") &&
+      typeof t.stockReturnPct === "number" &&
+      t.evaluatedDate
+    ) {
+      const arr = byDate.get(t.evaluatedDate) ?? [];
+      arr.push(t.stockReturnPct);
+      byDate.set(t.evaluatedDate, arr);
+    }
+  }
+  const dates = [...byDate.keys()].sort();
+  const out: { date: string; value: number }[] = [];
+  let v = 100;
+  for (const d of dates) {
+    const rs = byDate.get(d) as number[];
+    const avg = rs.reduce((s, x) => s + x, 0) / rs.length; // percent
+    v = v * (1 + avg / 100);
+    out.push({ date: d, value: Math.round(v * 100) / 100 });
+  }
+  return out;
 }
 
 /** Re-export for callers that want the record type handy. */
