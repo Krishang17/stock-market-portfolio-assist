@@ -289,10 +289,13 @@ export async function analyzeHolding(
   worldText = "",
 ): Promise<Analysis> {
   const exch = holding.exchange === "NS" ? "NSE" : "BSE";
+  const held = holding.qty > 0 && holding.buyPrice > 0;
   const priceLine =
-    price != null
-      ? `Current price: ₹${price} (your buy price: ₹${holding.buyPrice})`
-      : "Current price: unavailable this run.";
+    price == null
+      ? "Current price: unavailable this run."
+      : held
+        ? `Current price: ₹${price} (your buy price: ₹${holding.buyPrice})`
+        : `Current price: ₹${price}. NOTE: this stock is NOT held — it's a research request. Frame your read as whether to BUY/enter now (Add), wait (Watch/Hold), or stay away (Avoid).`;
   const user = `Holding: ${holding.name} (${holding.symbol}, ${exch})
 ${priceLine}
 

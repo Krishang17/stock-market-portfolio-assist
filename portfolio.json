@@ -9,5 +9,10 @@
   { "symbol": "POWERGRID", "name": "Power Grid Corporation of India", "exchange": "NS", "qty": 25, "buyPrice": 282.63 },
   { "symbol": "JWL", "name": "Jupiter Wagons", "exchange": "NS", "qty": 25, "buyPrice": 275.06 },
   { "symbol": "CPPLUS", "name": "Aditya Infotech (CP PLUS)", "exchange": "NS", "qty": 4, "buyPrice": 3601.26 },
-  { "symbol": "VEDL", "name": "Vedanta", "exchange": "NS", "qty": 80, "buyPrice": 415.65 }
+  { "symbol": "VEDL", "name": "Vedanta", "exchange": "NS", "qty": 80, "buyPrice": 415.65 },
+  { "symbol": "SBIN", "name": "State Bank of India", "exchange": "NS", "qty": 0, "buyPrice": 0 },
+  { "symbol": "RECLTD", "name": "REC Limited", "exchange": "NS", "qty": 0, "buyPrice": 0 },
+  { "symbol": "ITC", "name": "ITC", "exchange": "NS", "qty": 0, "buyPrice": 0 },
+  { "symbol": "JSWINFRA", "name": "JSW Infrastructure", "exchange": "NS", "qty": 0, "buyPrice": 0 },
+  { "symbol": "DIXON", "name": "Dixon Technologies", "exchange": "NS", "qty": 0, "buyPrice": 0 }
 ]

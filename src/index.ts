@@ -108,6 +108,22 @@ function actionLabel(stance: Stance): string {
   }
 }
 
+/** Action wording for a NON-held (research-only) stock — "Buy", not "Buy more". */
+function actionLabelFor(stance: Stance, held: boolean): string {
+  if (held) return actionLabel(stance);
+  switch (stance) {
+    case "Add":
+      return "Buy";
+    case "Trim":
+    case "Avoid":
+      return "Avoid";
+    case "Hold":
+      return "Neutral";
+    case "Watch":
+      return "Watch";
+  }
+}
+
 // ---- loading / saving -------------------------------------------------------
 
 function loadPortfolio(): Holding[] {
@@ -382,8 +398,10 @@ async function main(): Promise<void> {
     indices.push({ label, symbol, price: q.price, changePercent: q.changePercent });
   }
 
-  // 4. Portfolio totals (over holdings that have a price, so P/L is consistent).
-  const priced = views.filter((v) => v.price != null);
+  // 4. Portfolio totals — only over ACTUALLY HELD holdings (qty/buyPrice > 0), so
+  //    research-only names (added just for the AI read) don't distort value/P&L.
+  const heldViews = views.filter((v) => v.holding.qty > 0 && v.holding.buyPrice > 0);
+  const priced = heldViews.filter((v) => v.price != null);
   const invested = priced.reduce((s, v) => s + v.holding.qty * v.holding.buyPrice, 0);
   const value = priced.reduce((s, v) => s + v.holding.qty * (v.price as number), 0);
   const pnlAbs = value - invested;
@@ -392,9 +410,9 @@ async function main(): Promise<void> {
     value: round2(value),
     pnlAbs: round2(pnlAbs),
     pnlPct: invested > 0 ? round2((pnlAbs / invested) * 100) : null,
-    holdings: views.length,
+    holdings: heldViews.length,
     priced: priced.length,
-    unpriced: views.length - priced.length,
+    unpriced: heldViews.length - priced.length,
   };
 
   // 5. Append today's value to the time series (only when we have real prices).
@@ -478,9 +496,12 @@ async function main(): Promise<void> {
     performance,
     holdings: views.map((v, i) => {
       const { holding, price, dayChangePct, analysis } = v;
+      // "Research only" = added for the AI read, not actually held (qty/buyPrice 0).
+      // Skip P/L so we never divide by zero or show a position that isn't there.
+      const held = holding.qty > 0 && holding.buyPrice > 0;
       const plPct =
-        price != null ? ((price - holding.buyPrice) / holding.buyPrice) * 100 : null;
-      const plAbs = price != null ? (price - holding.buyPrice) * holding.qty : null;
+        held && price != null ? ((price - holding.buyPrice) / holding.buyPrice) * 100 : null;
+      const plAbs = held && price != null ? (price - holding.buyPrice) * holding.qty : null;
       return {
         symbol: holding.symbol,
         name: holding.name,
@@ -489,13 +510,14 @@ async function main(): Promise<void> {
         buyPrice: holding.buyPrice,
         price,
         dayChangePct,
-        value: price != null ? round2(price * holding.qty) : null,
-        invested: round2(holding.buyPrice * holding.qty),
+        value: held && price != null ? round2(price * holding.qty) : null,
+        invested: held ? round2(holding.buyPrice * holding.qty) : 0,
         plPct,
         plAbs,
+        research: !held,
         stance: analysis.stance,
         confidence: analysis.confidence,
-        action: actionLabel(analysis.stance),
+        action: actionLabelFor(analysis.stance, held),
         reasoning: analysis.reasoning,
         keyNews: analysis.keyNews,
         sources: analysis.sources ?? [],

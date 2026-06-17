@@ -558,6 +558,7 @@ function holdingCard(h) {
   const card = el("div", { class: "stock clickable" });
   const right = [el("span", { class: `pill ${PILL[h.stance] || "watch"}`, text: h.action || h.stance })];
   if (h.confidence) right.push(el("span", { class: "conf", text: h.confidence }));
+  if (h.research) right.push(el("span", { class: "tag research-tag", text: "research" }));
   if (h.local) {
     const rm = el("button", { class: "rbtn rm", text: "✕" });
     rm.title = "Remove from holdings";
@@ -1197,9 +1198,13 @@ function fillPos(pos, h) {
       pos.appendChild(document.createTextNode("   ·   P/L "));
       pos.appendChild(el("span", { class: cls(h.plPct), text: `${pct(h.plPct)} (${h.plAbs >= 0 ? "+" : ""}${inr(h.plAbs)})` }));
     }
-    pos.appendChild(document.createTextNode(`   ·   ${h.qty} @ ${inr(h.buyPrice)}  ·  value ${inr0(h.value)}`));
+    if (h.research) {
+      pos.appendChild(document.createTextNode("   ·   research only (not held)"));
+    } else {
+      pos.appendChild(document.createTextNode(`   ·   ${h.qty} @ ${inr(h.buyPrice)}  ·  value ${inr0(h.value)}`));
+    }
   } else {
-    pos.appendChild(document.createTextNode(`Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}`));
+    pos.appendChild(document.createTextNode(h.research ? "Price unavailable (research only)" : `Price unavailable · ${h.qty} @ ${inr(h.buyPrice)}`));
   }
 }
 

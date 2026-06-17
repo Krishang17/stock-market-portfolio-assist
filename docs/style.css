@@ -771,11 +771,15 @@ body {
   font-weight: 700;
 }
 
-/* holdings: local-add support */
+/* holdings: local-add + research support */
 .top-right {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+.research-tag {
+  background: rgba(88, 166, 255, 0.14);
+  color: var(--blue);
 }
 .rbtn.rm {
   padding: 2px 7px;
