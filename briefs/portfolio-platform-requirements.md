@@ -1,5 +1,5 @@
 # Requirements — Personal Portfolio Intelligence Platform
-**Draft v0.1 · 17 Jun 2026 · prepared for review**
+**Draft v0.2 · 18 Jun 2026 · decisions from dad's review captured (see §9)**
 
 > Goal: a private system that watches a large equity portfolio, keeps **years of history** for every holding, **flags unusual activity** (volume, delivery, price, news) with **alerts**, offers **honest buy/sell decision-support**, ingests **news**, and **learns from its own track record** over time.
 >
@@ -36,7 +36,7 @@ It's a strong choice as the **data backbone**. One gap to note: EODHD gives pric
 - **Multi-year EOD history** (OHLCV, adjusted for splits/dividends) per holding — target 10+ years where available. *Source: EODHD.*
 - **Daily delivery qty & delivery %** + historical backfill. *Source: NSE bhavcopy.*
 - **Fundamentals** (quarterly results, ratios), **corporate actions**, **dividends**. *Source: EODHD.*
-- *(Optional)* **F&O OI**, **FII/DII** flows. *Source: NSE.*
+- **F&O Open Interest (OI)** *(confirmed priority)* and **FII/DII** flows. *Source: NSE.*
 - Store in a proper **time-series database** so analytics/backtests are fast and history is permanent.
 - Automated **daily refresh** + one-time historical backfill; data-quality checks (gaps, bad ticks, corporate-action adjustments).
 
@@ -48,7 +48,7 @@ For each stock we learn its *normal* range and flag deviations. Concrete, explai
 - **Volatility regime change** — sudden expansion in daily range.
 - **Fundamental events** — results, guidance, rating/target changes, dividend/split.
 - **News spike** — surge in news volume or sharply negative/positive sentiment.
-- *(Optional)* **F&O/OI anomalies**, **FII/DII** unusual flows.
+- **F&O / OI anomalies** *(confirmed priority)* and **FII/DII** unusual flows.
 Each alert says **what** tripped, **how far** outside normal, and **links to the source** — no black boxes.
 
 ### 3.3 Buy / sell decision-support
@@ -96,14 +96,16 @@ Our current prototype already does, in miniature: portfolio tracking + P/L, AI r
 - **Hosting / DB / notifications** — modest cloud cost (can start near-free, scale as needed).
 - **AI (reads/news/learning)** — usage-based; controllable.
 
-## 9. Open questions for your dad (decisions that shape the build)
-1. **Scope of holdings** — only NSE/BSE, or also US/global stocks? How many names?
-2. **Exact "unusual" priorities** — rank what matters most (volume, delivery %, price breakouts, news, F&O/OI)?
-3. **Alert channels** — email / Telegram / WhatsApp / app push? How urgent vs digest?
-4. **History depth** — how many years to backfill?
-5. **Buy/sell role** — decision-support only, or also formal backtested strategy signals? (No auto-trading, correct?)
-6. **Budget** — comfort level for the EODHD plan + hosting.
-7. **Privacy/access** — who can see it; any compliance constraints given the portfolio size.
+## 9. Decisions (from dad's review — 18 Jun 2026)
+1. **Scope of holdings — NSE/BSE only.** (Indian market; number of names = his full portfolio, to list.)
+2. **"Unusual" priorities — track all, with F&O/OI movement an explicit priority** alongside volume, delivery %, price breakouts and news.
+3. **Alert channels — to be decided** during the build (email / Telegram / WhatsApp on the table; mix of instant alerts + a digest).
+4. **History depth — maximum available** *(to confirm)* — backfill as many years as the data sources allow.
+5. **Buy/sell role — decision-support only. NO auto-trading.**
+6. **Budget — keep it lean, ~₹2,000/month** *(to confirm)* for data + hosting (free NSE bhavcopy + an entry EODHD tier; scale only if needed).
+7. **Privacy/access — owner-only.** Private and access-controlled; only he can see it.
+
+*Still to confirm: exact history depth (#4) and the monthly budget figure (#6).*
 
 ## 10. Sources
 - EODHD GitHub org — https://github.com/EodHistoricalData
