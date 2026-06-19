@@ -36,7 +36,11 @@
       "priceAtTip": 1166.8,
       "indexSymbol": "^NSEI",
       "indexAtTip": 24085.7,
-      "outcome": "pending"
+      "outcome": "wrong",
+      "evaluatedPrice": 1161.8,
+      "stockReturnPct": -0.42852245457661864,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -74,7 +78,11 @@
       "priceAtTip": 1820.4,
       "indexSymbol": "^NSEI",
       "indexAtTip": 24085.7,
-      "outcome": "pending"
+      "outcome": "wrong",
+      "evaluatedPrice": 1824.8,
+      "stockReturnPct": 0.24170511975389886,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -112,7 +120,11 @@
       "priceAtTip": 958.4,
       "indexSymbol": "^NSEI",
       "indexAtTip": 24085.7,
-      "outcome": "pending"
+      "outcome": "wrong",
+      "evaluatedPrice": 958.85,
+      "stockReturnPct": 0.04695325542571904,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -150,7 +162,11 @@
       "priceAtTip": 355.55,
       "indexSymbol": "^NSEI",
       "indexAtTip": 24085.7,
-      "outcome": "pending"
+      "outcome": "right",
+      "evaluatedPrice": 361.95,
+      "stockReturnPct": 1.8000281254394457,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -188,7 +204,11 @@
       "priceAtTip": 13630,
       "indexSymbol": "^NSEI",
       "indexAtTip": 24085.7,
-      "outcome": "pending"
+      "outcome": "wrong",
+      "evaluatedPrice": 13484,
+      "stockReturnPct": -1.0711665443873808,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -226,7 +246,11 @@
       "priceAtTip": 1269,
       "indexSymbol": "^NSEI",
       "indexAtTip": 24085.7,
-      "outcome": "pending"
+      "outcome": "wrong",
+      "evaluatedPrice": 1267.5,
+      "stockReturnPct": -0.11820330969266601,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "evaluatedDate": "2026-06-18"
     }
   ]
 }

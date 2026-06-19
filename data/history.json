@@ -2312,7 +2312,13 @@
           "title": "www.tipranks.com"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 4190,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -0.4206573662570934,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2356,7 +2362,13 @@
           "title": "SCIL (SCILAL) Live Share Price Today on NSE/BSE, Stock Analysis and Price Estimates"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 45.96,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -0.4117009750812528,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2400,7 +2412,13 @@
           "title": "Jio Financial Services"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 244.1,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 0.4609432875133823,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2444,7 +2462,13 @@
           "title": "Friday, January 02, 2026 | 07:50 PM ISTहिंदी में पढें"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1328.1,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -0.34516395287762514,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2488,7 +2512,13 @@
           "title": "Defence stocks in demand: Paras, Data Patterns, Ideaforge surge up to 12% | Markets News - Business Standard"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1310.3,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 1.9173180881266072,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2532,7 +2562,13 @@
           "title": "Bharat Electronics Limited (BEL.NS) Stock Price, News, Quote & History - Yahoo Finance"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 428.6,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 2.0840776467786037,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2576,7 +2612,13 @@
           "title": "Hindustan Zinc Ltd share price | About Hindustan Zinc | Key Insights - Screener"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 571.45,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -0.19212295869355245,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2620,7 +2662,13 @@
           "title": "Power Grid Corporation of India Limited (INE752E01010)"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 288.7,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 0.8206740003492197,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2664,7 +2712,13 @@
           "title": "Jupiter Wagons Share Price, Stock Price, LIVE NSE/BSE - Groww"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 279.5,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 0.05369608018612748,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2708,7 +2762,13 @@
           "title": "CPPLUS-IN: Aditya Infotech Ltd - Stock Price, Quote and News - CNBC"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 3513.7,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 4.942954423272217,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2752,7 +2812,13 @@
           "title": "www.marketbeat.com"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 306,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -0.16313213703099683,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2796,7 +2862,13 @@
           "title": "State Bank of India Share Price, Stock Price, LIVE NSE/BSE - Groww"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1042.7,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 1.5781782756941087,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2840,7 +2912,13 @@
           "title": "REC Limited Share Price, Stock Price, LIVE NSE/BSE - Groww"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 358.7,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -0.013937282229969927,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2884,7 +2962,13 @@
           "title": "NSE - National Stock Exchange of India Ltd: Live Share/Stock Market News &amp; Updates, Quotes- Nseindia.com"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 291.15,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 0.1375752364574323,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2928,7 +3012,13 @@
           "title": "JSW Infrastructure Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India"
         }
       ],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 307.95,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": 2.8900768459739323,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
     },
     {
       "date": "2026-06-17",
@@ -2972,6 +3062,252 @@
           "title": "DIXON Stock Price and Chart — NSE:DIXON — TradingView — India"
         }
       ],
+      "outcome": "unscored",
+      "evaluatedPrice": 12666,
+      "evaluatedIndexPrice": 24168,
+      "stockReturnPct": -1.3013325021429156,
+      "benchmarkReturnPct": 0.3416965253241422,
+      "benchmarked": true,
+      "evaluatedDate": "2026-06-18"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "LT",
+      "exchange": "NS",
+      "name": "Larsen & Toubro",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 4190,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "SCILAL",
+      "exchange": "NS",
+      "name": "SCI Land & Assets",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 45.96,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "JIOFIN",
+      "exchange": "NS",
+      "name": "Jio Financial Services",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 244.1,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "RELIANCE",
+      "exchange": "NS",
+      "name": "Reliance Industries",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1328.1,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "PARAS",
+      "exchange": "NS",
+      "name": "Paras Defence & Space Technologies",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1310.3,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "BEL",
+      "exchange": "NS",
+      "name": "Bharat Electronics",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 428.6,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "HINDZINC",
+      "exchange": "NS",
+      "name": "Hindustan Zinc",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 571.45,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "POWERGRID",
+      "exchange": "NS",
+      "name": "Power Grid Corporation of India",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 288.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "JWL",
+      "exchange": "NS",
+      "name": "Jupiter Wagons",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 279.5,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "CPPLUS",
+      "exchange": "NS",
+      "name": "Aditya Infotech (CP PLUS)",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 3513.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "VEDL",
+      "exchange": "NS",
+      "name": "Vedanta",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 306,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "SBIN",
+      "exchange": "NS",
+      "name": "State Bank of India",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1042.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "RECLTD",
+      "exchange": "NS",
+      "name": "REC Limited",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 358.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "ITC",
+      "exchange": "NS",
+      "name": "ITC",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 291.15,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "JSWINFRA",
+      "exchange": "NS",
+      "name": "JSW Infrastructure",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 307.95,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "DIXON",
+      "exchange": "NS",
+      "name": "Dixon Technologies",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 12666,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24168,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
       "outcome": "pending"
     }
   ]
