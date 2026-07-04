@@ -93,3 +93,30 @@ python nse_option_chain.py SBIN 2026-06-01 today --expiry 2026-06-30
   use `--near` / `--expiry` or a short range to keep it manageable. In Excel you
   can then filter by Date/Expiry to see the chain for any single day.
 
+---
+
+# NSE daily F&O signal (futures + top call/put strike)
+
+`nse_fo_daily.py` gives **one compact row per day**: the futures data **plus**
+the single standout call strike and the single standout put strike for that day.
+
+## Output columns
+`Date, Day, Futures Close, Fut Price Chg %, Futures OI, Fut OI Chg %, Buildup,
+Opt Expiry, Top Call Strike, Call OI, Call OI Chg %, Call Volume,
+Top Put Strike, Put OI, Put OI Chg %, Put Volume`
+
+- **Top Call Strike** = the call strike with the biggest OI %-change that day,
+  **among the actively-traded strikes** (a real, liquid strike — not thin
+  far-OTM noise). Same for **Top Put Strike**. Options use the **nearest expiry**
+  by default. OI %-change is vs the strike's previous-day OI.
+
+## Usage
+```bash
+python nse_fo_daily.py SBIN 2026-06-01 yesterday
+python nse_fo_daily.py RELIANCE 01-05-2026 today reliance_daily.csv
+python nse_fo_daily.py SBIN 2026-06-01 today --expiry 2026-06-30   # fix an expiry
+```
+`--rank` chooses how the "top" strike is picked: **`combined`** (default: high
+OI %-change AND high volume), `oichg` (pure OI %-change), or `volume` (highest
+volume). Put any output filename BEFORE the `--rank`/`--expiry` flags.
+
