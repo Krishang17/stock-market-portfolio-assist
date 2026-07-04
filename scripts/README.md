@@ -40,3 +40,33 @@ It only returns trading days (weekends/holidays are skipped automatically).
 - For a rolling "last 52 weeks", use `... <SYMBOL> 2025-06-22 yesterday`.
 - If you get no data, double-check the symbol spelling and that the range
   includes trading days; try again (NSE can be briefly rate-limited).
+
+---
+
+# NSE F&O (Futures & Options) downloader
+
+`nse_fo_data.py` downloads a **daily Futures & Options summary** for an F&O stock
+(or index) over a date range into a CSV.
+
+## Output columns
+`Date, Day, Futures Close (near), Fut Price Chg %, Futures OI (total),
+Fut OI Chg %, Buildup, Near Expiry, Call OI, Put OI, Total Options OI,
+PCR (Put/Call), Call Volume, Put Volume`
+
+That covers all four asks: **(1) futures OI, (2) options OI, (3) put data,
+(4) call data** — plus PCR and the **Buildup** label (Long Buildup / Short
+Buildup / Long Unwinding / Short Covering), derived from the day's OI change vs
+price change, exactly like the broker screenshot.
+
+## Usage
+```bash
+python nse_fo_data.py SBIN 2026-05-01 yesterday
+python nse_fo_data.py RELIANCE 01-05-2026 today reliance_fo.csv
+python nse_fo_data.py NIFTY 2026-05-01 yesterday      # indices work too
+python nse_fo_data.py                                  # interactive prompts
+```
+- Same date rules as above (`YYYY-MM-DD` / `DD-MM-YYYY`, `today` / `yesterday`).
+- Works for **F&O stocks and indices** (SBIN, RELIANCE, NIFTY, BANKNIFTY, …).
+- Uses NSE's UDiFF F&O bhavcopy (available from ~July 2024 onward). Each daily
+  file is ~1.4 MB, so long ranges download a fair bit — start with a month or two.
+
