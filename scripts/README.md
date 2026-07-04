@@ -70,3 +70,26 @@ python nse_fo_data.py                                  # interactive prompts
 - Uses NSE's UDiFF F&O bhavcopy (available from ~July 2024 onward). Each daily
   file is ~1.4 MB, so long ranges download a fair bit — start with a month or two.
 
+---
+
+# NSE Option Chain (strike-wise Call & Put) downloader
+
+`nse_option_chain.py` gives the **per-strike** Call and Put data (the option
+chain) — what the F&O summary above sums up. One row per (Date, Expiry, Strike):
+
+`Date, Expiry, Strike, Call OI, Call Chg OI, Call Volume, Call Close,
+Put OI, Put Chg OI, Put Volume, Put Close`
+
+## Usage
+```bash
+python nse_option_chain.py SBIN 2026-06-17 2026-06-17            # one day, all expiries
+python nse_option_chain.py SBIN 2026-06-01 yesterday --near      # nearest expiry only
+python nse_option_chain.py SBIN 2026-06-01 today --expiry 2026-06-30
+```
+- `--near` keeps only the nearest expiry each day; `--expiry YYYY-MM-DD` filters to one expiry.
+- **Put any output filename BEFORE the `--near`/`--expiry` flags**, e.g.
+  `... SBIN 2026-06-17 2026-06-17 sbin_chain.csv --near`.
+- Heads-up on size: all-expiries × every strike × many days gets large quickly —
+  use `--near` / `--expiry` or a short range to keep it manageable. In Excel you
+  can then filter by Date/Expiry to see the chain for any single day.
+
