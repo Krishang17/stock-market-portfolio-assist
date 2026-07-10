@@ -120,3 +120,23 @@ python nse_fo_daily.py SBIN 2026-06-01 today --expiry 2026-06-30   # fix an expi
 OI %-change AND high volume), `oichg` (pure OI %-change), or `volume` (highest
 volume). Put any output filename BEFORE the `--rank`/`--expiry` flags.
 
+
+---
+
+# NSE top gainers / losers
+
+`nse_top_gainers.py` lists the day's **top gainers** (or losers) ranked by
+% price change, with each stock's **company name**, from NSE's official bhavcopy.
+
+## Usage
+```bash
+python nse_top_gainers.py                 # latest trading day, top 25 gainers
+python nse_top_gainers.py 2026-07-10      # a specific date
+python nse_top_gainers.py --top 50        # top 50
+python nse_top_gainers.py --losers        # top losers instead
+python nse_top_gainers.py --out today.csv # choose the output filename
+```
+- `--min-turnover L` drops illiquid stocks below L Rs-lakhs turnover (default 100 = Rs 1cr; `0` = include all).
+- `--max-move P` skips moves beyond ±P% (default 25) — filters split/bonus artifacts that would otherwise look like a huge gain/fall.
+- Prints the ranked list and writes a CSV (Rank, Symbol, Company, % Change, Close, Prev Close, Volume, Turnover, Delivery %).
+- No date = the most recent available trading day (today's file appears after market close).
