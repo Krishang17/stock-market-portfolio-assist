@@ -95,20 +95,22 @@ python nse_option_chain.py SBIN 2026-06-01 today --expiry 2026-06-30
 
 ---
 
-# NSE daily F&O signal (futures + top call/put strike)
+# NSE daily F&O signal (futures + highest-OI call & put strike)
 
-`nse_fo_daily.py` gives **one compact row per day**: the futures data **plus**
-the single standout call strike and the single standout put strike for that day.
+`nse_fo_daily.py` gives **one row per day**: the futures data **plus** the call
+strike with the **highest Call OI** and the put strike with the **highest Put
+OI**, each with its OI-change % and **premium change %**.
 
 ## Output columns
 `Date, Day, Futures Close, Fut Price Chg %, Futures OI, Fut OI Chg %, Buildup,
-Opt Expiry, Top Call Strike, Call OI, Call OI Chg %, Call Volume,
-Top Put Strike, Put OI, Put OI Chg %, Put Volume`
+Opt Expiry, Call Strike (max OI), Call OI, Call OI Chg %, Call Premium,
+Call Premium Chg %, Put Strike (max OI), Put OI, Put OI Chg %, Put Premium,
+Put Premium Chg %`
 
-- **Top Call Strike** = the call strike with the biggest OI %-change that day,
-  **among the actively-traded strikes** (a real, liquid strike — not thin
-  far-OTM noise). Same for **Top Put Strike**. Options use the **nearest expiry**
-  by default. OI %-change is vs the strike's previous-day OI.
+- **Call Strike (max OI)** = the call strike holding the most Open Interest that
+  day; same idea for **Put Strike (max OI)**. Nearest expiry by default.
+- **Premium** = the option's closing price; **Premium Chg %** is vs the option's
+  own previous close. **OI Chg %** is vs the strike's previous-day OI.
 
 ## Usage
 ```bash
@@ -116,10 +118,9 @@ python nse_fo_daily.py SBIN 2026-06-01 yesterday
 python nse_fo_daily.py RELIANCE 01-05-2026 today reliance_daily.csv
 python nse_fo_daily.py SBIN 2026-06-01 today --expiry 2026-06-30   # fix an expiry
 ```
-`--rank` chooses how the "top" strike is picked: **`combined`** (default: high
-OI %-change AND high volume), `oichg` (pure OI %-change), or `volume` (highest
-volume). Put any output filename BEFORE the `--rank`/`--expiry` flags.
-
+`--rank` picks the strike each day: **`oi`** (default -- highest Open Interest),
+`oichg` (biggest OI %-change among liquid strikes), or `volume`. Put any output
+filename BEFORE the `--rank`/`--expiry` flags.
 
 ---
 

@@ -2,15 +2,17 @@
 """
 nse_fo_daily.py
 ===============
-One row PER DAY combining, for an NSE F&O symbol:
+One row PER DAY for an NSE F&O symbol:
 
   FUTURES : near-month close, day price-change %, total futures Open Interest,
             day OI-change %, and the Buildup label.
-  TOP CALL: the call strike with the biggest OI %-change that day (among strikes
-            that actually traded), with its OI, OI %-change and volume.
-  TOP PUT : the put strike with the biggest OI %-change that day (among strikes
-            that actually traded), with its OI, OI %-change and volume.
+  CALL    : the CALL strike with the HIGHEST Call OI that day, with its OI,
+            OI-change %, premium (close) and premium-change %.
+  PUT     : the PUT strike with the HIGHEST Put OI that day, with its OI,
+            OI-change %, premium (close) and premium-change %.
 
+("premium" = the option's closing price. Premium-change % is vs the option's own
+previous close. OI-change % is vs the strike's previous-day OI.)
 Options are taken from the NEAREST expiry by default (use --expiry to fix one).
 
 Standard library only (Python 3.8+). Run from a normal/home connection.
@@ -19,15 +21,14 @@ USAGE
 -----
     python nse_fo_daily.py <SYMBOL> <FROM> <TO> [OUTFILE.csv]
     python nse_fo_daily.py SBIN 2026-06-01 yesterday
-    python nse_fo_daily.py RELIANCE 01-05-2026 today  reliance_fo_daily.csv  --rank combined
+    python nse_fo_daily.py RELIANCE 01-05-2026 today  reliance_daily.csv
+    python nse_fo_daily.py SBIN 2026-06-01 today --expiry 2026-06-30
     python nse_fo_daily.py                             # interactive prompts
 
-Selecting the "top" strike (--rank):
-    combined  (default) highest OI %-change among the more actively-traded
-              strikes (volume >= that day's median) -- i.e. high OI% change AND
-              high volume, which avoids thin far-out-of-the-money noise.
-    oichg     highest OI %-change among all strikes that traded
-    volume    the strike with the highest volume
+--rank chooses which strike to pick each day (default 'oi'):
+    oi        the strike with the highest Open Interest         (default)
+    oichg     the strike with the biggest OI %-change (liquid strikes only)
+    volume    the strike with the highest traded volume
 Put any OUTFILE name BEFORE the --rank/--expiry flags.
 
 Dates: YYYY-MM-DD or DD-MM-YYYY; TO also accepts 'today'/'yesterday'.
@@ -87,35 +88,42 @@ def parse_date(s):
     raise SystemExit("Could not parse date: %s (use YYYY-MM-DD or DD-MM-YYYY)" % s)
 
 
+def _enrich(s):
+    """Add OI %-change and premium %-change to a strike record."""
+    oi = s["oi"] or 0
+    prior = oi - (s["chg"] or 0)
+    oichg = (s["chg"] / prior * 100.0) if (prior > 0 and s["chg"] is not None) else None
+    prem_chg = None
+    if s["cls"] is not None and s["pcls"] and s["pcls"] > 0:
+        prem_chg = (s["cls"] - s["pcls"]) / s["pcls"] * 100.0
+    return dict(s, oi=oi, oichg=oichg, prem=s["cls"], prem_chg=prem_chg)
+
+
 def pick_strike(strikes, rank):
-    """strikes: list of dicts with strike, oi, chg, vol. Return the chosen one."""
-    # OI %-change vs the previous day's OI (prior = today's OI - change).
-    cands = []
-    for s in strikes:
-        vol = s["vol"] or 0
-        if vol <= 0:
-            continue
-        prior = (s["oi"] or 0) - (s["chg"] or 0)
-        if prior <= 0:
-            continue  # brand-new strike -> % is undefined/noisy; skip
-        s = dict(s, oichg=(s["chg"] / prior * 100.0))
-        cands.append(s)
+    cands = [_enrich(s) for s in strikes]
     if not cands:
         return None
+    if rank == "oi":
+        pool = [c for c in cands if c["oi"] > 0] or cands
+        return max(pool, key=lambda c: c["oi"])
     if rank == "volume":
-        return max(cands, key=lambda s: s["vol"])
+        return max(cands, key=lambda c: c["vol"] or 0)
+    # oichg / combined: only strikes that traded and have a defined OI %-change
+    liquid = [c for c in cands if (c["vol"] or 0) > 0 and c["oichg"] is not None]
+    if not liquid:
+        return max(cands, key=lambda c: c["oi"])  # fall back to max OI
     if rank == "combined":
-        med = statistics.median([s["vol"] for s in cands])
-        liquid = [s for s in cands if s["vol"] >= med] or cands
-        return max(liquid, key=lambda s: s["oichg"])
-    return max(cands, key=lambda s: s["oichg"])  # 'oichg' default (biggest buildup)
+        med = statistics.median([c["vol"] or 0 for c in liquid])
+        pool = [c for c in liquid if (c["vol"] or 0) >= med] or liquid
+        return max(pool, key=lambda c: c["oichg"])
+    return max(liquid, key=lambda c: c["oichg"])
 
 
 def day_analyze(symbol, zbytes, expiry_filter, rank):
     z = zipfile.ZipFile(io.BytesIO(zbytes))
     text = z.read(z.namelist()[0]).decode("utf-8", "ignore")
-    fut = []                # (expiry, oi, close)
-    calls, puts = {}, {}    # expiry -> list of strike dicts
+    fut = []
+    calls, puts = {}, {}
     for r in csv.DictReader(io.StringIO(text)):
         if r.get("TckrSymb", "").strip() != symbol:
             continue
@@ -125,7 +133,8 @@ def day_analyze(symbol, zbytes, expiry_filter, rank):
         elif tp in OPT_TYPES:
             exp = r.get("XpryDt", "").strip()
             rec = dict(strike=_f(r.get("StrkPric")), oi=_i(r.get("OpnIntrst")),
-                       chg=_i(r.get("ChngInOpnIntrst")), vol=_i(r.get("TtlTradgVol")))
+                       chg=_i(r.get("ChngInOpnIntrst")), vol=_i(r.get("TtlTradgVol")),
+                       cls=_f(r.get("ClsPric")), pcls=_f(r.get("PrvsClsgPric")))
             (calls if r.get("OptnTp", "").strip() == "CE" else puts).setdefault(exp, []).append(rec)
     if not fut and not calls and not puts:
         return None
@@ -133,11 +142,10 @@ def day_analyze(symbol, zbytes, expiry_filter, rank):
     near_fut = fut[0] if fut else ("", 0, None)
     opt_expiries = sorted(set(list(calls) + list(puts)))
     exp = expiry_filter or (opt_expiries[0] if opt_expiries else "")
-    top_call = pick_strike(calls.get(exp, []), rank)
-    top_put = pick_strike(puts.get(exp, []), rank)
     return dict(
-        fut_oi_total=sum(x[1] for x in fut), fut_close=near_fut[2],
-        opt_expiry=exp, top_call=top_call, top_put=top_put,
+        fut_oi_total=sum(x[1] for x in fut), fut_close=near_fut[2], opt_expiry=exp,
+        top_call=pick_strike(calls.get(exp, []), rank),
+        top_put=pick_strike(puts.get(exp, []), rank),
     )
 
 
@@ -155,13 +163,18 @@ def buildup(dprice, doi):
     return "Neutral"
 
 
+def r2(x):
+    return round(x, 2) if x is not None else ""
+
+
 def main():
-    ap = argparse.ArgumentParser(description="Daily F&O row: futures + top call strike + top put strike -> CSV.")
+    ap = argparse.ArgumentParser(description="Daily F&O row: futures + highest-OI call & put strike (with premium change %) -> CSV.")
     ap.add_argument("symbol", nargs="?")
     ap.add_argument("date_from", nargs="?")
     ap.add_argument("date_to", nargs="?")
     ap.add_argument("outfile", nargs="?")
-    ap.add_argument("--rank", choices=["combined", "oichg", "volume"], default="combined")
+    ap.add_argument("--rank", choices=["oi", "oichg", "volume"], default="oi",
+                    help="Which strike to pick each day (default: oi = highest Open Interest)")
     ap.add_argument("--expiry", help="Fix the option expiry (YYYY-MM-DD); default = nearest each day")
     ap.add_argument("--sleep", type=float, default=0.3)
     a = ap.parse_args()
@@ -174,7 +187,7 @@ def main():
     exp_filter = parse_date(a.expiry).isoformat() if a.expiry else None
     out = a.outfile or "%s_FO_DAILY_%s_%s.csv" % (symbol, d_from.strftime("%Y%m%d"), d_to.strftime("%Y%m%d"))
 
-    print("Fetching daily F&O for %s  %s -> %s  (rank=%s) ..." % (symbol, d_from, d_to, a.rank), file=sys.stderr)
+    print("Fetching daily F&O for %s  %s -> %s  (strike by %s) ..." % (symbol, d_from, d_to, a.rank), file=sys.stderr)
     days = {}
     d = d_from
     total = (d_to - d_from).days + 1
@@ -203,18 +216,18 @@ def main():
         print("No F&O data found (check symbol is an F&O stock / date range).", file=sys.stderr)
         sys.exit(1)
 
-    def strike_cells(s):
+    def cells(s):
         if not s:
-            return ["", "", "", ""]
-        return [s["strike"], s["oi"], round(s["oichg"], 2), s["vol"]]
+            return ["", "", "", "", ""]
+        return [s["strike"], s["oi"], r2(s["oichg"]), s["prem"], r2(s["prem_chg"])]
 
     with open(out, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow([
             "Date", "Day", "Futures Close", "Fut Price Chg %", "Futures OI",
             "Fut OI Chg %", "Buildup", "Opt Expiry",
-            "Top Call Strike", "Call OI", "Call OI Chg %", "Call Volume",
-            "Top Put Strike", "Put OI", "Put OI Chg %", "Put Volume",
+            "Call Strike (max OI)", "Call OI", "Call OI Chg %", "Call Premium", "Call Premium Chg %",
+            "Put Strike (max OI)", "Put OI", "Put OI Chg %", "Put Premium", "Put Premium Chg %",
         ])
         prev = None
         for dd, s in ordered:
@@ -225,11 +238,9 @@ def main():
                 if prev["fut_oi_total"]:
                     doi = (s["fut_oi_total"] - prev["fut_oi_total"]) / prev["fut_oi_total"] * 100
             w.writerow([
-                dd.isoformat(), dd.strftime("%a"), s["fut_close"],
-                round(dprice, 2) if dprice is not None else "",
-                s["fut_oi_total"], round(doi, 2) if doi is not None else "",
-                buildup(dprice, doi), s["opt_expiry"],
-            ] + strike_cells(s["top_call"]) + strike_cells(s["top_put"]))
+                dd.isoformat(), dd.strftime("%a"), s["fut_close"], r2(dprice),
+                s["fut_oi_total"], r2(doi), buildup(dprice, doi), s["opt_expiry"],
+            ] + cells(s["top_call"]) + cells(s["top_put"]))
             prev = s
     print("Wrote %d trading days to %s" % (len(ordered), out), file=sys.stderr)
     print(out)
