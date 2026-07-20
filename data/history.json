@@ -9740,7 +9740,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 282.7,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 1.199212457490595,
+      "benchmarkReturnPct": 0.6885378695828281,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-16",
@@ -9797,7 +9803,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 3838.8,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 0.6370428627605174,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9812,7 +9824,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 41.88,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 0.5280844935189766,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9827,7 +9845,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 238.92,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": -1.6709194172359831,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9842,7 +9866,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1323.1,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": -0.3089210367691497,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9857,7 +9887,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1206.6,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 2.5758735016577328,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9872,7 +9908,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 408.15,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": -0.3174990841372627,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9887,7 +9929,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 522.65,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 0.8295553197646299,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9902,7 +9950,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 288.7,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 1.8162581555281276,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9917,7 +9971,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 251.55,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": -1.0813999213527326,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9932,7 +9992,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 3565.9,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": -1.3418548030101785,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9947,7 +10013,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 261.85,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 3.4775736020549397,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9962,7 +10034,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 1060,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 1.5033994063008649,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9977,7 +10055,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 363.5,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 2.365530836384111,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -9992,7 +10076,8 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -10007,7 +10092,13 @@
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
-      "outcome": "pending"
+      "outcome": "unscored",
+      "evaluatedPrice": 348.45,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 1.8412976764576872,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
     },
     {
       "date": "2026-07-17",
@@ -10019,6 +10110,252 @@
       "priceAtCall": 14329,
       "indexSymbol": "^NSEI",
       "indexAtCall": 24334.3,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "unscored",
+      "evaluatedPrice": 14589,
+      "evaluatedIndexPrice": 24238.5,
+      "stockReturnPct": 1.8145020587619465,
+      "benchmarkReturnPct": -0.39368299067571444,
+      "benchmarked": true,
+      "evaluatedDate": "2026-07-20"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "LT",
+      "exchange": "NS",
+      "name": "Larsen & Toubro",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 3838.8,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "SCILAL",
+      "exchange": "NS",
+      "name": "SCI Land & Assets",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 41.88,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "JIOFIN",
+      "exchange": "NS",
+      "name": "Jio Financial Services",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 238.92,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "RELIANCE",
+      "exchange": "NS",
+      "name": "Reliance Industries",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1323.1,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "PARAS",
+      "exchange": "NS",
+      "name": "Paras Defence & Space Technologies",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1206.6,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "BEL",
+      "exchange": "NS",
+      "name": "Bharat Electronics",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 408.15,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "HINDZINC",
+      "exchange": "NS",
+      "name": "Hindustan Zinc",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 522.65,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "POWERGRID",
+      "exchange": "NS",
+      "name": "Power Grid Corporation of India",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 288.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "JWL",
+      "exchange": "NS",
+      "name": "Jupiter Wagons",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 251.55,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "CPPLUS",
+      "exchange": "NS",
+      "name": "Aditya Infotech (CP PLUS)",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 3565.9,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "VEDL",
+      "exchange": "NS",
+      "name": "Vedanta",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 261.85,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "SBIN",
+      "exchange": "NS",
+      "name": "State Bank of India",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 1060,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "RECLTD",
+      "exchange": "NS",
+      "name": "REC Limited",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 363.5,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "ITC",
+      "exchange": "NS",
+      "name": "ITC",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 282.7,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "JSWINFRA",
+      "exchange": "NS",
+      "name": "JSW Infrastructure",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 348.45,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
+      "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
+      "keyNews": [],
+      "sources": [],
+      "outcome": "pending"
+    },
+    {
+      "date": "2026-07-20",
+      "symbol": "DIXON",
+      "exchange": "NS",
+      "name": "Dixon Technologies",
+      "stance": "Watch",
+      "confidence": "Low",
+      "priceAtCall": 14589,
+      "indexSymbol": "^NSEI",
+      "indexAtCall": 24238.5,
       "reasoning": "Automated analysis was unavailable this run (model, credit, or parse error). Recorded as Watch, which is not scored.",
       "keyNews": [],
       "sources": [],
