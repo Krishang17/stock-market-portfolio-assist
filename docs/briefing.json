@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-26T10:52:37.642Z",
-  "date": "2026-08-26",
+  "generatedAt": "2026-08-27T20:32:50.625Z",
+  "date": "2026-08-27",
   "model": "claude-sonnet-4-6",
   "disclaimer": "This is information, not financial advice. Short-term calls are close to a coin flip — the track record is here to show that honestly.",
   "degraded": true,
   "degradedReason": "Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.",
   "totals": {
     "invested": 491290.23,
-    "value": 536075.45,
-    "pnlAbs": 44785.22,
-    "pnlPct": 9.12,
+    "value": 532580.9,
+    "pnlAbs": 41290.67,
+    "pnlPct": 8.4,
     "holdings": 11,
     "priced": 11,
     "unpriced": 0
@@ -18,20 +18,20 @@
     {
       "label": "SENSEX",
       "symbol": "^BSESN",
-      "price": 77472.94,
-      "changePercent": -0.23585561
+      "price": 76933.59,
+      "changePercent": -0.6961705
     },
     {
       "label": "NIFTY 50",
       "symbol": "^NSEI",
-      "price": 24207.75,
-      "changePercent": -0.52107304
+      "price": 24090.85,
+      "changePercent": -0.48290482
     },
     {
       "label": "BANK NIFTY",
       "symbol": "^NSEBANK",
-      "price": 57783.75,
-      "changePercent": 0.46866822
+      "price": 57509.95,
+      "changePercent": -0.473837
     }
   ],
   "valueSeries": [
@@ -346,6 +346,12 @@
       "value": 536075.45,
       "invested": 491290.23,
       "pnlAbs": 44785.22
+    },
+    {
+      "date": "2026-08-27",
+      "value": 532580.9,
+      "invested": 491290.23,
+      "pnlAbs": 41290.67
     }
   ],
   "track": {
@@ -382,10 +388,6 @@
   },
   "indexHistory": {
     "^NSEI": [
-      {
-        "t": "2025-08-26",
-        "c": 24712.05
-      },
       {
         "t": "2025-08-28",
         "c": 24500.9
@@ -1429,7 +1431,8 @@
       "2026-08-21",
       "2026-08-24",
       "2026-08-25",
-      "2026-08-26"
+      "2026-08-26",
+      "2026-08-27"
     ],
     "you": [
       100,
@@ -1483,13 +1486,15 @@
       99.43,
       99.15,
       99.47,
-      98.53
+      98.53,
+      97.89
     ],
     "tips": [
       null,
       null,
       null,
       100,
+      null,
       null,
       null,
       null,
@@ -1591,7 +1596,8 @@
       101.67,
       101.53,
       102.01,
-      101.48
+      101.48,
+      null
     ]
   },
   "holdings": [
@@ -1601,12 +1607,12 @@
       "exchange": "NSE",
       "qty": 50,
       "buyPrice": 3556.92,
-      "price": 4038.1,
-      "dayChangePct": -1.9640665,
-      "value": 201905,
+      "price": 4027,
+      "dayChangePct": -0.27488416,
+      "value": 201350,
       "invested": 177846,
-      "plPct": 13.527996131484537,
-      "plAbs": 24058.999999999993,
+      "plPct": 13.215928387481302,
+      "plAbs": 23503.999999999996,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -1617,10 +1623,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 3541.3
-        },
         {
           "t": "2025-08-28",
           "c": 3560.1
@@ -2624,6 +2626,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.27488175131868964,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -2678,14 +2688,6 @@
           "outcome": "unscored",
           "stockReturnPct": -0.5481195096287861,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.7320680305644478,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -2695,12 +2697,12 @@
       "exchange": "NSE",
       "qty": 500,
       "buyPrice": 45.42,
-      "price": 40.15,
-      "dayChangePct": 0.22466339,
-      "value": 20075,
+      "price": 40.02,
+      "dayChangePct": -0.32378846,
+      "value": 20010,
       "invested": 22710,
-      "plPct": -11.602818141787766,
-      "plAbs": -2635.0000000000014,
+      "plPct": -11.889035667106999,
+      "plAbs": -2699.999999999999,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -2711,10 +2713,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 49.25
-        },
         {
           "t": "2025-08-28",
           "c": 48.79
@@ -3714,6 +3712,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.32378580323784156,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -3768,14 +3774,6 @@
           "outcome": "unscored",
           "stockReturnPct": 0.8210997760637051,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -0.3224206349206393,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -3785,12 +3783,12 @@
       "exchange": "NSE",
       "qty": 50,
       "buyPrice": 107.89,
-      "price": 241,
-      "dayChangePct": -0.8842253,
-      "value": 12050,
+      "price": 238.1,
+      "dayChangePct": -1.203317,
+      "value": 11905,
       "invested": 5394.5,
-      "plPct": 123.37566039484662,
-      "plAbs": 6655.500000000001,
+      "plPct": 120.68773751042727,
+      "plAbs": 6510.499999999999,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -3801,10 +3799,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 315.75
-        },
         {
           "t": "2025-08-28",
           "c": 310.1
@@ -4808,6 +4802,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -1.2033195020746956,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -4862,14 +4864,6 @@
           "outcome": "unscored",
           "stockReturnPct": -1.5815815815815815,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.28106805862275763,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -4879,12 +4873,12 @@
       "exchange": "NSE",
       "qty": 150,
       "buyPrice": 1226.71,
-      "price": 1298,
-      "dayChangePct": -1.4426727,
-      "value": 194700,
+      "price": 1282.2,
+      "dayChangePct": -1.2172611,
+      "value": 192330,
       "invested": 184006.5,
-      "plPct": 5.8114794857790315,
-      "plAbs": 10693.499999999995,
+      "plPct": 4.523481507446749,
+      "plAbs": 8323.500000000002,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -4895,10 +4889,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 1384.9
-        },
         {
           "t": "2025-08-28",
           "c": 1385.9
@@ -5902,6 +5892,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -1.2172573189522362,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -5956,14 +5954,6 @@
           "outcome": "unscored",
           "stockReturnPct": 0.45592705167172287,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.45801526717557106,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -5973,12 +5963,12 @@
       "exchange": "NSE",
       "qty": 10,
       "buyPrice": 910.85,
-      "price": 1492.7,
-      "dayChangePct": 3.2867424,
-      "value": 14927,
+      "price": 1454.8,
+      "dayChangePct": -2.539017,
+      "value": 14548,
       "invested": 9108.5,
-      "plPct": 63.87989240819015,
-      "plAbs": 5818.5,
+      "plPct": 59.71894384366251,
+      "plAbs": 5439.499999999999,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -5989,10 +5979,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 651.8
-        },
         {
           "t": "2025-08-28",
           "c": 640.4
@@ -6996,6 +6982,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -2.5390232464661433,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -7050,14 +7044,6 @@
           "outcome": "unscored",
           "stockReturnPct": 9.996398991717669,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.7985480943738743,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -7067,12 +7053,12 @@
       "exchange": "NSE",
       "qty": 80,
       "buyPrice": 257.17,
-      "price": 406.9,
-      "dayChangePct": -1.5366015,
-      "value": 32552,
+      "price": 411,
+      "dayChangePct": 1.0076201,
+      "value": 32880,
       "invested": 20573.6,
-      "plPct": 58.222187657969414,
-      "plAbs": 11978.399999999998,
+      "plPct": 59.81646381770812,
+      "plAbs": 12306.399999999998,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -7083,10 +7069,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 365.85
-        },
         {
           "t": "2025-08-28",
           "c": 363.85
@@ -8090,6 +8072,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 1.0076185795035775,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -8144,14 +8134,6 @@
           "outcome": "unscored",
           "stockReturnPct": -0.10910413383440343,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.4016553067185846,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -8161,12 +8143,12 @@
       "exchange": "NSE",
       "qty": 16,
       "buyPrice": 628.24,
-      "price": 626.5,
-      "dayChangePct": 5.720558,
-      "value": 10024,
+      "price": 610.1,
+      "dayChangePct": -2.6177216,
+      "value": 9761.6,
       "invested": 10051.84,
-      "plPct": -0.27696421749649963,
-      "plAbs": -27.840000000000146,
+      "plPct": -2.887431554819812,
+      "plAbs": -290.2399999999998,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -8177,10 +8159,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 430.15
-        },
         {
           "t": "2025-08-28",
           "c": 421.7
@@ -9184,6 +9162,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -2.6177174780526724,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -9238,14 +9224,6 @@
           "outcome": "unscored",
           "stockReturnPct": -1.6740088105726914,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.9966186154120038,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -9255,12 +9233,12 @@
       "exchange": "NSE",
       "qty": 25,
       "buyPrice": 282.63,
-      "price": 265.2,
-      "dayChangePct": -2.1402168,
-      "value": 6630,
+      "price": 264.9,
+      "dayChangePct": -0.11312907,
+      "value": 6622.5,
       "invested": 7065.75,
-      "plPct": -6.1670735590701655,
-      "plAbs": -435.75000000000017,
+      "plPct": -6.273219403460361,
+      "plAbs": -443.25000000000045,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -9271,10 +9249,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 279.9
-        },
         {
           "t": "2025-08-28",
           "c": 274.45
@@ -10278,6 +10252,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.11312217194570096,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -10332,14 +10314,6 @@
           "outcome": "unscored",
           "stockReturnPct": 0.6950967499530503,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.03758691975190853,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -10349,12 +10323,12 @@
       "exchange": "NSE",
       "qty": 25,
       "buyPrice": 275.06,
-      "price": 246.85,
-      "dayChangePct": -0.02024617,
-      "value": 6171.25,
+      "price": 247,
+      "dayChangePct": 0.060763177,
+      "value": 6175,
       "invested": 6876.5,
-      "plPct": -10.255944157638336,
-      "plAbs": -705.2500000000002,
+      "plPct": -10.201410601323348,
+      "plAbs": -701.5,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -10365,10 +10339,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 329.65
-        },
         {
           "t": "2025-08-28",
           "c": 319.55
@@ -11372,6 +11342,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 0.06076564715413735,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -11426,14 +11404,6 @@
           "outcome": "unscored",
           "stockReturnPct": -0.7718187215515648,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -1.5009746588693917,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -11443,12 +11413,12 @@
       "exchange": "NSE",
       "qty": 4,
       "buyPrice": 3601.26,
-      "price": 3530.3,
-      "dayChangePct": 4.0312376,
-      "value": 14121.2,
+      "price": 3629.7,
+      "dayChangePct": 2.8156219,
+      "value": 14518.8,
       "invested": 14405.04,
-      "plPct": -1.9704214635988524,
-      "plAbs": -283.84000000000015,
+      "plPct": 0.7897235967411295,
+      "plAbs": 113.7599999999984,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -11459,10 +11429,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 1283
-        },
         {
           "t": "2025-08-28",
           "c": 1250.3
@@ -12466,6 +12432,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": 2.815624734441813,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -12520,14 +12494,6 @@
           "outcome": "unscored",
           "stockReturnPct": -0.03290359247404284,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -4.998579141801651,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -12537,12 +12503,12 @@
       "exchange": "NSE",
       "qty": 80,
       "buyPrice": 415.65,
-      "price": 286.5,
-      "dayChangePct": 4.1818185,
-      "value": 22920,
+      "price": 281,
+      "dayChangePct": -1.9197206,
+      "value": 22480,
       "invested": 33252,
-      "plPct": -31.071815229159146,
-      "plAbs": -10331.999999999998,
+      "plPct": -32.395043907133406,
+      "plAbs": -10771.999999999998,
       "research": false,
       "stance": "Watch",
       "confidence": "Low",
@@ -12553,10 +12519,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 428.2
-        },
         {
           "t": "2025-08-28",
           "c": 424.5
@@ -13560,6 +13522,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -1.919720767888311,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -13614,14 +13584,6 @@
           "outcome": "unscored",
           "stockReturnPct": -2.1134593993325845,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 0.8224299065420437,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -13631,8 +13593,8 @@
       "exchange": "NSE",
       "qty": 0,
       "buyPrice": 0,
-      "price": 1052,
-      "dayChangePct": 0.3816794,
+      "price": 1042.9,
+      "dayChangePct": -0.8650167,
       "value": null,
       "invested": 0,
       "plPct": null,
@@ -13647,10 +13609,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 807.85
-        },
         {
           "t": "2025-08-28",
           "c": 801.95
@@ -14654,6 +14612,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.8650190114068312,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -14708,14 +14674,6 @@
           "outcome": "unscored",
           "stockReturnPct": -0.7727101394647606,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -0.6087852392994253,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -14725,8 +14683,8 @@
       "exchange": "NSE",
       "qty": 0,
       "buyPrice": 0,
-      "price": 322.2,
-      "dayChangePct": -1.1656405,
+      "price": 320.9,
+      "dayChangePct": -0.40348178,
       "value": null,
       "invested": 0,
       "plPct": null,
@@ -14741,10 +14699,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 363.55
-        },
         {
           "t": "2025-08-28",
           "c": 354.9
@@ -15748,6 +15702,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.4034761018001265,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -15802,14 +15764,6 @@
           "outcome": "unscored",
           "stockReturnPct": -0.4411764705882337,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": 1.4925373134328401,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -15819,8 +15773,8 @@
       "exchange": "NSE",
       "qty": 0,
       "buyPrice": 0,
-      "price": 270.25,
-      "dayChangePct": -0.4237266,
+      "price": 269,
+      "dayChangePct": -0.4625347,
       "value": null,
       "invested": 0,
       "plPct": null,
@@ -15835,10 +15789,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 403.35
-        },
         {
           "t": "2025-08-28",
           "c": 400.9
@@ -16842,6 +16792,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.46253469010175685,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -16896,14 +16854,6 @@
           "outcome": "unscored",
           "stockReturnPct": -1.1170115363486555,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -1.851186196980581,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -16913,8 +16863,8 @@
       "exchange": "NSE",
       "qty": 0,
       "buyPrice": 0,
-      "price": 344.95,
-      "dayChangePct": 0.29073992,
+      "price": 337.95,
+      "dayChangePct": -2.0292797,
       "value": null,
       "invested": 0,
       "plPct": null,
@@ -16929,10 +16879,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 296.6
-        },
         {
           "t": "2025-08-28",
           "c": 300.1
@@ -17936,6 +17882,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -2.0292796057399642,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -17990,14 +17944,6 @@
           "outcome": "unscored",
           "stockReturnPct": -2.01252236135957,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -1.10570544007077,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     },
@@ -18007,8 +17953,8 @@
       "exchange": "NSE",
       "qty": 0,
       "buyPrice": 0,
-      "price": 14735,
-      "dayChangePct": -1.7011341,
+      "price": 14711,
+      "dayChangePct": -0.1628775,
       "value": null,
       "invested": 0,
       "plPct": null,
@@ -18023,10 +17969,6 @@
       "unavailable": true,
       "benchmarkSymbol": "^NSEI",
       "priceHistory": [
-        {
-          "t": "2025-08-26",
-          "c": 16668
-        },
         {
           "t": "2025-08-28",
           "c": 16678
@@ -19030,6 +18972,14 @@
       ],
       "recentCalls": [
         {
+          "date": "2026-08-26",
+          "stance": "Watch",
+          "confidence": "Low",
+          "outcome": "unscored",
+          "stockReturnPct": -0.1628775025449558,
+          "benchmarkReturnPct": -0.4829032024868174
+        },
+        {
           "date": "2026-08-25",
           "stance": "Watch",
           "confidence": "Low",
@@ -19084,14 +19034,6 @@
           "outcome": "unscored",
           "stockReturnPct": 0.891265597147961,
           "benchmarkReturnPct": -0.5465740818893505
-        },
-        {
-          "date": "2026-08-14",
-          "stance": "Watch",
-          "confidence": "Low",
-          "outcome": "unscored",
-          "stockReturnPct": -0.7430997876857748,
-          "benchmarkReturnPct": -0.32155462529753764
         }
       ]
     }
